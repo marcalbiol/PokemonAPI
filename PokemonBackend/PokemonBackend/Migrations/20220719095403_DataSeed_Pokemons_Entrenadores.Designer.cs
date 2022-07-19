@@ -12,8 +12,8 @@ using PokemonBackend.Models;
 namespace PokemonBackend.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20220718091645_Pokemon_DataSeed")]
-    partial class Pokemon_DataSeed
+    [Migration("20220719095403_DataSeed_Pokemons_Entrenadores")]
+    partial class DataSeed_Pokemons_Entrenadores
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -224,21 +224,19 @@ namespace PokemonBackend.Migrations
 
             modelBuilder.Entity("PokemonBackend.Models.Entrenador", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
 
                     b.Property<int?>("Derrotas")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Pokemon_idId")
+                    b.Property<int>("PokemonId")
                         .HasColumnType("int");
 
                     b.Property<int?>("Victorias")
@@ -246,18 +244,36 @@ namespace PokemonBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Pokemon_idId");
+                    b.HasIndex("PokemonId");
 
                     b.ToTable("Entrenadores");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Derrotas = 3,
+                            Nombre = "Marc",
+                            PokemonId = 1,
+                            Victorias = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Derrotas = 3,
+                            Nombre = "Jose",
+                            PokemonId = 2,
+                            Victorias = 2
+                        });
                 });
 
             modelBuilder.Entity("PokemonBackend.Models.Pokemon", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
 
                     b.Property<int?>("Ataque")
                         .HasColumnType("int");
@@ -357,11 +373,13 @@ namespace PokemonBackend.Migrations
 
             modelBuilder.Entity("PokemonBackend.Models.Entrenador", b =>
                 {
-                    b.HasOne("PokemonBackend.Models.Pokemon", "Pokemon_id")
+                    b.HasOne("PokemonBackend.Models.Pokemon", "Pokemon")
                         .WithMany()
-                        .HasForeignKey("Pokemon_idId");
+                        .HasForeignKey("PokemonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Pokemon_id");
+                    b.Navigation("Pokemon");
                 });
 #pragma warning restore 612, 618
         }

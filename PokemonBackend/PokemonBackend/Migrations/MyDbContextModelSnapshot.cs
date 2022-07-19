@@ -232,11 +232,9 @@ namespace PokemonBackend.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PokemonId")
+                    b.Property<int>("PokemonId")
                         .HasColumnType("int");
 
                     b.Property<int?>("Victorias")
@@ -247,6 +245,24 @@ namespace PokemonBackend.Migrations
                     b.HasIndex("PokemonId");
 
                     b.ToTable("Entrenadores");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Derrotas = 3,
+                            Nombre = "Marc",
+                            PokemonId = 1,
+                            Victorias = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Derrotas = 3,
+                            Nombre = "Jose",
+                            PokemonId = 2,
+                            Victorias = 2
+                        });
                 });
 
             modelBuilder.Entity("PokemonBackend.Models.Pokemon", b =>
@@ -278,6 +294,28 @@ namespace PokemonBackend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Pokemons");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Ataque = 14,
+                            Defensa = 10,
+                            Nivel = 25,
+                            Nombre = "Pikachu",
+                            Tipo = "Electrico",
+                            Vida = 30
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Ataque = 14,
+                            Defensa = 10,
+                            Nivel = 25,
+                            Nombre = "Charmander",
+                            Tipo = "Fuego",
+                            Vida = 30
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -335,7 +373,9 @@ namespace PokemonBackend.Migrations
                 {
                     b.HasOne("PokemonBackend.Models.Pokemon", "Pokemon")
                         .WithMany()
-                        .HasForeignKey("PokemonId");
+                        .HasForeignKey("PokemonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Pokemon");
                 });

@@ -17,7 +17,7 @@ namespace PokemonBackend.Models
         {
 
         }
-        //data-seed. informacion predefinidas en la bd
+       
        
       
         //constructor
@@ -25,7 +25,7 @@ namespace PokemonBackend.Models
         public DbSet<Entrenador> Entrenadores { get; set; }
 
 
-   
+         //data-seed. informacion predefinidas en la bd
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
 

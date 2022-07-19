@@ -4,32 +4,9 @@
 
 namespace PokemonBackend.Migrations
 {
-    public partial class Modelos_relacionados_03_ok : Migration
+    public partial class DataSeed_Pokemons_Entrenadores : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DeleteData(
-                table: "Entrenadores",
-                keyColumn: "Id",
-                keyValue: 1);
-
-            migrationBuilder.DeleteData(
-                table: "Entrenadores",
-                keyColumn: "Id",
-                keyValue: 2);
-
-            migrationBuilder.DeleteData(
-                table: "Pokemons",
-                keyColumn: "Id",
-                keyValue: 1);
-
-            migrationBuilder.DeleteData(
-                table: "Pokemons",
-                keyColumn: "Id",
-                keyValue: 2);
-        }
-
-        protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.InsertData(
                 table: "Pokemons",
@@ -50,6 +27,29 @@ namespace PokemonBackend.Migrations
                 table: "Entrenadores",
                 columns: new[] { "Id", "Derrotas", "Nombre", "PokemonId", "Victorias" },
                 values: new object[] { 2, 3, "Jose", 2, 2 });
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DeleteData(
+                table: "Entrenadores",
+                keyColumn: "Id",
+                keyValue: 1);
+
+            migrationBuilder.DeleteData(
+                table: "Entrenadores",
+                keyColumn: "Id",
+                keyValue: 2);
+
+            migrationBuilder.DeleteData(
+                table: "Pokemons",
+                keyColumn: "Id",
+                keyValue: 1);
+
+            migrationBuilder.DeleteData(
+                table: "Pokemons",
+                keyColumn: "Id",
+                keyValue: 2);
         }
     }
 }

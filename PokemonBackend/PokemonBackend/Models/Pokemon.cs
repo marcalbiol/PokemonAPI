@@ -15,7 +15,7 @@ namespace PokemonBackend.Models
         public int? Defensa { get; set; }
         public int? Vida { get; set; }
 
-     //  public List<Entrenador>?Entrenadores { get; set; }
+        // public List<Entrenador>?Entrenadores { get; set; }
 
         /*
         public int? EntrenadorId { get; set; }

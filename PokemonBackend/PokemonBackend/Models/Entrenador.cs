@@ -8,14 +8,9 @@ namespace PokemonBackend.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int? Id { get; set; }
-
-        [Required]
-        [StringLength(100)]
         public string? Nombre { get; set; }
         [Required]
         public int PokemonId { get; set; }
-
-
         [ForeignKey("PokemonId")]
         public Pokemon? Pokemon{ get; set; }
         public int? Victorias { get; set; }

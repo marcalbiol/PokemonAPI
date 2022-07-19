@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PokemonBackend.Migrations
 {
-    public partial class sistema_ususarios : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,6 +46,24 @@ namespace PokemonBackend.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pokemons",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Tipo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Nivel = table.Column<int>(type: "int", nullable: true),
+                    Ataque = table.Column<int>(type: "int", nullable: true),
+                    Defensa = table.Column<int>(type: "int", nullable: true),
+                    Vida = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pokemons", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -154,6 +172,28 @@ namespace PokemonBackend.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Entrenadores",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PokemonId = table.Column<int>(type: "int", nullable: false),
+                    Victorias = table.Column<int>(type: "int", nullable: true),
+                    Derrotas = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Entrenadores", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Entrenadores_Pokemons_PokemonId",
+                        column: x => x.PokemonId,
+                        principalTable: "Pokemons",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -192,6 +232,11 @@ namespace PokemonBackend.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Entrenadores_PokemonId",
+                table: "Entrenadores",
+                column: "PokemonId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -212,10 +257,16 @@ namespace PokemonBackend.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Entrenadores");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Pokemons");
         }
     }
 }

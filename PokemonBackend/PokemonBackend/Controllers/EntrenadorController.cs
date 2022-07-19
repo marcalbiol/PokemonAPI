@@ -16,7 +16,7 @@ namespace PokemonBackend.Controllers
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+   // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class EntrenadorController : ControllerBase
     {
         private readonly MyDbContext _context;

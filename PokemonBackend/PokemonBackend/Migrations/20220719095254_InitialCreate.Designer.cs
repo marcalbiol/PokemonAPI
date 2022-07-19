@@ -12,8 +12,8 @@ using PokemonBackend.Models;
 namespace PokemonBackend.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20220718104950_db_modelos_relacionados")]
-    partial class db_modelos_relacionados
+    [Migration("20220719095254_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -224,19 +224,17 @@ namespace PokemonBackend.Migrations
 
             modelBuilder.Entity("PokemonBackend.Models.Entrenador", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
 
                     b.Property<int?>("Derrotas")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PokemonId")
                         .HasColumnType("int");
@@ -249,33 +247,15 @@ namespace PokemonBackend.Migrations
                     b.HasIndex("PokemonId");
 
                     b.ToTable("Entrenadores");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Derrotas = 3,
-                            Nombre = "Marc",
-                            PokemonId = 1,
-                            Victorias = 2
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Derrotas = 3,
-                            Nombre = "Jose",
-                            PokemonId = 0,
-                            Victorias = 2
-                        });
                 });
 
             modelBuilder.Entity("PokemonBackend.Models.Pokemon", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
 
                     b.Property<int?>("Ataque")
                         .HasColumnType("int");
@@ -298,28 +278,6 @@ namespace PokemonBackend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Pokemons");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Ataque = 14,
-                            Defensa = 10,
-                            Nivel = 25,
-                            Nombre = "Pikachu",
-                            Tipo = "Electrico",
-                            Vida = 30
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Ataque = 14,
-                            Defensa = 10,
-                            Nivel = 25,
-                            Nombre = "Charmander",
-                            Tipo = "Fuego",
-                            Vida = 30
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -376,17 +334,12 @@ namespace PokemonBackend.Migrations
             modelBuilder.Entity("PokemonBackend.Models.Entrenador", b =>
                 {
                     b.HasOne("PokemonBackend.Models.Pokemon", "Pokemon")
-                        .WithMany("Entrenadores")
+                        .WithMany()
                         .HasForeignKey("PokemonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Pokemon");
-                });
-
-            modelBuilder.Entity("PokemonBackend.Models.Pokemon", b =>
-                {
-                    b.Navigation("Entrenadores");
                 });
 #pragma warning restore 612, 618
         }
