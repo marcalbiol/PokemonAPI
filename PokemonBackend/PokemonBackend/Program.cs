@@ -37,6 +37,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     );
 
 
+/* LOGIN EXCLUIDO
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
     // configuracion de pw
@@ -49,10 +50,9 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
     AddDefaultTokenProviders();
 
 
-
 // configuracion Autorizacion Swagger CONFIGURACION DEL BEARER
 
-/*
+
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "PokemonAPI", Version = "v1" });
@@ -90,8 +90,8 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "Titulo",
-        Description = "Descripcion",
+        Title = "Pokemon ",
+        Description = "Descripcion asdsdafdsgdasd",
         TermsOfService = new Uri("https://example.com/terms"),
         Contact = new OpenApiContact
         {

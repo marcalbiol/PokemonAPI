@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PokemonBackend.Models;
 
@@ -11,9 +12,10 @@ using PokemonBackend.Models;
 namespace PokemonBackend.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220720070901_ModeloRelacional_OneToMany_0.1")]
+    partial class ModeloRelacional_OneToMany_01
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,46 +73,6 @@ namespace PokemonBackend.Migrations
                     b.ToTable("Pokemons");
                 });
 
-            modelBuilder.Entity("PokemonBackend.Models.Tipo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Desventaja")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Tipo_pokemon")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Ventaja")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tipo");
-                });
-
-            modelBuilder.Entity("PokemonBackend.Models.Tipo_Pokemons", b =>
-                {
-                    b.Property<int>("TipoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PokemonId")
-                        .HasColumnType("int");
-
-                    b.HasKey("TipoId", "PokemonId");
-
-                    b.HasIndex("PokemonId");
-
-                    b.ToTable("Tipo_Pokemons");
-                });
-
             modelBuilder.Entity("PokemonBackend.Models.Pokemon", b =>
                 {
                     b.HasOne("PokemonBackend.Models.Entrenador", "Entrenador")
@@ -122,38 +84,9 @@ namespace PokemonBackend.Migrations
                     b.Navigation("Entrenador");
                 });
 
-            modelBuilder.Entity("PokemonBackend.Models.Tipo_Pokemons", b =>
-                {
-                    b.HasOne("PokemonBackend.Models.Pokemon", "Pokemon")
-                        .WithMany("Tipos")
-                        .HasForeignKey("PokemonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PokemonBackend.Models.Tipo", "Tipo")
-                        .WithMany("Tipos")
-                        .HasForeignKey("TipoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Pokemon");
-
-                    b.Navigation("Tipo");
-                });
-
             modelBuilder.Entity("PokemonBackend.Models.Entrenador", b =>
                 {
                     b.Navigation("pokemons");
-                });
-
-            modelBuilder.Entity("PokemonBackend.Models.Pokemon", b =>
-                {
-                    b.Navigation("Tipos");
-                });
-
-            modelBuilder.Entity("PokemonBackend.Models.Tipo", b =>
-                {
-                    b.Navigation("Tipos");
                 });
 #pragma warning restore 612, 618
         }

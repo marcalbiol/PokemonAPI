@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\UsuariosController.cs" />
+    <Compile Remove="Models\ApplicationUser.cs" />
+    <Compile Remove="Models\UserInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resources\index.html" />
   </ItemGroup>
 

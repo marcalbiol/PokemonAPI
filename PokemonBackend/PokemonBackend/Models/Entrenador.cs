@@ -5,16 +5,11 @@ namespace PokemonBackend.Models
 {
     public class Entrenador
     {
-        [Key]
+       
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int? Id { get; set; }
         public string? Nombre { get; set; }
-        [Required]
-        public int PokemonId { get; set; }
-        [ForeignKey("PokemonId")]
-        public Pokemon? Pokemon{ get; set; }
-        public int? Victorias { get; set; }
-        public int? Derrotas { get; set; }
+        public ICollection<Pokemon>? Pokemons { get; set; }
 
     }
 }
