@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PokemonBackend.Models;
 
@@ -11,9 +12,10 @@ using PokemonBackend.Models;
 namespace PokemonBackend.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220720084055_DataSeed_0.1")]
+    partial class DataSeed_01
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,18 +75,7 @@ namespace PokemonBackend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            Nombre = "Charmander"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Nombre = "Squirtle"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Nombre = "Bulbasaur"
+                            Id = 1
                         });
                 });
 
@@ -107,7 +98,7 @@ namespace PokemonBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tipos");
+                    b.ToTable("Tipo");
 
                     b.HasData(
                         new
@@ -146,23 +137,6 @@ namespace PokemonBackend.Migrations
                     b.HasIndex("PokemonId");
 
                     b.ToTable("Tipo_Pokemons");
-
-                    b.HasData(
-                        new
-                        {
-                            TipoId = 1,
-                            PokemonId = 1
-                        },
-                        new
-                        {
-                            TipoId = 2,
-                            PokemonId = 2
-                        },
-                        new
-                        {
-                            TipoId = 3,
-                            PokemonId = 3
-                        });
                 });
 
             modelBuilder.Entity("PokemonBackend.Models.Pokemon", b =>

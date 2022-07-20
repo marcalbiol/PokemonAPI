@@ -22,7 +22,7 @@ namespace PokemonBackend.Models
         public DbSet<Pokemon> Pokemons { get; set; }
         public DbSet<Entrenador> Entrenadores { get; set; }
         public DbSet<Tipo_Pokemons> Tipo_Pokemons { get; set; }
-      
+        public DbSet<Tipo> Tipos { get; set; }
          
         // configuracion de relaciones con FluentAPI
         protected override void OnModelCreating(ModelBuilder modelbuilder)
@@ -32,8 +32,10 @@ namespace PokemonBackend.Models
             modelbuilder.Entity<Entrenador>()
                  .HasMany(p => p.Pokemons)
                  .WithOne(e => e.Entrenador)
-                 .IsRequired();
+                 .OnDelete(DeleteBehavior.SetNull);
 
+           
+               
 
             // ManyToMany
             modelbuilder.Entity<Tipo_Pokemons>()
@@ -48,6 +50,28 @@ namespace PokemonBackend.Models
                 .HasOne(p => p.Tipo)
                 .WithMany(t => t.Tipos)
                 .HasForeignKey(tp => tp.TipoId);
+
+
+            // DATA-SEED
+
+            modelbuilder.Entity<Tipo>().HasData(
+                new Tipo { Id = 1, Tipo_pokemon = "Fuego", Ventaja = "Planta", Desventaja = "Agua" },
+                new Tipo { Id = 2, Tipo_pokemon = "Agua", Ventaja = "Fuego", Desventaja = "Planta" },
+                new Tipo { Id = 3, Tipo_pokemon = "Planta", Ventaja = "Agua", Desventaja = "Fuego" }
+                );
+
+            modelbuilder.Entity<Pokemon>().HasData(
+                new Pokemon { Id = 1, Nombre = "Charmander" },
+                new Pokemon { Id = 2, Nombre = "Squirtle" },
+                new Pokemon { Id = 3, Nombre = "Bulbasaur" }
+                );
+
+            modelbuilder.Entity<Tipo_Pokemons>().HasData
+                (new Tipo_Pokemons { PokemonId = 1, TipoId = 1 },
+                new Tipo_Pokemons { PokemonId = 2, TipoId = 2 },
+                new Tipo_Pokemons { PokemonId = 3, TipoId = 3 }
+                );
+           
 
             base.OnModelCreating(modelbuilder);
 

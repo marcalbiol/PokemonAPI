@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PokemonBackend.Models;
 
@@ -11,9 +12,10 @@ using PokemonBackend.Models;
 namespace PokemonBackend.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220720081234_campoTipoAdd_Pokemon")]
+    partial class campoTipoAdd_Pokemon
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,7 +54,7 @@ namespace PokemonBackend.Migrations
                     b.Property<int?>("Defensa")
                         .HasColumnType("int");
 
-                    b.Property<int?>("EntrenadorId")
+                    b.Property<int>("EntrenadorId")
                         .HasColumnType("int");
 
                     b.Property<int?>("Nivel")
@@ -61,6 +63,9 @@ namespace PokemonBackend.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("TipoId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("Vida")
                         .HasColumnType("int");
 
@@ -68,24 +73,9 @@ namespace PokemonBackend.Migrations
 
                     b.HasIndex("EntrenadorId");
 
-                    b.ToTable("Pokemons");
+                    b.HasIndex("TipoId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Nombre = "Charmander"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Nombre = "Squirtle"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Nombre = "Bulbasaur"
-                        });
+                    b.ToTable("Pokemons");
                 });
 
             modelBuilder.Entity("PokemonBackend.Models.Tipo", b =>
@@ -107,30 +97,7 @@ namespace PokemonBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tipos");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Desventaja = "Agua",
-                            Tipo_pokemon = "Fuego",
-                            Ventaja = "Planta"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Desventaja = "Planta",
-                            Tipo_pokemon = "Agua",
-                            Ventaja = "Fuego"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Desventaja = "Fuego",
-                            Tipo_pokemon = "Planta",
-                            Ventaja = "Agua"
-                        });
+                    b.ToTable("Tipo");
                 });
 
             modelBuilder.Entity("PokemonBackend.Models.Tipo_Pokemons", b =>
@@ -146,23 +113,6 @@ namespace PokemonBackend.Migrations
                     b.HasIndex("PokemonId");
 
                     b.ToTable("Tipo_Pokemons");
-
-                    b.HasData(
-                        new
-                        {
-                            TipoId = 1,
-                            PokemonId = 1
-                        },
-                        new
-                        {
-                            TipoId = 2,
-                            PokemonId = 2
-                        },
-                        new
-                        {
-                            TipoId = 3,
-                            PokemonId = 3
-                        });
                 });
 
             modelBuilder.Entity("PokemonBackend.Models.Pokemon", b =>
@@ -170,9 +120,16 @@ namespace PokemonBackend.Migrations
                     b.HasOne("PokemonBackend.Models.Entrenador", "Entrenador")
                         .WithMany("Pokemons")
                         .HasForeignKey("EntrenadorId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PokemonBackend.Models.Tipo", "Tipo")
+                        .WithMany()
+                        .HasForeignKey("TipoId");
 
                     b.Navigation("Entrenador");
+
+                    b.Navigation("Tipo");
                 });
 
             modelBuilder.Entity("PokemonBackend.Models.Tipo_Pokemons", b =>
