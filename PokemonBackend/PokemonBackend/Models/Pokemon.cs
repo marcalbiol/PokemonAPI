@@ -13,8 +13,8 @@ namespace PokemonBackend.Models
         public int? Ataque { get; set; }
         public int? Defensa { get; set; }
         public int? Vida { get; set; }
-        public Entrenador? Entrenador { get; set; }
-        public ICollection<Tipo_Pokemons>? Tipos { get; set; }   
+        public ICollection<Tipo_Pokemons>? Tipos { get; set; }
+        public ICollection<Entrenador_Pokemon>? Entrenador_Pokemons { get; set; }
 
 
     }

@@ -23,21 +23,35 @@ namespace PokemonBackend.Models
         public DbSet<Entrenador> Entrenadores { get; set; }
         public DbSet<Tipo_Pokemons> Tipo_Pokemons { get; set; }
         public DbSet<Tipo> Tipos { get; set; }
+        public DbSet<Entrenador_Pokemon> Entrenadores_Pokemons { get; set; }
          
+
+
         // configuracion de relaciones con FluentAPI
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
 
-            // Relacion OneToMany
-            modelbuilder.Entity<Entrenador>()
-                 .HasMany(p => p.Pokemons)
-                 .WithOne(e => e.Entrenador)
-                 .OnDelete(DeleteBehavior.SetNull);
+            // ManyToMany Pokemon Entrenador
 
-           
-               
+            // ForeignKey
+            modelbuilder.Entity<Entrenador_Pokemon>()
+                .HasKey(ep => new { ep.EntrenadorId, ep.PokemonId });
 
-            // ManyToMany
+            //Entrenador
+            modelbuilder.Entity<Entrenador_Pokemon>()
+                .HasOne(e => e.Entrenador)
+                .WithMany(p => p.Entrenador_Pokemons)
+                .HasForeignKey(e => e.EntrenadorId);
+
+            // Pokemons
+            modelbuilder.Entity<Entrenador_Pokemon>()
+              .HasOne(p => p.Pokemon)
+              .WithMany(p => p.Entrenador_Pokemons)
+              .HasForeignKey(e => e.PokemonId);
+
+            // ManyToMany Pokemon Tipos
+
+            // ForeignKey
             modelbuilder.Entity<Tipo_Pokemons>()
                 .HasKey(tp => new { tp.TipoId, tp.PokemonId });
 
@@ -61,13 +75,13 @@ namespace PokemonBackend.Models
                 );
 
             modelbuilder.Entity<Pokemon>().HasData(
-                new Pokemon { Id = 1, Nombre = "Charmander" },
+                new Pokemon { Id = 1, Nombre = "Charmander"},
                 new Pokemon { Id = 2, Nombre = "Squirtle" },
                 new Pokemon { Id = 3, Nombre = "Bulbasaur" }
                 );
 
-            modelbuilder.Entity<Tipo_Pokemons>().HasData
-                (new Tipo_Pokemons { PokemonId = 1, TipoId = 1 },
+            modelbuilder.Entity<Tipo_Pokemons>().HasData (
+                new Tipo_Pokemons { PokemonId = 1, TipoId = 1 },
                 new Tipo_Pokemons { PokemonId = 2, TipoId = 2 },
                 new Tipo_Pokemons { PokemonId = 3, TipoId = 3 }
                 );
