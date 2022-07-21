@@ -1,6 +1,6 @@
 ﻿namespace PokemonBackend.Models
 {
-    public class Tipo_Pokemons
+    public class Tipos_Pokemons
     {
       public int PokemonId { get; set; }    
       public Pokemon? Pokemon { get; set; }

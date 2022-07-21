@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PokemonBackend.Models;
 
@@ -11,9 +12,10 @@ using PokemonBackend.Models;
 namespace PokemonBackend.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220721062216_AddEntrenador_Pokemons0.1")]
+    partial class AddEntrenador_Pokemons01
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,7 +57,7 @@ namespace PokemonBackend.Migrations
                         });
                 });
 
-            modelBuilder.Entity("PokemonBackend.Models.Entrenadores_Pokemon", b =>
+            modelBuilder.Entity("PokemonBackend.Models.Entrenador_Pokemon", b =>
                 {
                     b.Property<int>("EntrenadorId")
                         .HasColumnType("int");
@@ -87,68 +89,6 @@ namespace PokemonBackend.Migrations
                         });
                 });
 
-            modelBuilder.Entity("PokemonBackend.Models.Habilidades_Agua", b =>
-                {
-                    b.Property<int>("AguaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AguaId"), 1L, 1);
-
-                    b.Property<string>("Habilidad_1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Habilidad_2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Habilidad_3")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Habilidad_4")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TipoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AguaId");
-
-                    b.HasIndex("TipoId")
-                        .IsUnique();
-
-                    b.ToTable("HabilidadesAgua");
-                });
-
-            modelBuilder.Entity("PokemonBackend.Models.Habilidades_Fuego", b =>
-                {
-                    b.Property<int>("FuegoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FuegoId"), 1L, 1);
-
-                    b.Property<string>("Habilidad_1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Habilidad_2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Habilidad_3")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Habilidad_4")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TipoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("FuegoId");
-
-                    b.HasIndex("TipoId")
-                        .IsUnique();
-
-                    b.ToTable("HabilidadesFuego");
-                });
-
             modelBuilder.Entity("PokemonBackend.Models.Pokemon", b =>
                 {
                     b.Property<int?>("Id")
@@ -157,23 +97,27 @@ namespace PokemonBackend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
 
+                    b.Property<int?>("Ataque")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Defensa")
+                        .HasColumnType("int");
+
                     b.Property<int?>("EntrenadorId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Nivel")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("Shiny")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("StatId")
+                    b.Property<int?>("Vida")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EntrenadorId");
-
-                    b.HasIndex("StatId");
 
                     b.ToTable("Pokemons");
 
@@ -181,8 +125,7 @@ namespace PokemonBackend.Migrations
                         new
                         {
                             Id = 1,
-                            Nombre = "Charmander",
-                            StatId = 1
+                            Nombre = "Charmander"
                         },
                         new
                         {
@@ -206,41 +149,6 @@ namespace PokemonBackend.Migrations
                         });
                 });
 
-            modelBuilder.Entity("PokemonBackend.Models.Stat", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("Ataque")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Defensa")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Nivel")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Vida")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Stats");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Ataque = 15,
-                            Defensa = 10,
-                            Nivel = 20,
-                            Vida = 40
-                        });
-                });
-
             modelBuilder.Entity("PokemonBackend.Models.Tipo", b =>
                 {
                     b.Property<int>("Id")
@@ -249,13 +157,13 @@ namespace PokemonBackend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Debil")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Eficaz")
+                    b.Property<string>("Desventaja")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Tipo_pokemon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ventaja")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -266,41 +174,41 @@ namespace PokemonBackend.Migrations
                         new
                         {
                             Id = 1,
-                            Debil = "Agua",
-                            Eficaz = "Planta",
-                            Tipo_pokemon = "Fuego"
+                            Desventaja = "Agua",
+                            Tipo_pokemon = "Fuego",
+                            Ventaja = "Planta"
                         },
                         new
                         {
                             Id = 2,
-                            Debil = "Planta",
-                            Eficaz = "Fuego",
-                            Tipo_pokemon = "Agua"
+                            Desventaja = "Planta",
+                            Tipo_pokemon = "Agua",
+                            Ventaja = "Fuego"
                         },
                         new
                         {
                             Id = 3,
-                            Debil = "Fuego",
-                            Eficaz = "Agua",
-                            Tipo_pokemon = "Planta"
+                            Desventaja = "Fuego",
+                            Tipo_pokemon = "Planta",
+                            Ventaja = "Agua"
                         },
                         new
                         {
                             Id = 4,
-                            Debil = "Dragon",
-                            Eficaz = "Agua",
-                            Tipo_pokemon = "Electrico"
+                            Desventaja = "Dragon",
+                            Tipo_pokemon = "Electrico",
+                            Ventaja = "Agua"
                         },
                         new
                         {
                             Id = 5,
-                            Debil = "Acero",
-                            Eficaz = "Fuego",
-                            Tipo_pokemon = "Roca"
+                            Desventaja = "Acero",
+                            Tipo_pokemon = "Roca",
+                            Ventaja = "Fuego"
                         });
                 });
 
-            modelBuilder.Entity("PokemonBackend.Models.Tipos_Pokemons", b =>
+            modelBuilder.Entity("PokemonBackend.Models.Tipo_Pokemons", b =>
                 {
                     b.Property<int>("TipoId")
                         .HasColumnType("int");
@@ -342,7 +250,7 @@ namespace PokemonBackend.Migrations
                         });
                 });
 
-            modelBuilder.Entity("PokemonBackend.Models.Entrenadores_Pokemon", b =>
+            modelBuilder.Entity("PokemonBackend.Models.Entrenador_Pokemon", b =>
                 {
                     b.HasOne("PokemonBackend.Models.Entrenador", "Entrenador")
                         .WithMany("Entrenador_Pokemons")
@@ -361,43 +269,14 @@ namespace PokemonBackend.Migrations
                     b.Navigation("Pokemon");
                 });
 
-            modelBuilder.Entity("PokemonBackend.Models.Habilidades_Agua", b =>
-                {
-                    b.HasOne("PokemonBackend.Models.Tipo", "Tipo")
-                        .WithOne("Habilidades_Agua")
-                        .HasForeignKey("PokemonBackend.Models.Habilidades_Agua", "TipoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Tipo");
-                });
-
-            modelBuilder.Entity("PokemonBackend.Models.Habilidades_Fuego", b =>
-                {
-                    b.HasOne("PokemonBackend.Models.Tipo", "Tipo")
-                        .WithOne("Habilidades_Fuego")
-                        .HasForeignKey("PokemonBackend.Models.Habilidades_Fuego", "TipoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Tipo");
-                });
-
             modelBuilder.Entity("PokemonBackend.Models.Pokemon", b =>
                 {
                     b.HasOne("PokemonBackend.Models.Entrenador", null)
                         .WithMany("Pokemons")
                         .HasForeignKey("EntrenadorId");
-
-                    b.HasOne("PokemonBackend.Models.Stat", "Stat")
-                        .WithMany("Pokemons")
-                        .HasForeignKey("StatId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.Navigation("Stat");
                 });
 
-            modelBuilder.Entity("PokemonBackend.Models.Tipos_Pokemons", b =>
+            modelBuilder.Entity("PokemonBackend.Models.Tipo_Pokemons", b =>
                 {
                     b.HasOne("PokemonBackend.Models.Pokemon", "Pokemon")
                         .WithMany("Tipos")
@@ -430,17 +309,8 @@ namespace PokemonBackend.Migrations
                     b.Navigation("Tipos");
                 });
 
-            modelBuilder.Entity("PokemonBackend.Models.Stat", b =>
-                {
-                    b.Navigation("Pokemons");
-                });
-
             modelBuilder.Entity("PokemonBackend.Models.Tipo", b =>
                 {
-                    b.Navigation("Habilidades_Agua");
-
-                    b.Navigation("Habilidades_Fuego");
-
                     b.Navigation("Tipos");
                 });
 #pragma warning restore 612, 618

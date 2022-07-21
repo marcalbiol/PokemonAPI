@@ -10,7 +10,7 @@ namespace PokemonBackend.Models
         public int? Id { get; set; }
         public string? Nombre { get; set; }
         public ICollection<Pokemon>? Pokemons { get; set; }
-        public ICollection<Entrenador_Pokemon>? Entrenador_Pokemons{ get; set; }
+        public ICollection<Entrenadores_Pokemon>? Entrenador_Pokemons{ get; set; }
 
     }
 }

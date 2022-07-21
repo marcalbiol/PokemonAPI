@@ -1,6 +1,6 @@
 ﻿namespace PokemonBackend.Models
 {
-    public class Entrenador_Pokemon
+    public class Entrenadores_Pokemon
     {
 
         public int EntrenadorId{ get; set; }

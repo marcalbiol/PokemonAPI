@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PokemonBackend.Models;
 
@@ -11,9 +12,10 @@ using PokemonBackend.Models;
 namespace PokemonBackend.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220721080157_AddedRelacion_TipoPokemon_Habilidades.v2")]
+    partial class AddedRelacion_TipoPokemon_Habilidadesv2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,7 +117,7 @@ namespace PokemonBackend.Migrations
                     b.HasIndex("TipoId")
                         .IsUnique();
 
-                    b.ToTable("HabilidadesAgua");
+                    b.ToTable("Habilidades_Agua");
                 });
 
             modelBuilder.Entity("PokemonBackend.Models.Habilidades_Fuego", b =>
@@ -146,7 +148,7 @@ namespace PokemonBackend.Migrations
                     b.HasIndex("TipoId")
                         .IsUnique();
 
-                    b.ToTable("HabilidadesFuego");
+                    b.ToTable("Habilidades_Fuego");
                 });
 
             modelBuilder.Entity("PokemonBackend.Models.Pokemon", b =>

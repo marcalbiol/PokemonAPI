@@ -9,12 +9,14 @@ namespace PokemonBackend.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int? Id { get; set; }
         public string? Nombre { get; set; }
-        public int? Nivel { get; set; }
-        public int? Ataque { get; set; }
-        public int? Defensa { get; set; }
-        public int? Vida { get; set; }
-        public ICollection<Tipo_Pokemons>? Tipos { get; set; }
-        public ICollection<Entrenador_Pokemon>? Entrenador_Pokemons { get; set; }
+
+        // a traves de la logica asignar si es shiny o no TO DO
+        public Boolean? Shiny { get; set; }
+
+        public int? StatId { get; set; }
+        public Stat? Stat { get; set; }
+        public ICollection<Tipos_Pokemons>? Tipos { get; set; }
+        public ICollection<Entrenadores_Pokemon>? Entrenador_Pokemons { get; set; }
 
 
     }
