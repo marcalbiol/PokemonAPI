@@ -8,6 +8,7 @@ namespace PokemonBackend.Models
         
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int? Id { get; set; }
+       // [RegularExpression(@"A-Za-z", ErrorMessage = "Nombre Invalido")]
         public string? Nombre { get; set; }
 
         // a traves de la logica asignar si es shiny o no TO DO

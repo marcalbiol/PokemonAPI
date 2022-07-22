@@ -8,8 +8,6 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\UsuariosController.cs" />
-    <Compile Remove="Models\ApplicationUser.cs" />
-    <Compile Remove="Models\UserInfo.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +33,10 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.7" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Business_Logic_Layer\Logica_Negocio.csproj" />
   </ItemGroup>
 	
 

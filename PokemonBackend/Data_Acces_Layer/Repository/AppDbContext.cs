@@ -1,23 +1,26 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using PokemonBackend.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace PokemonBackend.Models
+namespace Data_Acces_Layer.Repository
 {
     // aqui indicamos cuales son los modelos que queremos en nuestra BD, en este caso
     // Pokemon y entrenador
     public class MyDbContext : DbContext
     {
+        public MyDbContext()
+        {
+        }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
         {
 
         }
-       
+
         //constructor
         public DbSet<Pokemon> Pokemons { get; set; }
         public DbSet<Entrenador> Entrenadores { get; set; }
@@ -26,8 +29,8 @@ namespace PokemonBackend.Models
         public DbSet<Entrenadores_Pokemon> Entrenadores_Pokemons { get; set; }
         public DbSet<Stat> Stats { get; set; }
         public DbSet<Habilidades_Fuego> HabilidadesFuego { get; set; }
-        public DbSet<Habilidades_Agua> HabilidadesAgua { get; set; }   
-         
+        public DbSet<Habilidades_Agua> HabilidadesAgua { get; set; }
+
 
 
         // configuracion de relaciones con FluentAPI
@@ -38,7 +41,7 @@ namespace PokemonBackend.Models
 
             // Stats
             modelbuilder.Entity<Pokemon>()
-                .HasOne<Stat>(s => s.Stat)
+                .HasOne(s => s.Stat)
                 .WithMany(p => p.Pokemons)
                 .HasForeignKey(s => s.StatId)
                 .OnDelete(DeleteBehavior.Cascade);
@@ -48,12 +51,12 @@ namespace PokemonBackend.Models
             //TODO
             // revisar y comprobar añadiendo DATA
             modelbuilder.Entity<Tipo>()
-                .HasOne<Habilidades_Fuego>(f => f.Habilidades_Fuego)
+                .HasOne(f => f.Habilidades_Fuego)
                 .WithOne(t => t.Tipo)
                 .HasForeignKey<Habilidades_Fuego>(hf => hf.TipoId);
-            
+
             modelbuilder.Entity<Tipo>()
-                .HasOne<Habilidades_Agua>(a => a.Habilidades_Agua)
+                .HasOne(a => a.Habilidades_Agua)
                 .WithOne(t => t.Tipo)
                 .HasForeignKey<Habilidades_Agua>(ha => ha.TipoId);
 
@@ -113,11 +116,11 @@ namespace PokemonBackend.Models
                 );
 
             modelbuilder.Entity<Pokemon>().HasData(
-                new Pokemon { Id = 1, Nombre = "Charmander", StatId = 1},
+                new Pokemon { Id = 1, Nombre = "Charmander", StatId = 1 },
                 new Pokemon { Id = 2, Nombre = "Squirtle" },
                 new Pokemon { Id = 3, Nombre = "Bulbasaur" },
-                new Pokemon { Id = 4, Nombre = "Pikachu"},
-                new Pokemon { Id = 5, Nombre = "Onix"}
+                new Pokemon { Id = 4, Nombre = "Pikachu" },
+                new Pokemon { Id = 5, Nombre = "Onix" }
                 );
 
             modelbuilder.Entity<Entrenador>().HasData(
@@ -140,8 +143,8 @@ namespace PokemonBackend.Models
             // ASIGNACION DE CADA ENTRENADOR CON SU POKEMONS
             modelbuilder.Entity<Entrenadores_Pokemon>().HasData(
                 new Entrenadores_Pokemon { EntrenadorId = 2, PokemonId = 4 },
-                new Entrenadores_Pokemon { EntrenadorId = 1, PokemonId = 4},
-                new Entrenadores_Pokemon { EntrenadorId = 3, PokemonId = 5}
+                new Entrenadores_Pokemon { EntrenadorId = 1, PokemonId = 4 },
+                new Entrenadores_Pokemon { EntrenadorId = 3, PokemonId = 5 }
                 );
 
 
@@ -149,6 +152,16 @@ namespace PokemonBackend.Models
             base.OnModelCreating(modelbuilder);
 
         }
+
+        // CONEXION A LA BASE DE DATOS, YA NO SE HACE EN EL PROGRAM.CS
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+        var connect = @"Server=LOCALHOST;Database=db_pokemon_backend;Trusted_Connection=True";
+        if (!optionsBuilder.IsConfigured)
+       {
+                optionsBuilder.UseSqlServer(connect);
+       }
+}
 
     }
     /* PARA ACTUALIZAR LA TABLA. ADD-MIGRATION  (FECHA QUE SE EJECUTA). DESPUES UPDATE-DATABASE */

@@ -1,3 +1,4 @@
+using Data_Acces_Layer.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -5,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using PokemonBackend.Models;
 using System.Reflection;
 using System.Text;
 
@@ -15,10 +15,10 @@ var configuration = builder.Configuration;
 
 // Add services to the container.
 
-// conexion a la base de datos
+/* conexion a la base de datos *EDITADO, AHORA SE HACE EN EL APPDBCONTEXT*
 var connect = @"Server=LOCALHOST;Database=db_pokemon_backend;Trusted_Connection=True";
 builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlServer(connect));
-
+*/
 
 // validacion del token, 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
