@@ -4,6 +4,7 @@ using Data_Acces_Layer.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace PokemonBackend.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220722095510_TablasHabilidadesCambiadas")]
+    partial class TablasHabilidadesCambiadas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,43 +23,6 @@ namespace PokemonBackend.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("Acceso_BD.Repository.Entity.Tipos_Habilidades", b =>
-                {
-                    b.Property<int?>("TipoId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("HabilidadId")
-                        .HasColumnType("int");
-
-                    b.HasKey("TipoId", "HabilidadId");
-
-                    b.HasIndex("HabilidadId");
-
-                    b.ToTable("Tipos_Habilidades");
-
-                    b.HasData(
-                        new
-                        {
-                            TipoId = 1,
-                            HabilidadId = 1
-                        },
-                        new
-                        {
-                            TipoId = 2,
-                            HabilidadId = 2
-                        },
-                        new
-                        {
-                            TipoId = 3,
-                            HabilidadId = 3
-                        },
-                        new
-                        {
-                            TipoId = 4,
-                            HabilidadId = 4
-                        });
-                });
 
             modelBuilder.Entity("PokemonBackend.Models.Entrenador", b =>
                 {
@@ -144,43 +109,15 @@ namespace PokemonBackend.Migrations
                     b.Property<string>("Habilidad_4")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TipoId")
+                        .HasColumnType("int");
+
                     b.HasKey("HabilidadId");
 
-                    b.ToTable("Habilidades");
+                    b.HasIndex("TipoId")
+                        .IsUnique();
 
-                    b.HasData(
-                        new
-                        {
-                            HabilidadId = 1,
-                            Habilidad_1 = "Placaje",
-                            Habilidad_2 = "Ascuas",
-                            Habilidad_3 = "Llamarada",
-                            Habilidad_4 = "Gruñido"
-                        },
-                        new
-                        {
-                            HabilidadId = 2,
-                            Habilidad_1 = "Placaje",
-                            Habilidad_2 = "Pistola Agua",
-                            Habilidad_3 = "Surf",
-                            Habilidad_4 = "Ataque arena"
-                        },
-                        new
-                        {
-                            HabilidadId = 3,
-                            Habilidad_1 = "Placaje",
-                            Habilidad_2 = "Latigo cepa",
-                            Habilidad_3 = "Hoja afilada",
-                            Habilidad_4 = "Ataque arena"
-                        },
-                        new
-                        {
-                            HabilidadId = 4,
-                            Habilidad_1 = "Placaje",
-                            Habilidad_2 = "Impactrueno",
-                            Habilidad_3 = "Rayo",
-                            Habilidad_4 = "Trueno"
-                        });
+                    b.ToTable("Habilidades");
                 });
 
             modelBuilder.Entity("PokemonBackend.Models.Pokemon", b =>
@@ -376,25 +313,6 @@ namespace PokemonBackend.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Acceso_BD.Repository.Entity.Tipos_Habilidades", b =>
-                {
-                    b.HasOne("PokemonBackend.Models.Habilidades", "Habilidades")
-                        .WithMany("habilidades_tipos")
-                        .HasForeignKey("HabilidadId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PokemonBackend.Models.Tipo", "Tipo")
-                        .WithMany("habilidades_tipos")
-                        .HasForeignKey("TipoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Habilidades");
-
-                    b.Navigation("Tipo");
-                });
-
             modelBuilder.Entity("PokemonBackend.Models.Entrenadores_Pokemon", b =>
                 {
                     b.HasOne("PokemonBackend.Models.Entrenador", "Entrenador")
@@ -412,6 +330,17 @@ namespace PokemonBackend.Migrations
                     b.Navigation("Entrenador");
 
                     b.Navigation("Pokemon");
+                });
+
+            modelBuilder.Entity("PokemonBackend.Models.Habilidades", b =>
+                {
+                    b.HasOne("PokemonBackend.Models.Tipo", "Tipo")
+                        .WithOne("Habilidades")
+                        .HasForeignKey("PokemonBackend.Models.Habilidades", "TipoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Tipo");
                 });
 
             modelBuilder.Entity("PokemonBackend.Models.Pokemon", b =>
@@ -454,11 +383,6 @@ namespace PokemonBackend.Migrations
                     b.Navigation("Pokemons");
                 });
 
-            modelBuilder.Entity("PokemonBackend.Models.Habilidades", b =>
-                {
-                    b.Navigation("habilidades_tipos");
-                });
-
             modelBuilder.Entity("PokemonBackend.Models.Pokemon", b =>
                 {
                     b.Navigation("Entrenador_Pokemons");
@@ -473,9 +397,9 @@ namespace PokemonBackend.Migrations
 
             modelBuilder.Entity("PokemonBackend.Models.Tipo", b =>
                 {
-                    b.Navigation("Tipos");
+                    b.Navigation("Habilidades");
 
-                    b.Navigation("habilidades_tipos");
+                    b.Navigation("Tipos");
                 });
 #pragma warning restore 612, 618
         }

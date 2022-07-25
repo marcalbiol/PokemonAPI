@@ -4,6 +4,7 @@ using Data_Acces_Layer.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace PokemonBackend.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220722101501_TablasHabilidades_Tipo_ModeloRelacional")]
+    partial class TablasHabilidades_Tipo_ModeloRelacional
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,28 +37,6 @@ namespace PokemonBackend.Migrations
                     b.HasIndex("HabilidadId");
 
                     b.ToTable("Tipos_Habilidades");
-
-                    b.HasData(
-                        new
-                        {
-                            TipoId = 1,
-                            HabilidadId = 1
-                        },
-                        new
-                        {
-                            TipoId = 2,
-                            HabilidadId = 2
-                        },
-                        new
-                        {
-                            TipoId = 3,
-                            HabilidadId = 3
-                        },
-                        new
-                        {
-                            TipoId = 4,
-                            HabilidadId = 4
-                        });
                 });
 
             modelBuilder.Entity("PokemonBackend.Models.Entrenador", b =>
@@ -147,40 +127,6 @@ namespace PokemonBackend.Migrations
                     b.HasKey("HabilidadId");
 
                     b.ToTable("Habilidades");
-
-                    b.HasData(
-                        new
-                        {
-                            HabilidadId = 1,
-                            Habilidad_1 = "Placaje",
-                            Habilidad_2 = "Ascuas",
-                            Habilidad_3 = "Llamarada",
-                            Habilidad_4 = "Gruñido"
-                        },
-                        new
-                        {
-                            HabilidadId = 2,
-                            Habilidad_1 = "Placaje",
-                            Habilidad_2 = "Pistola Agua",
-                            Habilidad_3 = "Surf",
-                            Habilidad_4 = "Ataque arena"
-                        },
-                        new
-                        {
-                            HabilidadId = 3,
-                            Habilidad_1 = "Placaje",
-                            Habilidad_2 = "Latigo cepa",
-                            Habilidad_3 = "Hoja afilada",
-                            Habilidad_4 = "Ataque arena"
-                        },
-                        new
-                        {
-                            HabilidadId = 4,
-                            Habilidad_1 = "Placaje",
-                            Habilidad_2 = "Impactrueno",
-                            Habilidad_3 = "Rayo",
-                            Habilidad_4 = "Trueno"
-                        });
                 });
 
             modelBuilder.Entity("PokemonBackend.Models.Pokemon", b =>

@@ -1,4 +1,5 @@
-﻿using Data_Acces_Layer.Repository;
+﻿using Business_Logic_Layer.Models;
+using Data_Acces_Layer.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PokemonBackend.Models;
@@ -10,32 +11,47 @@ namespace PokemonBackend.Controllers
     public class PokemonController : ControllerBase
     {
 
-        private Business_Logic_Layer.PokemonBLL _BLL;
+        public Business_Logic_Layer.PokemonBLL _BLL;
         public PokemonController()
         {
-            _BLL = new Business_Logic_Layer.PokemonBLL();   
+            _BLL = new Business_Logic_Layer.PokemonBLL();
         }
 
 
 
         [HttpGet]
-        public List<Pokemon> GetPokemons()
+        public List<PokemonModel> GetPokemons()
         {
-            return _BLL.GetPokemons();  
+            return _BLL.GetPokemons();
         }
 
         [HttpGet("{id}")]
-        public Pokemon GetPokemonById(int id)
+        public ActionResult<PokemonModel> GetPokemonById(int id)
         {
-          return _BLL.GetPokemonById(id);
+            var pokemon = _BLL.GetPokemonById(id);
+
+            if (pokemon == null)
+            {
+                return NotFound("Pokemon no encontrado");
+            }
+            return Ok(pokemon);
         }
 
         [HttpPost]
-        public void postPokemon([FromBody] Pokemon p)
+        public void postPokemon([FromBody] PokemonModel pokemonModel)
         {
-            var db = new MyDbContext();
-            db.Add(p);
-            db.SaveChanges();
+            // en el controlador llamamos a los metodos de la logica de negocio
+
+            _BLL.PostPokemon(pokemonModel);
+
+        }
+
+        [HttpDelete("{id}")]
+        public Pokemon DeletePokemonById(int id)
+        {
+            return _BLL.DeletePokemonById(id);
+
+
         }
 
 

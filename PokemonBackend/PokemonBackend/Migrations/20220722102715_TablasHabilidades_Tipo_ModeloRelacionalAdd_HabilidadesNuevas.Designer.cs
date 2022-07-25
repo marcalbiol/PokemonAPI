@@ -4,6 +4,7 @@ using Data_Acces_Layer.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace PokemonBackend.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220722102715_TablasHabilidades_Tipo_ModeloRelacionalAdd_HabilidadesNuevas")]
+    partial class TablasHabilidades_Tipo_ModeloRelacionalAdd_HabilidadesNuevas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,21 +43,6 @@ namespace PokemonBackend.Migrations
                         {
                             TipoId = 1,
                             HabilidadId = 1
-                        },
-                        new
-                        {
-                            TipoId = 2,
-                            HabilidadId = 2
-                        },
-                        new
-                        {
-                            TipoId = 3,
-                            HabilidadId = 3
-                        },
-                        new
-                        {
-                            TipoId = 4,
-                            HabilidadId = 4
                         });
                 });
 

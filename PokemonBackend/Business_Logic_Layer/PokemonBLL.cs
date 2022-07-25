@@ -1,31 +1,70 @@
 ﻿using PokemonBackend.Models;
+using AutoMapper;
+using Business_Logic_Layer.Models;
+using Data_Acces_Layer.Repository;
 
 namespace Business_Logic_Layer
 {
     public class PokemonBLL
     {
         private Data_Acces_Layer.PokemonDAL _DAL;
+        // transferir la entidad de pokemon al modelo?
+        private Mapper _PokemonMapper;
         public PokemonBLL()
         {
             _DAL = new Data_Acces_Layer.PokemonDAL();
+            var _configPokemon = new MapperConfiguration(config => config.CreateMap<Pokemon, PokemonModel>().ReverseMap());
+
+            _PokemonMapper = new Mapper(_configPokemon);        
         }
-        public List<Pokemon> GetPokemons()
+        public List<PokemonModel> GetPokemons()
         {
-          return _DAL.GetPokemons();  
+
+          List<Pokemon> pokemonFromDB = _DAL.GetPokemons();  
+            List<PokemonModel> pokemonModel = _PokemonMapper.Map<List<Pokemon>, List<PokemonModel>>(pokemonFromDB);
+
+            return pokemonModel;
         }
 
 
-        public Pokemon GetPokemonById(int id)
+        public PokemonModel GetPokemonById(int id)
         {
-            var data = _DAL.GetPokemonById(id); 
+            var pokemonEntity = _DAL.GetPokemonById(id); 
+
+            PokemonModel pokemonModel = _PokemonMapper.Map<Pokemon, PokemonModel>(pokemonEntity);   
             
-            // logica
+            // logica tambien puede estar en el controlador con el ActionResult
+            /*
+            if (pokemonEntity == null)
+            {
+                throw new Exception("ID de Pokemon no encontrado");
+            }
+            */
+            return pokemonModel;
+               
+        }
+
+        public void PostPokemon(PokemonModel pokemonModel)
+        {
+            Pokemon pokemonEntity = _PokemonMapper.Map<PokemonModel, Pokemon>(pokemonModel);
+
+            _DAL.PostPokemon(pokemonEntity);
+
+        }
+
+        public Pokemon DeletePokemonById(int id)
+        {
+            var db = new MyDbContext();
+            var data = _DAL.DeletePokemonById(id);
+
             if (data == null)
             {
                 throw new Exception("ID de Pokemon no encontrado");
             }
+            db.Remove(data);
+            db.SaveChanges();
+
             return data;
-               
         }
 
     }

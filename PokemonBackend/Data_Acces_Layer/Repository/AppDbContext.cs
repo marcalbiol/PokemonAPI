@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Acceso_BD.Repository.Entity;
+using Microsoft.EntityFrameworkCore;
 using PokemonBackend.Models;
 using System;
 using System.Collections.Generic;
@@ -28,8 +29,8 @@ namespace Data_Acces_Layer.Repository
         public DbSet<Tipo> Tipos { get; set; }
         public DbSet<Entrenadores_Pokemon> Entrenadores_Pokemons { get; set; }
         public DbSet<Stat> Stats { get; set; }
-        public DbSet<Habilidades_Fuego> HabilidadesFuego { get; set; }
-        public DbSet<Habilidades_Agua> HabilidadesAgua { get; set; }
+        public DbSet<Habilidades> Habilidades { get; set; }
+        
 
 
 
@@ -50,15 +51,21 @@ namespace Data_Acces_Layer.Repository
 
             //TODO
             // revisar y comprobar añadiendo DATA
-            modelbuilder.Entity<Tipo>()
-                .HasOne(f => f.Habilidades_Fuego)
-                .WithOne(t => t.Tipo)
-                .HasForeignKey<Habilidades_Fuego>(hf => hf.TipoId);
 
-            modelbuilder.Entity<Tipo>()
-                .HasOne(a => a.Habilidades_Agua)
-                .WithOne(t => t.Tipo)
-                .HasForeignKey<Habilidades_Agua>(ha => ha.TipoId);
+
+            modelbuilder.Entity<Tipos_Habilidades>()
+                .HasKey(th => new { th.TipoId, th.HabilidadId });
+
+            modelbuilder.Entity<Tipos_Habilidades>()
+                .HasOne(t => t.Tipo)
+                .WithMany(h => h.habilidades_tipos)
+                .HasForeignKey(t => t.TipoId);
+
+            modelbuilder.Entity<Tipos_Habilidades>()
+            .HasOne(t => t.Habilidades)
+            .WithMany(h => h.habilidades_tipos)
+            .HasForeignKey(t => t.HabilidadId);
+
 
 
 
@@ -115,6 +122,15 @@ namespace Data_Acces_Layer.Repository
                 new Tipo { Id = 5, Tipo_pokemon = "Roca", Eficaz = "Fuego", Debil = "Acero" }
                 );
 
+
+            modelbuilder.Entity<Habilidades>().HasData(
+                new Habilidades { HabilidadId = 1, Habilidad_1 = "Placaje", Habilidad_2 = "Ascuas", Habilidad_3 = "Llamarada", Habilidad_4 = "Gruñido"},
+                new Habilidades { HabilidadId = 2, Habilidad_1 = "Placaje", Habilidad_2 = "Pistola Agua", Habilidad_3 = "Surf", Habilidad_4 = "Ataque arena"},
+                new Habilidades { HabilidadId = 3, Habilidad_1 = "Placaje", Habilidad_2 = "Latigo cepa", Habilidad_3 = "Hoja afilada", Habilidad_4 = "Ataque arena"},
+                new Habilidades { HabilidadId = 4, Habilidad_1 = "Placaje", Habilidad_2 = "Impactrueno", Habilidad_3 = "Rayo", Habilidad_4 = "Trueno"}
+                );
+
+
             modelbuilder.Entity<Pokemon>().HasData(
                 new Pokemon { Id = 1, Nombre = "Charmander", StatId = 1 },
                 new Pokemon { Id = 2, Nombre = "Squirtle" },
@@ -147,6 +163,14 @@ namespace Data_Acces_Layer.Repository
                 new Entrenadores_Pokemon { EntrenadorId = 3, PokemonId = 5 }
                 );
 
+            modelbuilder.Entity<Tipos_Habilidades>().HasData(
+                new Tipos_Habilidades { HabilidadId = 1, TipoId = 1 },
+                new Tipos_Habilidades { HabilidadId = 2, TipoId = 2 },
+                new Tipos_Habilidades { HabilidadId = 3, TipoId = 3 },
+                new Tipos_Habilidades { HabilidadId = 4, TipoId = 4 }
+                );
+
+
 
 
             base.OnModelCreating(modelbuilder);
@@ -159,7 +183,7 @@ namespace Data_Acces_Layer.Repository
         var connect = @"Server=LOCALHOST;Database=db_pokemon_backend;Trusted_Connection=True";
         if (!optionsBuilder.IsConfigured)
        {
-                optionsBuilder.UseSqlServer(connect);
+        optionsBuilder.UseSqlServer(connect, b => b.MigrationsAssembly("PokemonBackend"));
        }
 }
 

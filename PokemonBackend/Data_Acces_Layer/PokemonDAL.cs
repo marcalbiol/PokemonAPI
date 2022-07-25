@@ -21,5 +21,23 @@ namespace Data_Acces_Layer
         
             return pokemon;
         }
+
+        public void PostPokemon(Pokemon pokemon)
+        {
+            var db = new MyDbContext();
+            db.Add(pokemon);
+            db.SaveChanges();
+        }
+
+        public Pokemon DeletePokemonById(int id)
+        {
+            var db = new MyDbContext();
+            Pokemon pokemon = new Pokemon();
+
+            // comprobamos si el id es el mismo
+            pokemon = db.Pokemons.FirstOrDefault(x => x.Id == id);
+
+            return pokemon;
+        }
     }
 }

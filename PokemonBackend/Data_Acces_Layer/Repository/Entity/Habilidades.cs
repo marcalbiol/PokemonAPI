@@ -1,20 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Acceso_BD.Repository.Entity;
 
 namespace PokemonBackend.Models
 {
-    public class Habilidades_Fuego
+    public class Habilidades
     {
         [Key]
-        public int FuegoId { get; set; }    
+        public int? HabilidadId { get; set; }    
 
         // Habilidades
         public string? Habilidad_1 { get; set; }    
         public string? Habilidad_2 { get; set; }    
         public string? Habilidad_3 { get; set; }    
         public string? Habilidad_4 { get; set; }    
-
-        public int TipoId { get; set; }
-
-        public Tipo? Tipo { get; set; }  
+        public ICollection<Tipos_Habilidades>? habilidades_tipos { get; set; }
     }
 }
