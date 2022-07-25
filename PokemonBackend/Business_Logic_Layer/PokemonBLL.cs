@@ -63,7 +63,6 @@ namespace Business_Logic_Layer
             }
             db.Remove(data);
             db.SaveChanges();
-
             return data;
         }
 
