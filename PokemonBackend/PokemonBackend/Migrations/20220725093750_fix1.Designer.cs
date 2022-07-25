@@ -4,6 +4,7 @@ using Data_Acces_Layer.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace PokemonBackend.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220725093750_fix1")]
+    partial class fix1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -218,224 +220,28 @@ namespace PokemonBackend.Migrations
                         new
                         {
                             Id = 1,
-                            Nombre = "Bulbasaur",
-                            PokemonID = "#001"
+                            Nombre = "Charmander",
+                            StatId = 1
                         },
                         new
                         {
                             Id = 2,
-                            Nombre = "Ivysaur",
-                            PokemonID = "#002"
+                            Nombre = "Squirtle"
                         },
                         new
                         {
                             Id = 3,
-                            Nombre = "Venasaur",
-                            PokemonID = "#003"
+                            Nombre = "Bulbasaur"
                         },
                         new
                         {
                             Id = 4,
-                            Nombre = "Charmander",
-                            PokemonID = "#004"
+                            Nombre = "Pikachu"
                         },
                         new
                         {
                             Id = 5,
-                            Nombre = "Charmeleon",
-                            PokemonID = "#005"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Nombre = "Charizard",
-                            PokemonID = "#006"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Nombre = "Squirtle",
-                            PokemonID = "#007"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Nombre = "Wartotle",
-                            PokemonID = "#008"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Nombre = "Blastoise",
-                            PokemonID = "#009"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Nombre = "Caterpie",
-                            PokemonID = "#010"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Nombre = "Metapod",
-                            PokemonID = "#011"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Nombre = "Butterfree",
-                            PokemonID = "#012"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Nombre = "Weedle",
-                            PokemonID = "#013"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Nombre = "Kakuna",
-                            PokemonID = "#014"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Nombre = "Beedrill",
-                            PokemonID = "#015"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Nombre = "Pidgey",
-                            PokemonID = "#016"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Nombre = "Rattata",
-                            PokemonID = "#017"
-                        },
-                        new
-                        {
-                            Id = 18,
-                            Nombre = "Raticate",
-                            PokemonID = "#018"
-                        },
-                        new
-                        {
-                            Id = 19,
-                            Nombre = "Spearow",
-                            PokemonID = "#019"
-                        },
-                        new
-                        {
-                            Id = 20,
-                            Nombre = "Fearow",
-                            PokemonID = "#020"
-                        },
-                        new
-                        {
-                            Id = 21,
-                            Nombre = "Ekans",
-                            PokemonID = "#021"
-                        },
-                        new
-                        {
-                            Id = 22,
-                            Nombre = "Pikachu",
-                            PokemonID = "#022"
-                        },
-                        new
-                        {
-                            Id = 23,
-                            Nombre = "Raichu",
-                            PokemonID = "#023"
-                        },
-                        new
-                        {
-                            Id = 24,
-                            Nombre = "Sandshrew",
-                            PokemonID = "#024"
-                        },
-                        new
-                        {
-                            Id = 25,
-                            Nombre = "Sandslash",
-                            PokemonID = "#025"
-                        },
-                        new
-                        {
-                            Id = 26,
-                            Nombre = "Nidoran ♀",
-                            PokemonID = "#026"
-                        },
-                        new
-                        {
-                            Id = 27,
-                            Nombre = "Nidorina",
-                            PokemonID = "#027"
-                        },
-                        new
-                        {
-                            Id = 28,
-                            Nombre = "Nidoqueen",
-                            PokemonID = "#028"
-                        },
-                        new
-                        {
-                            Id = 29,
-                            Nombre = "Nidoran ♂",
-                            PokemonID = "#029"
-                        },
-                        new
-                        {
-                            Id = 30,
-                            Nombre = "Nidorino",
-                            PokemonID = "#030"
-                        },
-                        new
-                        {
-                            Id = 31,
-                            Nombre = "Nidoking",
-                            PokemonID = "#031"
-                        },
-                        new
-                        {
-                            Id = 32,
-                            Nombre = "Clefairy",
-                            PokemonID = "#032"
-                        },
-                        new
-                        {
-                            Id = 33,
-                            Nombre = "Clefable",
-                            PokemonID = "#033"
-                        },
-                        new
-                        {
-                            Id = 34,
-                            Nombre = "Vulpix",
-                            PokemonID = "#034"
-                        },
-                        new
-                        {
-                            Id = 35,
-                            Nombre = "Ninetales",
-                            PokemonID = "#035"
-                        },
-                        new
-                        {
-                            Id = 36,
-                            Nombre = "Jigglypuff",
-                            PokemonID = "#036"
-                        },
-                        new
-                        {
-                            Id = 37,
-                            Nombre = "Wigglytuff",
-                            PokemonID = "#037"
+                            Nombre = "Onix"
                         });
                 });
 

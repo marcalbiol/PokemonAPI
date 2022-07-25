@@ -11,6 +11,8 @@ namespace Business_Logic_Layer.Models
     {
         // aqui se puede modificar, no se sobreescribe cuando se cambia
         public int? Id { get; set; }
+
+        public string? IdPokemons { get; set; } 
         public string? Nombre { get; set; }
 
         // a traves de la logica asignar si es shiny o no TO DO

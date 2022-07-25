@@ -51,7 +51,6 @@ namespace PokemonBackend.Controllers
         {
             return _BLL.DeletePokemonById(id);
 
-
         }
 
 

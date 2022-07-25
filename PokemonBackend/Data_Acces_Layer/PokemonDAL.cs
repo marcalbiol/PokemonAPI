@@ -6,6 +6,9 @@ namespace Data_Acces_Layer
 {
     public class PokemonDAL
     {
+
+        Pokemon pokemons = new Pokemon();
+
         public List<Pokemon> GetPokemons()
         {
             var db = new MyDbContext();

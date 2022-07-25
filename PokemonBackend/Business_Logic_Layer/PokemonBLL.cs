@@ -48,8 +48,19 @@ namespace Business_Logic_Layer
         {
             Pokemon pokemonEntity = _PokemonMapper.Map<PokemonModel, Pokemon>(pokemonModel);
 
-            _DAL.PostPokemon(pokemonEntity);
 
+            var value = new Random().Next(0, 100);
+
+            if (value < 10)
+            {
+                pokemonEntity.Shiny = true;
+            }
+            else
+            {
+                pokemonEntity.Shiny = false;
+            }
+
+            _DAL.PostPokemon(pokemonEntity);
         }
 
         public Pokemon DeletePokemonById(int id)
@@ -65,6 +76,10 @@ namespace Business_Logic_Layer
             db.SaveChanges();
             return data;
         }
+
+
+
+
 
     }
 }

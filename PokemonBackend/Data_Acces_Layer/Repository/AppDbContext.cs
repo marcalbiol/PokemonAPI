@@ -110,6 +110,49 @@ namespace Data_Acces_Layer.Repository
 
             // DATA-SEED
 
+           
+            modelbuilder.Entity<Pokemon>().HasData(
+                    
+               new Pokemon { Id = 1, Nombre = "Bulbasaur", PokemonID = "#001"},
+               new Pokemon { Id = 2, Nombre = "Ivysaur", PokemonID = "#002"},
+               new Pokemon { Id = 3, Nombre = "Venasaur", PokemonID = "#003"},
+               new Pokemon { Id = 4, Nombre = "Charmander", PokemonID = "#004"},
+               new Pokemon { Id = 5, Nombre = "Charmeleon", PokemonID = "#005"},
+               new Pokemon { Id = 6, Nombre = "Charizard", PokemonID = "#006"},
+               new Pokemon { Id = 7, Nombre = "Squirtle", PokemonID = "#007"},
+               new Pokemon { Id = 8, Nombre = "Wartotle", PokemonID = "#008"},
+               new Pokemon { Id = 9, Nombre = "Blastoise", PokemonID = "#009"},
+               new Pokemon { Id = 10, Nombre = "Caterpie", PokemonID = "#010"},
+               new Pokemon { Id = 11, Nombre = "Metapod", PokemonID = "#011"},
+               new Pokemon { Id = 12, Nombre = "Butterfree", PokemonID = "#012"},
+               new Pokemon { Id = 13, Nombre = "Weedle", PokemonID = "#013"},
+               new Pokemon { Id = 14, Nombre = "Kakuna", PokemonID = "#014"},
+               new Pokemon { Id = 15, Nombre = "Beedrill", PokemonID = "#015"},
+               new Pokemon { Id = 16, Nombre = "Pidgey", PokemonID = "#016"},
+               new Pokemon { Id = 17, Nombre = "Rattata", PokemonID = "#017"},
+               new Pokemon { Id = 18, Nombre = "Raticate", PokemonID = "#018"},
+               new Pokemon { Id = 19, Nombre = "Spearow", PokemonID = "#019"},
+               new Pokemon { Id = 20, Nombre = "Fearow", PokemonID = "#020"},
+               new Pokemon { Id = 21, Nombre = "Ekans", PokemonID = "#021"},
+               new Pokemon { Id = 22, Nombre = "Pikachu", PokemonID = "#022"},
+               new Pokemon { Id = 23, Nombre = "Raichu", PokemonID = "#023"},
+               new Pokemon { Id = 24, Nombre = "Sandshrew", PokemonID = "#024"},
+               new Pokemon { Id = 25, Nombre = "Sandslash", PokemonID = "#025"},
+               new Pokemon { Id = 26, Nombre = "Nidoran ♀", PokemonID = "#026"},
+               new Pokemon { Id = 27, Nombre = "Nidorina", PokemonID = "#027"},
+               new Pokemon { Id = 28, Nombre = "Nidoqueen", PokemonID = "#028"},
+               new Pokemon { Id = 29, Nombre = "Nidoran ♂", PokemonID = "#029"},
+               new Pokemon { Id = 30, Nombre = "Nidorino", PokemonID = "#030"},
+               new Pokemon { Id = 31, Nombre = "Nidoking", PokemonID = "#031"},
+               new Pokemon { Id = 32, Nombre = "Clefairy", PokemonID = "#032"},
+               new Pokemon { Id = 33, Nombre = "Clefable", PokemonID = "#033"},
+               new Pokemon { Id = 34, Nombre = "Vulpix", PokemonID = "#034"},
+               new Pokemon { Id = 35, Nombre = "Ninetales", PokemonID = "#035"},
+               new Pokemon { Id = 36, Nombre = "Jigglypuff", PokemonID = "#036"},
+               new Pokemon { Id = 37, Nombre = "Wigglytuff", PokemonID = "#037"}
+               );
+            
+
             modelbuilder.Entity<Stat>().HasData(
                new Stat { Id = 1, Nivel = 20, Ataque = 15, Defensa = 10, Vida = 40 }
                );
@@ -131,13 +174,7 @@ namespace Data_Acces_Layer.Repository
                 );
 
 
-            modelbuilder.Entity<Pokemon>().HasData(
-                new Pokemon { Id = 1, Nombre = "Charmander", StatId = 1 },
-                new Pokemon { Id = 2, Nombre = "Squirtle" },
-                new Pokemon { Id = 3, Nombre = "Bulbasaur" },
-                new Pokemon { Id = 4, Nombre = "Pikachu" },
-                new Pokemon { Id = 5, Nombre = "Onix" }
-                );
+           
 
             modelbuilder.Entity<Entrenador>().HasData(
                 new Entrenador { Id = 1, Nombre = "Marc" },

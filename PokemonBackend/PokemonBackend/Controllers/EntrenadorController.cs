@@ -1,130 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Data_Acces_Layer.Repository;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
+﻿using Logica_Negocio.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using PokemonBackend.Models;
 
 namespace PokemonBackend.Controllers
 {
-
-    // https://localhost:7280/api/Entrenador
-    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-   // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class EntrenadorController : ControllerBase
     {
-        private readonly MyDbContext _context;
+        public Logica_Negocio.EntrenadorBLL _BLL { get; set; } 
 
-        public EntrenadorController(MyDbContext context)
+        public EntrenadorController()
         {
-            _context = context;
+            _BLL = new Logica_Negocio.EntrenadorBLL();
         }
 
-        // GET: api/Entrenador
+
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Entrenador>>> GetEntrenadores()
+        public List<EntrenadorModel> GetEntrenador()
         {
-          if (_context.Entrenadores == null)
-          {
-              return NotFound();
-          }
-            return await _context.Entrenadores.ToListAsync();
+            return _BLL.GetEntrenador();
         }
 
-        // GET: api/Entrenador/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Entrenador>> GetEntrenador(int id)
+        public ActionResult<EntrenadorModel> GetEntrenadorById(int id)
         {
-          if (_context.Entrenadores == null)
-          {
-              return NotFound();
-          }
-            var entrenador = await _context.Entrenadores.FindAsync(id);
+            var value = _BLL.GetEntrenadorById(id);
 
-            if (entrenador == null)
+            if (value == null)
             {
-                return NotFound();
+                return NotFound("entrenador no encontrado");
             }
-
-            return entrenador;
+            return Ok(value);
         }
 
-        // PUT: api/Entrenador/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutEntrenador(int id, Entrenador entrenador)
-        {
-            if (id != entrenador.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(entrenador).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!EntrenadorExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Entrenador
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Entrenador>> PostEntrenador(Entrenador entrenador)
+        public void postPokemon([FromBody] EntrenadorModel entrenadorModel)
         {
-          if (_context.Entrenadores == null)
-          {
-              return Problem("Entity set 'MyDbContext.Entrenadores'  is null.");
-          }
-            _context.Entrenadores.Add(entrenador);
-            await _context.SaveChangesAsync();
+            // en el controlador llamamos a los metodos de la logica de negocio
 
-            return CreatedAtAction("GetEntrenador", new { id = entrenador.Id }, entrenador);
+            _BLL.PostEntrenadorPokemon(entrenadorModel);
+
         }
 
-        // DELETE: api/Entrenador/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEntrenador(int id)
+        public Entrenador DeleteEntrenadorById(int id)
         {
-            if (_context.Entrenadores == null)
-            {
-                return NotFound();
-            }
-            var entrenador = await _context.Entrenadores.FindAsync(id);
-            if (entrenador == null)
-            {
-                return NotFound();
-            }
+            return _BLL.DeleteEntrenadorById(id);
 
-            _context.Entrenadores.Remove(entrenador);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
         }
 
-        private bool EntrenadorExists(int id)
-        {
-            return (_context.Entrenadores?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+
     }
 }
