@@ -7,6 +7,7 @@ namespace PokemonBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Produces("application/json")]
     public class EntrenadorController : ControllerBase
     {
         public Logica_Negocio.EntrenadorBLL _BLL { get; set; } 
@@ -40,7 +41,7 @@ namespace PokemonBackend.Controllers
         {
             // en el controlador llamamos a los metodos de la logica de negocio
 
-            _BLL.PostEntrenadorPokemon(entrenadorModel);
+            _BLL.PostEntrenador(entrenadorModel);
 
         }
 

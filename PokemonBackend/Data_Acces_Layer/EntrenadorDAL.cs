@@ -10,6 +10,9 @@ namespace Acceso_BD
 {
    public class EntrenadorDAL
     {
+
+      
+
         public List<Entrenador> GetEntrenadores()
         {
             var db = new MyDbContext();

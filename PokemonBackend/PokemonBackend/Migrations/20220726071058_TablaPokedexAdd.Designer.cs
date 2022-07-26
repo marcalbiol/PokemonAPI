@@ -4,6 +4,7 @@ using Data_Acces_Layer.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace PokemonBackend.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220726071058_TablaPokedexAdd")]
+    partial class TablaPokedexAdd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,14 +26,11 @@ namespace PokemonBackend.Migrations
 
             modelBuilder.Entity("Acceso_BD.Repository.Entity.Pokedex", b =>
                 {
-                    b.Property<int?>("ID")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("ID"), 1L, 1);
-
-                    b.Property<string>("Altura")
-                        .HasColumnType("nvarchar(max)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
 
                     b.Property<string>("Imagen")
                         .HasColumnType("nvarchar(max)");
@@ -39,13 +38,10 @@ namespace PokemonBackend.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Peso")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("StatId")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.HasIndex("StatId");
 
@@ -54,503 +50,188 @@ namespace PokemonBackend.Migrations
                     b.HasData(
                         new
                         {
-                            ID = 1,
-                            Nombre = "Bulbasaur "
+                            Id = 1,
+                            Nombre = "Bulbasaur"
                         },
                         new
                         {
-                            ID = 2,
+                            Id = 2,
                             Nombre = "Ivysaur"
                         },
                         new
                         {
-                            ID = 3,
+                            Id = 3,
                             Nombre = "Venasaur"
                         },
                         new
                         {
-                            ID = 4,
-                            Nombre = "Charmander"
+                            Id = 4,
+                            Nombre = "Charmand "
                         },
                         new
                         {
-                            ID = 5,
-                            Nombre = "Charmeleon"
+                            Id = 5,
+                            Nombre = "Charmele  "
                         },
                         new
                         {
-                            ID = 6,
-                            Nombre = "Charizard "
+                            Id = 6,
+                            Nombre = "Charizar "
                         },
                         new
                         {
-                            ID = 7,
+                            Id = 7,
                             Nombre = "Squirtle "
                         },
                         new
                         {
-                            ID = 8,
+                            Id = 8,
                             Nombre = "Wartotle"
                         },
                         new
                         {
-                            ID = 9,
-                            Nombre = "Blastoise"
+                            Id = 9,
+                            Nombre = "Blastois"
                         },
                         new
                         {
-                            ID = 10,
-                            Nombre = "Caterpie"
+                            Id = 10,
+                            Nombre = "Caterpi"
                         },
                         new
                         {
-                            ID = 11,
+                            Id = 11,
                             Nombre = "Metapod"
                         },
                         new
                         {
-                            ID = 12,
+                            Id = 12,
                             Nombre = "Butterfree"
                         },
                         new
                         {
-                            ID = 13,
+                            Id = 13,
                             Nombre = "Weedle"
                         },
                         new
                         {
-                            ID = 14,
+                            Id = 14,
                             Nombre = "Kakuna"
                         },
                         new
                         {
-                            ID = 15,
+                            Id = 15,
                             Nombre = "Beedril"
                         },
                         new
                         {
-                            ID = 16,
+                            Id = 16,
                             Nombre = "Pidgey"
                         },
                         new
                         {
-                            ID = 17,
-                            Nombre = "Pidgeotto"
-                        },
-                        new
-                        {
-                            ID = 18,
-                            Nombre = "Pidgeot"
-                        },
-                        new
-                        {
-                            ID = 19,
+                            Id = 17,
                             Nombre = "Rattata"
                         },
                         new
                         {
-                            ID = 20,
+                            Id = 18,
                             Nombre = "Raticat"
                         },
                         new
                         {
-                            ID = 21,
+                            Id = 19,
                             Nombre = "Spearow"
                         },
                         new
                         {
-                            ID = 22,
+                            Id = 20,
                             Nombre = "Fearow"
                         },
                         new
                         {
-                            ID = 23,
+                            Id = 21,
                             Nombre = "Ekans"
                         },
                         new
                         {
-                            ID = 24,
-                            Nombre = "Arbok"
-                        },
-                        new
-                        {
-                            ID = 25,
+                            Id = 22,
                             Nombre = "Pikachu"
                         },
                         new
                         {
-                            ID = 26,
+                            Id = 23,
                             Nombre = "Raichu"
                         },
                         new
                         {
-                            ID = 27,
-                            Nombre = "Sandshrew"
+                            Id = 24,
+                            Nombre = "Sandshr"
                         },
                         new
                         {
-                            ID = 28,
-                            Nombre = "Sandslah"
+                            Id = 25,
+                            Nombre = "Sandsla"
                         },
                         new
                         {
-                            ID = 29,
-                            Nombre = "Nidoran ♀"
+                            Id = 26,
+                            Nombre = "Nidoran"
                         },
                         new
                         {
-                            ID = 30,
-                            Nombre = "Nidorina"
+                            Id = 27,
+                            Nombre = "Nidorin"
                         },
                         new
                         {
-                            ID = 31,
-                            Nombre = "Nidoqueen"
+                            Id = 28,
+                            Nombre = "Nidoque"
                         },
                         new
                         {
-                            ID = 32,
-                            Nombre = "Nidoran ♂"
+                            Id = 29,
+                            Nombre = "Nidoran"
                         },
                         new
                         {
-                            ID = 33,
-                            Nombre = "Nidorino"
+                            Id = 30,
+                            Nombre = "Nidorin"
                         },
                         new
                         {
-                            ID = 34,
-                            Nombre = "Nidoking"
+                            Id = 31,
+                            Nombre = "Nidokin"
                         },
                         new
                         {
-                            ID = 35,
-                            Nombre = "Clefairy"
+                            Id = 32,
+                            Nombre = "Clefair"
                         },
                         new
                         {
-                            ID = 36,
-                            Nombre = "Clefable"
+                            Id = 33,
+                            Nombre = "Clefabl"
                         },
                         new
                         {
-                            ID = 37,
+                            Id = 34,
                             Nombre = "Vulpix"
                         },
                         new
                         {
-                            ID = 38,
-                            Nombre = "Ninetales"
+                            Id = 35,
+                            Nombre = "Ninetal"
                         },
                         new
                         {
-                            ID = 39,
-                            Nombre = "Jigglypuff"
+                            Id = 36,
+                            Nombre = "Jigglyp"
                         },
                         new
                         {
-                            ID = 40,
-                            Nombre = "Wigglytuff"
-                        },
-                        new
-                        {
-                            ID = 41,
-                            Nombre = "Zubat"
-                        },
-                        new
-                        {
-                            ID = 42,
-                            Nombre = "Golbat"
-                        },
-                        new
-                        {
-                            ID = 43,
-                            Nombre = "Oddish"
-                        },
-                        new
-                        {
-                            ID = 44,
-                            Nombre = "Gloom"
-                        },
-                        new
-                        {
-                            ID = 45,
-                            Nombre = "Vileplume"
-                        },
-                        new
-                        {
-                            ID = 46,
-                            Nombre = "Paras"
-                        },
-                        new
-                        {
-                            ID = 47,
-                            Nombre = "Parasect"
-                        },
-                        new
-                        {
-                            ID = 48,
-                            Nombre = "Venonat"
-                        },
-                        new
-                        {
-                            ID = 49,
-                            Nombre = "Venomoth"
-                        },
-                        new
-                        {
-                            ID = 50,
-                            Nombre = "Diglett"
-                        },
-                        new
-                        {
-                            ID = 51,
-                            Nombre = "Dugtrio"
-                        },
-                        new
-                        {
-                            ID = 52,
-                            Nombre = "Meowth"
-                        },
-                        new
-                        {
-                            ID = 53,
-                            Nombre = "Persian"
-                        },
-                        new
-                        {
-                            ID = 54,
-                            Nombre = "Psyduck"
-                        },
-                        new
-                        {
-                            ID = 55,
-                            Nombre = "Golduck"
-                        },
-                        new
-                        {
-                            ID = 56,
-                            Nombre = "Mankey"
-                        },
-                        new
-                        {
-                            ID = 57,
-                            Nombre = "Primeape"
-                        },
-                        new
-                        {
-                            ID = 58,
-                            Nombre = "Growlithe"
-                        },
-                        new
-                        {
-                            ID = 59,
-                            Nombre = "Arcanine"
-                        },
-                        new
-                        {
-                            ID = 60,
-                            Nombre = "Poliwag"
-                        },
-                        new
-                        {
-                            ID = 61,
-                            Nombre = "Poliwhirl"
-                        },
-                        new
-                        {
-                            ID = 62,
-                            Nombre = "Poliwrath"
-                        },
-                        new
-                        {
-                            ID = 63,
-                            Nombre = "Abra"
-                        },
-                        new
-                        {
-                            ID = 64,
-                            Nombre = "Kadabra"
-                        },
-                        new
-                        {
-                            ID = 65,
-                            Nombre = "Alakazam"
-                        },
-                        new
-                        {
-                            ID = 66,
-                            Nombre = "Machop"
-                        },
-                        new
-                        {
-                            ID = 67,
-                            Nombre = "Machoke"
-                        },
-                        new
-                        {
-                            ID = 68,
-                            Nombre = "Machamp"
-                        },
-                        new
-                        {
-                            ID = 69,
-                            Nombre = "Bellsprout"
-                        },
-                        new
-                        {
-                            ID = 70,
-                            Nombre = "Weepinbell"
-                        },
-                        new
-                        {
-                            ID = 71,
-                            Nombre = "Victreebell"
-                        },
-                        new
-                        {
-                            ID = 72,
-                            Nombre = "Tentacool"
-                        },
-                        new
-                        {
-                            ID = 73,
-                            Nombre = "Tentacruel"
-                        },
-                        new
-                        {
-                            ID = 74,
-                            Nombre = "Geodude"
-                        },
-                        new
-                        {
-                            ID = 75,
-                            Nombre = "Graveler"
-                        },
-                        new
-                        {
-                            ID = 76,
-                            Nombre = "Golem"
-                        },
-                        new
-                        {
-                            ID = 77,
-                            Nombre = "Ponyta"
-                        },
-                        new
-                        {
-                            ID = 78,
-                            Nombre = "Rapidash"
-                        },
-                        new
-                        {
-                            ID = 79,
-                            Nombre = "Slowpoke"
-                        },
-                        new
-                        {
-                            ID = 80,
-                            Nombre = "Slowbro"
-                        },
-                        new
-                        {
-                            ID = 81,
-                            Nombre = "Magnemite"
-                        },
-                        new
-                        {
-                            ID = 82,
-                            Nombre = "Magneton"
-                        },
-                        new
-                        {
-                            ID = 83,
-                            Nombre = "Farfetch'd"
-                        },
-                        new
-                        {
-                            ID = 84,
-                            Nombre = "Doduo"
-                        },
-                        new
-                        {
-                            ID = 85,
-                            Nombre = "Dodrio"
-                        },
-                        new
-                        {
-                            ID = 86,
-                            Nombre = "Seel"
-                        },
-                        new
-                        {
-                            ID = 87,
-                            Nombre = "Dewgong"
-                        },
-                        new
-                        {
-                            ID = 88,
-                            Nombre = "Grimer"
-                        },
-                        new
-                        {
-                            ID = 89,
-                            Nombre = "Muk"
-                        },
-                        new
-                        {
-                            ID = 90,
-                            Nombre = "Shellder"
-                        },
-                        new
-                        {
-                            ID = 91,
-                            Nombre = "Cloyster"
-                        },
-                        new
-                        {
-                            ID = 92,
-                            Nombre = "Gastly"
-                        },
-                        new
-                        {
-                            ID = 93,
-                            Nombre = "Haunter"
-                        },
-                        new
-                        {
-                            ID = 94,
-                            Nombre = "Gengar"
-                        },
-                        new
-                        {
-                            ID = 95,
-                            Nombre = "Onix"
-                        },
-                        new
-                        {
-                            ID = 96,
-                            Nombre = "Drowzee"
-                        },
-                        new
-                        {
-                            ID = 97,
-                            Nombre = "Hypno"
-                        },
-                        new
-                        {
-                            ID = 98,
-                            Nombre = "Krabby"
-                        },
-                        new
-                        {
-                            ID = 99,
-                            Nombre = "Kingler"
-                        },
-                        new
-                        {
-                            ID = 100,
-                            Nombre = "Voltorb"
+                            Id = 37,
+                            Nombre = "Wigglyt"
                         });
                 });
 
@@ -804,87 +485,37 @@ namespace PokemonBackend.Migrations
                         new
                         {
                             Id = 1,
+                            Debil = "Agua",
+                            Eficaz = "Planta",
                             Tipo_pokemon = "Fuego"
                         },
                         new
                         {
                             Id = 2,
+                            Debil = "Planta",
+                            Eficaz = "Fuego",
                             Tipo_pokemon = "Agua"
                         },
                         new
                         {
                             Id = 3,
+                            Debil = "Fuego",
+                            Eficaz = "Agua",
                             Tipo_pokemon = "Planta"
                         },
                         new
                         {
                             Id = 4,
+                            Debil = "Dragon",
+                            Eficaz = "Agua",
                             Tipo_pokemon = "Electrico"
                         },
                         new
                         {
                             Id = 5,
+                            Debil = "Acero",
+                            Eficaz = "Fuego",
                             Tipo_pokemon = "Roca"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Tipo_pokemon = "Acero"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Tipo_pokemon = "Volador"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Tipo_pokemon = "Hielo"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Tipo_pokemon = "Bicho"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Tipo_pokemon = "Normal"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Tipo_pokemon = "Tierra"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Tipo_pokemon = "Lucha"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Tipo_pokemon = "Hada"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Tipo_pokemon = "Psiquico"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Tipo_pokemon = "Dragón"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Tipo_pokemon = "Fantasma"
-                        },
-                        new
-                        {
-                            Id = 18,
-                            Tipo_pokemon = "Siniestro"
                         });
                 });
 
@@ -893,15 +524,10 @@ namespace PokemonBackend.Migrations
                     b.Property<int>("TipoId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PokedexId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("PokemonId")
                         .HasColumnType("int");
 
-                    b.HasKey("TipoId", "PokedexId");
-
-                    b.HasIndex("PokedexId");
+                    b.HasKey("TipoId", "PokemonId");
 
                     b.HasIndex("PokemonId");
 
@@ -910,8 +536,8 @@ namespace PokemonBackend.Migrations
                     b.HasData(
                         new
                         {
-                            TipoId = 3,
-                            PokedexId = 1
+                            TipoId = 1,
+                            PokemonId = 1
                         });
                 });
 
@@ -976,15 +602,11 @@ namespace PokemonBackend.Migrations
 
             modelBuilder.Entity("PokemonBackend.Models.Tipos_Pokemons", b =>
                 {
-                    b.HasOne("Acceso_BD.Repository.Entity.Pokedex", "Pokedex")
+                    b.HasOne("PokemonBackend.Models.Pokemon", "Pokemon")
                         .WithMany("Tipos")
-                        .HasForeignKey("PokedexId")
+                        .HasForeignKey("PokemonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("PokemonBackend.Models.Pokemon", null)
-                        .WithMany("Tipos")
-                        .HasForeignKey("PokemonId");
 
                     b.HasOne("PokemonBackend.Models.Tipo", "Tipo")
                         .WithMany("Tipos")
@@ -992,14 +614,9 @@ namespace PokemonBackend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Pokedex");
+                    b.Navigation("Pokemon");
 
                     b.Navigation("Tipo");
-                });
-
-            modelBuilder.Entity("Acceso_BD.Repository.Entity.Pokedex", b =>
-                {
-                    b.Navigation("Tipos");
                 });
 
             modelBuilder.Entity("PokemonBackend.Models.Entrenador", b =>

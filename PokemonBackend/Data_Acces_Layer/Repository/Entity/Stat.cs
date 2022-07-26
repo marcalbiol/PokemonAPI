@@ -1,4 +1,6 @@
-﻿namespace PokemonBackend.Models
+﻿using Acceso_BD.Repository.Entity;
+
+namespace PokemonBackend.Models
 {
     public class Stat
     {
@@ -9,5 +11,6 @@
         public int? Defensa { get; set; }
         public int? Vida { get; set; }
         public ICollection<Pokemon>? Pokemons { get; set; }  
+        public ICollection<Pokedex>? Pokedex { get; set; }
     }
 }

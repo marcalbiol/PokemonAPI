@@ -28,7 +28,7 @@ namespace Logica_Negocio
         public List<EntrenadorModel> GetEntrenador()
         {
 
-            List<Entrenador> entrenadorFromDB= _DAL.GetEntrenadores();
+            List<Entrenador> entrenadorFromDB = _DAL.GetEntrenadores();
             List<EntrenadorModel> entrenadorModel= _EntrenadorMapper.Map<List<Entrenador>, List<EntrenadorModel>>(entrenadorFromDB);
 
             return entrenadorModel;
@@ -52,7 +52,7 @@ namespace Logica_Negocio
 
         }
 
-        public void PostEntrenadorPokemon(EntrenadorModel entrenadorModel)
+        public void PostEntrenador(EntrenadorModel entrenadorModel)
         {
             Entrenador entrenadorEntity = _EntrenadorMapper.Map<EntrenadorModel, Entrenador>(entrenadorModel);
 

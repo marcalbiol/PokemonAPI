@@ -8,6 +8,7 @@ namespace PokemonBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Produces("application/json")]
     public class PokemonController : ControllerBase
     {
 
@@ -16,8 +17,6 @@ namespace PokemonBackend.Controllers
         {
             _BLL = new Business_Logic_Layer.PokemonBLL();
         }
-
-
 
         [HttpGet]
         public List<PokemonModel> GetPokemons()

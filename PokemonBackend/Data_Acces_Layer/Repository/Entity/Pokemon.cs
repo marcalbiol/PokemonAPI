@@ -9,7 +9,6 @@ namespace PokemonBackend.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int? Id { get; set; }
        
-        public string? PokemonID { get; set; }
         public string? Nombre { get; set; }
 
         public Boolean? Shiny { get; set; }

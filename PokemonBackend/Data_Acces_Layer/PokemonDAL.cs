@@ -30,6 +30,7 @@ namespace Data_Acces_Layer
             var db = new MyDbContext();
             db.Add(pokemon);
             db.SaveChanges();
+         
         }
 
         public Pokemon DeletePokemonById(int id)

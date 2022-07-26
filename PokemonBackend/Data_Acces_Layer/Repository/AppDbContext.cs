@@ -23,20 +23,24 @@ namespace Data_Acces_Layer.Repository
         }
 
         //constructor
+
+        public DbSet<Pokedex> Pokedex { get; set; }
         public DbSet<Pokemon> Pokemons { get; set; }
         public DbSet<Entrenador> Entrenadores { get; set; }
         public DbSet<Tipos_Pokemons> Tipo_Pokemons { get; set; }
         public DbSet<Tipo> Tipos { get; set; }
+    
         public DbSet<Entrenadores_Pokemon> Entrenadores_Pokemons { get; set; }
         public DbSet<Stat> Stats { get; set; }
         public DbSet<Habilidades> Habilidades { get; set; }
-        
+
 
 
 
         // configuracion de relaciones con FluentAPI
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
+        
 
             // OneToMany Stats Pokemons
 
@@ -46,6 +50,17 @@ namespace Data_Acces_Layer.Repository
                 .WithMany(p => p.Pokemons)
                 .HasForeignKey(s => s.StatId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+           
+            /*
+
+            modelbuilder.Entity<Pokedex>()
+                .HasOne(s => s.Stat)
+                .WithMany(p => p.Pokedex)
+                .HasForeignKey(s=> s.StatId)
+                .OnDelete(DeleteBehavior.Cascade);
+           
+            */
 
             // OneToOne Tipo Habilidades
 
@@ -89,17 +104,29 @@ namespace Data_Acces_Layer.Repository
               .HasForeignKey(e => e.PokemonId);
 
 
-            // ManyToMany Pokemon Tipos
+            //ManyToMany Pokemon Pokedex
+            //TODO 
+
+
+
+            //ManyToMany Tipos Bonus
+            
+
+          
+                
+            
+
+            // ManyToMany Pokedex Tipos
 
             // ForeignKey
             modelbuilder.Entity<Tipos_Pokemons>()
-                .HasKey(tp => new { tp.TipoId, tp.PokemonId });
+                .HasKey(tp => new { tp.TipoId, tp.PokedexId });
 
             // Pokemons
             modelbuilder.Entity<Tipos_Pokemons>()
-                .HasOne(p => p.Pokemon)
+                .HasOne(p => p.Pokedex)
                 .WithMany(t => t.Tipos)
-                .HasForeignKey(tp => tp.PokemonId);
+                .HasForeignKey(tp => tp.PokedexId);
 
             // Tipos
             modelbuilder.Entity<Tipos_Pokemons>()
@@ -108,62 +135,141 @@ namespace Data_Acces_Layer.Repository
                 .HasForeignKey(tp => tp.TipoId);
 
 
-            // DATA-SEED
+            // DATA-SEED //
 
-           
-            modelbuilder.Entity<Pokemon>().HasData(
-                    
-               new Pokemon { Id = 1, Nombre = "Bulbasaur", PokemonID = "#001"},
-               new Pokemon { Id = 2, Nombre = "Ivysaur", PokemonID = "#002"},
-               new Pokemon { Id = 3, Nombre = "Venasaur", PokemonID = "#003"},
-               new Pokemon { Id = 4, Nombre = "Charmander", PokemonID = "#004"},
-               new Pokemon { Id = 5, Nombre = "Charmeleon", PokemonID = "#005"},
-               new Pokemon { Id = 6, Nombre = "Charizard", PokemonID = "#006"},
-               new Pokemon { Id = 7, Nombre = "Squirtle", PokemonID = "#007"},
-               new Pokemon { Id = 8, Nombre = "Wartotle", PokemonID = "#008"},
-               new Pokemon { Id = 9, Nombre = "Blastoise", PokemonID = "#009"},
-               new Pokemon { Id = 10, Nombre = "Caterpie", PokemonID = "#010"},
-               new Pokemon { Id = 11, Nombre = "Metapod", PokemonID = "#011"},
-               new Pokemon { Id = 12, Nombre = "Butterfree", PokemonID = "#012"},
-               new Pokemon { Id = 13, Nombre = "Weedle", PokemonID = "#013"},
-               new Pokemon { Id = 14, Nombre = "Kakuna", PokemonID = "#014"},
-               new Pokemon { Id = 15, Nombre = "Beedrill", PokemonID = "#015"},
-               new Pokemon { Id = 16, Nombre = "Pidgey", PokemonID = "#016"},
-               new Pokemon { Id = 17, Nombre = "Rattata", PokemonID = "#017"},
-               new Pokemon { Id = 18, Nombre = "Raticate", PokemonID = "#018"},
-               new Pokemon { Id = 19, Nombre = "Spearow", PokemonID = "#019"},
-               new Pokemon { Id = 20, Nombre = "Fearow", PokemonID = "#020"},
-               new Pokemon { Id = 21, Nombre = "Ekans", PokemonID = "#021"},
-               new Pokemon { Id = 22, Nombre = "Pikachu", PokemonID = "#022"},
-               new Pokemon { Id = 23, Nombre = "Raichu", PokemonID = "#023"},
-               new Pokemon { Id = 24, Nombre = "Sandshrew", PokemonID = "#024"},
-               new Pokemon { Id = 25, Nombre = "Sandslash", PokemonID = "#025"},
-               new Pokemon { Id = 26, Nombre = "Nidoran ♀", PokemonID = "#026"},
-               new Pokemon { Id = 27, Nombre = "Nidorina", PokemonID = "#027"},
-               new Pokemon { Id = 28, Nombre = "Nidoqueen", PokemonID = "#028"},
-               new Pokemon { Id = 29, Nombre = "Nidoran ♂", PokemonID = "#029"},
-               new Pokemon { Id = 30, Nombre = "Nidorino", PokemonID = "#030"},
-               new Pokemon { Id = 31, Nombre = "Nidoking", PokemonID = "#031"},
-               new Pokemon { Id = 32, Nombre = "Clefairy", PokemonID = "#032"},
-               new Pokemon { Id = 33, Nombre = "Clefable", PokemonID = "#033"},
-               new Pokemon { Id = 34, Nombre = "Vulpix", PokemonID = "#034"},
-               new Pokemon { Id = 35, Nombre = "Ninetales", PokemonID = "#035"},
-               new Pokemon { Id = 36, Nombre = "Jigglypuff", PokemonID = "#036"},
-               new Pokemon { Id = 37, Nombre = "Wigglytuff", PokemonID = "#037"}
-               );
-            
+
+
+            modelbuilder.Entity<Tipo>().HasData(
+             new Tipo { Id = 1, Tipo_pokemon = "Fuego" },
+             new Tipo { Id = 2, Tipo_pokemon = "Agua" },
+             new Tipo { Id = 3, Tipo_pokemon = "Planta" },
+             new Tipo { Id = 4, Tipo_pokemon = "Electrico" },
+             new Tipo { Id = 5, Tipo_pokemon = "Roca" },
+             new Tipo { Id = 6, Tipo_pokemon = "Acero" },
+             new Tipo { Id = 7, Tipo_pokemon = "Volador" },
+             new Tipo { Id = 8, Tipo_pokemon = "Hielo" },
+             new Tipo { Id = 9, Tipo_pokemon = "Bicho" },
+             new Tipo { Id = 10, Tipo_pokemon = "Normal" },
+             new Tipo { Id = 11, Tipo_pokemon = "Tierra" },
+             new Tipo { Id = 12, Tipo_pokemon = "Lucha" },
+             new Tipo { Id = 13, Tipo_pokemon = "Hada" },
+             new Tipo { Id = 14, Tipo_pokemon = "Psiquico" },
+             new Tipo { Id = 16, Tipo_pokemon = "Dragón" },
+             new Tipo { Id = 17, Tipo_pokemon = "Fantasma" },
+             new Tipo { Id = 18, Tipo_pokemon = "Siniestro" }
+             );
+
+            var url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
+
+            modelbuilder.Entity<Pokedex>().HasData(
+              new Pokedex { ID = 1, Nombre = "Bulbasaur "},
+              new Pokedex { ID = 2, Nombre = "Ivysaur"  },
+              new Pokedex { ID = 3, Nombre = "Venasaur" },
+              new Pokedex { ID = 4, Nombre = "Charmander" },
+              new Pokedex { ID = 5, Nombre = "Charmeleon" },
+              new Pokedex { ID = 6, Nombre = "Charizard " },
+              new Pokedex { ID = 7, Nombre = "Squirtle " },
+              new Pokedex { ID = 8, Nombre = "Wartotle" },
+              new Pokedex { ID = 9, Nombre = "Blastoise" },
+              new Pokedex { ID = 10, Nombre = "Caterpie" },
+              new Pokedex { ID = 11, Nombre = "Metapod" },
+              new Pokedex { ID = 12, Nombre = "Butterfree" },
+              new Pokedex { ID = 13, Nombre = "Weedle" },
+              new Pokedex { ID = 14, Nombre = "Kakuna" },
+              new Pokedex { ID = 15, Nombre = "Beedril" },
+              new Pokedex { ID = 16, Nombre = "Pidgey" },
+              new Pokedex { ID = 17, Nombre = "Pidgeotto" },
+              new Pokedex { ID = 18, Nombre = "Pidgeot" },
+              new Pokedex { ID = 19, Nombre = "Rattata" },
+              new Pokedex { ID = 20, Nombre = "Raticat" },
+              new Pokedex { ID = 21, Nombre = "Spearow" },
+              new Pokedex { ID = 22, Nombre = "Fearow" },
+              new Pokedex { ID = 23, Nombre = "Ekans" },
+              new Pokedex { ID = 24, Nombre = "Arbok" },
+              new Pokedex { ID = 25, Nombre = "Pikachu" },
+              new Pokedex { ID = 26, Nombre = "Raichu" },
+              new Pokedex { ID = 27, Nombre = "Sandshrew" },
+              new Pokedex { ID = 28, Nombre = "Sandslah" },
+              new Pokedex { ID = 29, Nombre = "Nidoran ♀" },
+              new Pokedex { ID = 30, Nombre = "Nidorina" },
+              new Pokedex { ID = 31, Nombre = "Nidoqueen" },
+              new Pokedex { ID = 32, Nombre = "Nidoran ♂" },
+              new Pokedex { ID = 33, Nombre = "Nidorino" },
+              new Pokedex { ID = 34, Nombre = "Nidoking" },
+              new Pokedex { ID = 35, Nombre = "Clefairy" },
+              new Pokedex { ID = 36, Nombre = "Clefable" },
+              new Pokedex { ID = 37, Nombre = "Vulpix" },
+              new Pokedex { ID = 38, Nombre = "Ninetales" },
+              new Pokedex { ID = 39, Nombre = "Jigglypuff" },
+              new Pokedex { ID = 40, Nombre = "Wigglytuff" },
+              new Pokedex { ID = 41, Nombre = "Zubat" },
+              new Pokedex { ID = 42, Nombre = "Golbat" },
+              new Pokedex { ID = 43, Nombre = "Oddish" },
+              new Pokedex { ID = 44, Nombre = "Gloom" },
+              new Pokedex { ID = 45, Nombre = "Vileplume" },
+              new Pokedex { ID = 46, Nombre = "Paras" },
+              new Pokedex { ID = 47, Nombre = "Parasect" },
+              new Pokedex { ID = 48, Nombre = "Venonat" },
+              new Pokedex { ID = 49, Nombre = "Venomoth" },
+              new Pokedex { ID = 50, Nombre = "Diglett" },
+              new Pokedex { ID = 51, Nombre = "Dugtrio" },
+              new Pokedex { ID = 52, Nombre = "Meowth" },
+              new Pokedex { ID = 53, Nombre = "Persian" },
+              new Pokedex { ID = 54, Nombre = "Psyduck" },
+              new Pokedex { ID = 55, Nombre = "Golduck" },
+              new Pokedex { ID = 56, Nombre = "Mankey" },
+              new Pokedex { ID = 57, Nombre = "Primeape" },
+              new Pokedex { ID = 58, Nombre = "Growlithe" },
+              new Pokedex { ID = 59, Nombre = "Arcanine" },
+              new Pokedex { ID = 60, Nombre = "Poliwag" },
+              new Pokedex { ID = 61, Nombre = "Poliwhirl" },
+              new Pokedex { ID = 62, Nombre = "Poliwrath" },
+              new Pokedex { ID = 63, Nombre = "Abra" },
+              new Pokedex { ID = 64, Nombre = "Kadabra" },
+              new Pokedex { ID = 65, Nombre = "Alakazam" },
+              new Pokedex { ID = 66, Nombre = "Machop" },
+              new Pokedex { ID = 67, Nombre = "Machoke" },
+              new Pokedex { ID = 68, Nombre = "Machamp" },
+              new Pokedex { ID = 69, Nombre = "Bellsprout" },
+              new Pokedex { ID = 70, Nombre = "Weepinbell" },
+              new Pokedex { ID = 71, Nombre = "Victreebell" },
+              new Pokedex { ID = 72, Nombre = "Tentacool" },
+              new Pokedex { ID = 73, Nombre = "Tentacruel" },
+              new Pokedex { ID = 74, Nombre = "Geodude" },
+              new Pokedex { ID = 75, Nombre = "Graveler" },
+              new Pokedex { ID = 76, Nombre = "Golem" },
+              new Pokedex { ID = 77, Nombre = "Ponyta" },
+              new Pokedex { ID = 78, Nombre = "Rapidash" },
+              new Pokedex { ID = 79, Nombre = "Slowpoke" },
+              new Pokedex { ID = 80, Nombre = "Slowbro" },
+              new Pokedex { ID = 81, Nombre = "Magnemite" },
+              new Pokedex { ID = 82, Nombre = "Magneton" },
+              new Pokedex { ID = 83, Nombre = "Farfetch'd" },
+              new Pokedex { ID = 84, Nombre = "Doduo" },
+              new Pokedex { ID = 85, Nombre = "Dodrio" },
+              new Pokedex { ID = 86, Nombre = "Seel" },
+              new Pokedex { ID = 87, Nombre = "Dewgong" },
+              new Pokedex { ID = 88, Nombre = "Grimer" },
+              new Pokedex { ID = 89, Nombre = "Muk" },
+              new Pokedex { ID = 90, Nombre = "Shellder" },
+              new Pokedex { ID = 91, Nombre = "Cloyster" },
+              new Pokedex { ID = 92, Nombre = "Gastly" },
+              new Pokedex { ID = 93, Nombre = "Haunter" },
+              new Pokedex { ID = 94, Nombre = "Gengar" },
+              new Pokedex { ID = 95, Nombre = "Onix" },
+              new Pokedex { ID = 96, Nombre = "Drowzee" },
+              new Pokedex { ID = 97, Nombre = "Hypno" },
+              new Pokedex { ID = 98, Nombre = "Krabby" },
+              new Pokedex { ID = 99, Nombre = "Kingler" },
+              new Pokedex { ID = 100, Nombre = "Voltorb" }
+              );
+          
 
             modelbuilder.Entity<Stat>().HasData(
                new Stat { Id = 1, Nivel = 20, Ataque = 15, Defensa = 10, Vida = 40 }
                );
 
-            modelbuilder.Entity<Tipo>().HasData(
-                new Tipo { Id = 1, Tipo_pokemon = "Fuego", Eficaz = "Planta", Debil = "Agua" },
-                new Tipo { Id = 2, Tipo_pokemon = "Agua", Eficaz = "Fuego", Debil = "Planta" },
-                new Tipo { Id = 3, Tipo_pokemon = "Planta", Eficaz = "Agua", Debil = "Fuego" },
-                new Tipo { Id = 4, Tipo_pokemon = "Electrico", Eficaz = "Agua", Debil = "Dragon" },
-                new Tipo { Id = 5, Tipo_pokemon = "Roca", Eficaz = "Fuego", Debil = "Acero" }
-                );
+         
 
 
             modelbuilder.Entity<Habilidades>().HasData(
@@ -183,13 +289,13 @@ namespace Data_Acces_Layer.Repository
                );
 
 
-            // ASGINACION DE CADA POKEMON A SU TIPO
+
+
+
+
+            // ASGINACION DE CADA POKEMON de la pokedex A SU TIPO
             modelbuilder.Entity<Tipos_Pokemons>().HasData(
-                new Tipos_Pokemons { PokemonId = 1, TipoId = 1 },
-                new Tipos_Pokemons { PokemonId = 2, TipoId = 2 },
-                new Tipos_Pokemons { PokemonId = 3, TipoId = 3 },
-                new Tipos_Pokemons { PokemonId = 4, TipoId = 4 },
-                new Tipos_Pokemons { PokemonId = 5, TipoId = 5 }
+                new Tipos_Pokemons { PokedexId = 1, TipoId = 3}
                 );
 
 
@@ -207,11 +313,7 @@ namespace Data_Acces_Layer.Repository
                 new Tipos_Habilidades { HabilidadId = 4, TipoId = 4 }
                 );
 
-
-
-
             base.OnModelCreating(modelbuilder);
-
         }
 
         // CONEXION A LA BASE DE DATOS, YA NO SE HACE EN EL PROGRAM.CS

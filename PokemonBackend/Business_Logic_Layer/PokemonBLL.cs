@@ -49,6 +49,7 @@ namespace Business_Logic_Layer
             Pokemon pokemonEntity = _PokemonMapper.Map<PokemonModel, Pokemon>(pokemonModel);
 
 
+
             var value = new Random().Next(0, 100);
 
             if (value < 10)

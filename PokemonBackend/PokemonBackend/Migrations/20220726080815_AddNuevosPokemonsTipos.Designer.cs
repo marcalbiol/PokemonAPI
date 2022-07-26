@@ -4,6 +4,7 @@ using Data_Acces_Layer.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace PokemonBackend.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220726080815_AddNuevosPokemonsTipos")]
+    partial class AddNuevosPokemonsTipos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,7 +57,7 @@ namespace PokemonBackend.Migrations
                         new
                         {
                             ID = 1,
-                            Nombre = "Bulbasaur "
+                            Nombre = "Bulbasaur"
                         },
                         new
                         {
@@ -804,86 +806,127 @@ namespace PokemonBackend.Migrations
                         new
                         {
                             Id = 1,
+                            Debil = "Agua",
+                            Eficaz = "Planta",
                             Tipo_pokemon = "Fuego"
                         },
                         new
                         {
                             Id = 2,
+                            Debil = "Planta",
+                            Eficaz = "Fuego",
                             Tipo_pokemon = "Agua"
                         },
                         new
                         {
                             Id = 3,
+                            Debil = "Fuego",
+                            Eficaz = "Agua",
                             Tipo_pokemon = "Planta"
                         },
                         new
                         {
                             Id = 4,
+                            Debil = "Dragon",
+                            Eficaz = "Agua",
                             Tipo_pokemon = "Electrico"
                         },
                         new
                         {
                             Id = 5,
+                            Debil = "Acero",
+                            Eficaz = "Fuego",
                             Tipo_pokemon = "Roca"
                         },
                         new
                         {
                             Id = 6,
+                            Debil = "",
+                            Eficaz = "",
                             Tipo_pokemon = "Acero"
                         },
                         new
                         {
                             Id = 7,
+                            Debil = "",
+                            Eficaz = "",
                             Tipo_pokemon = "Volador"
                         },
                         new
                         {
                             Id = 8,
+                            Debil = "",
+                            Eficaz = "",
                             Tipo_pokemon = "Hielo"
                         },
                         new
                         {
                             Id = 9,
+                            Debil = "",
+                            Eficaz = "",
                             Tipo_pokemon = "Bicho"
                         },
                         new
                         {
                             Id = 10,
+                            Debil = "",
+                            Eficaz = "",
                             Tipo_pokemon = "Normal"
                         },
                         new
                         {
                             Id = 11,
+                            Debil = "",
+                            Eficaz = "",
                             Tipo_pokemon = "Tierra"
                         },
                         new
                         {
                             Id = 12,
+                            Debil = "",
+                            Eficaz = "",
                             Tipo_pokemon = "Lucha"
                         },
                         new
                         {
                             Id = 13,
+                            Debil = "",
+                            Eficaz = "",
                             Tipo_pokemon = "Hada"
                         },
                         new
                         {
                             Id = 14,
+                            Debil = "",
+                            Eficaz = "",
                             Tipo_pokemon = "Psiquico"
                         },
                         new
                         {
+                            Id = 15,
+                            Debil = "",
+                            Eficaz = "",
+                            Tipo_pokemon = "Veneno"
+                        },
+                        new
+                        {
                             Id = 16,
+                            Debil = "",
+                            Eficaz = "",
                             Tipo_pokemon = "Dragón"
                         },
                         new
                         {
                             Id = 17,
+                            Debil = "",
+                            Eficaz = "",
                             Tipo_pokemon = "Fantasma"
                         },
                         new
                         {
                             Id = 18,
+                            Debil = "",
+                            Eficaz = "",
                             Tipo_pokemon = "Siniestro"
                         });
                 });

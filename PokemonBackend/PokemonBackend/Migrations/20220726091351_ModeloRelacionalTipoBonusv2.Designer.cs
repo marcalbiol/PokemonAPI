@@ -4,6 +4,7 @@ using Data_Acces_Layer.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace PokemonBackend.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220726091351_ModeloRelacionalTipoBonusv2")]
+    partial class ModeloRelacionalTipoBonusv2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +23,25 @@ namespace PokemonBackend.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("Acceso_BD.Repository.Entity.Bonus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Debil")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Eficaz")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Bonus");
+                });
 
             modelBuilder.Entity("Acceso_BD.Repository.Entity.Pokedex", b =>
                 {
@@ -554,6 +575,21 @@ namespace PokemonBackend.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Acceso_BD.Repository.Entity.Tipo_Bonus", b =>
+                {
+                    b.Property<int>("TipoId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("BonusId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TipoId", "BonusId");
+
+                    b.HasIndex("BonusId");
+
+                    b.ToTable("Tipos_Bonus");
+                });
+
             modelBuilder.Entity("Acceso_BD.Repository.Entity.Tipos_Habilidades", b =>
                 {
                     b.Property<int?>("TipoId")
@@ -787,12 +823,6 @@ namespace PokemonBackend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
 
-                    b.Property<string>("Debil")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Eficaz")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Tipo_pokemon")
                         .HasColumnType("nvarchar(max)");
 
@@ -922,6 +952,25 @@ namespace PokemonBackend.Migrations
                         .HasForeignKey("StatId");
                 });
 
+            modelBuilder.Entity("Acceso_BD.Repository.Entity.Tipo_Bonus", b =>
+                {
+                    b.HasOne("Acceso_BD.Repository.Entity.Bonus", "Bonus")
+                        .WithMany("bonus_tipo")
+                        .HasForeignKey("BonusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PokemonBackend.Models.Tipo", "Tipo")
+                        .WithMany("bonus_tipo")
+                        .HasForeignKey("TipoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Bonus");
+
+                    b.Navigation("Tipo");
+                });
+
             modelBuilder.Entity("Acceso_BD.Repository.Entity.Tipos_Habilidades", b =>
                 {
                     b.HasOne("PokemonBackend.Models.Habilidades", "Habilidades")
@@ -997,6 +1046,11 @@ namespace PokemonBackend.Migrations
                     b.Navigation("Tipo");
                 });
 
+            modelBuilder.Entity("Acceso_BD.Repository.Entity.Bonus", b =>
+                {
+                    b.Navigation("bonus_tipo");
+                });
+
             modelBuilder.Entity("Acceso_BD.Repository.Entity.Pokedex", b =>
                 {
                     b.Navigation("Tipos");
@@ -1031,6 +1085,8 @@ namespace PokemonBackend.Migrations
             modelBuilder.Entity("PokemonBackend.Models.Tipo", b =>
                 {
                     b.Navigation("Tipos");
+
+                    b.Navigation("bonus_tipo");
 
                     b.Navigation("habilidades_tipos");
                 });
