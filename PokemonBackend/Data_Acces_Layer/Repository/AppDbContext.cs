@@ -23,13 +23,13 @@ namespace Data_Acces_Layer.Repository
         }
 
         //constructor
-
         public DbSet<Pokedex> Pokedex { get; set; }
         public DbSet<Pokemon> Pokemons { get; set; }
         public DbSet<Entrenador> Entrenadores { get; set; }
         public DbSet<Tipos_Pokemons> Tipo_Pokemons { get; set; }
         public DbSet<Tipo> Tipos { get; set; }
-    
+        public DbSet<TipoBonus> Bonuses { get; set; }
+        public DbSet<ModificadorTipo> Modificadores { get; set; }
         public DbSet<Entrenadores_Pokemon> Entrenadores_Pokemons { get; set; }
         public DbSet<Stat> Stats { get; set; }
         public DbSet<Habilidades> Habilidades { get; set; }
@@ -40,7 +40,7 @@ namespace Data_Acces_Layer.Repository
         // configuracion de relaciones con FluentAPI
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
-        
+
 
             // OneToMany Stats Pokemons
 
@@ -51,7 +51,6 @@ namespace Data_Acces_Layer.Repository
                 .HasForeignKey(s => s.StatId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-           
             /*
 
             modelbuilder.Entity<Pokedex>()
@@ -73,20 +72,17 @@ namespace Data_Acces_Layer.Repository
 
             modelbuilder.Entity<Tipos_Habilidades>()
                 .HasOne(t => t.Tipo)
-                .WithMany(h => h.habilidades_tipos)
+                .WithMany(h => h.Habilidades_tipos)
                 .HasForeignKey(t => t.TipoId);
 
             modelbuilder.Entity<Tipos_Habilidades>()
-            .HasOne(t => t.Habilidades)
-            .WithMany(h => h.habilidades_tipos)
-            .HasForeignKey(t => t.HabilidadId);
-
-
-
-
+                .HasOne(t => t.Habilidades)
+                .WithMany(h => h.habilidades_tipos)
+                .HasForeignKey(t => t.HabilidadId);
 
             // ManyToMany Pokemon Entrenador
 
+   
             // ForeignKey
             modelbuilder.Entity<Entrenadores_Pokemon>()
                 .HasKey(ep => new { ep.EntrenadorId, ep.PokemonId });
@@ -103,18 +99,12 @@ namespace Data_Acces_Layer.Repository
               .WithMany(p => p.Entrenador_Pokemons)
               .HasForeignKey(e => e.PokemonId);
 
-
-            //ManyToMany Pokemon Pokedex
-            //TODO 
-
-
-
-            //ManyToMany Tipos Bonus
-            
-
           
-                
-            
+            //0ToMany Pokemon Pokedex
+            modelbuilder.Entity<Pokedex>()
+                .HasMany(p => p.Pokemons)
+                .WithOne(p => p.Pokedex);
+
 
             // ManyToMany Pokedex Tipos
 
@@ -135,12 +125,33 @@ namespace Data_Acces_Layer.Repository
                 .HasForeignKey(tp => tp.TipoId);
 
 
+            // Relacion Tipo y Bonus
+
+        //   modelbuilder.Entity<Tipo>(e => e.HasIndex(t => t.Tipo_pokemon).IsUnique());
+       
+            modelbuilder.Entity<TipoBonus>().HasAlternateKey(x => new { x.EficazId, x.DebilidadId, x.IdTipo });
+          
+
+            modelbuilder.Entity<TipoBonus>()
+            .HasOne(tp => tp.BonusDeb)
+            .WithMany(tp => tp.Bonus)
+            .HasForeignKey(tp => tp.DebilidadId)
+            .OnDelete(DeleteBehavior.NoAction);
+
+            modelbuilder.Entity<TipoBonus>()
+            .HasOne(tp => tp.BonusEf)
+            .WithMany(tp => tp.Bonuses)
+            .HasForeignKey(tp => tp.EficazId)
+            .OnDelete(DeleteBehavior.NoAction);
+
+            modelbuilder.Entity<Tipo>().HasMany(t => t.Debilidades).WithOne(x => x.BonusDeb).HasForeignKey(x => x.IdTipo);
+            modelbuilder.Entity<Tipo>().HasMany(t => t.Fortalezas).WithOne(x => x.BonusEf).HasForeignKey(x => x.IdTipo);
+            
+
             // DATA-SEED //
 
-
-
             modelbuilder.Entity<Tipo>().HasData(
-             new Tipo { Id = 1, Tipo_pokemon = "Fuego" },
+             new Tipo { Id = 1, Tipo_pokemon = "Fuego"},
              new Tipo { Id = 2, Tipo_pokemon = "Agua" },
              new Tipo { Id = 3, Tipo_pokemon = "Planta" },
              new Tipo { Id = 4, Tipo_pokemon = "Electrico" },
@@ -159,16 +170,28 @@ namespace Data_Acces_Layer.Repository
              new Tipo { Id = 18, Tipo_pokemon = "Siniestro" }
              );
 
-            var url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
+            
+            modelbuilder.Entity<TipoBonus>().HasData(
+             new TipoBonus {Id = 1, IdTipo = 1, DebilidadId = 2, EficazId = 3},
+             new TipoBonus {Id = 2, IdTipo = 2, DebilidadId = 4, EficazId = 1 },
+             new TipoBonus {Id = 3, IdTipo = 2, DebilidadId = 8, EficazId = 11 }
+             );
+            
+            modelbuilder.Entity<ModificadorTipo>().HasData(
+            new ModificadorTipo { Id = 1, IdTipo = 1, Modificador = Modificador.Debilidad, TipoBonusId = 2 },
+            new ModificadorTipo { Id = 2, IdTipo = 1, Modificador = Modificador.Fortaleza, TipoBonusId = 3 }
+            );
+            
+           var url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
 
             modelbuilder.Entity<Pokedex>().HasData(
-              new Pokedex { ID = 1, Nombre = "Bulbasaur "},
-              new Pokedex { ID = 2, Nombre = "Ivysaur"  },
-              new Pokedex { ID = 3, Nombre = "Venasaur" },
-              new Pokedex { ID = 4, Nombre = "Charmander" },
-              new Pokedex { ID = 5, Nombre = "Charmeleon" },
-              new Pokedex { ID = 6, Nombre = "Charizard " },
-              new Pokedex { ID = 7, Nombre = "Squirtle " },
+              new Pokedex { ID = 1, Nombre = "Bulbasaur", Tier = 1, Basico = true},
+              new Pokedex { ID = 2, Nombre = "Ivysaur", Tier = 2, Basico = false },
+              new Pokedex { ID = 3, Nombre = "Venasaur", Tier = 3, Basico = false },
+              new Pokedex { ID = 4, Nombre = "Charmander", Tier = 1, Basico = true },
+              new Pokedex { ID = 5, Nombre = "Charmeleon", Tier = 2, Basico = false },
+              new Pokedex { ID = 6, Nombre = "Charizard ", Tier = 3, Basico = false },
+              new Pokedex { ID = 7, Nombre = "Squirtle", Tier = 1, Basico = true },
               new Pokedex { ID = 8, Nombre = "Wartotle" },
               new Pokedex { ID = 9, Nombre = "Blastoise" },
               new Pokedex { ID = 10, Nombre = "Caterpie" },
@@ -263,24 +286,27 @@ namespace Data_Acces_Layer.Repository
               new Pokedex { ID = 99, Nombre = "Kingler" },
               new Pokedex { ID = 100, Nombre = "Voltorb" }
               );
-          
+           
 
+            modelbuilder.Entity<Pokemon>().HasData(
+                new Pokemon {  Id = 1, PokedexId = 1},
+                new Pokemon {  Id = 2, PokedexId = 4 },
+                new Pokemon {  Id = 3, PokedexId = 2 },
+                new Pokemon {  Id = 4, PokedexId = 5 },
+                new Pokemon {  Id = 5, PokedexId = 100 }
+                );
+           
+           
             modelbuilder.Entity<Stat>().HasData(
                new Stat { Id = 1, Nivel = 20, Ataque = 15, Defensa = 10, Vida = 40 }
                );
 
-         
-
-
             modelbuilder.Entity<Habilidades>().HasData(
-                new Habilidades { HabilidadId = 1, Habilidad_1 = "Placaje", Habilidad_2 = "Ascuas", Habilidad_3 = "Llamarada", Habilidad_4 = "Gruñido"},
-                new Habilidades { HabilidadId = 2, Habilidad_1 = "Placaje", Habilidad_2 = "Pistola Agua", Habilidad_3 = "Surf", Habilidad_4 = "Ataque arena"},
-                new Habilidades { HabilidadId = 3, Habilidad_1 = "Placaje", Habilidad_2 = "Latigo cepa", Habilidad_3 = "Hoja afilada", Habilidad_4 = "Ataque arena"},
-                new Habilidades { HabilidadId = 4, Habilidad_1 = "Placaje", Habilidad_2 = "Impactrueno", Habilidad_3 = "Rayo", Habilidad_4 = "Trueno"}
+                new Habilidades { HabilidadId = 1, Habilidad_1 = "Placaje", Habilidad_2 = "Ascuas", Habilidad_3 = "Llamarada", Habilidad_4 = "Gruñido" },
+                new Habilidades { HabilidadId = 2, Habilidad_1 = "Placaje", Habilidad_2 = "Pistola Agua", Habilidad_3 = "Surf", Habilidad_4 = "Ataque arena" },
+                new Habilidades { HabilidadId = 3, Habilidad_1 = "Placaje", Habilidad_2 = "Latigo cepa", Habilidad_3 = "Hoja afilada", Habilidad_4 = "Ataque arena" },
+                new Habilidades { HabilidadId = 4, Habilidad_1 = "Placaje", Habilidad_2 = "Impactrueno", Habilidad_3 = "Rayo", Habilidad_4 = "Trueno" }
                 );
-
-
-           
 
             modelbuilder.Entity<Entrenador>().HasData(
                 new Entrenador { Id = 1, Nombre = "Marc" },
@@ -289,22 +315,19 @@ namespace Data_Acces_Layer.Repository
                );
 
 
-
-
-
+            // ASIGNACION DE CADA ENTRENADOR CON SU POKEMONS
+            modelbuilder.Entity<Entrenadores_Pokemon>().HasData(
+                new Entrenadores_Pokemon {  EntrenadorId = 1, PokemonId = 5},
+                new Entrenadores_Pokemon {  EntrenadorId = 2, PokemonId = 1}
+               
+                );
 
             // ASGINACION DE CADA POKEMON de la pokedex A SU TIPO
             modelbuilder.Entity<Tipos_Pokemons>().HasData(
-                new Tipos_Pokemons { PokedexId = 1, TipoId = 3}
+                new Tipos_Pokemons { PokedexId = 1, TipoId = 3 }
                 );
 
-
-            // ASIGNACION DE CADA ENTRENADOR CON SU POKEMONS
-            modelbuilder.Entity<Entrenadores_Pokemon>().HasData(
-                new Entrenadores_Pokemon { EntrenadorId = 2, PokemonId = 4 },
-                new Entrenadores_Pokemon { EntrenadorId = 1, PokemonId = 4 },
-                new Entrenadores_Pokemon { EntrenadorId = 3, PokemonId = 5 }
-                );
+          
 
             modelbuilder.Entity<Tipos_Habilidades>().HasData(
                 new Tipos_Habilidades { HabilidadId = 1, TipoId = 1 },
@@ -319,12 +342,16 @@ namespace Data_Acces_Layer.Repository
         // CONEXION A LA BASE DE DATOS, YA NO SE HACE EN EL PROGRAM.CS
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-        var connect = @"Server=LOCALHOST;Database=db_pokemon_backend;Trusted_Connection=True";
+            var connect = @"Server=LOCALHOST;Database=db_pokemon_backend;Trusted_Connection=True";
+            optionsBuilder.EnableSensitiveDataLogging();
+          
+           
         if (!optionsBuilder.IsConfigured)
        {
         optionsBuilder.UseSqlServer(connect, b => b.MigrationsAssembly("PokemonBackend"));
        }
-}
+            
+        }
 
     }
     /* PARA ACTUALIZAR LA TABLA. ADD-MIGRATION  (FECHA QUE SE EJECUTA). DESPUES UPDATE-DATABASE */

@@ -1,4 +1,6 @@
-﻿namespace PokemonBackend.Models
+﻿using Acceso_BD.Repository.Entity;
+
+namespace PokemonBackend.Models
 {
     public class Entrenadores_Pokemon
     {

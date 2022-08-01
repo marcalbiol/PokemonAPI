@@ -17,9 +17,10 @@ namespace Acceso_BD.Repository.Entity
 
         public string? Altura { get; set; }
         public string? Peso { get; set; }
-
-        //public int? StatId { get; set; }
-        //public Stat? Stat { get; set; }
+        public virtual ICollection<Pokemon> Pokemons { get; set; }
+        [MaxLength(3)]
+        public int? Tier { get; set; }
+        public Boolean? Basico { get; set; }
         public ICollection<Tipos_Pokemons>? Tipos { get; set; }
 
     }

@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Entrenador_PokemonDAL.cs" />
     <Compile Remove="Repository\Entity\ApplicationUser.cs" />
+    <Compile Remove="Repository\Entity\Tipos_Bonus.cs" />
   </ItemGroup>
 
   <ItemGroup>
