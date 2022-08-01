@@ -64,8 +64,7 @@ namespace Data_Acces_Layer.Repository
             // OneToOne Tipo Habilidades
 
             //TODO
-            // revisar y comprobar añadiendo DATA
-
+           
 
             modelbuilder.Entity<Tipos_Habilidades>()
                 .HasKey(th => new { th.TipoId, th.HabilidadId });
@@ -79,7 +78,7 @@ namespace Data_Acces_Layer.Repository
                 .HasOne(t => t.Habilidades)
                 .WithMany(h => h.habilidades_tipos)
                 .HasForeignKey(t => t.HabilidadId);
-
+           
            
             // ManyToMany Pokemon Entrenador
 
@@ -341,15 +340,14 @@ namespace Data_Acces_Layer.Repository
                 new Tipos_Pokemons {Id = 2, PokedexId = 1, TipoId = 19 }
                 );
             
-          
-
             modelbuilder.Entity<Tipos_Habilidades>().HasData(
-                new Tipos_Habilidades { HabilidadId = 1, TipoId = 1 },
-                new Tipos_Habilidades { HabilidadId = 2, TipoId = 2 },
-                new Tipos_Habilidades { HabilidadId = 3, TipoId = 3 },
-                new Tipos_Habilidades { HabilidadId = 4, TipoId = 4 }
+                new Tipos_Habilidades {Id = 1, HabilidadId = 1, TipoId = 1 },
+                new Tipos_Habilidades {Id = 2, HabilidadId = 2, TipoId = 2 },
+                new Tipos_Habilidades {Id = 3, HabilidadId = 3, TipoId = 3 },
+                new Tipos_Habilidades {Id = 4, HabilidadId = 4, TipoId = 4 },
+                new Tipos_Habilidades {Id = 5, HabilidadId = 3, TipoId = 4 }
                 );
-
+            
             base.OnModelCreating(modelbuilder);
         }
 
