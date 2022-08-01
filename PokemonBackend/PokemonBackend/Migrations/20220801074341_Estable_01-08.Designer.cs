@@ -4,6 +4,7 @@ using Data_Acces_Layer.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace PokemonBackend.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220801074341_Estable_01-08")]
+    partial class Estable_0108
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1037,11 +1039,6 @@ namespace PokemonBackend.Migrations
                         {
                             Id = 18,
                             Tipo_pokemon = "Siniestro"
-                        },
-                        new
-                        {
-                            Id = 19,
-                            Tipo_pokemon = "Veneno"
                         });
                 });
 
@@ -1096,11 +1093,8 @@ namespace PokemonBackend.Migrations
 
             modelBuilder.Entity("PokemonBackend.Models.Tipos_Pokemons", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("TipoId")
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int?>("PokedexId")
                         .HasColumnType("int");
@@ -1108,31 +1102,19 @@ namespace PokemonBackend.Migrations
                     b.Property<int?>("PokemonId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TipoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
+                    b.HasKey("TipoId", "PokedexId");
 
                     b.HasIndex("PokedexId");
 
                     b.HasIndex("PokemonId");
-
-                    b.HasIndex("TipoId");
 
                     b.ToTable("Tipo_Pokemons");
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            PokedexId = 1,
-                            TipoId = 3
-                        },
-                        new
-                        {
-                            Id = 2,
-                            PokedexId = 1,
-                            TipoId = 19
+                            TipoId = 3,
+                            PokedexId = 1
                         });
                 });
 
@@ -1247,7 +1229,9 @@ namespace PokemonBackend.Migrations
                 {
                     b.HasOne("Acceso_BD.Repository.Entity.Pokedex", "Pokedex")
                         .WithMany("Tipos")
-                        .HasForeignKey("PokedexId");
+                        .HasForeignKey("PokedexId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("PokemonBackend.Models.Pokemon", null)
                         .WithMany("Tipos")

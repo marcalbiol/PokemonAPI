@@ -111,7 +111,7 @@ namespace Data_Acces_Layer.Repository
 
             // ForeignKey
             modelbuilder.Entity<Tipos_Pokemons>()
-                .HasKey(tp => new { tp.TipoId, tp.PokedexId });
+                .HasKey(tp => new { tp.Id });
 
             // Pokemons
             modelbuilder.Entity<Tipos_Pokemons>()
@@ -175,7 +175,8 @@ namespace Data_Acces_Layer.Repository
              new Tipo { Id = 14, Tipo_pokemon = "Psiquico" },
              new Tipo { Id = 16, Tipo_pokemon = "Dragón" },
              new Tipo { Id = 17, Tipo_pokemon = "Fantasma" },
-             new Tipo { Id = 18, Tipo_pokemon = "Siniestro" }
+             new Tipo { Id = 18, Tipo_pokemon = "Siniestro" },
+             new Tipo { Id = 19, Tipo_pokemon = "Veneno" }
              );
 
             
@@ -301,7 +302,8 @@ namespace Data_Acces_Layer.Repository
                 new Pokemon {  Id = 2, PokedexId = 4 },
                 new Pokemon {  Id = 3, PokedexId = 2 },
                 new Pokemon {  Id = 4, PokedexId = 5 },
-                new Pokemon {  Id = 5, PokedexId = 100 }
+                new Pokemon {  Id = 5, PokedexId = 100 },
+                new Pokemon {  Id = 6, PokedexId = 25 }
                 );
            
            
@@ -324,19 +326,21 @@ namespace Data_Acces_Layer.Repository
             
 
             // ASIGNACION DE CADA ENTRENADOR CON SU POKEMONS
+            // PokemonId está relacionado con el Id y no con el PokedexId
             modelbuilder.Entity<Entrenadores_Pokemon>().HasData(
                 new Entrenadores_Pokemon {Id = 1,  EntrenadorId = 1, PokemonId = 5},
-                new Entrenadores_Pokemon {Id = 2,  EntrenadorId = 2, PokemonId = 1},
-                new Entrenadores_Pokemon {Id = 3,  EntrenadorId = 2, PokemonId = 1}
-               
+                new Entrenadores_Pokemon {Id = 2,  EntrenadorId = 2, PokemonId = 6},
+                new Entrenadores_Pokemon {Id = 3,  EntrenadorId = 2, PokemonId = 6}
                 );
             
 
+            
             // ASGINACION DE CADA POKEMON de la pokedex A SU TIPO
             modelbuilder.Entity<Tipos_Pokemons>().HasData(
-                new Tipos_Pokemons { PokedexId = 1, TipoId = 3 }
+                new Tipos_Pokemons {Id = 1, PokedexId = 1, TipoId = 3 },
+                new Tipos_Pokemons {Id = 2, PokedexId = 1, TipoId = 19 }
                 );
-
+            
           
 
             modelbuilder.Entity<Tipos_Habilidades>().HasData(

@@ -4,6 +4,7 @@ using Data_Acces_Layer.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace PokemonBackend.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220801075138_change_identity_columnTipoPokemon-NewId")]
+    partial class change_identity_columnTipoPokemonNewId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1037,11 +1039,6 @@ namespace PokemonBackend.Migrations
                         {
                             Id = 18,
                             Tipo_pokemon = "Siniestro"
-                        },
-                        new
-                        {
-                            Id = 19,
-                            Tipo_pokemon = "Veneno"
                         });
                 });
 
@@ -1120,20 +1117,6 @@ namespace PokemonBackend.Migrations
                     b.HasIndex("TipoId");
 
                     b.ToTable("Tipo_Pokemons");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            PokedexId = 1,
-                            TipoId = 3
-                        },
-                        new
-                        {
-                            Id = 2,
-                            PokedexId = 1,
-                            TipoId = 19
-                        });
                 });
 
             modelBuilder.Entity("Acceso_BD.Repository.Entity.Pokedex", b =>

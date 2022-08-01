@@ -26,7 +26,7 @@ namespace PokemonBackend.Models
         public int? StatId { get; set; }
         public Stat? Stat { get; set; }
       
-        public ICollection<Tipos_Pokemons>? Tipos { get; set; }
+       public ICollection<Tipos_Pokemons>? Tipos { get; set; }
        
        public ICollection<Entrenadores_Pokemon>? Entrenador_Pokemons { get; set; }
 
