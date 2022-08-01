@@ -28,7 +28,7 @@ namespace PokemonBackend.Models
       
         public ICollection<Tipos_Pokemons>? Tipos { get; set; }
        
-        public ICollection<Entrenadores_Pokemon>? Entrenador_Pokemons { get; set; }
+       public ICollection<Entrenadores_Pokemon>? Entrenador_Pokemons { get; set; }
 
 
     }

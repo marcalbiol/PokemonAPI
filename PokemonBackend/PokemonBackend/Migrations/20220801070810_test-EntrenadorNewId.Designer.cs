@@ -4,6 +4,7 @@ using Data_Acces_Layer.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace PokemonBackend.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220801070810_test-EntrenadorNewId")]
+    partial class testEntrenadorNewId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -668,21 +670,16 @@ namespace PokemonBackend.Migrations
 
             modelBuilder.Entity("PokemonBackend.Models.Entrenadores_Pokemon", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
                     b.Property<int?>("EntrenadorId")
                         .HasColumnType("int");
 
                     b.Property<int?>("PokemonId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
-                    b.HasIndex("EntrenadorId");
+                    b.HasKey("EntrenadorId", "PokemonId");
 
                     b.HasIndex("PokemonId");
 
@@ -691,21 +688,15 @@ namespace PokemonBackend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
                             EntrenadorId = 1,
-                            PokemonId = 5
+                            PokemonId = 5,
+                            Id = 0
                         },
                         new
                         {
-                            Id = 2,
                             EntrenadorId = 2,
-                            PokemonId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            EntrenadorId = 2,
-                            PokemonId = 1
+                            PokemonId = 1,
+                            Id = 0
                         });
                 });
 
@@ -1151,11 +1142,15 @@ namespace PokemonBackend.Migrations
                 {
                     b.HasOne("PokemonBackend.Models.Entrenador", "Entrenador")
                         .WithMany("Entrenador_Pokemons")
-                        .HasForeignKey("EntrenadorId");
+                        .HasForeignKey("EntrenadorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("PokemonBackend.Models.Pokemon", "Pokemon")
                         .WithMany("Entrenador_Pokemons")
-                        .HasForeignKey("PokemonId");
+                        .HasForeignKey("PokemonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Entrenador");
 

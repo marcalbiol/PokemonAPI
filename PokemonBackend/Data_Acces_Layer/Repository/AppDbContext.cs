@@ -30,7 +30,7 @@ namespace Data_Acces_Layer.Repository
         public DbSet<Tipo> Tipos { get; set; }
         public DbSet<TipoBonus> Bonuses { get; set; }
         public DbSet<ModificadorTipo> Modificadores { get; set; }
-        public DbSet<Entrenadores_Pokemon> Entrenadores_Pokemons { get; set; }
+      public DbSet<Entrenadores_Pokemon> Entrenadores_Pokemons { get; set; }
         public DbSet<Stat> Stats { get; set; }
         public DbSet<Habilidades> Habilidades { get; set; }
 
@@ -80,12 +80,12 @@ namespace Data_Acces_Layer.Repository
                 .WithMany(h => h.habilidades_tipos)
                 .HasForeignKey(t => t.HabilidadId);
 
+           
             // ManyToMany Pokemon Entrenador
 
-   
             // ForeignKey
             modelbuilder.Entity<Entrenadores_Pokemon>()
-                .HasKey(ep => new { ep.EntrenadorId, ep.PokemonId });
+                .HasKey(ep => new { ep.Id });
 
             // Entrenador
             modelbuilder.Entity<Entrenadores_Pokemon>()
@@ -98,9 +98,10 @@ namespace Data_Acces_Layer.Repository
               .HasOne(p => p.Pokemon)
               .WithMany(p => p.Entrenador_Pokemons)
               .HasForeignKey(e => e.PokemonId);
+          
 
           
-            //0ToMany Pokemon Pokedex
+            // Pokemon Pokedex
             modelbuilder.Entity<Pokedex>()
                 .HasMany(p => p.Pokemons)
                 .WithOne(p => p.Pokedex);
@@ -144,8 +145,15 @@ namespace Data_Acces_Layer.Repository
             .HasForeignKey(tp => tp.EficazId)
             .OnDelete(DeleteBehavior.NoAction);
 
-            modelbuilder.Entity<Tipo>().HasMany(t => t.Debilidades).WithOne(x => x.BonusDeb).HasForeignKey(x => x.IdTipo);
-            modelbuilder.Entity<Tipo>().HasMany(t => t.Fortalezas).WithOne(x => x.BonusEf).HasForeignKey(x => x.IdTipo);
+            modelbuilder.Entity<Tipo>()
+             .HasMany(t => t.Debilidades)
+             .WithOne(x => x.BonusDeb)
+             .HasForeignKey(x => x.IdTipo);
+
+            modelbuilder.Entity<Tipo>()
+                .HasMany(t => t.Fortalezas)
+                .WithOne(x => x.BonusEf)
+                .HasForeignKey(x => x.IdTipo);
             
 
             // DATA-SEED //
@@ -313,14 +321,16 @@ namespace Data_Acces_Layer.Repository
                 new Entrenador { Id = 2, Nombre = "Dani" },
                 new Entrenador { Id = 3, Nombre = "Ernest" }
                );
-
+            
 
             // ASIGNACION DE CADA ENTRENADOR CON SU POKEMONS
             modelbuilder.Entity<Entrenadores_Pokemon>().HasData(
-                new Entrenadores_Pokemon {  EntrenadorId = 1, PokemonId = 5},
-                new Entrenadores_Pokemon {  EntrenadorId = 2, PokemonId = 1}
+                new Entrenadores_Pokemon {Id = 1,  EntrenadorId = 1, PokemonId = 5},
+                new Entrenadores_Pokemon {Id = 2,  EntrenadorId = 2, PokemonId = 1},
+                new Entrenadores_Pokemon {Id = 3,  EntrenadorId = 2, PokemonId = 1}
                
                 );
+            
 
             // ASGINACION DE CADA POKEMON de la pokedex A SU TIPO
             modelbuilder.Entity<Tipos_Pokemons>().HasData(

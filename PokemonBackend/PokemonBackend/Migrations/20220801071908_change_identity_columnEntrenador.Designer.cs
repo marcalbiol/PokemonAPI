@@ -4,6 +4,7 @@ using Data_Acces_Layer.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace PokemonBackend.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220801071908_change_identity_columnEntrenador")]
+    partial class change_identity_columnEntrenador
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -666,49 +668,6 @@ namespace PokemonBackend.Migrations
                         });
                 });
 
-            modelBuilder.Entity("PokemonBackend.Models.Entrenadores_Pokemon", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("EntrenadorId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PokemonId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EntrenadorId");
-
-                    b.HasIndex("PokemonId");
-
-                    b.ToTable("Entrenadores_Pokemons");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            EntrenadorId = 1,
-                            PokemonId = 5
-                        },
-                        new
-                        {
-                            Id = 2,
-                            EntrenadorId = 2,
-                            PokemonId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            EntrenadorId = 2,
-                            PokemonId = 1
-                        });
-                });
-
             modelBuilder.Entity("PokemonBackend.Models.Fortalezas", b =>
                 {
                     b.Property<int>("Id")
@@ -1147,21 +1106,6 @@ namespace PokemonBackend.Migrations
                     b.Navigation("BonusDeb");
                 });
 
-            modelBuilder.Entity("PokemonBackend.Models.Entrenadores_Pokemon", b =>
-                {
-                    b.HasOne("PokemonBackend.Models.Entrenador", "Entrenador")
-                        .WithMany("Entrenador_Pokemons")
-                        .HasForeignKey("EntrenadorId");
-
-                    b.HasOne("PokemonBackend.Models.Pokemon", "Pokemon")
-                        .WithMany("Entrenador_Pokemons")
-                        .HasForeignKey("PokemonId");
-
-                    b.Navigation("Entrenador");
-
-                    b.Navigation("Pokemon");
-                });
-
             modelBuilder.Entity("PokemonBackend.Models.Fortalezas", b =>
                 {
                     b.HasOne("PokemonBackend.Models.Tipo", "BonusEf")
@@ -1247,11 +1191,6 @@ namespace PokemonBackend.Migrations
                     b.Navigation("Tipos");
                 });
 
-            modelBuilder.Entity("PokemonBackend.Models.Entrenador", b =>
-                {
-                    b.Navigation("Entrenador_Pokemons");
-                });
-
             modelBuilder.Entity("PokemonBackend.Models.Habilidades", b =>
                 {
                     b.Navigation("habilidades_tipos");
@@ -1259,8 +1198,6 @@ namespace PokemonBackend.Migrations
 
             modelBuilder.Entity("PokemonBackend.Models.Pokemon", b =>
                 {
-                    b.Navigation("Entrenador_Pokemons");
-
                     b.Navigation("Tipos");
                 });
 
