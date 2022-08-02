@@ -30,7 +30,7 @@ namespace Data_Acces_Layer.Repository
         public DbSet<Tipo> Tipos { get; set; }
         public DbSet<TipoBonus> Bonuses { get; set; }
         public DbSet<ModificadorTipo> Modificadores { get; set; }
-      public DbSet<Entrenadores_Pokemon> Entrenadores_Pokemons { get; set; }
+        public DbSet<Entrenadores_Pokemon> Entrenadores_Pokemons { get; set; }
         public DbSet<Stat> Stats { get; set; }
         public DbSet<Habilidades> Habilidades { get; set; }
 
@@ -297,7 +297,7 @@ namespace Data_Acces_Layer.Repository
            
 
             modelbuilder.Entity<Pokemon>().HasData(
-                new Pokemon {  Id = 1, PokedexId = 1},
+                new Pokemon {  Id = 1, PokedexId = 1, Nombre = "test"},
                 new Pokemon {  Id = 2, PokedexId = 4 },
                 new Pokemon {  Id = 3, PokedexId = 2 },
                 new Pokemon {  Id = 4, PokedexId = 5 },
@@ -355,12 +355,14 @@ namespace Data_Acces_Layer.Repository
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var connect = @"Server=LOCALHOST;Database=db_pokemon_backend;Trusted_Connection=True";
-            optionsBuilder.EnableSensitiveDataLogging();
-          
-           
-        if (!optionsBuilder.IsConfigured)
+            optionsBuilder
+                .EnableSensitiveDataLogging()
+                .UseLazyLoadingProxies();
+
+
+            if (!optionsBuilder.IsConfigured)
        {
-        optionsBuilder.UseSqlServer(connect, b => b.MigrationsAssembly("PokemonBackend"));
+        optionsBuilder.UseSqlServer(connect, b => b.MigrationsAssembly("Acceso_BD"));
        }
             
         }

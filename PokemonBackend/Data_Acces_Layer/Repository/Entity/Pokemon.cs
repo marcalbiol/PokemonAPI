@@ -15,7 +15,7 @@ namespace PokemonBackend.Models
      
         public int Nivel { get; set; }
         public int? PokedexId { get; set; }
-        public Pokedex? Pokedex{ get; set; }
+        public virtual Pokedex? Pokedex{ get; set; }
         
         /*
         public Boolean? BasicoId { get; set; }
@@ -24,11 +24,11 @@ namespace PokemonBackend.Models
         public Pokedex Tier { get; set; }
          */
         public int? StatId { get; set; }
-        public Stat? Stat { get; set; }
+        public virtual Stat? Stat { get; set; }
       
-       public ICollection<Tipos_Pokemons>? Tipos { get; set; }
+       public virtual ICollection<Tipos_Pokemons>? Tipos { get; set; }
        
-       public ICollection<Entrenadores_Pokemon>? Entrenador_Pokemons { get; set; }
+       public virtual ICollection<Entrenadores_Pokemon>? Entrenador_Pokemons { get; set; }
 
 
     }

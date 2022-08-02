@@ -11,16 +11,16 @@ namespace PokemonBackend.Models
         public int? Id { get; set; }
         public string? Tipo_pokemon { get; set; }
 
-        public ICollection<Tipos_Habilidades>? Habilidades_tipos { get; set; }
-        public ICollection<Tipos_Pokemons>? Tipos { get; set; }
+        public virtual ICollection<Tipos_Habilidades>? Habilidades_tipos { get; set; }
+        public virtual ICollection<Tipos_Pokemons>? Tipos { get; set; }
 
         [NotMapped]
-        public ICollection<TipoBonus>? Bonus { get; set; }
+        public virtual ICollection<TipoBonus>? Bonus { get; set; }
         [NotMapped]
-        public ICollection<TipoBonus>? Bonuses { get; set; }
+        public virtual ICollection<TipoBonus>? Bonuses { get; set; }
 
-        public ICollection<Debilidades> Debilidades { get; set; }
-        public ICollection<Fortalezas> Fortalezas { get; set; }
+        public virtual ICollection<Debilidades> Debilidades { get; set; }
+        public virtual ICollection<Fortalezas> Fortalezas { get; set; }
 
     }
 
@@ -30,9 +30,9 @@ namespace PokemonBackend.Models
         [Key] 
         public int Id { get; set; } 
         public int IdTipo { get; set; }
-        public Tipo? BonusEf { get; set; }
+        public virtual Tipo? BonusEf { get; set; }
         public int EficazId { get; set; }
-        public Tipo? BonusDeb { get; set; }
+        public virtual Tipo? BonusDeb { get; set; }
         public int DebilidadId { get; set; }
 
         
@@ -44,7 +44,7 @@ namespace PokemonBackend.Models
         [Key]
         public int Id { get; set; }
         public int IdTipo { get; set; }
-        public Tipo? BonusDeb { get; set; }
+        public virtual Tipo? BonusDeb { get; set; }
         public int DebilidadId { get; set; }     
 
     }
@@ -55,7 +55,7 @@ namespace PokemonBackend.Models
         [Key]
         public int Id { get; set; }
         public int IdTipo { get; set; }
-        public Tipo? BonusEf { get; set; }
+        public virtual Tipo? BonusEf { get; set; }
         public int EficazId { get; set; }
     }
 
@@ -65,8 +65,8 @@ namespace PokemonBackend.Models
         [Key]
         public int Id { get; set; }
         public int IdTipo { get; set; }
-        public Modificador Modificador { get; set; }
-        public Tipo? Bonus { get; set; }
+        public virtual Modificador Modificador { get; set; }
+        public virtual Tipo? Bonus { get; set; }
         public int TipoBonusId { get; set; }
     }
 

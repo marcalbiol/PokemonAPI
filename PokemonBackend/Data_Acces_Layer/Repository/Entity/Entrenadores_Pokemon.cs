@@ -8,8 +8,8 @@ namespace PokemonBackend.Models
         [Key]
         public int Id { get; set; } 
         public int? EntrenadorId{ get; set; }
-        public Entrenador? Entrenador{ get; set; }
+        public virtual Entrenador? Entrenador{ get; set; }
         public int? PokemonId { get; set; }
-        public Pokemon? Pokemon{ get; set; }
+        public virtual Pokemon? Pokemon{ get; set; }
     }
 }

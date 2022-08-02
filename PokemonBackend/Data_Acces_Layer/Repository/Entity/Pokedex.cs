@@ -21,7 +21,7 @@ namespace Acceso_BD.Repository.Entity
         [MaxLength(3)]
         public int? Tier { get; set; }
         public Boolean? Basico { get; set; }
-        public ICollection<Tipos_Pokemons>? Tipos { get; set; }
+        public virtual ICollection<Tipos_Pokemons>? Tipos { get; set; }
 
     }
 }

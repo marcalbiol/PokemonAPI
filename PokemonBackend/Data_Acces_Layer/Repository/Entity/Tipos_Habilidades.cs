@@ -11,9 +11,9 @@ namespace Acceso_BD.Repository.Entity
     {
         public int Id { get; set; }
         public int? HabilidadId { get; set; }
-        public Habilidades? Habilidades { get; set; }    
+        public virtual Habilidades? Habilidades { get; set; }    
         public int? TipoId { get; set; } 
-        public Tipo? Tipo { get; set; } 
+        public virtual Tipo? Tipo { get; set; } 
 
 
     }

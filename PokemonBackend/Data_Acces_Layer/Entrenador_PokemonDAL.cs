@@ -10,14 +10,12 @@ namespace Acceso_BD
 {
     public class Entrenador_PokemonDAL
     {
-        /*
+       
         public void PostEntrenadorPokemon(Entrenadores_Pokemon entrenador_pokemons)
         {
             var db = new MyDbContext();
             db.Add(entrenador_pokemons);
             db.SaveChanges();
         }
-        */
-
     }
 }

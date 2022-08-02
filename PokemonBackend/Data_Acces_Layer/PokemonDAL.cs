@@ -8,7 +8,7 @@ namespace Data_Acces_Layer
     {
 
         Pokemon pokemons = new Pokemon();
-
+            
         public List<Pokemon> GetPokemons()
         {
             var db = new MyDbContext();

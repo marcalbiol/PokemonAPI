@@ -9,10 +9,10 @@ namespace PokemonBackend.Models
       [Key]  
       public int Id { get; set; }
       public int TipoId { get; set; }   
-      public Tipo? Tipo { get; set; }
+      public virtual Tipo? Tipo { get; set; }
 
       public int? PokedexId { get; set; }
-      public Pokedex? Pokedex { get; set; }
+      public virtual Pokedex? Pokedex { get; set; }
         
 
     }

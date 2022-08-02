@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace PokemonBackend.Migrations
+namespace Acceso_BD.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20220801080340_change_identity_columnHabilidad")]
-    partial class change_identity_columnHabilidad
+    [Migration("20220802191932_test")]
+    partial class test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -577,6 +577,56 @@ namespace PokemonBackend.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Acceso_BD.Repository.Entity.Tipos_Habilidades", b =>
+                {
+                    b.Property<int?>("TipoId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("HabilidadId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("TipoId", "HabilidadId");
+
+                    b.HasIndex("HabilidadId");
+
+                    b.ToTable("Tipos_Habilidades");
+
+                    b.HasData(
+                        new
+                        {
+                            TipoId = 1,
+                            HabilidadId = 1,
+                            Id = 1
+                        },
+                        new
+                        {
+                            TipoId = 2,
+                            HabilidadId = 2,
+                            Id = 2
+                        },
+                        new
+                        {
+                            TipoId = 3,
+                            HabilidadId = 3,
+                            Id = 3
+                        },
+                        new
+                        {
+                            TipoId = 4,
+                            HabilidadId = 4,
+                            Id = 4
+                        },
+                        new
+                        {
+                            TipoId = 4,
+                            HabilidadId = 3,
+                            Id = 5
+                        });
+                });
+
             modelBuilder.Entity("PokemonBackend.Models.Debilidades", b =>
                 {
                     b.Property<int>("Id")
@@ -833,6 +883,7 @@ namespace PokemonBackend.Migrations
                         {
                             Id = 1,
                             Nivel = 0,
+                            Nombre = "test",
                             PokedexId = 1
                         },
                         new
@@ -1108,6 +1159,25 @@ namespace PokemonBackend.Migrations
                         .HasForeignKey("StatId");
                 });
 
+            modelBuilder.Entity("Acceso_BD.Repository.Entity.Tipos_Habilidades", b =>
+                {
+                    b.HasOne("PokemonBackend.Models.Habilidades", "Habilidades")
+                        .WithMany("habilidades_tipos")
+                        .HasForeignKey("HabilidadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PokemonBackend.Models.Tipo", "Tipo")
+                        .WithMany("Habilidades_tipos")
+                        .HasForeignKey("TipoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Habilidades");
+
+                    b.Navigation("Tipo");
+                });
+
             modelBuilder.Entity("PokemonBackend.Models.Debilidades", b =>
                 {
                     b.HasOne("PokemonBackend.Models.Tipo", "BonusDeb")
@@ -1222,6 +1292,11 @@ namespace PokemonBackend.Migrations
                     b.Navigation("Entrenador_Pokemons");
                 });
 
+            modelBuilder.Entity("PokemonBackend.Models.Habilidades", b =>
+                {
+                    b.Navigation("habilidades_tipos");
+                });
+
             modelBuilder.Entity("PokemonBackend.Models.Pokemon", b =>
                 {
                     b.Navigation("Entrenador_Pokemons");
@@ -1245,6 +1320,8 @@ namespace PokemonBackend.Migrations
                     b.Navigation("Debilidades");
 
                     b.Navigation("Fortalezas");
+
+                    b.Navigation("Habilidades_tipos");
 
                     b.Navigation("Tipos");
                 });

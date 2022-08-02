@@ -10,7 +10,7 @@ namespace PokemonBackend.Models
         public int? Ataque { get; set; }
         public int? Defensa { get; set; }
         public int? Vida { get; set; }
-        public ICollection<Pokemon>? Pokemons { get; set; }  
-        public ICollection<Pokedex>? Pokedex { get; set; }
+        public virtual ICollection<Pokemon>? Pokemons { get; set; }  
+        public virtual ICollection<Pokedex>? Pokedex { get; set; }
     }
 }

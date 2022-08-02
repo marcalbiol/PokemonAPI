@@ -23,8 +23,6 @@ namespace PokemonBackend.Controllers
         public void postPokemon([FromBody] Entrenador_PokemonModel entrenadorModel)
         {
             // en el controlador llamamos a los metodos de la logica de negocio
-
-
             _BLL.PostEntrenadorPokemon(entrenadorModel);
 
         }

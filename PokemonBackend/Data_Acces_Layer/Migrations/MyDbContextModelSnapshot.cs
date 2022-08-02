@@ -4,18 +4,16 @@ using Data_Acces_Layer.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace PokemonBackend.Migrations
+namespace Acceso_BD.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20220729143419_Estable")]
-    partial class Estable
+    partial class MyDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -585,6 +583,9 @@ namespace PokemonBackend.Migrations
                     b.Property<int?>("HabilidadId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
                     b.HasKey("TipoId", "HabilidadId");
 
                     b.HasIndex("HabilidadId");
@@ -595,22 +596,32 @@ namespace PokemonBackend.Migrations
                         new
                         {
                             TipoId = 1,
-                            HabilidadId = 1
+                            HabilidadId = 1,
+                            Id = 1
                         },
                         new
                         {
                             TipoId = 2,
-                            HabilidadId = 2
+                            HabilidadId = 2,
+                            Id = 2
                         },
                         new
                         {
                             TipoId = 3,
-                            HabilidadId = 3
+                            HabilidadId = 3,
+                            Id = 3
                         },
                         new
                         {
                             TipoId = 4,
-                            HabilidadId = 4
+                            HabilidadId = 4,
+                            Id = 4
+                        },
+                        new
+                        {
+                            TipoId = 4,
+                            HabilidadId = 3,
+                            Id = 5
                         });
                 });
 
@@ -670,17 +681,45 @@ namespace PokemonBackend.Migrations
 
             modelBuilder.Entity("PokemonBackend.Models.Entrenadores_Pokemon", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
                     b.Property<int?>("EntrenadorId")
                         .HasColumnType("int");
 
                     b.Property<int?>("PokemonId")
                         .HasColumnType("int");
 
-                    b.HasKey("EntrenadorId", "PokemonId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("EntrenadorId");
 
                     b.HasIndex("PokemonId");
 
                     b.ToTable("Entrenadores_Pokemons");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            EntrenadorId = 1,
+                            PokemonId = 5
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EntrenadorId = 2,
+                            PokemonId = 6
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EntrenadorId = 2,
+                            PokemonId = 6
+                        });
                 });
 
             modelBuilder.Entity("PokemonBackend.Models.Fortalezas", b =>
@@ -842,6 +881,7 @@ namespace PokemonBackend.Migrations
                         {
                             Id = 1,
                             Nivel = 0,
+                            Nombre = "test",
                             PokedexId = 1
                         },
                         new
@@ -867,6 +907,12 @@ namespace PokemonBackend.Migrations
                             Id = 5,
                             Nivel = 0,
                             PokedexId = 100
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Nivel = 0,
+                            PokedexId = 25
                         });
                 });
 
@@ -1005,6 +1051,11 @@ namespace PokemonBackend.Migrations
                         {
                             Id = 18,
                             Tipo_pokemon = "Siniestro"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Tipo_pokemon = "Veneno"
                         });
                 });
 
@@ -1059,8 +1110,11 @@ namespace PokemonBackend.Migrations
 
             modelBuilder.Entity("PokemonBackend.Models.Tipos_Pokemons", b =>
                 {
-                    b.Property<int>("TipoId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int?>("PokedexId")
                         .HasColumnType("int");
@@ -1068,19 +1122,31 @@ namespace PokemonBackend.Migrations
                     b.Property<int?>("PokemonId")
                         .HasColumnType("int");
 
-                    b.HasKey("TipoId", "PokedexId");
+                    b.Property<int>("TipoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("PokedexId");
 
                     b.HasIndex("PokemonId");
+
+                    b.HasIndex("TipoId");
 
                     b.ToTable("Tipo_Pokemons");
 
                     b.HasData(
                         new
                         {
-                            TipoId = 3,
-                            PokedexId = 1
+                            Id = 1,
+                            PokedexId = 1,
+                            TipoId = 3
+                        },
+                        new
+                        {
+                            Id = 2,
+                            PokedexId = 1,
+                            TipoId = 19
                         });
                 });
 
@@ -1125,15 +1191,11 @@ namespace PokemonBackend.Migrations
                 {
                     b.HasOne("PokemonBackend.Models.Entrenador", "Entrenador")
                         .WithMany("Entrenador_Pokemons")
-                        .HasForeignKey("EntrenadorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EntrenadorId");
 
                     b.HasOne("PokemonBackend.Models.Pokemon", "Pokemon")
                         .WithMany("Entrenador_Pokemons")
-                        .HasForeignKey("PokemonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PokemonId");
 
                     b.Navigation("Entrenador");
 
@@ -1199,9 +1261,7 @@ namespace PokemonBackend.Migrations
                 {
                     b.HasOne("Acceso_BD.Repository.Entity.Pokedex", "Pokedex")
                         .WithMany("Tipos")
-                        .HasForeignKey("PokedexId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PokedexId");
 
                     b.HasOne("PokemonBackend.Models.Pokemon", null)
                         .WithMany("Tipos")

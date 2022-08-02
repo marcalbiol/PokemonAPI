@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace PokemonBackend.Migrations
+namespace Acceso_BD.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20220801080543_change_identity_columnHabilidad-test1")]
-    partial class change_identity_columnHabilidadtest1
+    [Migration("20220802174539_Estable")]
+    partial class Estable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -661,7 +661,7 @@ namespace PokemonBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Entrenadores");
+                    b.ToTable("Entrenador");
 
                     b.HasData(
                         new
@@ -701,7 +701,7 @@ namespace PokemonBackend.Migrations
 
                     b.HasIndex("PokemonId");
 
-                    b.ToTable("Entrenadores_Pokemons");
+                    b.ToTable("Entrenadores_Pokemon");
 
                     b.HasData(
                         new
@@ -828,7 +828,7 @@ namespace PokemonBackend.Migrations
 
                     b.HasIndex("BonusId");
 
-                    b.ToTable("Modificadores");
+                    b.ToTable("ModificadorTipo");
 
                     b.HasData(
                         new
@@ -876,7 +876,7 @@ namespace PokemonBackend.Migrations
 
                     b.HasIndex("StatId");
 
-                    b.ToTable("Pokemons");
+                    b.ToTable("Pokemon");
 
                     b.HasData(
                         new
@@ -939,7 +939,7 @@ namespace PokemonBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Stats");
+                    b.ToTable("Stat");
 
                     b.HasData(
                         new
@@ -965,7 +965,7 @@ namespace PokemonBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tipos");
+                    b.ToTable("Tipo");
 
                     b.HasData(
                         new
@@ -1083,7 +1083,7 @@ namespace PokemonBackend.Migrations
 
                     b.HasIndex("DebilidadId");
 
-                    b.ToTable("Bonuses");
+                    b.ToTable("TipoBonus");
 
                     b.HasData(
                         new
@@ -1134,7 +1134,7 @@ namespace PokemonBackend.Migrations
 
                     b.HasIndex("TipoId");
 
-                    b.ToTable("Tipo_Pokemons");
+                    b.ToTable("Tipos_Pokemons");
 
                     b.HasData(
                         new
