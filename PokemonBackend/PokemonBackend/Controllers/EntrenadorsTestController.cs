@@ -12,16 +12,16 @@ namespace PokemonBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TestController : ControllerBase
+    public class EntrenadorsTestController : ControllerBase
     {
         private readonly MyDbContext _context;
 
-        public TestController(MyDbContext context)
+        public EntrenadorsTestController(MyDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Test
+        // GET: api/EntrenadorsTest
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Entrenador>>> GetEntrenadores()
         {
@@ -32,7 +32,7 @@ namespace PokemonBackend.Controllers
             return await _context.Entrenadores.ToListAsync();
         }
 
-        // GET: api/Test/5
+        // GET: api/EntrenadorsTest/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Entrenador>> GetEntrenador(int? id)
         {
@@ -50,7 +50,7 @@ namespace PokemonBackend.Controllers
             return entrenador;
         }
 
-        // PUT: api/Test/5
+        // PUT: api/EntrenadorsTest/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEntrenador(int? id, Entrenador entrenador)
@@ -81,7 +81,7 @@ namespace PokemonBackend.Controllers
             return NoContent();
         }
 
-        // POST: api/Test
+        // POST: api/EntrenadorsTest
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Entrenador>> PostEntrenador(Entrenador entrenador)
@@ -96,7 +96,7 @@ namespace PokemonBackend.Controllers
             return CreatedAtAction("GetEntrenador", new { id = entrenador.Id }, entrenador);
         }
 
-        // DELETE: api/Test/5
+        // DELETE: api/EntrenadorsTest/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEntrenador(int? id)
         {

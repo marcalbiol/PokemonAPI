@@ -15,10 +15,8 @@ var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
 // Add services to the container.
-
 var connect = @"Server=LOCALHOST;Database=db_pokemon_backend;Trusted_Connection=True";
 builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlServer(connect));
-
 
 // validacion del token, 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>

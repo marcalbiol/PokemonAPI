@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Business_Logic_Layer.Models;
 using Data_Acces_Layer.Repository;
 using Logica_Negocio.Models;
 using PokemonBackend.Models;
@@ -20,9 +21,14 @@ namespace Logica_Negocio
         public EntrenadorBLL()
         {
             _DAL = new Acceso_BD.EntrenadorDAL();
-            var _confiEntrenador = new MapperConfiguration(
-                config => config.CreateMap<Entrenador, EntrenadorModel>().ReverseMap());
-            _EntrenadorMapper = new Mapper(_confiEntrenador);   
+
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Entrenador, EntrenadorModel>()
+                    .ForMember(t=> t.EntrenadoresPokemons, opt=>  opt.MapFrom(t=>t.Entrenador_Pokemons))
+                   .ReverseMap();
+            });
+            _EntrenadorMapper = new Mapper(config);   
         }
 
         public List<EntrenadorModel> GetEntrenador()

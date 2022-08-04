@@ -56,7 +56,7 @@ namespace Acceso_BD.Migrations
 
                     b.HasIndex("StatId");
 
-                    b.ToTable("Pokedex");
+                    b.ToTable("Pokedex", (string)null);
 
                     b.HasData(
                         new
@@ -590,7 +590,7 @@ namespace Acceso_BD.Migrations
 
                     b.HasIndex("HabilidadId");
 
-                    b.ToTable("Tipos_Habilidades");
+                    b.ToTable("Tipos_Habilidades", (string)null);
 
                     b.HasData(
                         new
@@ -643,7 +643,7 @@ namespace Acceso_BD.Migrations
 
                     b.HasIndex("IdTipo");
 
-                    b.ToTable("Debilidades");
+                    b.ToTable("Debilidades", (string)null);
                 });
 
             modelBuilder.Entity("PokemonBackend.Models.Entrenador", b =>
@@ -659,7 +659,7 @@ namespace Acceso_BD.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Entrenadores");
+                    b.ToTable("Entrenadores", (string)null);
 
                     b.HasData(
                         new
@@ -699,7 +699,7 @@ namespace Acceso_BD.Migrations
 
                     b.HasIndex("PokemonId");
 
-                    b.ToTable("Entrenadores_Pokemons");
+                    b.ToTable("Entrenadores_Pokemons", (string)null);
 
                     b.HasData(
                         new
@@ -740,7 +740,7 @@ namespace Acceso_BD.Migrations
 
                     b.HasIndex("IdTipo");
 
-                    b.ToTable("Fortalezas");
+                    b.ToTable("Fortalezas", (string)null);
                 });
 
             modelBuilder.Entity("PokemonBackend.Models.Habilidades", b =>
@@ -765,7 +765,7 @@ namespace Acceso_BD.Migrations
 
                     b.HasKey("HabilidadId");
 
-                    b.ToTable("Habilidades");
+                    b.ToTable("Habilidades", (string)null);
 
                     b.HasData(
                         new
@@ -826,7 +826,7 @@ namespace Acceso_BD.Migrations
 
                     b.HasIndex("BonusId");
 
-                    b.ToTable("Modificadores");
+                    b.ToTable("Modificadores", (string)null);
 
                     b.HasData(
                         new
@@ -874,7 +874,7 @@ namespace Acceso_BD.Migrations
 
                     b.HasIndex("StatId");
 
-                    b.ToTable("Pokemons");
+                    b.ToTable("Pokemons", (string)null);
 
                     b.HasData(
                         new
@@ -938,7 +938,7 @@ namespace Acceso_BD.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Stats");
+                    b.ToTable("Stats", (string)null);
 
                     b.HasData(
                         new
@@ -964,7 +964,7 @@ namespace Acceso_BD.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tipos");
+                    b.ToTable("Tipos", (string)null);
 
                     b.HasData(
                         new
@@ -1082,7 +1082,7 @@ namespace Acceso_BD.Migrations
 
                     b.HasIndex("DebilidadId");
 
-                    b.ToTable("Bonuses");
+                    b.ToTable("Bonuses", (string)null);
 
                     b.HasData(
                         new
@@ -1133,7 +1133,7 @@ namespace Acceso_BD.Migrations
 
                     b.HasIndex("TipoId");
 
-                    b.ToTable("Tipo_Pokemons");
+                    b.ToTable("Tipo_Pokemons", (string)null);
 
                     b.HasData(
                         new

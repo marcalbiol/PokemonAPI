@@ -9,26 +9,26 @@ using System.Threading.Tasks;
 
 namespace Logica_Negocio
 {
-    public class Entrenador_PokemonBLL
+    public class EntrenadorPokemonBLL
     {
         private Acceso_BD.Entrenador_PokemonDAL _DAL;
         private Mapper _EntrenadorPokemonMapper;
 
 
-        public Entrenador_PokemonBLL()
+        public EntrenadorPokemonBLL()
         {
             _DAL = new Acceso_BD.Entrenador_PokemonDAL();
             var _confiEntrenadorPokemon = new MapperConfiguration(
                 config => config.CreateMap
-                <Entrenadores_Pokemon, Entrenador_PokemonModel>().ReverseMap());
+                <Entrenadores_Pokemon, EntrenadorPokemonModel>().ReverseMap());
             _EntrenadorPokemonMapper = new Mapper(_confiEntrenadorPokemon);
         }
 
-        public void PostEntrenadorPokemon(Entrenador_PokemonModel entrenador_PokemonModel)
+        public void PostEntrenadorPokemon(EntrenadorPokemonModel entrenador_PokemonModel)
         {
 
             Entrenadores_Pokemon entrenadores_PokemonEntity = _EntrenadorPokemonMapper
-                .Map<Entrenador_PokemonModel, Entrenadores_Pokemon>(entrenador_PokemonModel);
+                .Map<EntrenadorPokemonModel, Entrenadores_Pokemon>(entrenador_PokemonModel);
 
             var value = new Random().Next(0, 100);
 
