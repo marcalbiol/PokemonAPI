@@ -12,17 +12,30 @@ namespace Logica_Negocio
     public class EntrenadorPokemonBLL
     {
         private Acceso_BD.Entrenador_PokemonDAL _DAL;
+        private Acceso_BD.EntrenadorDAL _DALent;
         private Mapper _EntrenadorPokemonMapper;
-
 
         public EntrenadorPokemonBLL()
         {
             _DAL = new Acceso_BD.Entrenador_PokemonDAL();
+
             var _confiEntrenadorPokemon = new MapperConfiguration(
                 config => config.CreateMap
                 <Entrenadores_Pokemon, EntrenadorPokemonModel>().ReverseMap());
             _EntrenadorPokemonMapper = new Mapper(_confiEntrenadorPokemon);
         }
+
+        public List<EntrenadorPokemonModel> GetAll()
+        {
+            // mapeo
+            List<Entrenadores_Pokemon> dataFromDb = _DAL.GetAll();
+            List<EntrenadorPokemonModel> entrenadorPokemonModels = _EntrenadorPokemonMapper
+                .Map<List<Entrenadores_Pokemon>, List<EntrenadorPokemonModel>>(dataFromDb);
+
+            return entrenadorPokemonModels;
+        }
+
+
 
         public void PostEntrenadorPokemon(EntrenadorPokemonModel entrenador_PokemonModel)
         {

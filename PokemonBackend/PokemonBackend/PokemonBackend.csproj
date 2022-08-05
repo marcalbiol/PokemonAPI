@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\Entrenadores_PokemonController.cs" />
+    <Compile Remove="Controllers\EntrenadorPokemonModelController.cs" />
+    <Compile Remove="Controllers\EntrenadorsTestController.cs" />
     <Compile Remove="Controllers\Entrenador_PokemonController.cs" />
     <Compile Remove="Controllers\UsuariosController.cs" />
   </ItemGroup>

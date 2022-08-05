@@ -11,6 +11,13 @@ namespace Acceso_BD
     public class Entrenador_PokemonDAL
     {
        
+
+        public List<Entrenadores_Pokemon> GetAll()
+        {
+            var db = new MyDbContext();
+            return db.Entrenadores_Pokemons.ToList();
+        }
+
         public void PostEntrenadorPokemon(Entrenadores_Pokemon entrenador_pokemons)
         {
             var db = new MyDbContext();

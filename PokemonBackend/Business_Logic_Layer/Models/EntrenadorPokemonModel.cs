@@ -10,7 +10,10 @@ namespace Logica_Negocio.Models
 {
     public class EntrenadorPokemonModel
     {
-      public int Id { get; set; }
-      public string Nombre { get; set; }
+        public int Id { get; set; }
+        public int? EntrenadorId { get; set; }
+        public virtual string? Entrenador { get; set; }
+        public int? PokemonId { get; set; }
+        public virtual string? Pokemon { get; set; }
     }
 }

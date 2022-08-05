@@ -25,7 +25,6 @@ namespace Logica_Negocio
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<Entrenador, EntrenadorModel>()
-                    .ForMember(t=> t.EntrenadoresPokemons, opt=>  opt.MapFrom(t=>t.Entrenador_Pokemons))
                    .ReverseMap();
             });
             _EntrenadorMapper = new Mapper(config);   
