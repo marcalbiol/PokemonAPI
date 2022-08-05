@@ -19,47 +19,7 @@ namespace PokemonBackend.Controllers
             _BLL = new Logica_Negocio.EntrenadorBLL();
         }
 
-        [HttpGet]
-        public IQueryable<EntrenadorModel> GetEntrenador()
-        {
-            var Entrenador = from pk in db.Pokemons
-                             join ep in db.Entrenadores_Pokemons
-                             on pk.Id equals ep.PokemonId
-                             join et in db.Entrenadores
-                             on ep.EntrenadorId equals et.Id
-                             join pkx in db.Pokedex
-                             on pk.PokedexId equals pkx.ID
-                             select new EntrenadorModel
-                             {
-                                 Id = pk.Id,
-                                 Pokemon = pkx.Nombre,
-                                 Entrenador = et.Nombre
-                             };
-
-            return Entrenador;
-        }
-
-        [HttpGet("{id}")]
-        public IQueryable<EntrenadorModel> GetEntrenadorById(int id)
-        {
-            var Entrenador = from pk in db.Pokemons
-                             join ep in db.Entrenadores_Pokemons
-                             on pk.Id equals ep.PokemonId
-                             join et in db.Entrenadores
-                             on ep.EntrenadorId equals et.Id
-                             join pkx in db.Pokedex
-                             on pk.PokedexId equals pkx.ID
-                             where et.Id == id
-                             select new EntrenadorModel
-                             {
-                                 Id = pk.Id,
-                                 Pokemon = pkx.Nombre,
-                                 Entrenador = et.Nombre
-                             };
-            return Entrenador;
-
-
-        }
+    
         /*
 
           [HttpPost]

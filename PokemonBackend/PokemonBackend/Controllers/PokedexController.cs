@@ -14,6 +14,7 @@ namespace PokemonBackend.Controllers
     {
 
         public Logica_Negocio.PokedexBLL _BLL;
+        private MyDbContext db = new MyDbContext();
         public PokedexController()
         {
             _BLL = new Logica_Negocio.PokedexBLL();
@@ -35,6 +36,18 @@ namespace PokemonBackend.Controllers
                 return NotFound("Pokemon no encontrado");
             }
             return Ok(pokemon);
+        }
+        [HttpGet("/Tier/{id}")]
+        public IQueryable<PokedexModel> GetPokemonByTier(int id)
+        {
+            var Pokemon = from pkx in db.Pokedex
+                          where pkx.Tier == id
+                          select new PokedexModel
+                          {
+                              ID = pkx.ID,
+                              Nombre = pkx.Nombre
+                          };
+            return Pokemon;
         }
     }
 }

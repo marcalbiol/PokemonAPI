@@ -27,6 +27,7 @@ namespace Data_Acces_Layer.Repository
         public DbSet<Pokemon> Pokemons { get; set; }
         public DbSet<Entrenador> Entrenadores { get; set; }
         public DbSet<Tipos_Pokemons> Tipo_Pokemons { get; set; }
+        public DbSet<Tipos_Habilidades> Tipos_Habilidades{ get; set; }
         public DbSet<Tipo> Tipos { get; set; }
         public DbSet<TipoBonus> Bonuses { get; set; }
         public DbSet<ModificadorTipo> Modificadores { get; set; }
