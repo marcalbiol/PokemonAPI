@@ -41,9 +41,7 @@ namespace PokemonBackend.Controllers
         public void postPokemon([FromBody] PokemonModel pokemonModel)
         {
             // en el controlador llamamos a los metodos de la logica de negocio
-
             _BLL.PostPokemon(pokemonModel);
-
         }
 
         [HttpDelete("{id}")]

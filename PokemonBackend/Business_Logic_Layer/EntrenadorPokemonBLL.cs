@@ -12,7 +12,6 @@ namespace Logica_Negocio
     public class EntrenadorPokemonBLL
     {
         private Acceso_BD.Entrenador_PokemonDAL _DAL;
-        private Acceso_BD.EntrenadorDAL _DALent;
         private Mapper _EntrenadorPokemonMapper;
 
         public EntrenadorPokemonBLL()
@@ -21,42 +20,34 @@ namespace Logica_Negocio
 
             var _confiEntrenadorPokemon = new MapperConfiguration(
                 config => config.CreateMap
-                <Entrenadores_Pokemon, EntrenadorPokemonModel>().ReverseMap());
+                <Entrenadores_Pokemon, PutEntrenadorPokemonModel>().ReverseMap());
             _EntrenadorPokemonMapper = new Mapper(_confiEntrenadorPokemon);
         }
 
-        public List<EntrenadorPokemonModel> GetAll()
-        {
-            // mapeo
-            List<Entrenadores_Pokemon> dataFromDb = _DAL.GetAll();
-            List<EntrenadorPokemonModel> entrenadorPokemonModels = _EntrenadorPokemonMapper
-                .Map<List<Entrenadores_Pokemon>, List<EntrenadorPokemonModel>>(dataFromDb);
-
-            return entrenadorPokemonModels;
-        }
-
-
-
-        public void PostEntrenadorPokemon(EntrenadorPokemonModel entrenador_PokemonModel)
+        public void PostEntrenadorPokemon(PutEntrenadorPokemonModel model)
         {
 
-            Entrenadores_Pokemon entrenadores_PokemonEntity = _EntrenadorPokemonMapper
-                .Map<EntrenadorPokemonModel, Entrenadores_Pokemon>(entrenador_PokemonModel);
+            Entrenadores_Pokemon entrenadorEntity = _EntrenadorPokemonMapper.Map<PutEntrenadorPokemonModel, Entrenadores_Pokemon>(model);
 
+            model.EntrenadorId = entrenadorEntity.EntrenadorId;
+            model.PokemonId = entrenadorEntity.PokemonId;
             var value = new Random().Next(0, 100);
-
             if (value < 10)
             {
-                entrenadores_PokemonEntity.Pokemon.Shiny = true;
+               entrenadorEntity.Shiny = true;
             }
             else
             {
-                entrenadores_PokemonEntity.Pokemon.Shiny = false;
+                entrenadorEntity.Shiny = true;
             }
 
-            _DAL.PostEntrenadorPokemon(entrenadores_PokemonEntity);
+            // CONTROL DE ERRORES, CONTROLAR SI NO EXISTE EL ID Y INTRODUCIR VARIOS POKEMONS CON EL MISMO ID
+
+            _DAL.PostEntrenadorPokemon(entrenadorEntity);
 
         }
+
+      
 
     }
 }

@@ -11,5 +11,6 @@ namespace PokemonBackend.Models
         public virtual Entrenador? Entrenador{ get; set; }
         public int? PokemonId { get; set; }
         public virtual Pokemon? Pokemon{ get; set; }
+        public Boolean? Shiny { get; set; }
     }
 }

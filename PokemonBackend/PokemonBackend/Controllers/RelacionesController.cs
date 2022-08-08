@@ -3,6 +3,8 @@ using Data_Acces_Layer.Repository;
 using Logica_Negocio.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using PokemonBackend.Models;
 
 namespace PokemonBackend.Controllers
 {
@@ -11,9 +13,11 @@ namespace PokemonBackend.Controllers
     public class RelacionesController : ControllerBase
     {
         private MyDbContext db = new MyDbContext();
+        public Logica_Negocio.EntrenadorPokemonBLL _BLL;
 
         public RelacionesController()
         {
+            _BLL = new Logica_Negocio.EntrenadorPokemonBLL();
         }
         [HttpGet("PokemonsTipos")]
         public IQueryable<PokemonModel> GetPokemonTipos()
@@ -48,7 +52,7 @@ namespace PokemonBackend.Controllers
                                   Habilidad_3 = h.Habilidad_3,
                                   Habilidad_4 = h.Habilidad_4,
                               };
-                              return Habilidades;
+            return Habilidades;
         }
         [HttpGet("EntrenadorPokemons")]
         public IQueryable<EntrenadorPokemonModel> GetEntrenador()
@@ -90,5 +94,13 @@ namespace PokemonBackend.Controllers
             return Entrenador;
         }
 
+        [HttpPost("Create")]
+        public void postEntPok([FromBody] PutEntrenadorPokemonModel Model)
+        {
+            // en el controlador llamamos a los metodos de la logica de negocio
+            _BLL.PostEntrenadorPokemon(Model);
+        }
     }
 }
+
+

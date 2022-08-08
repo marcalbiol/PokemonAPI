@@ -4,6 +4,7 @@ using Data_Acces_Layer.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Acceso_BD.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220805103831_AzureSQL")]
+    partial class AzureSQL
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -693,9 +695,6 @@ namespace Acceso_BD.Migrations
                     b.Property<int?>("PokemonId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Shiny")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.HasIndex("EntrenadorId");
@@ -709,22 +708,19 @@ namespace Acceso_BD.Migrations
                         {
                             Id = 1,
                             EntrenadorId = 1,
-                            PokemonId = 5,
-                            Shiny = false
+                            PokemonId = 5
                         },
                         new
                         {
                             Id = 2,
                             EntrenadorId = 2,
-                            PokemonId = 6,
-                            Shiny = false
+                            PokemonId = 6
                         },
                         new
                         {
                             Id = 3,
                             EntrenadorId = 2,
-                            PokemonId = 6,
-                            Shiny = false
+                            PokemonId = 6
                         });
                 });
 

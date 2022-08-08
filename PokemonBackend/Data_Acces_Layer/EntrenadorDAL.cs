@@ -5,11 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Acceso_BD.Repository.Entity;
 namespace Acceso_BD
 {
    public class EntrenadorDAL
     {
+       
 
         public List<Entrenador> GetEntrenadores()
         {
@@ -33,6 +34,19 @@ namespace Acceso_BD
             var db = new MyDbContext();
             db.Add(entrenador);
             db.SaveChanges();
+
+           // AddNuevos();
+            
+
+        }
+
+        public void AddNuevos(int value)
+        {
+            Entrenadores_Pokemon ep = new Entrenadores_Pokemon();
+            if (value != ep.EntrenadorId)
+            {
+                ep.EntrenadorId = value;
+            }
         }
 
         public Entrenador DeleteEntrenadorById(int id)
