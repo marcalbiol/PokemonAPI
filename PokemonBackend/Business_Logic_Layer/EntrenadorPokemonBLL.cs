@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net;
+using Data_Acces_Layer.Repository;
 
 namespace Logica_Negocio
 {
@@ -13,6 +15,8 @@ namespace Logica_Negocio
     {
         private Acceso_BD.Entrenador_PokemonDAL _DAL;
         private Mapper _EntrenadorPokemonMapper;
+        private MyDbContext db = new MyDbContext();
+
 
         public EntrenadorPokemonBLL()
         {
@@ -31,23 +35,20 @@ namespace Logica_Negocio
 
             model.EntrenadorId = entrenadorEntity.EntrenadorId;
             model.PokemonId = entrenadorEntity.PokemonId;
+
+            // hacerlo en un metodo
             var value = new Random().Next(0, 100);
             if (value < 10)
             {
-               entrenadorEntity.Shiny = true;
+                entrenadorEntity.Shiny = true;
             }
             else
             {
-                entrenadorEntity.Shiny = true;
+                entrenadorEntity.Shiny = false;
             }
 
             // CONTROL DE ERRORES, CONTROLAR SI NO EXISTE EL ID Y INTRODUCIR VARIOS POKEMONS CON EL MISMO ID
-
             _DAL.PostEntrenadorPokemon(entrenadorEntity);
-
         }
-
-      
-
     }
 }

@@ -37,6 +37,7 @@ namespace PokemonBackend.Controllers
             }
             return Ok(pokemon);
         }
+
         [HttpGet("/Tier/{id}")]
         public IQueryable<PokedexModel> GetPokemonByTier(int id)
         {
