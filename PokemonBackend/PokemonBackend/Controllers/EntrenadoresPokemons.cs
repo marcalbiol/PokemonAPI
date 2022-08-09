@@ -11,13 +11,13 @@ namespace PokemonBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RelacionesController : ControllerBase
+    public class EntrenadoresPokemons : ControllerBase
     {
         private MyDbContext db = new MyDbContext();
         public Logica_Negocio.EntrenadorPokemonBLL _BLL;
         private Mapper _EntrenadorPokemonMapper;
 
-        public RelacionesController()
+        public EntrenadoresPokemons()
         {
             _BLL = new Logica_Negocio.EntrenadorPokemonBLL();
 
@@ -27,55 +27,10 @@ namespace PokemonBackend.Controllers
             _EntrenadorPokemonMapper = new Mapper(_confiEntrenadorPokemon);
 
         }
-        [HttpGet("PokemonsTipos")]
-        public IQueryable<PokemonModel> GetPokemonTipos()
-        {
-            var Pokemon = from pkx in db.Pokedex
-                          join tpk in db.Tipo_Pokemons
-                          on pkx.ID equals tpk.PokedexId
-                          join t in db.Tipos
-                          on tpk.TipoId equals t.Id
-                          select new PokemonModel
-                          {
-                              Nombre = pkx.Nombre,
-                              Tipo = t.Tipo_pokemon
-                          };
-            return Pokemon;
-        }
+      
 
-        [HttpGet("PokemonsAsignables")]
-        public IQueryable<PokemonModel> GetPokemonAv()
-        {
-            var Pokemon = from p in db.Pokemons
-                          join pkx in db.Pokedex
-                          on p.PokedexId equals pkx.ID
-                          select new PokemonModel
-                          {
-                              Id = pkx.ID,
-                              Nombre = pkx.Nombre
-                          };
-            return Pokemon;
-        }
 
-        [HttpGet("Habilidades")]
-        public IQueryable<HabilidadesModel> GetHabilidadesTipo()
-        {
-            var Habilidades = from t in db.Tipos
-                              join th in db.Tipos_Habilidades
-                              on t.Id equals th.TipoId
-                              join h in db.Habilidades
-                              on th.HabilidadId equals h.HabilidadId
-                              select new HabilidadesModel
-                              {
-                                  Tipo = t.Tipo_pokemon,
-                                  Habilidad_1 = h.Habilidad_1,
-                                  Habilidad_2 = h.Habilidad_2,
-                                  Habilidad_3 = h.Habilidad_3,
-                                  Habilidad_4 = h.Habilidad_4,
-                              };
-            return Habilidades;
-        }
-        [HttpGet("EntrenadorPokemons")]
+        [HttpGet]
         public IQueryable<EntrenadorPokemonModel> GetEntrenador()
         {
             var Entrenador = from pk in db.Pokemons
@@ -96,7 +51,7 @@ namespace PokemonBackend.Controllers
             return Entrenador;
         }
 
-        [HttpGet("EntrenadorPokemons/{id}")]
+        [HttpGet("{id}")]
         public IQueryable<EntrenadorPokemonModel> GetEntrenadorById(int id)
         {
             var Entrenador = from pk in db.Pokemons
@@ -118,15 +73,14 @@ namespace PokemonBackend.Controllers
 
     
 
-        [HttpPost("Crear/EntrenadorPokemons")]
+        [HttpPost]
         public void postEntPok([FromBody] PutEntrenadorPokemonModel Model)
         {
             // en el controlador llamamos a los metodos de la logica de negocio
-            
             _BLL.PostEntrenadorPokemon(Model);
         }
 
-        [HttpPut("Editar/EntrenadorPokemon/{id}")]
+        [HttpPut]
         public async Task<IActionResult> Put(int id, PutEntrenadorPokemonModel model)
         {
             Entrenadores_Pokemon entrenadorEntity = _EntrenadorPokemonMapper.Map<PutEntrenadorPokemonModel, Entrenadores_Pokemon>(model);

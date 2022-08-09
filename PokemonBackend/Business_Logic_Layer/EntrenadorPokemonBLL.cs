@@ -33,22 +33,25 @@ namespace Logica_Negocio
 
             Entrenadores_Pokemon entrenadorEntity = _EntrenadorPokemonMapper.Map<PutEntrenadorPokemonModel, Entrenadores_Pokemon>(model);
 
-            model.EntrenadorId = entrenadorEntity.EntrenadorId;
-            model.PokemonId = entrenadorEntity.PokemonId;
-
-            // hacerlo en un metodo
             var value = new Random().Next(0, 100);
-            if (value < 10)
-            {
-                entrenadorEntity.Shiny = true;
-            }
-            else
-            {
-                entrenadorEntity.Shiny = false;
-            }
+            entrenadorEntity.Shiny = EsShiny(value);
 
             // CONTROL DE ERRORES, CONTROLAR SI NO EXISTE EL ID Y INTRODUCIR VARIOS POKEMONS CON EL MISMO ID
             _DAL.PostEntrenadorPokemon(entrenadorEntity);
         }
+
+
+       public Boolean EsShiny (int value)
+        {
+            if (value < 50)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }

@@ -43,21 +43,5 @@ namespace PokemonBackend.Controllers
             return _BLL.DeleteEntrenadorById(id);
 
         }
-
-        //pokemons asignables  SOLO LOS TIER 1
-        [HttpGet("Pokemons/Tier 1")]
-        public IQueryable<PokedexModel> GetPokemonByTier()
-        {
-            var Pokemon = from pkx in db.Pokedex
-                          where pkx.Tier == 1
-                          select new PokedexModel
-                          {
-                              ID = pkx.ID,
-                              Nombre = pkx.Nombre
-                          };
-            return Pokemon;
-        }
-
-
     }
 }
