@@ -37,9 +37,22 @@ namespace PokemonBackend.Controllers
                           on tpk.TipoId equals t.Id
                           select new PokemonModel
                           {
-                              Id = t.Id, // id del tipo, cambiar
                               Nombre = pkx.Nombre,
                               Tipo = t.Tipo_pokemon
+                          };
+            return Pokemon;
+        }
+
+        [HttpGet("PokemonsAsignables")]
+        public IQueryable<PokemonModel> GetPokemonAv()
+        {
+            var Pokemon = from p in db.Pokemons
+                          join pkx in db.Pokedex
+                          on p.PokedexId equals pkx.ID
+                          select new PokemonModel
+                          {
+                              Id = pkx.ID,
+                              Nombre = pkx.Nombre
                           };
             return Pokemon;
         }
