@@ -12,17 +12,17 @@ namespace Acceso_BD
     {
        
 
-        public List<Entrenador> GetEntrenadores()
+        public  List<Entrenador> GetEntrenadores()
         {
             var db = new MyDbContext();
             return db.Entrenadores.ToList();
         }
 
 
-        public Entrenador GetEntrenadorById(int id)
+        public  Entrenador GetEntrenadorById(int id)
         {
             var db = new MyDbContext();
-            Entrenador entrenador = new Entrenador();
+            Entrenador entrenador = new();
 
             entrenador = db.Entrenadores.FirstOrDefault(x => x.Id == id);
 
@@ -34,10 +34,6 @@ namespace Acceso_BD
             var db = new MyDbContext();
             db.Add(entrenador);
             db.SaveChanges();
-
-           // AddNuevos();
-            
-
         }
 
         public void AddNuevos(int value)
@@ -53,10 +49,8 @@ namespace Acceso_BD
         {
             var db = new MyDbContext();
             Entrenador entrenador = new Entrenador();
-
             // comprobamos si el id es el mismo
             entrenador = db.Entrenadores.FirstOrDefault(x => x.Id == id);
-
             return entrenador;
         }
     }

@@ -1,0 +1,6 @@
+
+{csharpsquid:S101"_Rename class 'EntrenadorBLL' to match pascal case naming rules, consider using 'EntrenadorBll'.(©‹Ê­
+4csharpsquid:S2933"Make '_DAL' 'readonly'.(‹‹®Ñ
+Fcsharpsquid:S2933"$Make '_EntrenadorMapper' 'readonly'.(åì‡»øÿÿÿÿ
+Vcsharpsquid:S112J"5'System.Exception' should not be thrown by user code.(ŽÀ´Åÿÿÿÿÿ
+:csharpsquid:S1253"Remove this commented out code.(Û¸­e

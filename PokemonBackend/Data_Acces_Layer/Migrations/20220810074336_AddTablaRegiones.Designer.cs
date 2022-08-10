@@ -4,6 +4,7 @@ using Data_Acces_Layer.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Acceso_BD.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220810074336_AddTablaRegiones")]
+    partial class AddTablaRegiones
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,9 +47,6 @@ namespace Acceso_BD.Migrations
                     b.Property<string>("Peso")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("RegionId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("StatId")
                         .HasColumnType("int");
 
@@ -56,8 +55,6 @@ namespace Acceso_BD.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("RegionId");
 
                     b.HasIndex("StatId");
 
@@ -69,7 +66,6 @@ namespace Acceso_BD.Migrations
                             ID = 1,
                             Basico = true,
                             Nombre = "Bulbasaur",
-                            RegionId = 1,
                             Tier = 1
                         },
                         new
@@ -77,7 +73,6 @@ namespace Acceso_BD.Migrations
                             ID = 2,
                             Basico = false,
                             Nombre = "Ivysaur",
-                            RegionId = 1,
                             Tier = 2
                         },
                         new
@@ -85,7 +80,6 @@ namespace Acceso_BD.Migrations
                             ID = 3,
                             Basico = false,
                             Nombre = "Venasaur",
-                            RegionId = 2,
                             Tier = 3
                         },
                         new
@@ -585,13 +579,14 @@ namespace Acceso_BD.Migrations
 
             modelBuilder.Entity("Acceso_BD.Repository.Entity.Region", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Nombre")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -1195,15 +1190,9 @@ namespace Acceso_BD.Migrations
 
             modelBuilder.Entity("Acceso_BD.Repository.Entity.Pokedex", b =>
                 {
-                    b.HasOne("Acceso_BD.Repository.Entity.Region", "Region")
-                        .WithMany("Pokedex")
-                        .HasForeignKey("RegionId");
-
                     b.HasOne("PokemonBackend.Models.Stat", null)
                         .WithMany("Pokedex")
                         .HasForeignKey("StatId");
-
-                    b.Navigation("Region");
                 });
 
             modelBuilder.Entity("Acceso_BD.Repository.Entity.Tipos_Habilidades", b =>
@@ -1332,11 +1321,6 @@ namespace Acceso_BD.Migrations
                     b.Navigation("Pokemons");
 
                     b.Navigation("Tipos");
-                });
-
-            modelBuilder.Entity("Acceso_BD.Repository.Entity.Region", b =>
-                {
-                    b.Navigation("Pokedex");
                 });
 
             modelBuilder.Entity("PokemonBackend.Models.Entrenador", b =>

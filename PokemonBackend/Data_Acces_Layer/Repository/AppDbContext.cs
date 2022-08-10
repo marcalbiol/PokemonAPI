@@ -34,6 +34,7 @@ namespace Data_Acces_Layer.Repository
         public DbSet<Entrenadores_Pokemon> Entrenadores_Pokemons { get; set; }
         public DbSet<Stat> Stats { get; set; }
         public DbSet<Habilidades> Habilidades { get; set; }
+        public DbSet<Region> Regiones { get; set; }
 
 
 
@@ -52,21 +53,19 @@ namespace Data_Acces_Layer.Repository
                 .HasForeignKey(s => s.StatId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            /*
-
             modelbuilder.Entity<Pokedex>()
-                .HasOne(s => s.Stat)
-                .WithMany(p => p.Pokedex)
-                .HasForeignKey(s=> s.StatId)
-                .OnDelete(DeleteBehavior.Cascade);
-           
-            */
+                 .HasOne(r => r.Region)
+                 .WithMany(r => r.Pokedex)
+                 .HasForeignKey(r => r.RegionId);
+
+
+
+            // Pokemon Pokedex
+            modelbuilder.Entity<Pokedex>()
+                .HasMany(p => p.Pokemons)
+                .WithOne(p => p.Pokedex);
 
             // OneToOne Tipo Habilidades
-
-            //TODO
-           
-
             modelbuilder.Entity<Tipos_Habilidades>()
                 .HasKey(th => new { th.TipoId, th.HabilidadId });
 
@@ -79,8 +78,11 @@ namespace Data_Acces_Layer.Repository
                 .HasOne(t => t.Habilidades)
                 .WithMany(h => h.habilidades_tipos)
                 .HasForeignKey(t => t.HabilidadId);
+
            
            
+           
+
             // ManyToMany Pokemon Entrenador
 
             // ForeignKey
@@ -98,13 +100,6 @@ namespace Data_Acces_Layer.Repository
               .HasOne(p => p.Pokemon)
               .WithMany(p => p.Entrenador_Pokemons)
               .HasForeignKey(e => e.PokemonId);
-          
-
-          
-            // Pokemon Pokedex
-            modelbuilder.Entity<Pokedex>()
-                .HasMany(p => p.Pokemons)
-                .WithOne(p => p.Pokedex);
 
 
             // ManyToMany Pokedex Tipos
@@ -128,11 +123,8 @@ namespace Data_Acces_Layer.Repository
 
             // Relacion Tipo y Bonus
 
-        //   modelbuilder.Entity<Tipo>(e => e.HasIndex(t => t.Tipo_pokemon).IsUnique());
-       
             modelbuilder.Entity<TipoBonus>().HasAlternateKey(x => new { x.EficazId, x.DebilidadId, x.IdTipo });
           
-
             modelbuilder.Entity<TipoBonus>()
             .HasOne(tp => tp.BonusDeb)
             .WithMany(tp => tp.Bonus)
@@ -190,13 +182,20 @@ namespace Data_Acces_Layer.Repository
             new ModificadorTipo { Id = 1, IdTipo = 1, Modificador = Modificador.Debilidad, TipoBonusId = 2 },
             new ModificadorTipo { Id = 2, IdTipo = 1, Modificador = Modificador.Fortaleza, TipoBonusId = 3 }
             );
-            
-           var url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
+
+            // Regiones
+            modelbuilder.Entity<Region>().HasData(
+                new Region { Id = 1, Nombre = "Kanto" },
+                new Region { Id = 2, Nombre = "Johto" },
+                new Region { Id = 3, Nombre = "Hoenn" }
+                );
+    
+            var url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
 
             modelbuilder.Entity<Pokedex>().HasData(
-              new Pokedex { ID = 1, Nombre = "Bulbasaur", Tier = 1, Basico = true},
-              new Pokedex { ID = 2, Nombre = "Ivysaur", Tier = 2, Basico = false },
-              new Pokedex { ID = 3, Nombre = "Venasaur", Tier = 3, Basico = false },
+              new Pokedex { ID = 1, Nombre = "Bulbasaur", Tier = 1, Basico = true, RegionId = 1},
+              new Pokedex { ID = 2, Nombre = "Ivysaur", Tier = 2, Basico = false, RegionId = 1 },
+              new Pokedex { ID = 3, Nombre = "Venasaur", Tier = 3, Basico = false, RegionId = 2 },
               new Pokedex { ID = 4, Nombre = "Charmander", Tier = 1, Basico = true },
               new Pokedex { ID = 5, Nombre = "Charmeleon", Tier = 2, Basico = false },
               new Pokedex { ID = 6, Nombre = "Charizard ", Tier = 3, Basico = false },
@@ -296,16 +295,14 @@ namespace Data_Acces_Layer.Repository
               new Pokedex { ID = 100, Nombre = "Voltorb" }
               );
            
-
             modelbuilder.Entity<Pokemon>().HasData(
-                new Pokemon {  Id = 1, PokedexId = 1, Nombre = "test"},
+                new Pokemon {  Id = 1, PokedexId = 1},
                 new Pokemon {  Id = 2, PokedexId = 4 },
                 new Pokemon {  Id = 3, PokedexId = 2 },
                 new Pokemon {  Id = 4, PokedexId = 5 },
                 new Pokemon {  Id = 5, PokedexId = 100 },
                 new Pokemon {  Id = 6, PokedexId = 25 }
                 );
-           
            
             modelbuilder.Entity<Stat>().HasData(
                new Stat { Id = 1, Nivel = 20, Ataque = 15, Defensa = 10, Vida = 40 }
@@ -326,14 +323,13 @@ namespace Data_Acces_Layer.Repository
             
 
             // ASIGNACION DE CADA ENTRENADOR CON SU POKEMONS
-            // PokemonId está relacionado con el Id y no con el PokedexId
+
+            // ****************PokemonId está relacionado con el Id y no con el PokedexId******** //
             modelbuilder.Entity<Entrenadores_Pokemon>().HasData(
                 new Entrenadores_Pokemon {Id = 1,  EntrenadorId = 1, PokemonId = 5},
                 new Entrenadores_Pokemon {Id = 2,  EntrenadorId = 2, PokemonId = 6},
                 new Entrenadores_Pokemon {Id = 3,  EntrenadorId = 2, PokemonId = 6}
                 );
-            
-
             
             // ASGINACION DE CADA POKEMON de la pokedex A SU TIPO
             modelbuilder.Entity<Tipos_Pokemons>().HasData(
@@ -359,15 +355,12 @@ namespace Data_Acces_Layer.Repository
             optionsBuilder
                 .EnableSensitiveDataLogging()
                 .UseLazyLoadingProxies();
-
-
             if (!optionsBuilder.IsConfigured)
        {
         optionsBuilder.UseSqlServer(connect, b => b.MigrationsAssembly("Acceso_BD"));
        }
             
         }
-
     }
     /* PARA ACTUALIZAR LA TABLA. ADD-MIGRATION  (FECHA QUE SE EJECUTA). DESPUES UPDATE-DATABASE */
 }

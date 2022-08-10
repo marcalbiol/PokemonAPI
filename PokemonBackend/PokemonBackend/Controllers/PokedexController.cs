@@ -51,6 +51,25 @@ namespace PokemonBackend.Controllers
             return Pokemon;
         }
 
+
+
+        [HttpGet("Region/{id}")]
+        public IQueryable<PokedexModel> GetPokemonByRegion(int id)
+        {
+            var Pokemon = from pkx in db.Pokedex
+                          join r in db.Regiones
+                          on pkx.RegionId equals r.Id
+                          where pkx.RegionId == id
+                          select new PokedexModel
+                          {
+                              ID = pkx.ID,
+                              Nombre = pkx.Nombre,
+                              Region = r.Nombre
+                              
+                          };
+            return Pokemon;
+        }
+
         [HttpGet("PokemonsAsignables")]
         public IQueryable<PokemonModel> GetPokemonAv()
         {

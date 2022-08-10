@@ -13,8 +13,6 @@ namespace Business_Logic_Layer.Models
         // aqui se puede modificar, no se sobreescribe cuando se cambia
         public int? Id { get; set; }
         public string? Nombre { get; set; }
-      //  public Boolean? Shiny { get; set; }
-        public string Tipo { get; set; }
-       // public virtual List<EntrenadorPokemonModel>? Entrenador { get; set; }
+        public string? Tipo { get; set; }
     }
 }

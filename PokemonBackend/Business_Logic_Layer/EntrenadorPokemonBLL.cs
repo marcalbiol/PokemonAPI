@@ -15,7 +15,6 @@ namespace Logica_Negocio
     {
         private Acceso_BD.Entrenador_PokemonDAL _DAL;
         private Mapper _EntrenadorPokemonMapper;
-        private MyDbContext db = new MyDbContext();
 
 
         public EntrenadorPokemonBLL()
@@ -41,7 +40,7 @@ namespace Logica_Negocio
         }
 
 
-       public Boolean EsShiny (int value)
+       public static Boolean EsShiny (int value)
         {
             if (value < 50)
             {
