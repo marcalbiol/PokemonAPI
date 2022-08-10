@@ -25,6 +25,8 @@ namespace Acceso_BD.Repository.Entity
         public virtual ICollection<Tipos_Pokemons>? Tipos { get; set; }
         public int? RegionId { get; set; }
         public virtual Region? Region { get; set; }
+        public int? ZonaId { get; set; }
+        public virtual Zona? Zona { get; set; }
 
     }
 }

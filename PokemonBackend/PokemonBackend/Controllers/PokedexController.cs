@@ -23,6 +23,7 @@ namespace PokemonBackend.Controllers
         [HttpGet]
         public List<PokedexModel> GetPokedex()
         {
+            // mostrar region, usando linq?
             return _BLL.GetPokedex();
         }
 
@@ -51,8 +52,6 @@ namespace PokemonBackend.Controllers
             return Pokemon;
         }
 
-
-
         [HttpGet("Region/{id}")]
         public IQueryable<PokedexModel> GetPokemonByRegion(int id)
         {
@@ -66,6 +65,20 @@ namespace PokemonBackend.Controllers
                               Nombre = pkx.Nombre,
                               Region = r.Nombre
                               
+                          };
+            return Pokemon;
+        }
+        [HttpGet("Zona/{id}")]
+        public IQueryable<PokedexModel> GetPokemonByZona(int id)
+        {
+            var Pokemon = from pkx in db.Pokedex
+                          join r in db.Zonas
+                          on pkx.ZonaId equals r.Id
+                          where pkx.ZonaId == id
+                          select new PokedexModel
+                          {
+                              ID = pkx.ID,
+                              Nombre = pkx.Nombre
                           };
             return Pokemon;
         }
@@ -94,6 +107,7 @@ namespace PokemonBackend.Controllers
                       on tpk.TipoId equals t.Id
                       select new PokemonModel
                       {
+                          Id = pkx.ID,
                           Nombre = pkx.Nombre,
                           Tipo = t.Tipo_pokemon
                       };
