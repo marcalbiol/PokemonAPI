@@ -15,7 +15,8 @@ var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
 // Add services to the container.
-var connect = @"Server=LOCALHOST;Database=db_pokemon_backend;Trusted_Connection=True";
+var connect = @"Data Source=pokemonbackend.database.windows.net;Initial Catalog=db_pokemon_backend_Wizard;User ID=admin1;Password=Pokemon1;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
 builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlServer(connect));
 
 // validacion del token, 
