@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Data_Acces_Layer.Repository;
 using PokemonBackend.Models;
 using Logica_Negocio.Models;
+using Acceso_BD.Repository.GenericRepository;
 
 namespace PokemonBackend.Controllers
 {
@@ -17,6 +18,7 @@ namespace PokemonBackend.Controllers
     {
         private MyDbContext db = new MyDbContext();
         public Logica_Negocio.EntrenadorBLL _BLL;
+
 
         public EntrenadorController()
         {
@@ -31,10 +33,16 @@ namespace PokemonBackend.Controllers
         }
 
         [HttpPost]
-        public void postPokemon([FromBody] EntrenadorModel entrenadorModel)
+        public void PostEntrenador([FromBody] EntrenadorModel entrenadorModel)
         {
             // en el controlador llamamos a los metodos de la logica de negocio
             _BLL.PostEntrenador(entrenadorModel);
+        }
+
+        [HttpPut]
+        public void PutEntrenador(int id, EntrenadorModel entrenadorModel)
+        {
+            _BLL.PutEntrenador(id, entrenadorModel);
         }
 
         [HttpDelete("{id}")]

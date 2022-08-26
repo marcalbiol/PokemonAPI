@@ -71,8 +71,6 @@ namespace PokemonBackend.Controllers
             return Entrenador;
         }
 
-    
-
         [HttpPost]
         public void postEntPok([FromBody] PutEntrenadorPokemonModel Model)
         {
@@ -80,6 +78,13 @@ namespace PokemonBackend.Controllers
             _BLL.PostEntrenadorPokemon(Model);
         }
 
+        [HttpPut]
+        public void PutEntrenadorPokemon(int id, PutEntrenadorPokemonModel model)
+        {
+            _BLL.PutEntrenador(id, model);
+        }
+
+        /*
         [HttpPut]
         public async Task<IActionResult> Put(int id, PutEntrenadorPokemonModel model)
         {
@@ -95,6 +100,7 @@ namespace PokemonBackend.Controllers
 
             return NoContent();
         }
+        */
 
     }
 }

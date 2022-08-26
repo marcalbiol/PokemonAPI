@@ -1,4 +1,5 @@
 ﻿using Acceso_BD.Repository.Entity;
+using Acceso_BD.Repository.GenericRepository;
 using AutoMapper;
 using Logica_Negocio.Models;
 using System;
@@ -11,6 +12,10 @@ namespace Logica_Negocio
 {
     public class PokedexBLL
     {
+        private IGenericRepository<Pokedex> repository = null;
+        private IGenericReadOnlyRepository<Pokedex> repositoryRO = null;
+
+
         private Acceso_BD.PokedexDAL _DAL;
         // transferir la entidad de pokemon al modelo
         private Mapper _PokedexMapper;
@@ -18,6 +23,7 @@ namespace Logica_Negocio
 
         public PokedexBLL()
         {
+            this.repository = new GenericRepository<Pokedex>();
             _DAL = new Acceso_BD.PokedexDAL();
             var _configPokemon = new MapperConfiguration(config => config.CreateMap<Pokedex, PokedexModel>().ReverseMap());
 
@@ -25,10 +31,15 @@ namespace Logica_Negocio
 
         }
 
+        public PokedexBLL(IGenericRepository<Pokedex> repository)
+        {
+            this.repository = repository;
+        }
+
         public List<PokedexModel> GetPokedex()
         {
 
-            List<Pokedex> pokemonFromDB = _DAL.GetPokedex();
+            List<Pokedex> pokemonFromDB = repositoryRO.GetAll();
             List<PokedexModel> pokedexModel = _PokedexMapper.Map<List<Pokedex>, List<PokedexModel>>(pokemonFromDB);
 
             return pokedexModel;

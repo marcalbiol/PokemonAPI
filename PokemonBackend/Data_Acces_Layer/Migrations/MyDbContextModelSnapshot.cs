@@ -1012,6 +1012,11 @@ namespace Acceso_BD.Migrations
                         {
                             Id = 4,
                             Nombre = "Nicol"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Nombre = "Jose"
                         });
                 });
 

@@ -8,20 +8,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Acceso_BD.Repository.GenericRepository;
 
 namespace Logica_Negocio
 {
     public class EntrenadorBLL
     {
+        private IGenericRepository<Entrenador> repository = null;
+        private IGenericReadOnlyRepository<Entrenador> repositoryRO = null;
         private Acceso_BD.EntrenadorDAL _DAL;
-
         private Mapper _EntrenadorMapper;
 
         // constructor
         public EntrenadorBLL()
         {
-            _DAL = new Acceso_BD.EntrenadorDAL();
+            this.repository = new GenericRepository<Entrenador>();
 
+            _DAL = new Acceso_BD.EntrenadorDAL();
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<Entrenador, EntrenadorModel>()
@@ -30,10 +33,16 @@ namespace Logica_Negocio
             _EntrenadorMapper = new Mapper(config);   
         }
 
+        public EntrenadorBLL(IGenericRepository<Entrenador> repository,
+            IGenericReadOnlyRepository<Entrenador> repositoryRO)
+        {
+            this.repository = repository;
+            this.repositoryRO = repositoryRO;
+        }
+
         public List<EntrenadorModel> GetEntrenador()
         {
-
-            List<Entrenador> entrenadorFromDB = _DAL.GetEntrenadores();
+            List<Entrenador> entrenadorFromDB = repositoryRO.GetAll();
             List<EntrenadorModel> entrenadorModel= _EntrenadorMapper.Map<List<Entrenador>, List<EntrenadorModel>>(entrenadorFromDB);
 
             return entrenadorModel;
@@ -42,17 +51,10 @@ namespace Logica_Negocio
 
         public EntrenadorModel GetEntrenadorById(int id)
         {
-            var entrenadorEntity = _DAL.GetEntrenadorById(id);
+            var entrenadorEntity = repositoryRO.GetById(id);
 
             EntrenadorModel entrenadorModel= _EntrenadorMapper.Map<Entrenador, EntrenadorModel>(entrenadorEntity);
 
-            // logica tambien puede estar en el controlador con el ActionResult
-            /*
-            if (pokemonEntity == null)
-            {
-                throw new Exception("ID de Pokemon no encontrado");
-            }
-            */
             return entrenadorModel;
 
         }
@@ -60,14 +62,23 @@ namespace Logica_Negocio
         public void PostEntrenador(EntrenadorModel entrenadorModel)
         {
             Entrenador entrenadorEntity = _EntrenadorMapper.Map<EntrenadorModel, Entrenador>(entrenadorModel);
-
-            _DAL.PostEntrenador(entrenadorEntity);
+            repository.Insert(entrenadorEntity);
+        }
+        
+        public void PutEntrenador(int id, EntrenadorModel entrenadorModel)
+        {
+            if(entrenadorModel.Id == id)
+            {
+                Entrenador entrenadorEntity = _EntrenadorMapper.Map<EntrenadorModel, Entrenador>(entrenadorModel);
+                repository.Update(entrenadorEntity);
+            } // manejo de errores si el id no coincide
+              
         }
 
         public Entrenador DeleteEntrenadorById(int id)
         {
             var db = new MyDbContext();
-            var data = _DAL.DeleteEntrenadorById(id);
+            var data = repositoryRO.GetById(id);
 
             if (data == null)
             {

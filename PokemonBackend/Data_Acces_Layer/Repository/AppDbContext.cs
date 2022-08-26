@@ -374,7 +374,8 @@ namespace Data_Acces_Layer.Repository
                 new Entrenador { Id = 1, Nombre = "Marc" },
                 new Entrenador { Id = 2, Nombre = "Dani" },
                 new Entrenador { Id = 3, Nombre = "Ernest" },
-                new Entrenador { Id = 4, Nombre = "Nicol" }
+                new Entrenador { Id = 4, Nombre = "Nicol" },
+                new Entrenador { Id = 5, Nombre = "Jose" }
                );
             
 
@@ -457,9 +458,8 @@ namespace Data_Acces_Layer.Repository
 
         // CONEXION A LA BASE DE DATOS, YA NO SE HACE EN EL PROGRAM.CS
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        { 
-           //  var connect = @"Server=tcp:pokemonbackend.database.windows.net,1433;Initial Catalog=db_pokemon_backend_Wizard;User ID=admin1;Password=Pokemonbd1;Trusted_Connection=False;";
-             var connect = @"Data Source=pokemonbackend.database.windows.net;Initial Catalog=db_pokemon_backend_Wizard;User ID=admin1;Password=Pokemon1;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        {
+            var connect = @"Server=LOCALHOST;Database=db_poke_backend;Trusted_Connection=True";
             optionsBuilder
                 .EnableSensitiveDataLogging()
                 .UseLazyLoadingProxies();

@@ -10,7 +10,7 @@ namespace Acceso_BD
 {
     public class Entrenador_PokemonDAL
     {
-        Entrenadores_Pokemon ep= new Entrenadores_Pokemon();
+        Entrenadores_Pokemon ep = new Entrenadores_Pokemon();
 
         public List<Entrenadores_Pokemon> GetAll()
         {
