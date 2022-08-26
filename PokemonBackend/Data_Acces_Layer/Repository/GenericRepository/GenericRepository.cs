@@ -15,6 +15,7 @@ namespace Acceso_BD.Repository.GenericRepository
 
         public GenericRepository()
         {
+
             this.context = new MyDbContext();
             table = context.Set<T>();
         }
@@ -23,6 +24,16 @@ namespace Acceso_BD.Repository.GenericRepository
         {
             this.context = context;
             this.table = table;
+        }
+
+        public List<T> GetAll()
+        {
+            return table.ToList();
+        }
+
+        public T GetById(object id)
+        {
+            return table.Find(id);
         }
 
         public void Delete(object id)

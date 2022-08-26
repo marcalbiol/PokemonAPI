@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Acceso_BD.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20220818093228_Estable")]
+    [Migration("20220826113026_Estable")]
     partial class Estable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

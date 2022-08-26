@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Acceso_BD.Repository.GenericRepository
 {
-    public class GenericReadOnlyRepository<T> : GenericRepository<T> where T : class
+    public class GenericReadOnlyRepository<T> : IGenericReadOnlyRepository<T> where T : class
     {
         private readonly MyDbContext context;
         private readonly DbSet<T> table = null;
@@ -24,14 +24,9 @@ namespace Acceso_BD.Repository.GenericRepository
             this.table = table;
         }
 
-        public List<T> GetAll()
+        public void Dispose()
         {
-            return table.ToList();
-        }
-
-        public T GetById(object id)
-        {
-            return table.Find(id);
+            throw new NotImplementedException();
         }
 
     }

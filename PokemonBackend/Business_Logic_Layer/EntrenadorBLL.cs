@@ -15,7 +15,7 @@ namespace Logica_Negocio
     public class EntrenadorBLL
     {
         private IGenericRepository<Entrenador> repository = null;
-        private IGenericReadOnlyRepository<Entrenador> repositoryRO = null;
+        // private IGenericReadOnlyRepository<Entrenador> repositoryRO = null;
         private Acceso_BD.EntrenadorDAL _DAL;
         private Mapper _EntrenadorMapper;
 
@@ -37,12 +37,11 @@ namespace Logica_Negocio
             IGenericReadOnlyRepository<Entrenador> repositoryRO)
         {
             this.repository = repository;
-            this.repositoryRO = repositoryRO;
         }
 
         public List<EntrenadorModel> GetEntrenador()
         {
-            List<Entrenador> entrenadorFromDB = repositoryRO.GetAll();
+            List<Entrenador> entrenadorFromDB = repository.GetAll();
             List<EntrenadorModel> entrenadorModel= _EntrenadorMapper.Map<List<Entrenador>, List<EntrenadorModel>>(entrenadorFromDB);
 
             return entrenadorModel;
@@ -51,7 +50,7 @@ namespace Logica_Negocio
 
         public EntrenadorModel GetEntrenadorById(int id)
         {
-            var entrenadorEntity = repositoryRO.GetById(id);
+            var entrenadorEntity = repository.GetById(id);
 
             EntrenadorModel entrenadorModel= _EntrenadorMapper.Map<Entrenador, EntrenadorModel>(entrenadorEntity);
 
@@ -78,7 +77,7 @@ namespace Logica_Negocio
         public Entrenador DeleteEntrenadorById(int id)
         {
             var db = new MyDbContext();
-            var data = repositoryRO.GetById(id);
+            var data = repository.GetById(id);
 
             if (data == null)
             {

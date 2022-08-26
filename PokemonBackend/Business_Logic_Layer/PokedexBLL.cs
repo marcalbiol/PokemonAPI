@@ -39,7 +39,7 @@ namespace Logica_Negocio
         public List<PokedexModel> GetPokedex()
         {
 
-            List<Pokedex> pokemonFromDB = repositoryRO.GetAll();
+            List<Pokedex> pokemonFromDB = repository.GetAll();
             List<PokedexModel> pokedexModel = _PokedexMapper.Map<List<Pokedex>, List<PokedexModel>>(pokemonFromDB);
 
             return pokedexModel;
