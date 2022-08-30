@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Acceso_BD.Repository.GenericRepository;
+using Acceso_BD.Repository.Entity;
 
 namespace Logica_Negocio
 {
@@ -30,7 +31,7 @@ namespace Logica_Negocio
                 cfg.CreateMap<Entrenador, EntrenadorModel>()
                    .ReverseMap();
             });
-            _EntrenadorMapper = new Mapper(config);   
+            _EntrenadorMapper = new Mapper(config);
         }
 
         public EntrenadorBLL(IGenericRepository<Entrenador> repository,
@@ -39,12 +40,17 @@ namespace Logica_Negocio
             this.repository = repository;
         }
 
-        public List<EntrenadorModel> GetEntrenador()
-        {
-            List<Entrenador> entrenadorFromDB = repository.GetAll();
-            List<EntrenadorModel> entrenadorModel= _EntrenadorMapper.Map<List<Entrenador>, List<EntrenadorModel>>(entrenadorFromDB);
 
-            return entrenadorModel;
+        public List<EntrenadorModel> GetEntrenador(Pagination pagination)
+        {
+            List<Entrenador> entrenadorFromDB = repository.GetAll(pagination);
+            List<EntrenadorModel> entrenadorModel = _EntrenadorMapper.Map<List<Entrenador>, List<EntrenadorModel>>(entrenadorFromDB);
+
+            return entrenadorModel
+                 .OrderBy(on => on.Id)
+                .Skip((pagination.PageNumber - 1) * pagination.PageSize)
+                .Take(pagination.PageSize)
+                .ToList();
         }
 
 
@@ -52,7 +58,7 @@ namespace Logica_Negocio
         {
             var entrenadorEntity = repository.GetById(id);
 
-            EntrenadorModel entrenadorModel= _EntrenadorMapper.Map<Entrenador, EntrenadorModel>(entrenadorEntity);
+            EntrenadorModel entrenadorModel = _EntrenadorMapper.Map<Entrenador, EntrenadorModel>(entrenadorEntity);
 
             return entrenadorModel;
 
@@ -63,15 +69,15 @@ namespace Logica_Negocio
             Entrenador entrenadorEntity = _EntrenadorMapper.Map<EntrenadorModel, Entrenador>(entrenadorModel);
             repository.Insert(entrenadorEntity);
         }
-        
+
         public void PutEntrenador(int id, EntrenadorModel entrenadorModel)
         {
-            if(entrenadorModel.Id == id)
+            if (entrenadorModel.Id == id)
             {
                 Entrenador entrenadorEntity = _EntrenadorMapper.Map<EntrenadorModel, Entrenador>(entrenadorModel);
                 repository.Update(entrenadorEntity);
             } // manejo de errores si el id no coincide
-              
+
         }
 
         public Entrenador DeleteEntrenadorById(int id)

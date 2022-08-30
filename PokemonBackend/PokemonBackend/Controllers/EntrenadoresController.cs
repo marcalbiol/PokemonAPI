@@ -9,6 +9,7 @@ using Data_Acces_Layer.Repository;
 using PokemonBackend.Models;
 using Logica_Negocio.Models;
 using Acceso_BD.Repository.GenericRepository;
+using Acceso_BD.Repository.Entity;
 
 namespace PokemonBackend.Controllers
 {
@@ -26,9 +27,9 @@ namespace PokemonBackend.Controllers
         }
 
         [HttpGet]
-        public List<EntrenadorModel> GetEntrenadors()
+        public List<EntrenadorModel> GetEntrenadors(Pagination pagination)
         {
-            return _BLL.GetEntrenador();
+            return _BLL.GetEntrenador(pagination);
 
         }
 

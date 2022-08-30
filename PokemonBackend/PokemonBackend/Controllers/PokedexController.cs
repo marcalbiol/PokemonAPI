@@ -4,6 +4,7 @@ using PokemonBackend.Models;
 using Business_Logic_Layer.Models;
 using Data_Acces_Layer.Repository;
 using Logica_Negocio.Models;
+using Acceso_BD.Repository.Entity;
 
 namespace PokemonBackend.Controllers
 {
@@ -18,13 +19,13 @@ namespace PokemonBackend.Controllers
         public PokedexController()
         {
             _BLL = new Logica_Negocio.PokedexBLL();
-        }   
+        }
 
         [HttpGet]
-        public List<PokedexModel> GetPokedex()
+        public List<PokedexModel> GetPokedex([FromQuery] Pagination pagination)
         {
             // mostrar region, usando linq?
-            return _BLL.GetPokedex();
+            return _BLL.GetPokedex(pagination);
         }
 
         [HttpGet("{id}")]
@@ -64,7 +65,7 @@ namespace PokemonBackend.Controllers
                               ID = pkx.ID,
                               Nombre = pkx.Nombre,
                               Region = r.Nombre
-                              
+
                           };
             return Pokemon;
         }
@@ -96,41 +97,41 @@ namespace PokemonBackend.Controllers
                           };
             return Pokemon;
         }
-   
-    [HttpGet("PokemonsTipos")]
-    public IQueryable<PokemonModel> GetPokemonTipos()
-    {
-        var Pokemon = from pkx in db.Pokedex
-                      join tpk in db.Tipo_Pokemons
-                      on pkx.ID equals tpk.PokedexId
-                      join t in db.Tipos
-                      on tpk.TipoId equals t.Id
-                      select new PokemonModel
-                      {
-                          Id = pkx.ID,
-                          Nombre = pkx.Nombre,
-                          Tipo = t.Tipo_pokemon
-                      };
-        return Pokemon;
-    }
 
-    [HttpGet("Habilidades")]
-    public IQueryable<HabilidadesModel> GetHabilidadesTipo()
-    {
-        var Habilidades = from t in db.Tipos
-                          join th in db.Tipos_Habilidades
-                          on t.Id equals th.TipoId
-                          join h in db.Habilidades
-                          on th.HabilidadId equals h.HabilidadId
-                          select new HabilidadesModel
+        [HttpGet("PokemonsTipos")]
+        public IQueryable<PokemonModel> GetPokemonTipos()
+        {
+            var Pokemon = from pkx in db.Pokedex
+                          join tpk in db.Tipo_Pokemons
+                          on pkx.ID equals tpk.PokedexId
+                          join t in db.Tipos
+                          on tpk.TipoId equals t.Id
+                          select new PokemonModel
                           {
-                              Tipo = t.Tipo_pokemon,
-                              Habilidad_1 = h.Habilidad_1,
-                              Habilidad_2 = h.Habilidad_2,
-                              Habilidad_3 = h.Habilidad_3,
-                              Habilidad_4 = h.Habilidad_4,
+                              Id = pkx.ID,
+                              Nombre = pkx.Nombre,
+                              Tipo = t.Tipo_pokemon
                           };
-        return Habilidades;
-    }
+            return Pokemon;
+        }
+
+        [HttpGet("Habilidades")]
+        public IQueryable<HabilidadesModel> GetHabilidadesTipo()
+        {
+            var Habilidades = from t in db.Tipos
+                              join th in db.Tipos_Habilidades
+                              on t.Id equals th.TipoId
+                              join h in db.Habilidades
+                              on th.HabilidadId equals h.HabilidadId
+                              select new HabilidadesModel
+                              {
+                                  Tipo = t.Tipo_pokemon,
+                                  Habilidad_1 = h.Habilidad_1,
+                                  Habilidad_2 = h.Habilidad_2,
+                                  Habilidad_3 = h.Habilidad_3,
+                                  Habilidad_4 = h.Habilidad_4,
+                              };
+            return Habilidades;
+        }
     }
 }

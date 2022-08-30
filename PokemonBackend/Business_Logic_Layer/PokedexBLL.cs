@@ -36,19 +36,22 @@ namespace Logica_Negocio
             this.repository = repository;
         }
 
-        public List<PokedexModel> GetPokedex()
+        public List<PokedexModel> GetPokedex(Pagination pagination)
         {
-
-            List<Pokedex> pokemonFromDB = repository.GetAll();
+            List<Pokedex> pokemonFromDB = repository.GetAll(pagination);
             List<PokedexModel> pokedexModel = _PokedexMapper.Map<List<Pokedex>, List<PokedexModel>>(pokemonFromDB);
 
-            return pokedexModel;
+            return pokedexModel
+                .OrderBy(on => on.ID)
+                .Skip((pagination.PageNumber - 1) * pagination.PageSize)
+                .Take(pagination.PageSize)
+                .ToList();
         }
 
 
         public PokedexModel GetPokedexById(int id)
         {
-            var pokemonEntity = _DAL.GetPokemonById(id);
+            var pokemonEntity = repository.GetById(id);
 
             PokedexModel pokedexModel = _PokedexMapper.Map<Pokedex, PokedexModel>(pokemonEntity);
 

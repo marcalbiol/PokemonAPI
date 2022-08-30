@@ -1,4 +1,5 @@
-﻿using Data_Acces_Layer.Repository;
+﻿using Acceso_BD.Repository.Entity;
+using Data_Acces_Layer.Repository;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,9 @@ namespace Acceso_BD.Repository.GenericRepository
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private  MyDbContext context;
+        private MyDbContext context;
         private DbSet<T> table = null;
+        private Pagination pagination;
 
         public GenericRepository()
         {
@@ -20,13 +22,14 @@ namespace Acceso_BD.Repository.GenericRepository
             table = context.Set<T>();
         }
 
-        public GenericRepository(MyDbContext context, DbSet<T> table)
+        public GenericRepository(MyDbContext context, DbSet<T> table, Pagination pagination)
         {
+            this.pagination = pagination;
             this.context = context;
             this.table = table;
         }
 
-        public List<T> GetAll()
+        public List<T> GetAll(Pagination pagination)
         {
             return table.ToList();
         }
