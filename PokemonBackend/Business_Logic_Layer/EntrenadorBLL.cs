@@ -17,7 +17,6 @@ namespace Logica_Negocio
     {
         private IGenericRepository<Entrenador> repository = null;
         // private IGenericReadOnlyRepository<Entrenador> repositoryRO = null;
-        private Acceso_BD.EntrenadorDAL _DAL;
         private Mapper _EntrenadorMapper;
 
         // constructor
@@ -25,7 +24,6 @@ namespace Logica_Negocio
         {
             this.repository = new GenericRepository<Entrenador>();
 
-            _DAL = new Acceso_BD.EntrenadorDAL();
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<Entrenador, EntrenadorModel>()

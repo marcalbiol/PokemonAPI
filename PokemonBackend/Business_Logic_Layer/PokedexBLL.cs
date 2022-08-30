@@ -16,7 +16,6 @@ namespace Logica_Negocio
         private IGenericReadOnlyRepository<Pokedex> repositoryRO = null;
 
 
-        private Acceso_BD.PokedexDAL _DAL;
         // transferir la entidad de pokemon al modelo
         private Mapper _PokedexMapper;
 
@@ -24,7 +23,6 @@ namespace Logica_Negocio
         public PokedexBLL()
         {
             this.repository = new GenericRepository<Pokedex>();
-            _DAL = new Acceso_BD.PokedexDAL();
             var _configPokemon = new MapperConfiguration(config => config.CreateMap<Pokedex, PokedexModel>().ReverseMap());
 
             _PokedexMapper = new Mapper(_configPokemon);
