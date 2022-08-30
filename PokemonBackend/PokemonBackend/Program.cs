@@ -111,6 +111,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    
     app.UseSwagger();
 
     app.UseSwaggerUI(options =>
@@ -119,6 +120,7 @@ if (app.Environment.IsDevelopment())
         .Assembly.GetManifestResourceStream("PokemonBackend.Resources.index.html");
     }
        );
+    
 }
 
 

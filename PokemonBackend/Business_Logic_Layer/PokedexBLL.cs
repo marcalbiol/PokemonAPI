@@ -1,6 +1,7 @@
 ﻿using Acceso_BD.Repository.Entity;
 using Acceso_BD.Repository.GenericRepository;
 using AutoMapper;
+using Data_Acces_Layer.Repository;
 using Logica_Negocio.Models;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace Logica_Negocio
     {
         private IGenericRepository<Pokedex> repository = null;
         private IGenericReadOnlyRepository<Pokedex> repositoryRO = null;
-
+        private MyDbContext db = new MyDbContext();
 
         // transferir la entidad de pokemon al modelo
         private Mapper _PokedexMapper;
@@ -54,16 +55,25 @@ namespace Logica_Negocio
             return pokedexModel;
         }
 
-        public List<Pokedex> GetAll()
+        public List<PokedexModel> GetAll()
         {
-            var AllData = repository.GetAllData();
-            return AllData;
+            List<Pokedex> pokemonFromDB = repository.GetAllData();
+            List<PokedexModel> pokedexModel = _PokedexMapper.Map<List<Pokedex>, List<PokedexModel>>(pokemonFromDB);
+            return pokedexModel;
+
         }
-        public PokedexModel Insert()
+
+        
+        public void PutImage(int id)
         {
-            var getAll = GetAll();
- 
+            // hacer bucle e insertar url en el campo
+            var image = "test";
+            var loadedEntity = db.Set<Pokedex>().Find(id); 
+            loadedEntity.Imagen = image;
+            db.SaveChanges();
+
         }
+        
 
     }
 

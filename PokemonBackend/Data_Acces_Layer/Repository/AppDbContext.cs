@@ -43,9 +43,7 @@ namespace Data_Acces_Layer.Repository
         {
 
 
-            // OneToMany Stats Pokemons
 
-            // Stats
             modelbuilder.Entity<Pokemon>()
                 .HasOne(s => s.Stat)
                 .WithMany(p => p.Pokemons)

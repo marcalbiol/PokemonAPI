@@ -5,6 +5,9 @@ using Business_Logic_Layer.Models;
 using Data_Acces_Layer.Repository;
 using Logica_Negocio.Models;
 using Acceso_BD.Repository.Entity;
+using Microsoft.Data.SqlClient;
+using System.Data;
+using System.Collections;
 
 namespace PokemonBackend.Controllers
 {
@@ -140,11 +143,10 @@ namespace PokemonBackend.Controllers
             return Habilidades;
         }
 
-        [HttpGet("SeedImages")]
-        public PokedexModel InsertImages()
+        [HttpPut("{id}/ImageURL")]
+        public void PutImage(int id)
         {
-            var insert = _BLL.Insert();
-            return insert;
+          _BLL.PutImage(id);    
         }
 
     }

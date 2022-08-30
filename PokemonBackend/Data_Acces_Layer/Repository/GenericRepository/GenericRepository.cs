@@ -34,6 +34,8 @@ namespace Acceso_BD.Repository.GenericRepository
             return table.ToList();
         }
 
+        
+
         public T GetById(object id)
         {
             return table.Find(id);
@@ -64,6 +66,11 @@ namespace Acceso_BD.Repository.GenericRepository
         public void Save()
         {
             context.SaveChanges();
+        }
+
+        public List<T> GetAllData()
+        {
+            throw new NotImplementedException();
         }
     }
 }
