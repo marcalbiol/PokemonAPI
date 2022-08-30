@@ -50,21 +50,20 @@ namespace Logica_Negocio
         public PokedexModel GetPokedexById(int id)
         {
             var pokemonEntity = repository.GetById(id);
-
             PokedexModel pokedexModel = _PokedexMapper.Map<Pokedex, PokedexModel>(pokemonEntity);
-
-            // logica tambien puede estar en el controlador con el ActionResult
-            /*
-            if (pokemonEntity == null)
-            {
-                throw new Exception("ID de Pokemon no encontrado");
-            }
-            */
             return pokedexModel;
-
         }
 
-
+        public List<Pokedex> GetAll()
+        {
+            var AllData = repository.GetAllData();
+            return AllData;
+        }
+        public PokedexModel Insert()
+        {
+            var getAll = GetAll();
+ 
+        }
 
     }
 

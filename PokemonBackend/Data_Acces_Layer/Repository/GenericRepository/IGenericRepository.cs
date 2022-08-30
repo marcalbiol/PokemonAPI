@@ -11,6 +11,7 @@ namespace Acceso_BD.Repository.GenericRepository
     {
         // METODOS CRUD ACCIONES
         List<T> GetAll(Pagination pagination);
+        List<T> GetAllData();
         T GetById(object id);
         void Insert(T obj);
         void Update(T obj);

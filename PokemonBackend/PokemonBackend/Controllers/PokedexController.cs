@@ -15,6 +15,7 @@ namespace PokemonBackend.Controllers
     {
 
         public Logica_Negocio.PokedexBLL _BLL;
+
         private MyDbContext db = new MyDbContext();
         public PokedexController()
         {
@@ -31,13 +32,18 @@ namespace PokemonBackend.Controllers
         [HttpGet("{id}")]
         public ActionResult<PokedexModel> GetPokedexById(int id)
         {
+
             var pokemon = _BLL.GetPokedexById(id);
 
             if (pokemon == null)
             {
-                return NotFound("Pokemon no encontrado");
+                return StatusCode(404, "Pokemon no encontrado");
             }
+
             return Ok(pokemon);
+
+
+
         }
 
         [HttpGet("Tier/{id}")]
@@ -133,5 +139,13 @@ namespace PokemonBackend.Controllers
                               };
             return Habilidades;
         }
+
+        [HttpGet("SeedImages")]
+        public PokedexModel InsertImages()
+        {
+            var insert = _BLL.Insert();
+            return insert;
+        }
+
     }
 }
