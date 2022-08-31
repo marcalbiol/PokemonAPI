@@ -46,8 +46,8 @@ namespace Logica_Negocio
 
             return entrenadorModel
                  .OrderBy(on => on.Id)
-                .Skip((pagination.PageNumber - 1) * pagination.PageSize)
-                .Take(pagination.PageSize)
+                .Skip((pagination.Pagina - 1) * pagination.TamañoPagina)
+                .Take(pagination.TamañoPagina)
                 .ToList();
         }
 

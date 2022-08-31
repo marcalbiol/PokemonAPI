@@ -27,7 +27,7 @@ namespace PokemonBackend.Controllers
         }
 
         [HttpGet]
-        public List<EntrenadorModel> GetEntrenadors(Pagination pagination)
+        public List<EntrenadorModel> GetEntrenadors([FromQuery] Pagination pagination)
         {
             return _BLL.GetEntrenador(pagination);
 

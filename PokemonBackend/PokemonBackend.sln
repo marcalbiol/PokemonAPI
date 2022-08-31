@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logica_Negocio", "Business_
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acceso_BD", "Data_Acces_Layer\Acceso_BD.csproj", "{A80B131E-2ABD-4E5B-8071-9E61C72AAFCD}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "frontend", "Frontend\frontend.esproj", "{621E0D58-98D1-4026-B80A-03335C335C0E}"
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "front", "front\front.esproj", "{56C64F4E-543C-4E76-8425-2B7CC704D671}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,12 +29,12 @@ Global
 		{A80B131E-2ABD-4E5B-8071-9E61C72AAFCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A80B131E-2ABD-4E5B-8071-9E61C72AAFCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A80B131E-2ABD-4E5B-8071-9E61C72AAFCD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{621E0D58-98D1-4026-B80A-03335C335C0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{621E0D58-98D1-4026-B80A-03335C335C0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{621E0D58-98D1-4026-B80A-03335C335C0E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{621E0D58-98D1-4026-B80A-03335C335C0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{621E0D58-98D1-4026-B80A-03335C335C0E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{621E0D58-98D1-4026-B80A-03335C335C0E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{56C64F4E-543C-4E76-8425-2B7CC704D671}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56C64F4E-543C-4E76-8425-2B7CC704D671}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56C64F4E-543C-4E76-8425-2B7CC704D671}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{56C64F4E-543C-4E76-8425-2B7CC704D671}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56C64F4E-543C-4E76-8425-2B7CC704D671}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56C64F4E-543C-4E76-8425-2B7CC704D671}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

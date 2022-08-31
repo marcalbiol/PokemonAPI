@@ -42,8 +42,8 @@ namespace Logica_Negocio
 
             return pokedexModel
                 .OrderBy(on => on.ID)
-                .Skip((pagination.PageNumber - 1) * pagination.PageSize)
-                .Take(pagination.PageSize)
+                .Skip((pagination.Pagina - 1) * pagination.TamañoPagina)
+                .Take(pagination.TamañoPagina)
                 .ToList();
         }
 
@@ -71,9 +71,10 @@ namespace Logica_Negocio
             }
         }
         
-        public void PutImage(int id)
+        public void PutImage()
         {
-            for(id = 1; id<= 150; id++)
+            // TODO que no sea metodo put SINO get y solo ejecute el metodo
+            for(var id = 1; id<=150; id++)
             {
             var url = $"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.png";
             var PokedexEntityDB = db.Set<Pokedex>().Find(id);

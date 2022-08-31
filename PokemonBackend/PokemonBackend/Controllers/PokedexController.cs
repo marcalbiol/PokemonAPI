@@ -149,10 +149,10 @@ namespace PokemonBackend.Controllers
             _BLL.PokedexEdit(id, model);    
         }
 
-        [HttpPut("{id}/InsertImgURL")]
-        public void PutImage(int id)
+        [HttpGet("InsertImgURL")]
+        public void PutImage()
         {
-          _BLL.PutImage(id);    
+          _BLL.PutImage();    
         }
 
     }
