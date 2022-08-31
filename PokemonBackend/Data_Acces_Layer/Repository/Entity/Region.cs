@@ -1,10 +1,4 @@
-﻿using PokemonBackend.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Acceso_BD.Repository.Entity
 {
@@ -13,6 +7,6 @@ namespace Acceso_BD.Repository.Entity
         [Key]
         public int? Id { get; set; }
         public string? Nombre { get; set; }
-        public virtual ICollection<Pokedex>? Pokedex{ get; set; }
+        public virtual ICollection<Pokedex>? Pokedex { get; set; }
     }
 }

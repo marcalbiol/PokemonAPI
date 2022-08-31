@@ -1,18 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Acceso_BD.Repository.Entity;
+﻿using Acceso_BD.Repository.Entity;
+using System.ComponentModel.DataAnnotations;
 
 namespace PokemonBackend.Models
 {
     public class Habilidades
     {
         [Key]
-        public int? HabilidadId { get; set; }    
+        public int? HabilidadId { get; set; }
 
         // Habilidades
-        public string? Habilidad_1 { get; set; }    
-        public string? Habilidad_2 { get; set; }    
-        public string? Habilidad_3 { get; set; }    
-        public string? Habilidad_4 { get; set; }    
+        public string? Habilidad_1 { get; set; }
+        public string? Habilidad_2 { get; set; }
+        public string? Habilidad_3 { get; set; }
+        public string? Habilidad_4 { get; set; }
         public virtual ICollection<Tipos_Habilidades>? habilidades_tipos { get; set; }
     }
 }

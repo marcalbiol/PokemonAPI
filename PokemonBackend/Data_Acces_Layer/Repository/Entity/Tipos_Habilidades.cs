@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PokemonBackend.Models;
+﻿using PokemonBackend.Models;
 
 namespace Acceso_BD.Repository.Entity
 {
@@ -11,9 +6,9 @@ namespace Acceso_BD.Repository.Entity
     {
         public int Id { get; set; }
         public int? HabilidadId { get; set; }
-        public virtual Habilidades? Habilidades { get; set; }    
-        public int? TipoId { get; set; } 
-        public virtual Tipo? Tipo { get; set; } 
+        public virtual Habilidades? Habilidades { get; set; }
+        public int? TipoId { get; set; }
+        public virtual Tipo? Tipo { get; set; }
 
 
     }

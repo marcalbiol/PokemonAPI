@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Data_Acces_Layer.Repository;
+﻿using Data_Acces_Layer.Repository;
 using PokemonBackend.Models;
 
 namespace Acceso_BD

@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
-using Business_Logic_Layer.Models;
 using Data_Acces_Layer.Repository;
 using Logica_Negocio.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using PokemonBackend.Models;
 
 namespace PokemonBackend.Controllers
@@ -27,7 +24,7 @@ namespace PokemonBackend.Controllers
             _EntrenadorPokemonMapper = new Mapper(_confiEntrenadorPokemon);
 
         }
-      
+
 
 
         [HttpGet]
@@ -42,7 +39,7 @@ namespace PokemonBackend.Controllers
                              on pk.PokedexId equals pkx.ID
                              select new EntrenadorPokemonModel
                              {
-                                
+
                                  Pokemon = pkx.Nombre,
                                  Entrenador = et.Nombre,
                                  Shiny = ep.Shiny

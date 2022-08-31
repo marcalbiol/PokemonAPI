@@ -1,10 +1,6 @@
 ﻿using Acceso_BD.Repository.Entity;
 using Microsoft.EntityFrameworkCore;
 using PokemonBackend.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 
 namespace Data_Acces_Layer.Repository
@@ -25,7 +21,7 @@ namespace Data_Acces_Layer.Repository
         public DbSet<Pokemon> Pokemons { get; set; }
         public DbSet<Entrenador> Entrenadores { get; set; }
         public DbSet<Tipos_Pokemons> Tipo_Pokemons { get; set; }
-        public DbSet<Tipos_Habilidades> Tipos_Habilidades{ get; set; }
+        public DbSet<Tipos_Habilidades> Tipos_Habilidades { get; set; }
         public DbSet<Tipo> Tipos { get; set; }
         public DbSet<TipoBonus> Bonuses { get; set; }
         public DbSet<ModificadorTipo> Modificadores { get; set; }
@@ -121,7 +117,7 @@ namespace Data_Acces_Layer.Repository
             // Relacion Tipo y Bonus
 
             modelbuilder.Entity<TipoBonus>().HasAlternateKey(x => new { x.EficazId, x.DebilidadId, x.IdTipo });
-          
+
             modelbuilder.Entity<TipoBonus>()
             .HasOne(tp => tp.BonusDeb)
             .WithMany(tp => tp.Bonus)
@@ -143,12 +139,12 @@ namespace Data_Acces_Layer.Repository
                 .HasMany(t => t.Fortalezas)
                 .WithOne(x => x.BonusEf)
                 .HasForeignKey(x => x.IdTipo);
-            
+
 
             // DATA-SEED //
 
             modelbuilder.Entity<Tipo>().HasData(
-             new Tipo { Id = 1, Tipo_pokemon = "Fuego"},
+             new Tipo { Id = 1, Tipo_pokemon = "Fuego" },
              new Tipo { Id = 2, Tipo_pokemon = "Agua" },
              new Tipo { Id = 3, Tipo_pokemon = "Planta" },
              new Tipo { Id = 4, Tipo_pokemon = "Electrico" },
@@ -169,16 +165,16 @@ namespace Data_Acces_Layer.Repository
              );
 
             modelbuilder.Entity<Zona>().HasData(
-                new Zona {Id = 1, NombreZona = "Inicio"},
-                new Zona {Id = 2, NombreZona = "Inicio2"}
+                new Zona { Id = 1, NombreZona = "Inicio" },
+                new Zona { Id = 2, NombreZona = "Inicio2" }
                 );
-            
+
             modelbuilder.Entity<TipoBonus>().HasData(
-             new TipoBonus {Id = 1, IdTipo = 1, DebilidadId = 2, EficazId = 3},
-             new TipoBonus {Id = 2, IdTipo = 2, DebilidadId = 4, EficazId = 1 },
-             new TipoBonus {Id = 3, IdTipo = 2, DebilidadId = 8, EficazId = 11 }
+             new TipoBonus { Id = 1, IdTipo = 1, DebilidadId = 2, EficazId = 3 },
+             new TipoBonus { Id = 2, IdTipo = 2, DebilidadId = 4, EficazId = 1 },
+             new TipoBonus { Id = 3, IdTipo = 2, DebilidadId = 8, EficazId = 11 }
              );
-            
+
             modelbuilder.Entity<ModificadorTipo>().HasData(
             new ModificadorTipo { Id = 1, IdTipo = 1, Modificador = Modificador.Debilidad, TipoBonusId = 2 },
             new ModificadorTipo { Id = 2, IdTipo = 1, Modificador = Modificador.Fortaleza, TipoBonusId = 3 }
@@ -190,11 +186,11 @@ namespace Data_Acces_Layer.Repository
                 new Region { Id = 2, Nombre = "Johto" },
                 new Region { Id = 3, Nombre = "Hoenn" }
                 );
-    
-            
+
+
 
             modelbuilder.Entity<Pokedex>().HasData(
-              new Pokedex { ID = 1, Nombre = "Bulbasaur", Tier = 1, Basico = true, RegionId = 1},
+              new Pokedex { ID = 1, Nombre = "Bulbasaur", Tier = 1, Basico = true, RegionId = 1 },
               new Pokedex { ID = 2, Nombre = "Ivysaur", Tier = 2, Basico = false, RegionId = 1 },
               new Pokedex { ID = 3, Nombre = "Venasaur", Tier = 3, Basico = false, RegionId = 2 },
               new Pokedex { ID = 4, Nombre = "Charmander", Tier = 1, Basico = true },
@@ -203,10 +199,10 @@ namespace Data_Acces_Layer.Repository
               new Pokedex { ID = 7, Nombre = "Squirtle", Tier = 1, Basico = true },
               new Pokedex { ID = 8, Nombre = "Wartotle" },
               new Pokedex { ID = 9, Nombre = "Blastoise" },
-              new Pokedex { ID = 10, Nombre = "Caterpie", ZonaId = 1},
+              new Pokedex { ID = 10, Nombre = "Caterpie", ZonaId = 1 },
               new Pokedex { ID = 11, Nombre = "Metapod" },
               new Pokedex { ID = 12, Nombre = "Butterfree" },
-              new Pokedex { ID = 13, Nombre = "Weedle", ZonaId = 2},
+              new Pokedex { ID = 13, Nombre = "Weedle", ZonaId = 2 },
               new Pokedex { ID = 14, Nombre = "Kakuna" },
               new Pokedex { ID = 15, Nombre = "Beedril" },
               new Pokedex { ID = 16, Nombre = "Pidgey" },
@@ -345,18 +341,18 @@ namespace Data_Acces_Layer.Repository
               new Pokedex { ID = 149, Nombre = "Dragonite" },
               new Pokedex { ID = 150, Nombre = "Mewtwo" },
               new Pokedex { ID = 151, Nombre = "Mew" }
-            
+
               );
-           
+
             modelbuilder.Entity<Pokemon>().HasData(
-                new Pokemon {  Id = 1, PokedexId = 1},
-                new Pokemon {  Id = 2, PokedexId = 4 },
-                new Pokemon {  Id = 3, PokedexId = 2 },
-                new Pokemon {  Id = 4, PokedexId = 5 },
-                new Pokemon {  Id = 5, PokedexId = 100 },
-                new Pokemon {  Id = 6, PokedexId = 25 }
+                new Pokemon { Id = 1, PokedexId = 1 },
+                new Pokemon { Id = 2, PokedexId = 4 },
+                new Pokemon { Id = 3, PokedexId = 2 },
+                new Pokemon { Id = 4, PokedexId = 5 },
+                new Pokemon { Id = 5, PokedexId = 100 },
+                new Pokemon { Id = 6, PokedexId = 25 }
                 );
-           
+
             modelbuilder.Entity<Stat>().HasData(
                new Stat { Id = 1, Nivel = 20, Ataque = 15, Defensa = 10, Vida = 40 }
                );
@@ -375,82 +371,82 @@ namespace Data_Acces_Layer.Repository
                 new Entrenador { Id = 4, Nombre = "Nicol" },
                 new Entrenador { Id = 5, Nombre = "Jose" }
                );
-            
+
 
             // ASIGNACION DE CADA ENTRENADOR CON SU POKEMONS
 
             // ****************PokemonId está relacionado con el Id y no con el PokedexId******** //
             modelbuilder.Entity<Entrenadores_Pokemon>().HasData(
-                new Entrenadores_Pokemon {Id = 1,  EntrenadorId = 1, PokemonId = 5},
-                new Entrenadores_Pokemon {Id = 2,  EntrenadorId = 2, PokemonId = 6},
-                new Entrenadores_Pokemon {Id = 3,  EntrenadorId = 2, PokemonId = 6}
+                new Entrenadores_Pokemon { Id = 1, EntrenadorId = 1, PokemonId = 5 },
+                new Entrenadores_Pokemon { Id = 2, EntrenadorId = 2, PokemonId = 6 },
+                new Entrenadores_Pokemon { Id = 3, EntrenadorId = 2, PokemonId = 6 }
                 );
-            
+
             // ASGINACION DE CADA POKEMON de la pokedex A SU TIPO
             modelbuilder.Entity<Tipos_Pokemons>().HasData(
-                new Tipos_Pokemons {Id = 1, PokedexId = 1, TipoId = 3 },
-                new Tipos_Pokemons {Id = 2, PokedexId = 1, TipoId = 19},
-                new Tipos_Pokemons {Id = 3, PokedexId = 2, TipoId = 3},
-                new Tipos_Pokemons {Id = 4, PokedexId = 2, TipoId = 19},
-                new Tipos_Pokemons {Id = 5, PokedexId = 3, TipoId = 3},
-                new Tipos_Pokemons {Id = 6, PokedexId = 3, TipoId = 19},
-                new Tipos_Pokemons {Id = 7, PokedexId = 4, TipoId = 1},
-                new Tipos_Pokemons {Id = 8, PokedexId = 5, TipoId = 1},
-                new Tipos_Pokemons {Id = 9, PokedexId = 6, TipoId = 1},
-                new Tipos_Pokemons {Id = 10, PokedexId = 6, TipoId = 7},
-                new Tipos_Pokemons {Id = 11, PokedexId = 7, TipoId = 2},
-                new Tipos_Pokemons {Id = 12, PokedexId = 8, TipoId = 2},
-                new Tipos_Pokemons {Id = 13, PokedexId = 9, TipoId = 2},
-                new Tipos_Pokemons {Id = 14, PokedexId = 10, TipoId = 9},
-                new Tipos_Pokemons {Id = 15, PokedexId = 11, TipoId = 9},
-                new Tipos_Pokemons {Id = 16, PokedexId = 12, TipoId = 9},
-                new Tipos_Pokemons {Id = 17, PokedexId = 12, TipoId = 7},
-                new Tipos_Pokemons {Id = 18, PokedexId = 13, TipoId = 7},
-                new Tipos_Pokemons {Id = 19, PokedexId = 13, TipoId = 19},
-                new Tipos_Pokemons {Id = 20, PokedexId = 14, TipoId = 7},
-                new Tipos_Pokemons {Id = 21, PokedexId = 14, TipoId = 19},
-                new Tipos_Pokemons {Id = 22, PokedexId = 15, TipoId = 7},
-                new Tipos_Pokemons {Id = 23, PokedexId = 15, TipoId = 19},
-                new Tipos_Pokemons {Id = 24, PokedexId = 16, TipoId = 7},
-                new Tipos_Pokemons {Id = 25, PokedexId = 16, TipoId = 10},
-                new Tipos_Pokemons {Id = 26, PokedexId = 17, TipoId = 7},
-                new Tipos_Pokemons {Id = 27, PokedexId = 17, TipoId = 10},
-                new Tipos_Pokemons {Id = 28, PokedexId = 18, TipoId = 7},
-                new Tipos_Pokemons {Id = 29, PokedexId = 18, TipoId = 10},
-                new Tipos_Pokemons {Id = 30, PokedexId = 19, TipoId = 10},
-                new Tipos_Pokemons {Id = 31, PokedexId = 20, TipoId = 10},
-                new Tipos_Pokemons {Id = 32, PokedexId = 21, TipoId = 10},
-                new Tipos_Pokemons {Id = 33, PokedexId = 21, TipoId = 7},
-                new Tipos_Pokemons {Id = 34, PokedexId = 22, TipoId = 7},
-                new Tipos_Pokemons {Id = 35, PokedexId = 22, TipoId = 10},
-                new Tipos_Pokemons {Id = 36, PokedexId = 23, TipoId = 19},
-                new Tipos_Pokemons {Id = 37, PokedexId = 24, TipoId = 19},
-                new Tipos_Pokemons {Id = 38, PokedexId = 25, TipoId = 4},
-                new Tipos_Pokemons {Id = 39, PokedexId = 26, TipoId = 4},
-                new Tipos_Pokemons {Id = 40, PokedexId = 27, TipoId = 11},
-                new Tipos_Pokemons {Id = 41, PokedexId = 28, TipoId = 11},
-                new Tipos_Pokemons {Id = 42, PokedexId = 29, TipoId = 19},
-                new Tipos_Pokemons {Id = 43, PokedexId = 30, TipoId = 19},
-                new Tipos_Pokemons {Id = 44, PokedexId = 31, TipoId = 19},
-                new Tipos_Pokemons {Id = 45, PokedexId = 31, TipoId = 11},
-                new Tipos_Pokemons {Id = 46, PokedexId = 32, TipoId = 19},
-                new Tipos_Pokemons {Id = 47, PokedexId = 33, TipoId = 19},
-                new Tipos_Pokemons {Id = 48, PokedexId = 34, TipoId = 19},
-                new Tipos_Pokemons {Id = 49, PokedexId = 34, TipoId = 11},
-                new Tipos_Pokemons {Id = 50, PokedexId = 35, TipoId = 13},
-                new Tipos_Pokemons {Id = 51, PokedexId = 36, TipoId = 13},
-                new Tipos_Pokemons {Id = 52, PokedexId = 37, TipoId = 1},
-                new Tipos_Pokemons {Id = 53, PokedexId = 38, TipoId = 1}
+                new Tipos_Pokemons { Id = 1, PokedexId = 1, TipoId = 3 },
+                new Tipos_Pokemons { Id = 2, PokedexId = 1, TipoId = 19 },
+                new Tipos_Pokemons { Id = 3, PokedexId = 2, TipoId = 3 },
+                new Tipos_Pokemons { Id = 4, PokedexId = 2, TipoId = 19 },
+                new Tipos_Pokemons { Id = 5, PokedexId = 3, TipoId = 3 },
+                new Tipos_Pokemons { Id = 6, PokedexId = 3, TipoId = 19 },
+                new Tipos_Pokemons { Id = 7, PokedexId = 4, TipoId = 1 },
+                new Tipos_Pokemons { Id = 8, PokedexId = 5, TipoId = 1 },
+                new Tipos_Pokemons { Id = 9, PokedexId = 6, TipoId = 1 },
+                new Tipos_Pokemons { Id = 10, PokedexId = 6, TipoId = 7 },
+                new Tipos_Pokemons { Id = 11, PokedexId = 7, TipoId = 2 },
+                new Tipos_Pokemons { Id = 12, PokedexId = 8, TipoId = 2 },
+                new Tipos_Pokemons { Id = 13, PokedexId = 9, TipoId = 2 },
+                new Tipos_Pokemons { Id = 14, PokedexId = 10, TipoId = 9 },
+                new Tipos_Pokemons { Id = 15, PokedexId = 11, TipoId = 9 },
+                new Tipos_Pokemons { Id = 16, PokedexId = 12, TipoId = 9 },
+                new Tipos_Pokemons { Id = 17, PokedexId = 12, TipoId = 7 },
+                new Tipos_Pokemons { Id = 18, PokedexId = 13, TipoId = 7 },
+                new Tipos_Pokemons { Id = 19, PokedexId = 13, TipoId = 19 },
+                new Tipos_Pokemons { Id = 20, PokedexId = 14, TipoId = 7 },
+                new Tipos_Pokemons { Id = 21, PokedexId = 14, TipoId = 19 },
+                new Tipos_Pokemons { Id = 22, PokedexId = 15, TipoId = 7 },
+                new Tipos_Pokemons { Id = 23, PokedexId = 15, TipoId = 19 },
+                new Tipos_Pokemons { Id = 24, PokedexId = 16, TipoId = 7 },
+                new Tipos_Pokemons { Id = 25, PokedexId = 16, TipoId = 10 },
+                new Tipos_Pokemons { Id = 26, PokedexId = 17, TipoId = 7 },
+                new Tipos_Pokemons { Id = 27, PokedexId = 17, TipoId = 10 },
+                new Tipos_Pokemons { Id = 28, PokedexId = 18, TipoId = 7 },
+                new Tipos_Pokemons { Id = 29, PokedexId = 18, TipoId = 10 },
+                new Tipos_Pokemons { Id = 30, PokedexId = 19, TipoId = 10 },
+                new Tipos_Pokemons { Id = 31, PokedexId = 20, TipoId = 10 },
+                new Tipos_Pokemons { Id = 32, PokedexId = 21, TipoId = 10 },
+                new Tipos_Pokemons { Id = 33, PokedexId = 21, TipoId = 7 },
+                new Tipos_Pokemons { Id = 34, PokedexId = 22, TipoId = 7 },
+                new Tipos_Pokemons { Id = 35, PokedexId = 22, TipoId = 10 },
+                new Tipos_Pokemons { Id = 36, PokedexId = 23, TipoId = 19 },
+                new Tipos_Pokemons { Id = 37, PokedexId = 24, TipoId = 19 },
+                new Tipos_Pokemons { Id = 38, PokedexId = 25, TipoId = 4 },
+                new Tipos_Pokemons { Id = 39, PokedexId = 26, TipoId = 4 },
+                new Tipos_Pokemons { Id = 40, PokedexId = 27, TipoId = 11 },
+                new Tipos_Pokemons { Id = 41, PokedexId = 28, TipoId = 11 },
+                new Tipos_Pokemons { Id = 42, PokedexId = 29, TipoId = 19 },
+                new Tipos_Pokemons { Id = 43, PokedexId = 30, TipoId = 19 },
+                new Tipos_Pokemons { Id = 44, PokedexId = 31, TipoId = 19 },
+                new Tipos_Pokemons { Id = 45, PokedexId = 31, TipoId = 11 },
+                new Tipos_Pokemons { Id = 46, PokedexId = 32, TipoId = 19 },
+                new Tipos_Pokemons { Id = 47, PokedexId = 33, TipoId = 19 },
+                new Tipos_Pokemons { Id = 48, PokedexId = 34, TipoId = 19 },
+                new Tipos_Pokemons { Id = 49, PokedexId = 34, TipoId = 11 },
+                new Tipos_Pokemons { Id = 50, PokedexId = 35, TipoId = 13 },
+                new Tipos_Pokemons { Id = 51, PokedexId = 36, TipoId = 13 },
+                new Tipos_Pokemons { Id = 52, PokedexId = 37, TipoId = 1 },
+                new Tipos_Pokemons { Id = 53, PokedexId = 38, TipoId = 1 }
                 );
-            
+
             modelbuilder.Entity<Tipos_Habilidades>().HasData(
-                new Tipos_Habilidades {Id = 1, HabilidadId = 1, TipoId = 1 },
-                new Tipos_Habilidades {Id = 2, HabilidadId = 2, TipoId = 2 },
-                new Tipos_Habilidades {Id = 3, HabilidadId = 3, TipoId = 3 },
-                new Tipos_Habilidades {Id = 4, HabilidadId = 4, TipoId = 4 },
-                new Tipos_Habilidades {Id = 5, HabilidadId = 3, TipoId = 4 }
+                new Tipos_Habilidades { Id = 1, HabilidadId = 1, TipoId = 1 },
+                new Tipos_Habilidades { Id = 2, HabilidadId = 2, TipoId = 2 },
+                new Tipos_Habilidades { Id = 3, HabilidadId = 3, TipoId = 3 },
+                new Tipos_Habilidades { Id = 4, HabilidadId = 4, TipoId = 4 },
+                new Tipos_Habilidades { Id = 5, HabilidadId = 3, TipoId = 4 }
                 );
-            
+
             base.OnModelCreating(modelbuilder);
         }
 
@@ -462,10 +458,10 @@ namespace Data_Acces_Layer.Repository
                 .EnableSensitiveDataLogging()
                 .UseLazyLoadingProxies();
             if (!optionsBuilder.IsConfigured)
-       {
-        optionsBuilder.UseSqlServer(connect, b => b.MigrationsAssembly("Acceso_BD"));
-       }
-            
+            {
+                optionsBuilder.UseSqlServer(connect, b => b.MigrationsAssembly("Acceso_BD"));
+            }
+
         }
     }
     /* PARA ACTUALIZAR LA TABLA. ADD-MIGRATION  (FECHA QUE SE EJECUTA). DESPUES UPDATE-DATABASE */

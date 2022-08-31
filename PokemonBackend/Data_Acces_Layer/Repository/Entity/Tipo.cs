@@ -27,15 +27,15 @@ namespace PokemonBackend.Models
     public class TipoBonus
     {
 
-        [Key] 
-        public int Id { get; set; } 
+        [Key]
+        public int Id { get; set; }
         public int IdTipo { get; set; }
         public virtual Tipo? BonusEf { get; set; }
         public int EficazId { get; set; }
         public virtual Tipo? BonusDeb { get; set; }
         public int DebilidadId { get; set; }
 
-        
+
     }
 
     public class Debilidades
@@ -45,7 +45,7 @@ namespace PokemonBackend.Models
         public int Id { get; set; }
         public int IdTipo { get; set; }
         public virtual Tipo? BonusDeb { get; set; }
-        public int DebilidadId { get; set; }     
+        public int DebilidadId { get; set; }
 
     }
 

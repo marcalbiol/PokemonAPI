@@ -1,15 +1,9 @@
-﻿using AutoMapper;
-using Business_Logic_Layer.Models;
+﻿using Acceso_BD.Repository.Entity;
+using Acceso_BD.Repository.GenericRepository;
+using AutoMapper;
 using Data_Acces_Layer.Repository;
 using Logica_Negocio.Models;
 using PokemonBackend.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Acceso_BD.Repository.GenericRepository;
-using Acceso_BD.Repository.Entity;
 
 namespace Logica_Negocio
 {

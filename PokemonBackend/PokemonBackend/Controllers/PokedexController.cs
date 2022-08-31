@@ -1,13 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using PokemonBackend.Models;
+﻿using Acceso_BD.Repository.Entity;
 using Business_Logic_Layer.Models;
 using Data_Acces_Layer.Repository;
 using Logica_Negocio.Models;
-using Acceso_BD.Repository.Entity;
-using Microsoft.Data.SqlClient;
+using Microsoft.AspNetCore.Mvc;
 using System.Data;
-using System.Collections;
 
 namespace PokemonBackend.Controllers
 {
@@ -146,13 +142,13 @@ namespace PokemonBackend.Controllers
         [HttpPut("{id}")]
         public void PutMethod(int id, PokedexModel model)
         {
-            _BLL.PokedexEdit(id, model);    
+            _BLL.PokedexEdit(id, model);
         }
 
         [HttpGet("InsertImgURL")]
         public void PutImage()
         {
-          _BLL.PutImage();    
+            _BLL.PutImage();
         }
 
     }

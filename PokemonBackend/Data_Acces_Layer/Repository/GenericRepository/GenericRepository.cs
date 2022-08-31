@@ -1,11 +1,6 @@
 ﻿using Acceso_BD.Repository.Entity;
 using Data_Acces_Layer.Repository;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Acceso_BD.Repository.GenericRepository
 {
@@ -34,7 +29,7 @@ namespace Acceso_BD.Repository.GenericRepository
             return table.ToList();
         }
 
-        
+
 
         public T GetById(object id)
         {

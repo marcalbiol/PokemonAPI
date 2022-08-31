@@ -3,11 +3,6 @@ using Acceso_BD.Repository.GenericRepository;
 using AutoMapper;
 using Data_Acces_Layer.Repository;
 using Logica_Negocio.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Logica_Negocio
 {
@@ -63,28 +58,29 @@ namespace Logica_Negocio
 
         }
 
-        public void PokedexEdit (int id, PokedexModel model)
+        public void PokedexEdit(int id, PokedexModel model)
         {
-            if(model.ID == id){
+            if (model.ID == id)
+            {
                 Pokedex entrenadorEntity = _PokedexMapper.Map<PokedexModel, Pokedex>(model);
                 repository.Update(entrenadorEntity);
             }
         }
-        
+
         public void PutImage()
         {
             // TODO que no sea metodo put SINO get y solo ejecute el metodo
-            for(var id = 1; id<=150; id++)
+            for (var id = 1; id <= 150; id++)
             {
-            var url = $"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.png";
-            var PokedexEntityDB = db.Set<Pokedex>().Find(id);
-            PokedexEntityDB.Imagen = url;
+                var url = $"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.png";
+                var PokedexEntityDB = db.Set<Pokedex>().Find(id);
+                PokedexEntityDB.Imagen = url;
             }
 
             db.SaveChanges();
 
         }
-        
+
 
     }
 

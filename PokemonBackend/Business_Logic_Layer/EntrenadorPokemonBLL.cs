@@ -1,14 +1,7 @@
-﻿using AutoMapper;
-using PokemonBackend.Models;
+﻿using Acceso_BD.Repository.GenericRepository;
+using AutoMapper;
 using Logica_Negocio.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net;
-using Data_Acces_Layer.Repository;
-using Acceso_BD.Repository.GenericRepository;
+using PokemonBackend.Models;
 
 namespace Logica_Negocio
 {
@@ -57,7 +50,7 @@ namespace Logica_Negocio
 
         }
 
-        public static Boolean EsShiny (int value)
+        public static Boolean EsShiny(int value)
         {
             if (value < 50)
             {

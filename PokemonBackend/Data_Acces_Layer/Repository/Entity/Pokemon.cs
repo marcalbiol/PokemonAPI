@@ -6,17 +6,17 @@ namespace PokemonBackend.Models
 {
     public class Pokemon
     {
-        
+
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int? Id { get; set; }
         public string? Nombre { get; set; }
         public Boolean? Shiny { get; set; }
-     
+
         public int Nivel { get; set; }
         public int? PokedexId { get; set; }
-        public virtual Pokedex? Pokedex{ get; set; }
-        
+        public virtual Pokedex? Pokedex { get; set; }
+
         /*
         public Boolean? BasicoId { get; set; }
         public Pokedex Basico { get; set; }
@@ -25,10 +25,10 @@ namespace PokemonBackend.Models
          */
         public int? StatId { get; set; }
         public virtual Stat? Stat { get; set; }
-      
-       public virtual ICollection<Tipos_Pokemons>? Tipos { get; set; }
-       
-       public virtual ICollection<Entrenadores_Pokemon>? Entrenador_Pokemons { get; set; }
+
+        public virtual ICollection<Tipos_Pokemons>? Tipos { get; set; }
+
+        public virtual ICollection<Entrenadores_Pokemon>? Entrenador_Pokemons { get; set; }
 
 
     }
