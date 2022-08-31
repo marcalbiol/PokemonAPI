@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logica_Negocio", "Business_
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acceso_BD", "Data_Acces_Layer\Acceso_BD.csproj", "{A80B131E-2ABD-4E5B-8071-9E61C72AAFCD}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "front", "front\front.esproj", "{56C64F4E-543C-4E76-8425-2B7CC704D671}"
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "PokemonFrontend", "..\PokemonFrontend\PokemonFrontend.esproj", "{56C64F4E-543C-4E76-8425-2B7CC704D671}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
