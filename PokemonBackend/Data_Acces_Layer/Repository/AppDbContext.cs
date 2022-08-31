@@ -191,7 +191,7 @@ namespace Data_Acces_Layer.Repository
                 new Region { Id = 3, Nombre = "Hoenn" }
                 );
     
-            var url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
+            
 
             modelbuilder.Entity<Pokedex>().HasData(
               new Pokedex { ID = 1, Nombre = "Bulbasaur", Tier = 1, Basico = true, RegionId = 1},

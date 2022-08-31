@@ -63,13 +63,23 @@ namespace Logica_Negocio
 
         }
 
+        public void PokedexEdit (int id, PokedexModel model)
+        {
+            if(model.ID == id){
+                Pokedex entrenadorEntity = _PokedexMapper.Map<PokedexModel, Pokedex>(model);
+                repository.Update(entrenadorEntity);
+            }
+        }
         
         public void PutImage(int id)
         {
-            // hacer bucle e insertar url en el campo
-            var image = "test";
-            var loadedEntity = db.Set<Pokedex>().Find(id); 
-            loadedEntity.Imagen = image;
+            for(id = 1; id<= 150; id++)
+            {
+            var url = $"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.png";
+            var PokedexEntityDB = db.Set<Pokedex>().Find(id);
+            PokedexEntityDB.Imagen = url;
+            }
+
             db.SaveChanges();
 
         }

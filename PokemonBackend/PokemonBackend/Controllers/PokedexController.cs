@@ -143,7 +143,13 @@ namespace PokemonBackend.Controllers
             return Habilidades;
         }
 
-        [HttpPut("{id}/ImageURL")]
+        [HttpPut("{id}")]
+        public void PutMethod(int id, PokedexModel model)
+        {
+            _BLL.PokedexEdit(id, model);    
+        }
+
+        [HttpPut("{id}/InsertImgURL")]
         public void PutImage(int id)
         {
           _BLL.PutImage(id);    
