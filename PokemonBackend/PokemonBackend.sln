@@ -5,7 +5,7 @@ VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokemonBackend", "PokemonBackend\PokemonBackend.csproj", "{8F50EE65-3617-427F-9336-AFF307D73CA1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logica_Negocio", "Business_Logic_Layer\Logica_Negocio.csproj", "{6E45411B-9013-4D20-A9A1-DD5D2AC31781}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business_Logic_Layer", "Business_Logic_Layer\Business_Logic_Layer.csproj", "{6E45411B-9013-4D20-A9A1-DD5D2AC31781}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acceso_BD", "Data_Acces_Layer\Acceso_BD.csproj", "{A80B131E-2ABD-4E5B-8071-9E61C72AAFCD}"
 EndProject

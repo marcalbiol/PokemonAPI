@@ -1,16 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PokemonBackend.Models
+namespace PokemonBackend.Models;
+
+public class Entrenador
 {
-    public class Entrenador
-    {
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [Key]
+    public int? Id { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
-        public int? Id { get; set; }
-        public string? Nombre { get; set; }
-        public virtual ICollection<Entrenadores_Pokemon>? Entrenador_Pokemons { get; set; }
-
-    }
+    public string? Nombre { get; set; }
+    public virtual ICollection<Entrenadores_Pokemon>? Entrenador_Pokemons { get; set; }
 }

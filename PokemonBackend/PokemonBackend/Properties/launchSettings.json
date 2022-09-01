@@ -11,7 +11,7 @@
   "profiles": {
     "PokemonBackend": {
       "commandName": "Project",
-     // "launchUrl": "swagger",
+      // "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "Secret_key": "ASDAWQESDFDSCVJSAIDASDAHDA"

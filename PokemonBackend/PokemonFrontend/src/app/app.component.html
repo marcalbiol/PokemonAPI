@@ -2,11 +2,12 @@
 <app-entrenadores></app-entrenadores>
 
 
-<button (click)="mostrarPokedex()" type="button" class="btn btn-success">{{show == true ? 'Ocultar' : 'Mostrar'}}</button>
+<button (click)="mostrarPokedex()" class="btn btn-success"
+        type="button">{{show == true ? 'Ocultar' : 'Mostrar'}}</button>
 <div *ngIf="show == true" class="card-group">
   <div *ngFor="let pokedex of pokedex;" class="card-deck">
     <div class="card" style="width: 10rem">
-      <img src={{pokedex.imagen}} class="card-img-top img-thumbnail" alt="...">
+      <img alt="..." class="card-img-top img-thumbnail" src={{pokedex.imagen}}>
       <div class="card-body">
         <h5 class="card-title">{{pokedex.id}}</h5>
         <h5 class="card-title">{{pokedex.nombre}}</h5>

@@ -1,66 +1,59 @@
-﻿using Acceso_BD.Repository.GenericRepository;
+﻿using Acceso_BD;
+using Acceso_BD.Repository.GenericRepository;
 using AutoMapper;
-using Logica_Negocio.Models;
+using Business_Logic_Layer.Models;
 using PokemonBackend.Models;
 
-namespace Logica_Negocio
+namespace Business_Logic_Layer;
+
+public class EntrenadorPokemonBLL
 {
-    public class EntrenadorPokemonBLL
+    private readonly Entrenador_PokemonDAL _DAL;
+    private readonly Mapper _EntrenadorPokemonMapper;
+    private readonly IGenericRepository<Entrenadores_Pokemon> repository;
+
+
+    public EntrenadorPokemonBLL()
     {
-        private IGenericRepository<Entrenadores_Pokemon> repository = null;
-        private Acceso_BD.Entrenador_PokemonDAL _DAL;
-        private Mapper _EntrenadorPokemonMapper;
+        repository = new GenericRepository<Entrenadores_Pokemon>();
+        _DAL = new Entrenador_PokemonDAL();
 
-
-        public EntrenadorPokemonBLL()
-        {
-            this.repository = new GenericRepository<Entrenadores_Pokemon>();
-            _DAL = new Acceso_BD.Entrenador_PokemonDAL();
-
-            var _confiEntrenadorPokemon = new MapperConfiguration(
-                config => config.CreateMap
+        var _confiEntrenadorPokemon = new MapperConfiguration(
+            config => config.CreateMap
                 <Entrenadores_Pokemon, PutEntrenadorPokemonModel>().ReverseMap());
-            _EntrenadorPokemonMapper = new Mapper(_confiEntrenadorPokemon);
-        }
+        _EntrenadorPokemonMapper = new Mapper(_confiEntrenadorPokemon);
+    }
 
-        public EntrenadorPokemonBLL(IGenericRepository<Entrenadores_Pokemon> repository)
+    public EntrenadorPokemonBLL(IGenericRepository<Entrenadores_Pokemon> repository)
+    {
+        this.repository = repository;
+    }
+
+
+    public void PostEntrenadorPokemon(PutEntrenadorPokemonModel model)
+    {
+        var entrenadorEntity = _EntrenadorPokemonMapper.Map<PutEntrenadorPokemonModel, Entrenadores_Pokemon>(model);
+
+        var value = new Random().Next(0, 100);
+        entrenadorEntity.Shiny = EsShiny(value);
+
+        // CONTROL DE ERRORES, CONTROLAR SI NO EXISTE EL ID Y INTRODUCIR VARIOS POKEMONS CON EL MISMO ID
+        _DAL.PostEntrenadorPokemon(entrenadorEntity);
+    }
+
+    public void PutEntrenador(int id, PutEntrenadorPokemonModel model)
+    {
+        if (model.Id == id && id == model.EntrenadorId)
         {
-            this.repository = repository;
-        }
+            var entrenadorEntity = _EntrenadorPokemonMapper.Map<PutEntrenadorPokemonModel, Entrenadores_Pokemon>(model);
+            repository.Update(entrenadorEntity);
+        } // manejo de errores si el id no coincide
+    }
 
-
-        public void PostEntrenadorPokemon(PutEntrenadorPokemonModel model)
-        {
-            Entrenadores_Pokemon entrenadorEntity = _EntrenadorPokemonMapper.Map<PutEntrenadorPokemonModel, Entrenadores_Pokemon>(model);
-
-            var value = new Random().Next(0, 100);
-            entrenadorEntity.Shiny = EsShiny(value);
-
-            // CONTROL DE ERRORES, CONTROLAR SI NO EXISTE EL ID Y INTRODUCIR VARIOS POKEMONS CON EL MISMO ID
-            _DAL.PostEntrenadorPokemon(entrenadorEntity);
-        }
-
-        public void PutEntrenador(int id, PutEntrenadorPokemonModel model)
-        {
-            if (model.Id == id && id == model.EntrenadorId)
-            {
-                Entrenadores_Pokemon entrenadorEntity = _EntrenadorPokemonMapper.Map<PutEntrenadorPokemonModel, Entrenadores_Pokemon>(model);
-                repository.Update(entrenadorEntity);
-            } // manejo de errores si el id no coincide
-
-        }
-
-        public static Boolean EsShiny(int value)
-        {
-            if (value < 50)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
+    public static bool EsShiny(int value)
+    {
+        if (value < 50)
+            return true;
+        return false;
     }
 }

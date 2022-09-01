@@ -1,11 +1,5 @@
-﻿namespace Logica_Negocio
+﻿namespace Business_Logic_Layer;
+
+public class HandleError
 {
-    public class HandleError
-    {
-        public HandleError() { }
-
-
-
-
-    }
 }

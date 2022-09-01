@@ -1,8 +1,7 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { PokedexService } from '../app.service';
-import { pokedex } from '../pokedex';
-import { Tipos } from './tipos';
+import {HttpClient} from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {PokedexService} from '../app.service';
+import {Tipos} from './tipos';
 
 @Component({
   selector: 'app-nav',
@@ -11,9 +10,10 @@ import { Tipos } from './tipos';
 })
 export class NavComponent implements OnInit {
 
-  Tipos!: Tipos[];
+  tipos: string[] = ['Fuego', 'Agua']
 
-  constructor(private http: HttpClient, private pokedexservice: PokedexService) { }
+  constructor(private http: HttpClient, private pokedexservice: PokedexService) {
+  }
 
   ngOnInit(): void {
     Tipos;

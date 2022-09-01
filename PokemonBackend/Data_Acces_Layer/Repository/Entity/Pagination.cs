@@ -1,17 +1,15 @@
-﻿namespace Acceso_BD.Repository.Entity
+﻿namespace Acceso_BD.Repository.Entity;
+
+public class Pagination
 {
-    public class Pagination
+    private const int maxSize = 50;
+
+    private int _pageSize = 10;
+    public int Pagina { get; set; } = 1;
+
+    public int TamañoPagina
     {
-        const int maxSize = 50;
-        public int Pagina { get; set; } = 1;
-
-        private int _pageSize = 10;
-
-        public int TamañoPagina
-        {
-            get { return _pageSize; }
-            set { _pageSize = (value > maxSize) ? maxSize : value; }
-        }
-
+        get => _pageSize;
+        set => _pageSize = value > maxSize ? maxSize : value;
     }
 }
