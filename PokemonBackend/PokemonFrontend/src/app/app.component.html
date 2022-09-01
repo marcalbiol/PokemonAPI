@@ -7,9 +7,11 @@
     </form>
   </div>
 </nav>
+<app-entrenadores></app-entrenadores>
 
 
-<div class="card-group">
+<button (click)="mostrarPokedex()" type="button" class="btn btn-success">{{show == true ? 'Ocultar' : 'Mostrar'}}</button>
+<div *ngIf="show == true" class="card-group">
   <div *ngFor="let pokedex of pokedex;" class="card-deck">
     <div class="card" style="width: 10rem">
       <img src={{pokedex.imagen}} class="card-img-top img-thumbnail" alt="...">
