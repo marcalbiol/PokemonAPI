@@ -42,7 +42,6 @@ namespace Logica_Negocio
                 .ToList();
         }
 
-
         public PokedexModel GetPokedexById(int id)
         {
             var pokemonEntity = repository.GetById(id);
@@ -70,18 +69,13 @@ namespace Logica_Negocio
         public void PutImage()
         {
             // TODO que no sea metodo put SINO get y solo ejecute el metodo
-            for (var id = 1; id <= 150; id++)
+            for (var id = 1; id <=151; id++)
             {
                 var url = $"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.png";
                 var PokedexEntityDB = db.Set<Pokedex>().Find(id);
                 PokedexEntityDB.Imagen = url;
             }
-
             db.SaveChanges();
-
         }
-
-
     }
-
 }

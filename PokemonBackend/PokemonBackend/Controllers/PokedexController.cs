@@ -103,7 +103,7 @@ namespace PokemonBackend.Controllers
             return Pokemon;
         }
 
-        [HttpGet("PokemonsTipos")]
+        [HttpGet("AllData")]
         public IQueryable<PokemonModel> GetPokemonTipos()
         {
             var Pokemon = from pkx in db.Pokedex
@@ -115,10 +115,13 @@ namespace PokemonBackend.Controllers
                           {
                               Id = pkx.ID,
                               Nombre = pkx.Nombre,
-                              Tipo = t.Tipo_pokemon
+                              Tipo = t.Tipo_pokemon,
+                              Imagen = pkx.Imagen
                           };
             return Pokemon;
         }
+
+        //TODO ENDPOINT PARA FILTRAR POR TIPO. INTRODUCIENDO TIPO
 
         [HttpGet("Habilidades")]
         public IQueryable<HabilidadesModel> GetHabilidadesTipo()

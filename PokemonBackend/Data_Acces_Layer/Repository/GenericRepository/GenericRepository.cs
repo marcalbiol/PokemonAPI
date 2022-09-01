@@ -65,7 +65,7 @@ namespace Acceso_BD.Repository.GenericRepository
 
         public List<T> GetAllData()
         {
-            throw new NotImplementedException();
+            return table.ToList();
         }
     }
 }

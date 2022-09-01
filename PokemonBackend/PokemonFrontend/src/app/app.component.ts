@@ -16,10 +16,10 @@ export class AppComponent implements OnInit {
 
   constructor(private http: HttpClient, private pokedexservice: PokedexService) { }
 
+  // al levantar el servidor se ejecuta ->
   ngOnInit() {
     this.pokedexservice.getPokedex().subscribe(
       pok => this.pokedex = pok)
-    }
-
+  }
 }
 
