@@ -23,8 +23,8 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.pokedexservice.getPokedex().subscribe(
       pok => this.pokedex = pok)
+    
   }
-
 
   mostrarPokedex(): void {
     this.show = (this.show == true) ? false : true

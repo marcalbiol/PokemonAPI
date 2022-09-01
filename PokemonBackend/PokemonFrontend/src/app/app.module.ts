@@ -4,11 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { PokedexService } from './app.service';
 import { EntrenadoresComponent } from './entrenadores/entrenadores.component';
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EntrenadoresComponent
+    EntrenadoresComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule, HttpClientModule

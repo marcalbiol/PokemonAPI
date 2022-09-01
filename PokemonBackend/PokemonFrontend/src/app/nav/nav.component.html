@@ -1,0 +1,14 @@
+<nav class="navbar bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand">PokemonAPI</a>
+
+    <form class="d-flex" role="search">
+      <select class="form-select form-select-lg mb-1 mt-2" aria-label=".form-select-lg example">
+        <option selected>Filtrar por Tipos</option>
+        <option *ngFor="let tipos of Tipos" value="1">{{tipos.tipos}}</option>
+      </select>
+      <input class="form-control me-4" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+</nav>

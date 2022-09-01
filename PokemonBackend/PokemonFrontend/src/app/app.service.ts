@@ -18,10 +18,4 @@ export class PokedexService {
     return this.http.get<pokedex[]>(this.urlEndPoint + "/Pokedex/AllData")
   }
 
-
-  mostrarPokedex(value: boolean) {
-
-
-  }
-
 }
