@@ -12,12 +12,14 @@ namespace PokemonBackend.Controllers;
 public class PokedexController : ControllerBase
 {
     public PokedexBLL _BLL;
+    public RegionBll _BLLR;
 
     private readonly MyDbContext db = new();
 
     public PokedexController()
     {
         _BLL = new PokedexBLL();
+        _BLLR = new RegionBll();
     }
 
     [HttpGet]
@@ -100,8 +102,6 @@ public class PokedexController : ControllerBase
     {
         return _BLL.GetAll();
     }
-    
-      
 
     //TODO ENDPOINT PARA FILTRAR POR TIPO. INTRODUCIENDO TIPO
 
@@ -129,6 +129,7 @@ public class PokedexController : ControllerBase
     {
         _BLL.PokedexEdit(id, model);
     }
+
 
     [HttpGet("InsertImgURL")]
     public void PutImage()

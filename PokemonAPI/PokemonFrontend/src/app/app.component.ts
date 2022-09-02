@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
 import {PokedexService} from './app.service';
-import {pokedex} from './pokedex';
+import {pokedex, region} from './pokedex';
 
 
 @Component({
@@ -11,6 +11,7 @@ import {pokedex} from './pokedex';
 export class AppComponent implements OnInit {
 
   pokedex!: pokedex[];
+  region!: region[]
 
   show: boolean = true;
 

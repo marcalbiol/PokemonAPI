@@ -3,4 +3,11 @@ export class pokedex {
   nombre!: string;
   imagen!: string;
   tipo!: string;
+  region!: region[]
+}
+
+
+export class region {
+  id!: number;
+  nombre!: string
 }
