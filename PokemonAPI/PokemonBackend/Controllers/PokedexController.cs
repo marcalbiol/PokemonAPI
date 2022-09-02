@@ -60,8 +60,7 @@ public class PokedexController : ControllerBase
             select new PokedexModel
             {
                 ID = pkx.ID,
-                Nombre = pkx.Nombre,
-                Region = r.Nombre
+                Nombre = pkx.Nombre
             };
         return Pokemon;
     }

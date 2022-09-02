@@ -9,6 +9,6 @@ public class PokedexModel
     public string? Altura { get; set; }
     public string? Peso { get; set; }
     public string? Imagen { get; set; }
-    public string? Region { get; set; }
     public List<TipoModel>? Tipos { get; set; }
+    public RegionModel? Region { get; set; }
 }

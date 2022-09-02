@@ -22,7 +22,9 @@ public class PokedexBLL
         var configuration = new MapperConfiguration(cfg => {
             cfg.CreateMap<Pokedex, PokedexModel>()
                 //.Include<Tipo, TipoModel>()
-                .ForMember(dest => dest.Tipos, opt => opt.MapFrom(src => src.Tipos));
+                .ForMember(dest => dest.Tipos, opt => opt.MapFrom(src => src.Tipos))
+                .ForMember(dest => dest.Region, opt => opt.MapFrom(src => src.Region));
+            cfg.CreateMap<Region, RegionModel>();
             cfg.CreateMap<Tipo, TipoModel>();
         });
         _PokedexMapper = new Mapper(configuration);
