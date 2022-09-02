@@ -1,8 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
 import {PokedexService} from './app.service';
-import {pokedex, region} from './pokedex';
-
+import {pokedex} from "./pokedex.interface";
 
 @Component({
   selector: 'app-root',
@@ -10,11 +9,8 @@ import {pokedex, region} from './pokedex';
 })
 export class AppComponent implements OnInit {
 
-  pokedex!: pokedex[];
-  region!: region[]
-
+  pokedex!: any;
   show: boolean = true;
-
 
   constructor(private http: HttpClient, private pokedexservice: PokedexService) {
   }
@@ -22,12 +18,27 @@ export class AppComponent implements OnInit {
   // al levantar el servidor se ejecuta ->
   ngOnInit() {
     this.pokedexservice.getPokedex().subscribe(
-      pok => this.pokedex = pok)
-
+      res => {
+        this.pokedex = res
+        console.log(this.pokedex[2])
+  }, err => {
+        console.log(err)
+      }
+    );
   }
 
+  getData(){
+    this.pokedexservice.getPokedex().subscribe((res:any)=>{
+      this.pokedex = res.tipos;
+    });
+  }
+
+
+
+
+
   mostrarPokedex(): void {
-    this.show = (this.show == true) ? false : true
+    this.show = this.show ? false : true
   }
 
 }

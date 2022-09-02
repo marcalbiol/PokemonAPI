@@ -9,7 +9,7 @@ namespace Business_Logic_Layer;
 
 public class EntrenadorBLL
 {
-    // private IGenericReadOnlyRepository<Entrenador> repositoryRO = null;
+    
     private readonly Mapper _EntrenadorMapper;
     private readonly IGenericRepository<Entrenador> repository;
 
@@ -26,8 +26,7 @@ public class EntrenadorBLL
         _EntrenadorMapper = new Mapper(config);
     }
 
-    public EntrenadorBLL(IGenericRepository<Entrenador> repository,
-        IGenericReadOnlyRepository<Entrenador> repositoryRO)
+    public EntrenadorBLL(IGenericRepository<Entrenador> repository)
     {
         this.repository = repository;
     }
@@ -35,7 +34,7 @@ public class EntrenadorBLL
 
     public List<EntrenadorModel> GetEntrenador(Pagination pagination)
     {
-        var entrenadorFromDB = repository.GetAll(pagination);
+        var entrenadorFromDB = repository.GetAllPag(pagination);
         var entrenadorModel = _EntrenadorMapper.Map<List<Entrenador>, List<EntrenadorModel>>(entrenadorFromDB);
 
         return entrenadorModel

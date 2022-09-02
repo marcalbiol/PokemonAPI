@@ -12,6 +12,8 @@
         <Compile Remove="PokemonDAL.cs" />
         <Compile Remove="Repository\Entity\ApplicationUser.cs" />
         <Compile Remove="Repository\Entity\Tipos_Bonus.cs" />
+        <Compile Remove="Repository\GenericRepository\GenericReadOnlyRepository.cs" />
+        <Compile Remove="Repository\GenericRepository\IGenericReadOnlyRepository.cs" />
     </ItemGroup>
 
     <ItemGroup>

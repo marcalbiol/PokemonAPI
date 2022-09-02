@@ -23,11 +23,14 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         this.table = table;
     }
 
-    public List<T> GetAll(Pagination pagination)
+    public List<T> GetAllPag(Pagination pagination)
     {
         return table.ToList();
     }
-
+    public List<T> GetAllData()
+    {
+        return table.ToList();
+    }
 
     public T GetById(object id)
     {
@@ -63,8 +66,5 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         context.SaveChanges();
     }
 
-    public List<T> GetAllData()
-    {
-        return table.ToList();
-    }
+ 
 }

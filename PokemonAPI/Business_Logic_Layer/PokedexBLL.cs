@@ -37,7 +37,7 @@ public class PokedexBLL
 
     public List<PokedexModel> GetPokedex(Pagination pagination)
     {
-        var pokemonFromDB = repository.GetAll(pagination);
+        var pokemonFromDB = repository.GetAllPag(pagination);
         var pokedexModel = _PokedexMapper.Map<List<Pokedex>, List<PokedexModel>>(pokemonFromDB);
 
         return pokedexModel

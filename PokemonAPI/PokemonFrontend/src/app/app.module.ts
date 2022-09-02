@@ -5,6 +5,7 @@ import {AppComponent} from './app.component';
 import {PokedexService} from './app.service';
 import {EntrenadoresComponent} from './entrenadores/entrenadores.component';
 import {NavComponent} from './nav/nav.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,7 @@ import {NavComponent} from './nav/nav.component';
     NavComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule
+    BrowserModule, HttpClientModule, CommonModule
   ],
   providers: [PokedexService],
   bootstrap: [AppComponent]

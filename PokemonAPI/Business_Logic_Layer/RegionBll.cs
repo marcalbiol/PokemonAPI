@@ -16,11 +16,6 @@ namespace Business_Logic_Layer.Models
         private readonly Mapper _PokedexMapper;
         private readonly MyDbContext db = new();
         private readonly IGenericRepository<Region> repository;
-
-
-
-
-
         public RegionBll()
         {
             repository = new GenericRepository<Region>();

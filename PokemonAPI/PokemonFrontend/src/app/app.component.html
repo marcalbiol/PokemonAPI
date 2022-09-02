@@ -5,13 +5,16 @@
 <button (click)="mostrarPokedex()" class="btn btn-success"
         type="button">{{show == true ? 'Ocultar' : 'Mostrar'}}</button>
 <div *ngIf="show == true" class="card-group">
-  <div *ngFor="let pokedex of pokedex;" class="card-deck">
+
+  <div *ngFor="let pokemon of pokedex" class="card-deck">
     <div class="card" style="width: 10rem">
-      <img alt="..." class="card-img-top img-thumbnail" src={{pokedex.imagen}}>
+      <img alt="..." class="card-img-top img-thumbnail" src={{pokemon.imagen}}>
       <div class="card-body">
-        <h5 class="card-title">{{pokedex.id}}</h5>
-        <h5 class="card-title">{{pokedex.nombre}}</h5>
-        <h4 class="card-title">{{pokedex.tipo}}</h4>
+        <h5 class="card-title">{{pokemon.id}}</h5>
+        <h5 class="card-title">{{pokemon.nombre}}</h5>
+        <h5 *ngIf="pokemon.region" class="card-title">{{pokemon.region.nombre}}</h5>
+
+
         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
       </div>
     </div>

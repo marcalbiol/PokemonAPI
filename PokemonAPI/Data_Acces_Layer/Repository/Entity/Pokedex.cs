@@ -18,7 +18,7 @@ public class Pokedex
 
     public bool? Basico { get; set; }
 
-    public virtual ICollection<Tipo> Tipos { get; set; }
+    public virtual List<Tipo> Tipos { get; set; }
     public virtual List<PokedexTipo> PokedexTipos { get; set; }
 
 

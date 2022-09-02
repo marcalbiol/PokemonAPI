@@ -20,7 +20,7 @@ namespace PokemonBackend.Controllers
         }
 
 
-        [HttpGet("Regiones")]
+        [HttpGet]
         public List<RegionModel> GetRegiones()
         {
             return _BLLR.GetAllRegions();
