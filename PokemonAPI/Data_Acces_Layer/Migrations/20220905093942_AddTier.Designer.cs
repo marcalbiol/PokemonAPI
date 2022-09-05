@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Acceso_BD.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20220901175201_test")]
-    partial class test
+    [Migration("20220905093942_AddTier")]
+    partial class AddTier
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,91 @@ namespace Acceso_BD.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("Acceso_BD.Repository.Entity.Debilidades", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("DebilidadId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdTipo")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdTipo");
+
+                    b.ToTable("Debilidades");
+                });
+
+            modelBuilder.Entity("Acceso_BD.Repository.Entity.Fortalezas", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("EficazId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdTipo")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdTipo");
+
+                    b.ToTable("Fortalezas");
+                });
+
+            modelBuilder.Entity("Acceso_BD.Repository.Entity.ModificadorTipo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("BonusId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdTipo")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Modificador")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TipoBonusId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BonusId");
+
+                    b.ToTable("Modificadores");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IdTipo = 1,
+                            Modificador = 1,
+                            TipoBonusId = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IdTipo = 1,
+                            Modificador = 0,
+                            TipoBonusId = 3
+                        });
+                });
 
             modelBuilder.Entity("Acceso_BD.Repository.Entity.Pokedex", b =>
                 {
@@ -53,8 +138,7 @@ namespace Acceso_BD.Migrations
                     b.Property<int?>("StatId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Tier")
-                        .HasMaxLength(3)
+                    b.Property<int?>("TierId")
                         .HasColumnType("int");
 
                     b.Property<int?>("ZonaId")
@@ -65,6 +149,10 @@ namespace Acceso_BD.Migrations
                     b.HasIndex("RegionId");
 
                     b.HasIndex("StatId");
+
+                    b.HasIndex("TierId")
+                        .IsUnique()
+                        .HasFilter("[TierId] IS NOT NULL");
 
                     b.HasIndex("ZonaId");
 
@@ -77,15 +165,14 @@ namespace Acceso_BD.Migrations
                             Basico = true,
                             Nombre = "Bulbasaur",
                             RegionId = 1,
-                            Tier = 1
+                            TierId = 1
                         },
                         new
                         {
                             ID = 2,
                             Basico = false,
                             Nombre = "Ivysaur",
-                            RegionId = 1,
-                            Tier = 2
+                            RegionId = 1
                         },
                         new
                         {
@@ -93,35 +180,31 @@ namespace Acceso_BD.Migrations
                             Basico = false,
                             Nombre = "Venasaur",
                             RegionId = 2,
-                            Tier = 3
+                            TierId = 4
                         },
                         new
                         {
                             ID = 4,
                             Basico = true,
-                            Nombre = "Charmander",
-                            Tier = 1
+                            Nombre = "Charmander"
                         },
                         new
                         {
                             ID = 5,
                             Basico = false,
-                            Nombre = "Charmeleon",
-                            Tier = 2
+                            Nombre = "Charmeleon"
                         },
                         new
                         {
                             ID = 6,
                             Basico = false,
-                            Nombre = "Charizard ",
-                            Tier = 3
+                            Nombre = "Charizard "
                         },
                         new
                         {
                             ID = 7,
                             Basico = true,
-                            Nombre = "Squirtle",
-                            Tier = 1
+                            Nombre = "Squirtle"
                         },
                         new
                         {
@@ -880,6 +963,191 @@ namespace Acceso_BD.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Acceso_BD.Repository.Entity.Tier", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tiers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Descripcion = "Basico"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Descripcion = "Legendario"
+                        });
+                });
+
+            modelBuilder.Entity("Acceso_BD.Repository.Entity.Tipo", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
+
+                    b.Property<string>("Tipo_pokemon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tipos");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Tipo_pokemon = "Fuego"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Tipo_pokemon = "Agua"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Tipo_pokemon = "Planta"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Tipo_pokemon = "Electrico"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Tipo_pokemon = "Roca"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Tipo_pokemon = "Acero"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Tipo_pokemon = "Volador"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Tipo_pokemon = "Hielo"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Tipo_pokemon = "Bicho"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Tipo_pokemon = "Normal"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Tipo_pokemon = "Tierra"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Tipo_pokemon = "Lucha"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Tipo_pokemon = "Hada"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Tipo_pokemon = "Psiquico"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Tipo_pokemon = "Dragón"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Tipo_pokemon = "Fantasma"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Tipo_pokemon = "Siniestro"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Tipo_pokemon = "Veneno"
+                        });
+                });
+
+            modelBuilder.Entity("Acceso_BD.Repository.Entity.TipoBonus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("DebilidadId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EficazId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdTipo")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasAlternateKey("EficazId", "DebilidadId", "IdTipo");
+
+                    b.HasIndex("DebilidadId");
+
+                    b.ToTable("Bonuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DebilidadId = 2,
+                            EficazId = 3,
+                            IdTipo = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DebilidadId = 4,
+                            EficazId = 1,
+                            IdTipo = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DebilidadId = 8,
+                            EficazId = 11,
+                            IdTipo = 2
+                        });
+                });
+
             modelBuilder.Entity("Acceso_BD.Repository.Entity.Tipos_Habilidades", b =>
                 {
                     b.Property<int?>("TipoId")
@@ -956,42 +1224,6 @@ namespace Acceso_BD.Migrations
                             Id = 2,
                             NombreZona = "Inicio2"
                         });
-                });
-
-            modelBuilder.Entity("PokedexTipo", b =>
-                {
-                    b.Property<int>("PokedexsID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TiposId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PokedexsID", "TiposId");
-
-                    b.HasIndex("TiposId");
-
-                    b.ToTable("PokedexTipo", (string)null);
-                });
-
-            modelBuilder.Entity("PokemonBackend.Models.Debilidades", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("DebilidadId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdTipo")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdTipo");
-
-                    b.ToTable("Debilidades");
                 });
 
             modelBuilder.Entity("PokemonBackend.Models.Entrenador", b =>
@@ -1083,27 +1315,6 @@ namespace Acceso_BD.Migrations
                         });
                 });
 
-            modelBuilder.Entity("PokemonBackend.Models.Fortalezas", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("EficazId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdTipo")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdTipo");
-
-                    b.ToTable("Fortalezas");
-                });
-
             modelBuilder.Entity("PokemonBackend.Models.Habilidades", b =>
                 {
                     b.Property<int?>("HabilidadId")
@@ -1163,66 +1374,18 @@ namespace Acceso_BD.Migrations
                         });
                 });
 
-            modelBuilder.Entity("PokemonBackend.Models.ModificadorTipo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("BonusId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdTipo")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Modificador")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TipoBonusId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BonusId");
-
-                    b.ToTable("Modificadores");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            IdTipo = 1,
-                            Modificador = 1,
-                            TipoBonusId = 2
-                        },
-                        new
-                        {
-                            Id = 2,
-                            IdTipo = 1,
-                            Modificador = 0,
-                            TipoBonusId = 3
-                        });
-                });
-
             modelBuilder.Entity("PokemonBackend.Models.PokedexTipo", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
                     b.Property<int?>("PokedexId")
                         .HasColumnType("int");
 
                     b.Property<int>("TipoId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
-                    b.HasIndex("PokedexId");
+                    b.HasKey("PokedexId", "TipoId");
 
                     b.HasIndex("TipoId");
 
@@ -1231,321 +1394,321 @@ namespace Acceso_BD.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
                             PokedexId = 1,
-                            TipoId = 3
+                            TipoId = 3,
+                            Id = 1
                         },
                         new
                         {
-                            Id = 2,
                             PokedexId = 1,
-                            TipoId = 19
+                            TipoId = 19,
+                            Id = 2
                         },
                         new
                         {
-                            Id = 3,
                             PokedexId = 2,
-                            TipoId = 3
+                            TipoId = 3,
+                            Id = 3
                         },
                         new
                         {
-                            Id = 4,
                             PokedexId = 2,
-                            TipoId = 19
+                            TipoId = 19,
+                            Id = 4
                         },
                         new
                         {
-                            Id = 5,
                             PokedexId = 3,
-                            TipoId = 3
+                            TipoId = 3,
+                            Id = 5
                         },
                         new
                         {
-                            Id = 6,
                             PokedexId = 3,
-                            TipoId = 19
+                            TipoId = 19,
+                            Id = 6
                         },
                         new
                         {
-                            Id = 7,
                             PokedexId = 4,
-                            TipoId = 1
+                            TipoId = 1,
+                            Id = 7
                         },
                         new
                         {
-                            Id = 8,
                             PokedexId = 5,
-                            TipoId = 1
+                            TipoId = 1,
+                            Id = 8
                         },
                         new
                         {
-                            Id = 9,
                             PokedexId = 6,
-                            TipoId = 1
+                            TipoId = 1,
+                            Id = 9
                         },
                         new
                         {
-                            Id = 10,
                             PokedexId = 6,
-                            TipoId = 7
+                            TipoId = 7,
+                            Id = 10
                         },
                         new
                         {
-                            Id = 11,
                             PokedexId = 7,
-                            TipoId = 2
+                            TipoId = 2,
+                            Id = 11
                         },
                         new
                         {
-                            Id = 12,
                             PokedexId = 8,
-                            TipoId = 2
+                            TipoId = 2,
+                            Id = 12
                         },
                         new
                         {
-                            Id = 13,
                             PokedexId = 9,
-                            TipoId = 2
+                            TipoId = 2,
+                            Id = 13
                         },
                         new
                         {
-                            Id = 14,
                             PokedexId = 10,
-                            TipoId = 9
+                            TipoId = 9,
+                            Id = 14
                         },
                         new
                         {
-                            Id = 15,
                             PokedexId = 11,
-                            TipoId = 9
+                            TipoId = 9,
+                            Id = 15
                         },
                         new
                         {
-                            Id = 16,
                             PokedexId = 12,
-                            TipoId = 9
+                            TipoId = 9,
+                            Id = 16
                         },
                         new
                         {
-                            Id = 17,
                             PokedexId = 12,
-                            TipoId = 7
+                            TipoId = 7,
+                            Id = 17
                         },
                         new
                         {
-                            Id = 18,
                             PokedexId = 13,
-                            TipoId = 7
+                            TipoId = 7,
+                            Id = 18
                         },
                         new
                         {
-                            Id = 19,
                             PokedexId = 13,
-                            TipoId = 19
+                            TipoId = 19,
+                            Id = 19
                         },
                         new
                         {
-                            Id = 20,
                             PokedexId = 14,
-                            TipoId = 7
+                            TipoId = 7,
+                            Id = 20
                         },
                         new
                         {
-                            Id = 21,
                             PokedexId = 14,
-                            TipoId = 19
+                            TipoId = 19,
+                            Id = 21
                         },
                         new
                         {
-                            Id = 22,
                             PokedexId = 15,
-                            TipoId = 7
+                            TipoId = 7,
+                            Id = 22
                         },
                         new
                         {
-                            Id = 23,
                             PokedexId = 15,
-                            TipoId = 19
+                            TipoId = 19,
+                            Id = 23
                         },
                         new
                         {
-                            Id = 24,
                             PokedexId = 16,
-                            TipoId = 7
+                            TipoId = 7,
+                            Id = 24
                         },
                         new
                         {
-                            Id = 25,
                             PokedexId = 16,
-                            TipoId = 10
+                            TipoId = 10,
+                            Id = 25
                         },
                         new
                         {
-                            Id = 26,
                             PokedexId = 17,
-                            TipoId = 7
+                            TipoId = 7,
+                            Id = 26
                         },
                         new
                         {
-                            Id = 27,
                             PokedexId = 17,
-                            TipoId = 10
+                            TipoId = 10,
+                            Id = 27
                         },
                         new
                         {
-                            Id = 28,
                             PokedexId = 18,
-                            TipoId = 7
+                            TipoId = 7,
+                            Id = 28
                         },
                         new
                         {
-                            Id = 29,
                             PokedexId = 18,
-                            TipoId = 10
+                            TipoId = 10,
+                            Id = 29
                         },
                         new
                         {
-                            Id = 30,
                             PokedexId = 19,
-                            TipoId = 10
+                            TipoId = 10,
+                            Id = 30
                         },
                         new
                         {
-                            Id = 31,
                             PokedexId = 20,
-                            TipoId = 10
+                            TipoId = 10,
+                            Id = 31
                         },
                         new
                         {
-                            Id = 32,
                             PokedexId = 21,
-                            TipoId = 10
+                            TipoId = 10,
+                            Id = 32
                         },
                         new
                         {
-                            Id = 33,
                             PokedexId = 21,
-                            TipoId = 7
+                            TipoId = 7,
+                            Id = 33
                         },
                         new
                         {
-                            Id = 34,
                             PokedexId = 22,
-                            TipoId = 7
+                            TipoId = 7,
+                            Id = 34
                         },
                         new
                         {
-                            Id = 35,
                             PokedexId = 22,
-                            TipoId = 10
+                            TipoId = 10,
+                            Id = 35
                         },
                         new
                         {
-                            Id = 36,
                             PokedexId = 23,
-                            TipoId = 19
+                            TipoId = 19,
+                            Id = 36
                         },
                         new
                         {
-                            Id = 37,
                             PokedexId = 24,
-                            TipoId = 19
+                            TipoId = 19,
+                            Id = 37
                         },
                         new
                         {
-                            Id = 38,
                             PokedexId = 25,
-                            TipoId = 4
+                            TipoId = 4,
+                            Id = 38
                         },
                         new
                         {
-                            Id = 39,
                             PokedexId = 26,
-                            TipoId = 4
+                            TipoId = 4,
+                            Id = 39
                         },
                         new
                         {
-                            Id = 40,
                             PokedexId = 27,
-                            TipoId = 11
+                            TipoId = 11,
+                            Id = 40
                         },
                         new
                         {
-                            Id = 41,
                             PokedexId = 28,
-                            TipoId = 11
+                            TipoId = 11,
+                            Id = 41
                         },
                         new
                         {
-                            Id = 42,
                             PokedexId = 29,
-                            TipoId = 19
+                            TipoId = 19,
+                            Id = 42
                         },
                         new
                         {
-                            Id = 43,
                             PokedexId = 30,
-                            TipoId = 19
+                            TipoId = 19,
+                            Id = 43
                         },
                         new
                         {
-                            Id = 44,
                             PokedexId = 31,
-                            TipoId = 19
+                            TipoId = 19,
+                            Id = 44
                         },
                         new
                         {
-                            Id = 45,
                             PokedexId = 31,
-                            TipoId = 11
+                            TipoId = 11,
+                            Id = 45
                         },
                         new
                         {
-                            Id = 46,
                             PokedexId = 32,
-                            TipoId = 19
+                            TipoId = 19,
+                            Id = 46
                         },
                         new
                         {
-                            Id = 47,
                             PokedexId = 33,
-                            TipoId = 19
+                            TipoId = 19,
+                            Id = 47
                         },
                         new
                         {
-                            Id = 48,
                             PokedexId = 34,
-                            TipoId = 19
+                            TipoId = 19,
+                            Id = 48
                         },
                         new
                         {
-                            Id = 49,
                             PokedexId = 34,
-                            TipoId = 11
+                            TipoId = 11,
+                            Id = 49
                         },
                         new
                         {
-                            Id = 50,
                             PokedexId = 35,
-                            TipoId = 13
+                            TipoId = 13,
+                            Id = 50
                         },
                         new
                         {
-                            Id = 51,
                             PokedexId = 36,
-                            TipoId = 13
+                            TipoId = 13,
+                            Id = 51
                         },
                         new
                         {
-                            Id = 52,
                             PokedexId = 37,
-                            TipoId = 1
+                            TipoId = 1,
+                            Id = 52
                         },
                         new
                         {
-                            Id = 53,
                             PokedexId = 38,
-                            TipoId = 1
+                            TipoId = 1,
+                            Id = 53
                         });
                 });
 
@@ -1654,161 +1817,35 @@ namespace Acceso_BD.Migrations
                         });
                 });
 
-            modelBuilder.Entity("PokemonBackend.Models.Tipo", b =>
+            modelBuilder.Entity("Acceso_BD.Repository.Entity.Debilidades", b =>
                 {
-                    b.Property<int?>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.HasOne("Acceso_BD.Repository.Entity.Tipo", "BonusDeb")
+                        .WithMany("Debilidades")
+                        .HasForeignKey("IdTipo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
-
-                    b.Property<string>("Tipo_pokemon")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tipos");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Tipo_pokemon = "Fuego"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Tipo_pokemon = "Agua"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Tipo_pokemon = "Planta"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Tipo_pokemon = "Electrico"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Tipo_pokemon = "Roca"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Tipo_pokemon = "Acero"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Tipo_pokemon = "Volador"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Tipo_pokemon = "Hielo"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Tipo_pokemon = "Bicho"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Tipo_pokemon = "Normal"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Tipo_pokemon = "Tierra"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Tipo_pokemon = "Lucha"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Tipo_pokemon = "Hada"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Tipo_pokemon = "Psiquico"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Tipo_pokemon = "Dragón"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Tipo_pokemon = "Fantasma"
-                        },
-                        new
-                        {
-                            Id = 18,
-                            Tipo_pokemon = "Siniestro"
-                        },
-                        new
-                        {
-                            Id = 19,
-                            Tipo_pokemon = "Veneno"
-                        });
+                    b.Navigation("BonusDeb");
                 });
 
-            modelBuilder.Entity("PokemonBackend.Models.TipoBonus", b =>
+            modelBuilder.Entity("Acceso_BD.Repository.Entity.Fortalezas", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.HasOne("Acceso_BD.Repository.Entity.Tipo", "BonusEf")
+                        .WithMany("Fortalezas")
+                        .HasForeignKey("IdTipo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    b.Navigation("BonusEf");
+                });
 
-                    b.Property<int>("DebilidadId")
-                        .HasColumnType("int");
+            modelBuilder.Entity("Acceso_BD.Repository.Entity.ModificadorTipo", b =>
+                {
+                    b.HasOne("Acceso_BD.Repository.Entity.Tipo", "Bonus")
+                        .WithMany()
+                        .HasForeignKey("BonusId");
 
-                    b.Property<int>("EficazId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdTipo")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasAlternateKey("EficazId", "DebilidadId", "IdTipo");
-
-                    b.HasIndex("DebilidadId");
-
-                    b.ToTable("Bonuses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DebilidadId = 2,
-                            EficazId = 3,
-                            IdTipo = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DebilidadId = 4,
-                            EficazId = 1,
-                            IdTipo = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DebilidadId = 8,
-                            EficazId = 11,
-                            IdTipo = 2
-                        });
+                    b.Navigation("Bonus");
                 });
 
             modelBuilder.Entity("Acceso_BD.Repository.Entity.Pokedex", b =>
@@ -1821,13 +1858,38 @@ namespace Acceso_BD.Migrations
                         .WithMany("Pokedex")
                         .HasForeignKey("StatId");
 
+                    b.HasOne("Acceso_BD.Repository.Entity.Tier", "Tier")
+                        .WithOne("Pokedex")
+                        .HasForeignKey("Acceso_BD.Repository.Entity.Pokedex", "TierId");
+
                     b.HasOne("Acceso_BD.Repository.Entity.Zona", "Zona")
                         .WithMany("PokeZona")
                         .HasForeignKey("ZonaId");
 
                     b.Navigation("Region");
 
+                    b.Navigation("Tier");
+
                     b.Navigation("Zona");
+                });
+
+            modelBuilder.Entity("Acceso_BD.Repository.Entity.TipoBonus", b =>
+                {
+                    b.HasOne("Acceso_BD.Repository.Entity.Tipo", "BonusDeb")
+                        .WithMany("Bonus")
+                        .HasForeignKey("DebilidadId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Acceso_BD.Repository.Entity.Tipo", "BonusEf")
+                        .WithMany("Bonuses")
+                        .HasForeignKey("EficazId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("BonusDeb");
+
+                    b.Navigation("BonusEf");
                 });
 
             modelBuilder.Entity("Acceso_BD.Repository.Entity.Tipos_Habilidades", b =>
@@ -1838,7 +1900,7 @@ namespace Acceso_BD.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PokemonBackend.Models.Tipo", "Tipo")
+                    b.HasOne("Acceso_BD.Repository.Entity.Tipo", "Tipo")
                         .WithMany("Habilidades_tipos")
                         .HasForeignKey("TipoId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1847,32 +1909,6 @@ namespace Acceso_BD.Migrations
                     b.Navigation("Habilidades");
 
                     b.Navigation("Tipo");
-                });
-
-            modelBuilder.Entity("PokedexTipo", b =>
-                {
-                    b.HasOne("Acceso_BD.Repository.Entity.Pokedex", null)
-                        .WithMany()
-                        .HasForeignKey("PokedexsID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PokemonBackend.Models.Tipo", null)
-                        .WithMany()
-                        .HasForeignKey("TiposId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("PokemonBackend.Models.Debilidades", b =>
-                {
-                    b.HasOne("PokemonBackend.Models.Tipo", "BonusDeb")
-                        .WithMany("Debilidades")
-                        .HasForeignKey("IdTipo")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("BonusDeb");
                 });
 
             modelBuilder.Entity("PokemonBackend.Models.Entrenadores_Pokemon", b =>
@@ -1890,34 +1926,16 @@ namespace Acceso_BD.Migrations
                     b.Navigation("Pokemon");
                 });
 
-            modelBuilder.Entity("PokemonBackend.Models.Fortalezas", b =>
-                {
-                    b.HasOne("PokemonBackend.Models.Tipo", "BonusEf")
-                        .WithMany("Fortalezas")
-                        .HasForeignKey("IdTipo")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("BonusEf");
-                });
-
-            modelBuilder.Entity("PokemonBackend.Models.ModificadorTipo", b =>
-                {
-                    b.HasOne("PokemonBackend.Models.Tipo", "Bonus")
-                        .WithMany()
-                        .HasForeignKey("BonusId");
-
-                    b.Navigation("Bonus");
-                });
-
             modelBuilder.Entity("PokemonBackend.Models.PokedexTipo", b =>
                 {
                     b.HasOne("Acceso_BD.Repository.Entity.Pokedex", "Pokedex")
-                        .WithMany()
-                        .HasForeignKey("PokedexId");
+                        .WithMany("PokedexTipos")
+                        .HasForeignKey("PokedexId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("PokemonBackend.Models.Tipo", "Tipo")
-                        .WithMany()
+                    b.HasOne("Acceso_BD.Repository.Entity.Tipo", "Tipo")
+                        .WithMany("PokedexTipos")
                         .HasForeignKey("TipoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1943,33 +1961,36 @@ namespace Acceso_BD.Migrations
                     b.Navigation("Stat");
                 });
 
-            modelBuilder.Entity("PokemonBackend.Models.TipoBonus", b =>
-                {
-                    b.HasOne("PokemonBackend.Models.Tipo", "BonusDeb")
-                        .WithMany("Bonus")
-                        .HasForeignKey("DebilidadId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("PokemonBackend.Models.Tipo", "BonusEf")
-                        .WithMany("Bonuses")
-                        .HasForeignKey("EficazId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("BonusDeb");
-
-                    b.Navigation("BonusEf");
-                });
-
             modelBuilder.Entity("Acceso_BD.Repository.Entity.Pokedex", b =>
                 {
+                    b.Navigation("PokedexTipos");
+
                     b.Navigation("Pokemons");
                 });
 
             modelBuilder.Entity("Acceso_BD.Repository.Entity.Region", b =>
                 {
                     b.Navigation("Pokedex");
+                });
+
+            modelBuilder.Entity("Acceso_BD.Repository.Entity.Tier", b =>
+                {
+                    b.Navigation("Pokedex");
+                });
+
+            modelBuilder.Entity("Acceso_BD.Repository.Entity.Tipo", b =>
+                {
+                    b.Navigation("Bonus");
+
+                    b.Navigation("Bonuses");
+
+                    b.Navigation("Debilidades");
+
+                    b.Navigation("Fortalezas");
+
+                    b.Navigation("Habilidades_tipos");
+
+                    b.Navigation("PokedexTipos");
                 });
 
             modelBuilder.Entity("Acceso_BD.Repository.Entity.Zona", b =>
@@ -1997,19 +2018,6 @@ namespace Acceso_BD.Migrations
                     b.Navigation("Pokedex");
 
                     b.Navigation("Pokemons");
-                });
-
-            modelBuilder.Entity("PokemonBackend.Models.Tipo", b =>
-                {
-                    b.Navigation("Bonus");
-
-                    b.Navigation("Bonuses");
-
-                    b.Navigation("Debilidades");
-
-                    b.Navigation("Fortalezas");
-
-                    b.Navigation("Habilidades_tipos");
                 });
 #pragma warning restore 612, 618
         }

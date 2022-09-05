@@ -11,4 +11,5 @@ public class PokedexModel
     public string? Imagen { get; set; }
     public List<TipoModel>? Tipos { get; set; }
     public RegionModel? Region { get; set; }
+    public TierModel? Tier { get; set; }
 }

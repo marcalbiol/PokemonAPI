@@ -14,7 +14,8 @@ public class Pokedex
     public string? Peso { get; set; }
     public virtual ICollection<Pokemon> Pokemons { get; set; }
 
-    [MaxLength(3)] public int? Tier { get; set; }
+    public int? TierId { get; set; }
+    public virtual Tier? Tier { get; set; }
 
     public bool? Basico { get; set; }
 

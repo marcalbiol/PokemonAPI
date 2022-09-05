@@ -19,7 +19,6 @@ public class PokedexController : ControllerBase
     public PokedexController()
     {
         _BLL = new PokedexBLL();
-        _BLLR = new RegionBll();
     }
 
     [HttpGet]
@@ -39,18 +38,13 @@ public class PokedexController : ControllerBase
         return Ok(pokemon);
     }
 
+    /*
     [HttpGet("Tier/{id}")]
     public IQueryable<PokedexModel> GetPokemonByTier(int id)
     {
-        var Pokemon = from pkx in db.Pokedex
-            where pkx.Tier == id
-            select new PokedexModel
-            {
-                ID = pkx.ID,
-                Nombre = pkx.Nombre
-            };
-        return Pokemon;
+    
     }
+    */
 
     [HttpGet("Region/{id}")]
     public IQueryable<PokedexModel> GetPokemonByRegion(int id)

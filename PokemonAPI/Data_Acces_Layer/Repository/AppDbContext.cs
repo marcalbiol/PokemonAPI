@@ -30,6 +30,7 @@ public class MyDbContext : DbContext
     public DbSet<Habilidades> Habilidades { get; set; }
     public DbSet<Region> Regiones { get; set; }
     public DbSet<Zona> Zonas { get; set; }
+    public DbSet<Tier> Tiers { get; set; }
 
 
     // configuracion de relaciones con FluentAPI
@@ -104,6 +105,12 @@ public class MyDbContext : DbContext
                 j => { j.HasKey(t => new { t.PokedexId, t.TipoId }); });
 
 
+
+        modelBuilder.Entity<Pokedex>()
+            .HasOne(a => a.Tier)
+            .WithOne(b => b.Pokedex)
+            .HasForeignKey<Pokedex>(b => b.TierId);
+
         // Relacion Tipo y Bonus
 
         modelBuilder.Entity<TipoBonus>().HasAlternateKey(x => new { x.EficazId, x.DebilidadId, x.IdTipo });
@@ -159,6 +166,13 @@ public class MyDbContext : DbContext
             new Zona { Id = 2, NombreZona = "Inicio2" }
         );
 
+        modelBuilder.Entity<Tier>().HasData(
+         new Tier { Id = 1, Descripcion = "Basico" },
+         new Tier { Id = 4, Descripcion = "Legendario" }
+     );
+
+
+
         modelBuilder.Entity<TipoBonus>().HasData(
             new TipoBonus { Id = 1, IdTipo = 1, DebilidadId = 2, EficazId = 3 },
             new TipoBonus { Id = 2, IdTipo = 2, DebilidadId = 4, EficazId = 1 },
@@ -179,13 +193,13 @@ public class MyDbContext : DbContext
 
 
         modelBuilder.Entity<Pokedex>().HasData(
-            new Pokedex { ID = 1, Nombre = "Bulbasaur", Tier = 1, Basico = true, RegionId = 1 },
-            new Pokedex { ID = 2, Nombre = "Ivysaur", Tier = 2, Basico = false, RegionId = 1 },
-            new Pokedex { ID = 3, Nombre = "Venasaur", Tier = 3, Basico = false, RegionId = 2 },
-            new Pokedex { ID = 4, Nombre = "Charmander", Tier = 1, Basico = true },
-            new Pokedex { ID = 5, Nombre = "Charmeleon", Tier = 2, Basico = false },
-            new Pokedex { ID = 6, Nombre = "Charizard ", Tier = 3, Basico = false },
-            new Pokedex { ID = 7, Nombre = "Squirtle", Tier = 1, Basico = true },
+            new Pokedex { ID = 1, Nombre = "Bulbasaur", Basico = true, RegionId = 1, TierId = 1 },
+            new Pokedex { ID = 2, Nombre = "Ivysaur", Basico = false, RegionId = 1 },
+            new Pokedex { ID = 3, Nombre = "Venasaur", Basico = false, RegionId = 2, TierId = 4 },
+            new Pokedex { ID = 4, Nombre = "Charmander", Basico = true },
+            new Pokedex { ID = 5, Nombre = "Charmeleon", Basico = false },
+            new Pokedex { ID = 6, Nombre = "Charizard ", Basico = false },
+            new Pokedex { ID = 7, Nombre = "Squirtle", Basico = true },
             new Pokedex { ID = 8, Nombre = "Wartotle" },
             new Pokedex { ID = 9, Nombre = "Blastoise" },
             new Pokedex { ID = 10, Nombre = "Caterpie", ZonaId = 1 },

@@ -1,5 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
+import { SubscriptionLog } from 'rxjs/internal/testing/SubscriptionLog';
 import {PokedexService} from './app.service';
 import {pokedex} from "./pokedex.interface";
 
@@ -17,14 +18,9 @@ export class AppComponent implements OnInit {
 
   // al levantar el servidor se ejecuta ->
   ngOnInit() {
-    this.pokedexservice.getPokedex().subscribe(
-      res => {
-        this.pokedex = res
-        console.log(this.pokedex[2])
-  }, err => {
-        console.log(err)
-      }
-    );
+    this.pokedexservice.getPokedex().subscribe(val => {
+      console.log(val.)
+    })
   }
 
   getData(){
