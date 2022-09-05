@@ -3,7 +3,6 @@ using Acceso_BD.Repository.GenericRepository;
 using AutoMapper;
 using Business_Logic_Layer.Models;
 using Data_Acces_Layer.Repository;
-using PokemonBackend.Models;
 
 namespace Business_Logic_Layer;
 
@@ -18,8 +17,9 @@ public class PokedexBLL
     public PokedexBLL()
     {
         repository = new GenericRepository<Pokedex>();
-        
-        var configuration = new MapperConfiguration(cfg => {
+
+        var configuration = new MapperConfiguration(cfg =>
+        {
             cfg.CreateMap<Pokedex, PokedexModel>()
                 //.Include<Tipo, TipoModel>()
                 .ForMember(dest => dest.Tipos, opt => opt.MapFrom(src => src.Tipos))

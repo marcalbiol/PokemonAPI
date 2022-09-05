@@ -105,7 +105,6 @@ public class MyDbContext : DbContext
                 j => { j.HasKey(t => new { t.PokedexId, t.TipoId }); });
 
 
-
         modelBuilder.Entity<Pokedex>()
             .HasOne(a => a.Tier)
             .WithOne(b => b.Pokedex)
@@ -167,10 +166,9 @@ public class MyDbContext : DbContext
         );
 
         modelBuilder.Entity<Tier>().HasData(
-         new Tier { Id = 1, Descripcion = "Basico" },
-         new Tier { Id = 4, Descripcion = "Legendario" }
-     );
-
+            new Tier { Id = 1, Descripcion = "Basico" },
+            new Tier { Id = 4, Descripcion = "Legendario" }
+        );
 
 
         modelBuilder.Entity<TipoBonus>().HasData(

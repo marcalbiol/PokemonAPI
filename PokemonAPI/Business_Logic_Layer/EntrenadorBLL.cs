@@ -9,7 +9,6 @@ namespace Business_Logic_Layer;
 
 public class EntrenadorBLL
 {
-    
     private readonly Mapper _EntrenadorMapper;
     private readonly IGenericRepository<Entrenador> repository;
 

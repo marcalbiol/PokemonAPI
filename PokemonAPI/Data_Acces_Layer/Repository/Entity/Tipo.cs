@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Acceso_BD.Repository.Entity;
 using PokemonBackend.Models;
 
 namespace Acceso_BD.Repository.Entity;

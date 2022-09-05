@@ -5,7 +5,7 @@ import {AppComponent} from './app.component';
 import {PokedexService} from './app.service';
 import {EntrenadoresComponent} from './entrenadores/entrenadores.component';
 import {NavComponent} from './nav/nav.component';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
   declarations: [

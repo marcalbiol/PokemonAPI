@@ -1,6 +1,5 @@
 import {HttpClient} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
-import { SubscriptionLog } from 'rxjs/internal/testing/SubscriptionLog';
 import {PokedexService} from './app.service';
 
 @Component({

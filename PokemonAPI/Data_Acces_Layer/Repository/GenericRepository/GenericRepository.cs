@@ -7,8 +7,8 @@ namespace Acceso_BD.Repository.GenericRepository;
 public class GenericRepository<T> : IGenericRepository<T> where T : class
 {
     private readonly MyDbContext context;
-    private Pagination pagination;
     private readonly DbSet<T> table;
+    private Pagination pagination;
 
     public GenericRepository()
     {
@@ -27,6 +27,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         return table.ToList();
     }
+
     public List<T> GetAllData()
     {
         return table.ToList();
@@ -65,6 +66,4 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         context.SaveChanges();
     }
-
- 
 }

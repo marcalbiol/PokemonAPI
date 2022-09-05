@@ -1,6 +1,4 @@
-﻿using Acceso_BD.Repository.Entity;
-
-namespace Business_Logic_Layer.Models;
+﻿namespace Business_Logic_Layer.Models;
 
 public class PokedexModel
 {

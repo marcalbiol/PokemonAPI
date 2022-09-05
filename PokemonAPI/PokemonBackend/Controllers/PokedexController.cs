@@ -11,10 +11,9 @@ namespace PokemonBackend.Controllers;
 [Produces("application/json")]
 public class PokedexController : ControllerBase
 {
+    private readonly MyDbContext db = new();
     public PokedexBLL _BLL;
     public RegionBll _BLLR;
-
-    private readonly MyDbContext db = new();
 
     public PokedexController()
     {
@@ -90,7 +89,7 @@ public class PokedexController : ControllerBase
         return Pokemon;
     }
 
-    
+
     [HttpGet("AllData")]
     public List<PokedexModel> GetPokemonTipos()
     {

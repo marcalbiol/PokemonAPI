@@ -11,9 +11,9 @@ namespace PokemonBackend.Controllers;
 [ApiController]
 public class EntrenadoresPokemons : ControllerBase
 {
+    private readonly MyDbContext db = new();
     public EntrenadorPokemonBLL _BLL;
     private Mapper _EntrenadorPokemonMapper;
-    private readonly MyDbContext db = new();
 
     public EntrenadoresPokemons()
     {
