@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
 import { SubscriptionLog } from 'rxjs/internal/testing/SubscriptionLog';
-import {pokedex} from "./pokedex.interface";
+import {pokedex} from "./pokedex";
 import {map} from  'rxjs/operators';
 
 @Injectable()
