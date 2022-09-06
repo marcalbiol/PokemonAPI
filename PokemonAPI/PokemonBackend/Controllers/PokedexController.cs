@@ -13,7 +13,6 @@ public class PokedexController : ControllerBase
 {
     private readonly MyDbContext db = new();
     public PokedexBLL _BLL;
-    public RegionBll _BLLR;
 
     public PokedexController()
     {
@@ -23,7 +22,6 @@ public class PokedexController : ControllerBase
     [HttpGet]
     public List<PokedexModel> GetPokedex([FromQuery] Pagination pagination)
     {
-        // mostrar region, usando linq?
         return _BLL.GetPokedex(pagination);
     }
 
@@ -31,49 +29,18 @@ public class PokedexController : ControllerBase
     public ActionResult<PokedexModel> GetPokedexById(int id)
     {
         var pokemon = _BLL.GetPokedexById(id);
-
         if (pokemon == null) return StatusCode(404, "Pokemon no encontrado");
-
         return Ok(pokemon);
     }
-
-    /*
-    [HttpGet("Tier/{id}")]
-    public IQueryable<PokedexModel> GetPokemonByTier(int id)
-    {
     
-    }
-    */
-
-    [HttpGet("Region/{id}")]
-    public IQueryable<PokedexModel> GetPokemonByRegion(int id)
+    
+    //TODO ENDPOINT PARA FILTRAR POR TIPO. INTRODUCIENDO TIPO
+    [HttpGet("FindByName")]
+    public List<PokedexModel> GetByName([FromQuery]string name)
     {
-        var Pokemon = from pkx in db.Pokedex
-            join r in db.Regiones
-                on pkx.RegionId equals r.Id
-            where pkx.RegionId == id
-            select new PokedexModel
-            {
-                ID = pkx.ID,
-                Nombre = pkx.Nombre
-            };
-        return Pokemon;
+        return _BLL.GetByName(name);
     }
-
-    [HttpGet("Zona/{id}")]
-    public IQueryable<PokedexModel> GetPokemonByZona(int id)
-    {
-        var Pokemon = from pkx in db.Pokedex
-            join r in db.Zonas
-                on pkx.ZonaId equals r.Id
-            where pkx.ZonaId == id
-            select new PokedexModel
-            {
-                ID = pkx.ID,
-                Nombre = pkx.Nombre
-            };
-        return Pokemon;
-    }
+    
 
     [HttpGet("PokemonsAsignables")]
     public IQueryable<PokemonModel> GetPokemonAv()
@@ -95,9 +62,7 @@ public class PokedexController : ControllerBase
     {
         return _BLL.GetAll();
     }
-
-    //TODO ENDPOINT PARA FILTRAR POR TIPO. INTRODUCIENDO TIPO
-
+    
     [HttpGet("Habilidades")]
     public IQueryable<HabilidadesModel> GetHabilidadesTipo()
     {
@@ -123,10 +88,9 @@ public class PokedexController : ControllerBase
         _BLL.PokedexEdit(id, model);
     }
 
-
     [HttpGet("InsertImgURL")]
-    public void PutImage()
+    public void SeedImage()
     {
-        _BLL.PutImage();
+        _BLL.SeedImageURL();
     }
 }

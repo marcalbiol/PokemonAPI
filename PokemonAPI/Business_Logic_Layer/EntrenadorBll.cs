@@ -33,7 +33,7 @@ public class EntrenadorBLL
 
     public List<EntrenadorModel> GetEntrenador(Pagination pagination)
     {
-        var entrenadorFromDB = repository.GetAllPag(pagination);
+        var entrenadorFromDB = repository.GetByPag(pagination);
         var entrenadorModel = _EntrenadorMapper.Map<List<Entrenador>, List<EntrenadorModel>>(entrenadorFromDB);
 
         return entrenadorModel

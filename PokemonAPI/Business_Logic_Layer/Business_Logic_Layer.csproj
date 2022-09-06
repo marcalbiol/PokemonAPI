@@ -7,12 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Remove="PokemonBLL.cs"/>
+        <Compile Remove="PokemonBLL.cs" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="AutoMapper" Version="11.0.1"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.7"/>
+        <PackageReference Include="AutoMapper" Version="11.0.1" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.7" />
         <PackageReference Include="SonarAnalyzer.CSharp" Version="8.43.0.51858">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -20,7 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Data_Acces_Layer\Acceso_BD.csproj"/>
+        <ProjectReference Include="..\Data_Acces_Layer\Acceso_BD.csproj" />
     </ItemGroup>
 
 </Project>

@@ -39,7 +39,7 @@ public class PokedexBLL
 
     public List<PokedexModel> GetPokedex(Pagination pagination)
     {
-        var pokemonFromDB = repository.GetAllPag(pagination);
+        var pokemonFromDB = repository.GetByPag(pagination);
         var pokedexModel = _PokedexMapper.Map<List<Pokedex>, List<PokedexModel>>(pokemonFromDB);
 
         return pokedexModel
@@ -49,6 +49,19 @@ public class PokedexBLL
             .ToList();
     }
 
+    public List<PokedexModel> GetByName(string name)
+    {
+        var pokedexDB = repository.GetAllData();
+        var pokedexModel = _PokedexMapper.Map<List<Pokedex>, List<PokedexModel>>(pokedexDB);
+
+        var pokFind = pokedexModel
+            .Where(t => t.Nombre == name)
+            .ToList();
+        //TODO control de error si el pokemon no existe
+        return pokFind; 
+        
+    }
+    
     public PokedexModel GetPokedexById(int id)
     {
         var pokemonEntity = repository.GetById(id);
@@ -70,9 +83,9 @@ public class PokedexBLL
         }
     }
 
-    public void PutImage()
+    public void SeedImageURL()
     {
-        // TODO que no sea metodo put SINO get y solo ejecute el metodo
+        //TODO coger la longitud de la pokedex 
         for (var id = 1; id <= 151; id++)
         {
             var url = $"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.png";

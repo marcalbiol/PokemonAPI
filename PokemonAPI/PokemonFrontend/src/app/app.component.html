@@ -14,7 +14,6 @@
         <h5 *ngIf="pokemon.region" class="card-title">{{pokemon.region.nombre}}</h5>
         <h5 *ngIf="pokemon.tier" class="card-title">{{pokemon.tier.descripcion}}</h5>
         <h5 *ngFor="let tipos of pokemon.tipos" class="card-title">{{tipos.tipo_pokemon}}</h5>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
       </div>
     </div>
   </div>

@@ -23,7 +23,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         this.table = table;
     }
 
-    public List<T> GetAllPag(Pagination pagination)
+    public List<T> GetByPag(Pagination pagination)
     {
         return table.ToList();
     }
@@ -37,6 +37,12 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         return table.Find(id);
     }
+
+    public List<T> GetByName(string name)
+    {
+        return table.ToList();
+    }
+    
 
     public void Delete(object id)
     {
