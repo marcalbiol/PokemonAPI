@@ -34,13 +34,25 @@ public class PokedexController : ControllerBase
     }
     
     
-    //TODO ENDPOINT PARA FILTRAR POR TIPO. INTRODUCIENDO TIPO
+    //TODO ENDPOINT PARA FILTRAR POR TIPO Y TIER
+    
+    [HttpGet("Tier/")]
+    public List<PokedexModel> GetTierByName(string descripcion)
+    {
+        return _BLL.GetTierByName(descripcion);
+    }
+    
+        
+    
+    
+    
+    
+    
     [HttpGet("FindByName")]
     public List<PokedexModel> GetByName([FromQuery]string name)
     {
         return _BLL.GetByName(name);
     }
-    
 
     [HttpGet("PokemonsAsignables")]
     public IQueryable<PokemonModel> GetPokemonAv()

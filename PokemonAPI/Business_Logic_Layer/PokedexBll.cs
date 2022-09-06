@@ -59,8 +59,21 @@ public class PokedexBLL
             .ToList();
         //TODO control de error si el pokemon no existe
         return pokFind; 
-        
     }
+    
+    public List<PokedexModel> GetTierByName(string tierName)
+    {
+        var pokedexDB = repository.GetAllData();
+        var pokedexModel = _PokedexMapper.Map<List<Pokedex>, List<PokedexModel>>(pokedexDB);
+        
+        var pokFind = pokedexModel
+            .OrderBy(i => i.ID)
+            .Where(t => t.Tier.Descripcion == tierName)
+            .ToList();
+        //TODO control de error si el pokemon no existe
+        return pokFind; 
+    }
+    
     
     public PokedexModel GetPokedexById(int id)
     {

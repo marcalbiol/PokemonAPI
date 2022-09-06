@@ -7,7 +7,7 @@ namespace Business_Logic_Layer.Models;
 
 public class RegionBll
 {
-    private readonly Mapper _PokedexMapper;
+    private readonly Mapper _Mapper;
     private readonly MyDbContext db = new();
     private readonly IGenericRepository<Region> repository;
 
@@ -16,7 +16,7 @@ public class RegionBll
         repository = new GenericRepository<Region>();
 
         var configuration = new MapperConfiguration(cfg => { cfg.CreateMap<Region, RegionModel>(); });
-        _PokedexMapper = new Mapper(configuration);
+        _Mapper = new Mapper(configuration);
     }
 
     public RegionBll(IGenericRepository<Region> repository)
@@ -27,6 +27,6 @@ public class RegionBll
     public List<RegionModel> GetAllRegions()
     {
         var regionEntity = repository.GetAllData();
-        return _PokedexMapper.Map<List<Region>, List<RegionModel>>(regionEntity);
+        return _Mapper.Map<List<Region>, List<RegionModel>>(regionEntity);
     }
 }

@@ -10,18 +10,18 @@ namespace PokemonBackend.Controllers;
 public class RegionController : ControllerBase
 {
     private readonly MyDbContext db = new();
-    public RegionBll _BLLR;
+    public RegionBll _BLR;
 
 
     public RegionController()
     {
-        _BLLR = new RegionBll();
+        _BLR = new RegionBll();
     }
 
 
     [HttpGet]
     public List<RegionModel> GetRegiones()
     {
-        return _BLLR.GetAllRegions();
+        return _BLR.GetAllRegions();
     }
 }
