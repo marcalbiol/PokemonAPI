@@ -4,5 +4,5 @@ public class Zona
 {
     public int? Id { get; set; }
     public string? NombreZona { get; set; }
-    public virtual ICollection<Pokedex>? PokeZona { get; set; }
+    public virtual List<Pokedex>? Pokedex { get; set; }
 }

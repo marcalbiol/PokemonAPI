@@ -16,9 +16,9 @@ export class AppComponent implements OnInit {
 
   // al levantar el servidor se ejecuta ->
   ngOnInit() {
-    this.pokedexservice.getPokedex().subscribe(val => {
-      this.pokedex = val
-      console.log(val[2])
+    this.pokedexservice.getPokedex().subscribe(value => {
+      this.pokedex = value
+      console.log(value)
     })
   }
 

@@ -6,12 +6,16 @@ import {PokedexService} from './app.service';
 import {EntrenadoresComponent} from './entrenadores/entrenadores.component';
 import {NavComponent} from './nav/nav.component';
 import {CommonModule} from '@angular/common';
+import { ZonasComponent } from './zonas/zonas.component';
+
+//TODO: IMPLEMENTAR ROUTERLINK PARA NAVEGAR A OTRAS PAGINAS
 
 @NgModule({
   declarations: [
     AppComponent,
     EntrenadoresComponent,
-    NavComponent
+    NavComponent,
+    ZonasComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, CommonModule

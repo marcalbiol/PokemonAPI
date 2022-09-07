@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Acceso_BD.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20220905093942_AddTier")]
-    partial class AddTier
+    [Migration("20220907073154_Estable")]
+    partial class Estable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -165,14 +165,16 @@ namespace Acceso_BD.Migrations
                             Basico = true,
                             Nombre = "Bulbasaur",
                             RegionId = 1,
-                            TierId = 1
+                            TierId = 1,
+                            ZonaId = 1
                         },
                         new
                         {
                             ID = 2,
                             Basico = false,
                             Nombre = "Ivysaur",
-                            RegionId = 1
+                            RegionId = 1,
+                            ZonaId = 2
                         },
                         new
                         {
@@ -180,19 +182,22 @@ namespace Acceso_BD.Migrations
                             Basico = false,
                             Nombre = "Venasaur",
                             RegionId = 2,
-                            TierId = 4
+                            TierId = 4,
+                            ZonaId = 2
                         },
                         new
                         {
                             ID = 4,
                             Basico = true,
-                            Nombre = "Charmander"
+                            Nombre = "Charmander",
+                            ZonaId = 1
                         },
                         new
                         {
                             ID = 5,
                             Basico = false,
-                            Nombre = "Charmeleon"
+                            Nombre = "Charmeleon",
+                            ZonaId = 2
                         },
                         new
                         {
@@ -1863,7 +1868,7 @@ namespace Acceso_BD.Migrations
                         .HasForeignKey("Acceso_BD.Repository.Entity.Pokedex", "TierId");
 
                     b.HasOne("Acceso_BD.Repository.Entity.Zona", "Zona")
-                        .WithMany("PokeZona")
+                        .WithMany("Pokedex")
                         .HasForeignKey("ZonaId");
 
                     b.Navigation("Region");
@@ -1995,7 +2000,7 @@ namespace Acceso_BD.Migrations
 
             modelBuilder.Entity("Acceso_BD.Repository.Entity.Zona", b =>
                 {
-                    b.Navigation("PokeZona");
+                    b.Navigation("Pokedex");
                 });
 
             modelBuilder.Entity("PokemonBackend.Models.Entrenador", b =>

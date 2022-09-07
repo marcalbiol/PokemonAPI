@@ -21,13 +21,19 @@ public class PokedexBLL
         var configuration = new MapperConfiguration(cfg =>
         {
             cfg.CreateMap<Pokedex, PokedexModel>()
-                //.Include<Tipo, TipoModel>()
-                .ForMember(dest => dest.Tipos, opt => opt.MapFrom(src => src.Tipos))
-                .ForMember(dest => dest.Region, opt => opt.MapFrom(src => src.Region))
-                .ForMember(dest => dest.Tier, opt => opt.MapFrom(src => src.Tier));
+                .ForMember(dest => dest.Tipos, opt
+                    => opt.MapFrom(src => src.Tipos))
+                .ForMember(dest => dest.Region, opt
+                    => opt.MapFrom(src => src.Region))
+                .ForMember(dest => dest.Tier, opt 
+                    => opt.MapFrom(src => src.Tier))
+                .ForMember(dest => dest.Zonas, opt
+                    => opt.MapFrom(src => src.Zona));
             cfg.CreateMap<Region, RegionModel>();
             cfg.CreateMap<Tier, TierModel>();
             cfg.CreateMap<Tipo, TipoModel>();
+            cfg.CreateMap<Zona, ZonaModel>();
+            
         });
         _PokedexMapper = new Mapper(configuration);
     }
@@ -105,7 +111,6 @@ public class PokedexBLL
             var PokedexEntityDB = db.Set<Pokedex>().Find(id);
             PokedexEntityDB.Imagen = url;
         }
-
         db.SaveChanges();
     }
 }

@@ -10,4 +10,5 @@ public class PokedexModel
     public List<TipoModel>? Tipos { get; set; }
     public RegionModel? Region { get; set; }
     public TierModel Tier { get; set; }
+    public ZonaModel? Zonas { get; set; }
 }

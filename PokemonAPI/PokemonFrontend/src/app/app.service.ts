@@ -15,7 +15,8 @@ export class PokedexService {
   }
 
   getPokedex(): Observable<pokedex[]> {
-    return this.http.get<pokedex[]>(this.urlEndPoint + "/Pokedex/AllData")
+   // return this.http.get<pokedex[]>(this.urlEndPoint + "/Pokedex/AllData")
+    return this.http.get<pokedex[]>(this.urlEndPoint + "/Pokedex")
   }
 
   /*

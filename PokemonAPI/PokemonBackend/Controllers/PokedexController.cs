@@ -32,24 +32,19 @@ public class PokedexController : ControllerBase
         if (pokemon == null) return StatusCode(404, "Pokemon no encontrado");
         return Ok(pokemon);
     }
-    
-    
+
+
     //TODO ENDPOINT PARA FILTRAR POR TIPO Y TIER
-    
+
     [HttpGet("Tier/")]
     public List<PokedexModel> GetTierByName(string descripcion)
     {
         return _BLL.GetTierByName(descripcion);
     }
-    
-        
-    
-    
-    
-    
-    
+
+
     [HttpGet("FindByName")]
-    public List<PokedexModel> GetByName([FromQuery]string name)
+    public List<PokedexModel> GetByName([FromQuery] string name)
     {
         return _BLL.GetByName(name);
     }
@@ -74,7 +69,7 @@ public class PokedexController : ControllerBase
     {
         return _BLL.GetAll();
     }
-    
+
     [HttpGet("Habilidades")]
     public IQueryable<HabilidadesModel> GetHabilidadesTipo()
     {

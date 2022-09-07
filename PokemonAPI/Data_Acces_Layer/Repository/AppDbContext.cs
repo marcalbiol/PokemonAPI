@@ -49,7 +49,7 @@ public class MyDbContext : DbContext
 
         modelBuilder.Entity<Pokedex>()
             .HasOne(r => r.Zona)
-            .WithMany(r => r.PokeZona)
+            .WithMany(r => r.Pokedex)
             .HasForeignKey(r => r.ZonaId);
 
         // Pokemon Pokedex
@@ -191,12 +191,12 @@ public class MyDbContext : DbContext
 
 
         modelBuilder.Entity<Pokedex>().HasData(
-            new Pokedex { ID = 1, Nombre = "Bulbasaur", Basico = true, RegionId = 1, TierId = 1 },
-            new Pokedex { ID = 2, Nombre = "Ivysaur", Basico = false, RegionId = 1 },
-            new Pokedex { ID = 3, Nombre = "Venasaur", Basico = false, RegionId = 2, TierId = 4 },
-            new Pokedex { ID = 4, Nombre = "Charmander", Basico = true },
-            new Pokedex { ID = 5, Nombre = "Charmeleon", Basico = false },
-            new Pokedex { ID = 6, Nombre = "Charizard ", Basico = false },
+            new Pokedex { ID = 1, Nombre = "Bulbasaur", Basico = true, RegionId = 1, TierId = 1, ZonaId = 1},
+            new Pokedex { ID = 2, Nombre = "Ivysaur", Basico = false, RegionId = 1, ZonaId = 2 },
+            new Pokedex { ID = 3, Nombre = "Venasaur", Basico = false, RegionId = 2, TierId = 4, ZonaId = 2},
+            new Pokedex { ID = 4, Nombre = "Charmander", Basico = true, ZonaId = 1 },
+            new Pokedex { ID = 5, Nombre = "Charmeleon", Basico = false, ZonaId = 2 },
+            new Pokedex { ID = 6, Nombre = "Charizard ", Basico = false},
             new Pokedex { ID = 7, Nombre = "Squirtle", Basico = true },
             new Pokedex { ID = 8, Nombre = "Wartotle" },
             new Pokedex { ID = 9, Nombre = "Blastoise" },

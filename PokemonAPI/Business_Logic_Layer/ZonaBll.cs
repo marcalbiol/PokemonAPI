@@ -1,0 +1,40 @@
+﻿using Acceso_BD.Repository.Entity;
+using Acceso_BD.Repository.GenericRepository;
+using AutoMapper;
+using Data_Acces_Layer.Repository;
+
+namespace Business_Logic_Layer.Models;
+
+public class ZonaBll
+{
+    private readonly Mapper _Mapper;
+    private readonly MyDbContext db = new();
+    private readonly IGenericRepository<Zona> repository;
+    
+    public ZonaBll()
+    {
+        repository = new GenericRepository<Zona>();
+
+        var configuration = new MapperConfiguration(
+            cfg =>
+            {
+                cfg.CreateMap<Zona, ZonaModel>()
+                    .ForMember(dest => dest.Pokemon, opt
+                        => opt.MapFrom(src => src.Pokedex));
+                cfg.CreateMap<Pokedex, PokeZonaModel>();
+
+            });
+        _Mapper = new Mapper(configuration);
+    }
+    
+    public ZonaBll(IGenericRepository<Zona> repository)
+    {
+        this.repository = repository;
+    }
+    
+    public List<ZonaModel> GetAllZonas()
+    {
+        var zonaEntity = repository.GetAllData();
+        return _Mapper.Map<List<Zona>, List<ZonaModel>>(zonaEntity);
+    }
+}

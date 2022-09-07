@@ -4,7 +4,7 @@
 
 namespace Acceso_BD.Migrations
 {
-    public partial class test : Migration
+    public partial class Estable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -373,8 +373,6 @@ namespace Acceso_BD.Migrations
                 columns: new[] { "ID", "Altura", "Basico", "Imagen", "Nombre", "Peso", "RegionId", "StatId", "TierId", "ZonaId" },
                 values: new object[,]
                 {
-                    { 4, null, true, null, "Charmander", null, null, null, null, null },
-                    { 5, null, false, null, "Charmeleon", null, null, null, null, null },
                     { 6, null, false, null, "Charizard ", null, null, null, null, null },
                     { 7, null, true, null, "Squirtle", null, null, null, null, null },
                     { 8, null, null, null, "Wartotle", null, null, null, null, null },
@@ -403,7 +401,9 @@ namespace Acceso_BD.Migrations
                     { 33, null, null, null, "Nidorino", null, null, null, null, null },
                     { 34, null, null, null, "Nidoking", null, null, null, null, null },
                     { 35, null, null, null, "Clefairy", null, null, null, null, null },
-                    { 36, null, null, null, "Clefable", null, null, null, null, null }
+                    { 36, null, null, null, "Clefable", null, null, null, null, null },
+                    { 37, null, null, null, "Vulpix", null, null, null, null, null },
+                    { 38, null, null, null, "Ninetales", null, null, null, null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -411,8 +411,6 @@ namespace Acceso_BD.Migrations
                 columns: new[] { "ID", "Altura", "Basico", "Imagen", "Nombre", "Peso", "RegionId", "StatId", "TierId", "ZonaId" },
                 values: new object[,]
                 {
-                    { 37, null, null, null, "Vulpix", null, null, null, null, null },
-                    { 38, null, null, null, "Ninetales", null, null, null, null, null },
                     { 39, null, null, null, "Jigglypuff", null, null, null, null, null },
                     { 40, null, null, null, "Wigglytuff", null, null, null, null, null },
                     { 41, null, null, null, "Zubat", null, null, null, null, null },
@@ -452,7 +450,9 @@ namespace Acceso_BD.Migrations
                     { 75, null, null, null, "Graveler", null, null, null, null, null },
                     { 76, null, null, null, "Golem", null, null, null, null, null },
                     { 77, null, null, null, "Ponyta", null, null, null, null, null },
-                    { 78, null, null, null, "Rapidash", null, null, null, null, null }
+                    { 78, null, null, null, "Rapidash", null, null, null, null, null },
+                    { 79, null, null, null, "Slowpoke", null, null, null, null, null },
+                    { 80, null, null, null, "Slowbro", null, null, null, null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -460,8 +460,6 @@ namespace Acceso_BD.Migrations
                 columns: new[] { "ID", "Altura", "Basico", "Imagen", "Nombre", "Peso", "RegionId", "StatId", "TierId", "ZonaId" },
                 values: new object[,]
                 {
-                    { 79, null, null, null, "Slowpoke", null, null, null, null, null },
-                    { 80, null, null, null, "Slowbro", null, null, null, null, null },
                     { 81, null, null, null, "Magnemite", null, null, null, null, null },
                     { 82, null, null, null, "Magneton", null, null, null, null, null },
                     { 83, null, null, null, "Farfetch'd", null, null, null, null, null },
@@ -501,7 +499,9 @@ namespace Acceso_BD.Migrations
                     { 117, null, null, null, "Seadra", null, null, null, null, null },
                     { 118, null, null, null, "Goldeen", null, null, null, null, null },
                     { 119, null, null, null, "Seaking", null, null, null, null, null },
-                    { 120, null, null, null, "Staryu", null, null, null, null, null }
+                    { 120, null, null, null, "Staryu", null, null, null, null, null },
+                    { 121, null, null, null, "Starmie", null, null, null, null, null },
+                    { 122, null, null, null, "Mr.Mime", null, null, null, null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -509,8 +509,6 @@ namespace Acceso_BD.Migrations
                 columns: new[] { "ID", "Altura", "Basico", "Imagen", "Nombre", "Peso", "RegionId", "StatId", "TierId", "ZonaId" },
                 values: new object[,]
                 {
-                    { 121, null, null, null, "Starmie", null, null, null, null, null },
-                    { 122, null, null, null, "Mr.Mime", null, null, null, null, null },
                     { 123, null, null, null, "Scyher", null, null, null, null, null },
                     { 124, null, null, null, "Jynx", null, null, null, null, null },
                     { 125, null, null, null, "Electabuzz", null, null, null, null, null },
@@ -575,7 +573,9 @@ namespace Acceso_BD.Migrations
                     { 2, "Agua" },
                     { 3, "Planta" },
                     { 4, "Electrico" },
-                    { 5, "Roca" }
+                    { 5, "Roca" },
+                    { 6, "Acero" },
+                    { 7, "Volador" }
                 });
 
             migrationBuilder.InsertData(
@@ -583,8 +583,6 @@ namespace Acceso_BD.Migrations
                 columns: new[] { "Id", "Tipo_pokemon" },
                 values: new object[,]
                 {
-                    { 6, "Acero" },
-                    { 7, "Volador" },
                     { 8, "Hielo" },
                     { 9, "Bicho" },
                     { 10, "Normal" },
@@ -622,9 +620,11 @@ namespace Acceso_BD.Migrations
                 columns: new[] { "ID", "Altura", "Basico", "Imagen", "Nombre", "Peso", "RegionId", "StatId", "TierId", "ZonaId" },
                 values: new object[,]
                 {
-                    { 1, null, true, null, "Bulbasaur", null, 1, null, 1, null },
-                    { 2, null, false, null, "Ivysaur", null, 1, null, null, null },
-                    { 3, null, false, null, "Venasaur", null, 2, null, null, null },
+                    { 1, null, true, null, "Bulbasaur", null, 1, null, 1, 1 },
+                    { 2, null, false, null, "Ivysaur", null, 1, null, null, 2 },
+                    { 3, null, false, null, "Venasaur", null, 2, null, 4, 2 },
+                    { 4, null, true, null, "Charmander", null, null, null, null, 1 },
+                    { 5, null, false, null, "Charmeleon", null, null, null, null, 2 },
                     { 10, null, null, null, "Caterpie", null, null, null, null, 1 },
                     { 13, null, null, null, "Weedle", null, null, null, null, 2 }
                 });
@@ -634,8 +634,6 @@ namespace Acceso_BD.Migrations
                 columns: new[] { "Id", "Nivel", "Nombre", "PokedexId", "Shiny", "StatId" },
                 values: new object[,]
                 {
-                    { 2, 0, null, 4, null, null },
-                    { 4, 0, null, 5, null, null },
                     { 5, 0, null, 100, null, null },
                     { 6, 0, null, 25, null, null }
                 });
@@ -645,8 +643,6 @@ namespace Acceso_BD.Migrations
                 columns: new[] { "PokedexId", "TipoId", "Id" },
                 values: new object[,]
                 {
-                    { 4, 1, 7 },
-                    { 5, 1, 8 },
                     { 6, 1, 9 },
                     { 6, 7, 10 },
                     { 7, 2, 11 },
@@ -674,7 +670,9 @@ namespace Acceso_BD.Migrations
                     { 23, 19, 36 },
                     { 24, 19, 37 },
                     { 25, 4, 38 },
-                    { 26, 4, 39 }
+                    { 26, 4, 39 },
+                    { 27, 11, 40 },
+                    { 28, 11, 41 }
                 });
 
             migrationBuilder.InsertData(
@@ -682,8 +680,6 @@ namespace Acceso_BD.Migrations
                 columns: new[] { "PokedexId", "TipoId", "Id" },
                 values: new object[,]
                 {
-                    { 27, 11, 40 },
-                    { 28, 11, 41 },
                     { 29, 19, 42 },
                     { 30, 19, 43 },
                     { 31, 11, 45 },
@@ -726,7 +722,9 @@ namespace Acceso_BD.Migrations
                 values: new object[,]
                 {
                     { 1, 0, null, 1, null, null },
-                    { 3, 0, null, 2, null, null }
+                    { 2, 0, null, 4, null, null },
+                    { 3, 0, null, 2, null, null },
+                    { 4, 0, null, 5, null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -740,6 +738,8 @@ namespace Acceso_BD.Migrations
                     { 2, 19, 4 },
                     { 3, 3, 5 },
                     { 3, 19, 6 },
+                    { 4, 1, 7 },
+                    { 5, 1, 8 },
                     { 10, 9, 14 },
                     { 13, 7, 18 },
                     { 13, 19, 19 }
