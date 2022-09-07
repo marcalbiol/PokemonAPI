@@ -10,17 +10,26 @@ namespace PokemonBackend.Controllers;
 public class ZonaController : ControllerBase
 {
     private readonly MyDbContext db = new();
-    public ZonaBll _BLR;
+    public ZonaBll _BLL;
     
     public ZonaController()
     {
-        _BLR = new ZonaBll();
+        _BLL = new ZonaBll();
     }
     
     [HttpGet]
     public List<ZonaModel> GetZonas()
     {
-        return _BLR.GetAllZonas();
+        return _BLL.GetAllZonas();
+    }
+    
+   
+    [HttpGet("{id}")]
+    public ActionResult<ZonaModel> GetZonaById(int id)
+    {
+        var zona = _BLL.GetZonaById(id);
+        if (zona == null) return StatusCode(404, "Pokemon no encontrado");
+        return Ok(zona);
     }
     
 }

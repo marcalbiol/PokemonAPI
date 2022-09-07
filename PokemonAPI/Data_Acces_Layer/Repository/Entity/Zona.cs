@@ -4,5 +4,6 @@ public class Zona
 {
     public int? Id { get; set; }
     public string? NombreZona { get; set; }
+    public string? ImageURL { get; set; }
     public virtual List<Pokedex>? Pokedex { get; set; }
 }

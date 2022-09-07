@@ -37,4 +37,10 @@ public class ZonaBll
         var zonaEntity = repository.GetAllData();
         return _Mapper.Map<List<Zona>, List<ZonaModel>>(zonaEntity);
     }
+    
+    public ZonaModel GetZonaById(int id)
+    {
+        var zonaEntity = repository.GetById(id);
+        return _Mapper.Map<Zona, ZonaModel>(zonaEntity);
+    }
 }

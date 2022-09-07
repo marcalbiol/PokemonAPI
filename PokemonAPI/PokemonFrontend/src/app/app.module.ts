@@ -7,6 +7,7 @@ import {EntrenadoresComponent} from './entrenadores/entrenadores.component';
 import {NavComponent} from './nav/nav.component';
 import {CommonModule} from '@angular/common';
 import { ZonasComponent } from './zonas/zonas.component';
+import {ZonaService} from "./zonas/zonas.service";
 
 //TODO: IMPLEMENTAR ROUTERLINK PARA NAVEGAR A OTRAS PAGINAS
 
@@ -20,7 +21,7 @@ import { ZonasComponent } from './zonas/zonas.component';
   imports: [
     BrowserModule, HttpClientModule, CommonModule
   ],
-  providers: [PokedexService],
+  providers: [PokedexService, ZonaService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
