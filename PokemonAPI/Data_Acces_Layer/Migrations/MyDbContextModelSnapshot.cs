@@ -171,8 +171,7 @@ namespace Acceso_BD.Migrations
                             ID = 2,
                             Basico = false,
                             Nombre = "Ivysaur",
-                            RegionId = 1,
-                            ZonaId = 2
+                            RegionId = 1
                         },
                         new
                         {
@@ -180,8 +179,7 @@ namespace Acceso_BD.Migrations
                             Basico = false,
                             Nombre = "Venasaur",
                             RegionId = 2,
-                            TierId = 4,
-                            ZonaId = 2
+                            TierId = 4
                         },
                         new
                         {
@@ -194,8 +192,7 @@ namespace Acceso_BD.Migrations
                         {
                             ID = 5,
                             Basico = false,
-                            Nombre = "Charmeleon",
-                            ZonaId = 2
+                            Nombre = "Charmeleon"
                         },
                         new
                         {
@@ -238,8 +235,7 @@ namespace Acceso_BD.Migrations
                         new
                         {
                             ID = 13,
-                            Nombre = "Weedle",
-                            ZonaId = 2
+                            Nombre = "Weedle"
                         },
                         new
                         {
@@ -1225,11 +1221,6 @@ namespace Acceso_BD.Migrations
                             Id = 1,
                             ImageURL = "https://i.pinimg.com/736x/d6/7c/3c/d67c3cbce4d7e9355e8522e10434d76c.jpg",
                             NombreZona = "Inicio"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            NombreZona = "Inicio2"
                         });
                 });
 

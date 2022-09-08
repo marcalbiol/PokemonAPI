@@ -11,14 +11,20 @@ import {ZonaService} from "./zonas.service";
 export class ZonasComponent implements OnInit {
 
   zona!: any;
-
+  pokedex!: any;
   constructor(private http: HttpClient, private pokedexservice: PokedexService,
               private zonaService: ZonaService) { }
 
   ngOnInit(): void {
     this.zonaService.getZona().subscribe(value => {
-      this.zona = value
-      console.log(value)
+      console.log(value[0])
+      this.zona = value;
     })
   }
+
+  myFunc(){
+    alert("hola")
+  }
+
+
 }

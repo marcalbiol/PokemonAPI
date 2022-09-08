@@ -7,6 +7,7 @@ import {zona} from "./zona"
 @Injectable()
 export class ZonaService {
 
+  id: number = 1;
   private urlEndPoint: string = 'https://localhost:7001/api'  // servidor de backend
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'})
 
@@ -17,4 +18,11 @@ export class ZonaService {
   getZona(): Observable<zona[]> {
     return this.http.get<zona[]>(this.urlEndPoint + "/Zona")
   }
+
+
+  getZonaById(): Observable<zona[]>{
+    return this.http.get<zona[]>(this.urlEndPoint + "/Zona" + "/1")
+
+  }
+
 }

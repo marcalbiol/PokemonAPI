@@ -1,0 +1,42 @@
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://i.imgur.com/aATX2uo.png" class="d-block w-100" alt="Map pokemon" usemap="#pokemonMap" >
+      <map name="pokemonMap">
+        <area target="" type="button" style="cursor: pointer" alt="" title="" coords="370,490,30" shape="circle" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="openZona()">
+      </map>
+    </div>
+  </div>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Launch static backdrop modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+        <h5 class="modal-title" id="staticBackdropLabel">Zona 1</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" *ngFor="let zonas of zona">
+        <img  class="card-img" src="{{zonas.imageURL}}" alt="Card image">
+        <div class="card-img-overlay">
+          <div *ngFor="let pokemons of zonas.pokemon">
+            <img src="{{pokemons.imagen}}">
+          </div>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+  </div>
+</div>
