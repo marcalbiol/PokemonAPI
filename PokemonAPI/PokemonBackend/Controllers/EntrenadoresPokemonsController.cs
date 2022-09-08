@@ -78,22 +78,4 @@ public class EntrenadoresPokemons : ControllerBase
     {
         _BLL.PutEntrenador(id, model);
     }
-
-    /*
-    [HttpPut]
-    public async Task<IActionResult> Put(int id, PutEntrenadorPokemonModel model)
-    {
-        Entrenadores_Pokemon entrenadorEntity = _EntrenadorPokemonMapper.Map<PutEntrenadorPokemonModel, Entrenadores_Pokemon>(model);
-
-        if (id != model.Id)
-        {
-            return BadRequest();
-        }
-
-        db.Entry(entrenadorEntity).State = EntityState.Modified;
-        await db.SaveChangesAsync();
-
-        return NoContent();
-    }
-    */
 }

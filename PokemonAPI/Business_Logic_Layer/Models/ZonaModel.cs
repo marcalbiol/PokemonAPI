@@ -11,7 +11,7 @@ namespace Business_Logic_Layer.Models
         public int? Id { get; set; }
         public string? NombreZona { get; set; }
         public string? ImageURL { get; set; }
-        public List<PokeZonaModel> Pokemon { get; set; }
+        public List<PokeZonaModel>? Pokemon { get; set; }
     }
 
     public class PokeZonaModel

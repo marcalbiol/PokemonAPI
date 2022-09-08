@@ -9,10 +9,7 @@
   </div>
 </div>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  Launch static backdrop modal
-</button>
+
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -24,18 +21,16 @@
         <h5 class="modal-title" id="staticBackdropLabel">Zona 1</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body" *ngFor="let zonas of zona">
-        <img  class="card-img" src="{{zonas.imageURL}}" alt="Card image">
+      <div class="modal-body" *ngFor="let zonas of zona" style="text-align: center; margin-top: 6rem">
+        <img class="card-img" src="{{zonas.imageURL}}" alt="Card image" style="width: 60rem; border-radius: 1rem; text-align: center">
         <div class="card-img-overlay">
           <div *ngFor="let pokemons of zonas.pokemon">
             <img src="{{pokemons.imagen}}">
           </div>
         </div>
-
-
       </div>
       <div class="modal-footer">
-
+        INFORMACION DEL EVENTO
       </div>
     </div>
   </div>

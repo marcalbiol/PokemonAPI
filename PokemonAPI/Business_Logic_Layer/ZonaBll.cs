@@ -43,4 +43,21 @@ public class ZonaBll
         var zonaEntity = repository.GetById(id);
         return _Mapper.Map<Zona, ZonaModel>(zonaEntity);
     }
+
+    public void PostZona(ZonaModel model)
+    {
+        var zonaEntity = _Mapper.Map<ZonaModel, Zona>(model);
+        repository.Insert(zonaEntity);
+    }
+    
+    public Zona DeleteZonaById(int id)
+    {
+        var db = new MyDbContext();
+        var data = repository.GetById(id);
+        if (data == null) throw new Exception("Not Found");
+        db.Remove(data);
+        db.SaveChanges();
+        return data;
+    }
+    
 }

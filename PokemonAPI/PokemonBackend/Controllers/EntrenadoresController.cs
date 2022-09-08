@@ -29,7 +29,6 @@ public class EntrenadorController : ControllerBase
     [HttpPost]
     public void PostEntrenador([FromBody] EntrenadorModel entrenadorModel)
     {
-        // en el controlador llamamos a los metodos de la logica de negocio
         _BLL.PostEntrenador(entrenadorModel);
     }
 

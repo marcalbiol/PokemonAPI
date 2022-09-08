@@ -1,4 +1,5 @@
-﻿using Business_Logic_Layer.Models;
+﻿using Acceso_BD.Repository.Entity;
+using Business_Logic_Layer.Models;
 using Data_Acces_Layer.Repository;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,5 +32,16 @@ public class ZonaController : ControllerBase
         if (zona == null) return StatusCode(404, "Pokemon no encontrado");
         return Ok(zona);
     }
+
+    [HttpPost]
+    public void PostZona([FromBody] ZonaModel model)
+    {
+        _BLL.PostZona(model);
+    }
     
+    [HttpDelete("{id}")]
+    public Zona DeleteZona(int id)
+    {
+        return _BLL.DeleteZonaById(id);
+    }
 }
