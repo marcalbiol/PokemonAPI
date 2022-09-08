@@ -38,6 +38,12 @@ public class ZonaController : ControllerBase
     {
         _BLL.PostZona(model);
     }
+
+    [HttpPut]
+    public void PutZona(int id, ZonaModel model)
+    {
+        _BLL.PutZona(id, model);
+    }
     
     [HttpDelete("{id}")]
     public Zona DeleteZona(int id)

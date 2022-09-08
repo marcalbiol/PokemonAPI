@@ -165,7 +165,7 @@ public class MyDbContext : DbContext
         );
 
         modelBuilder.Entity<Zona>().HasData(
-            new Zona { Id = 1, NombreZona = "Inicio", ImageURL = "https://i.pinimg.com/736x/d6/7c/3c/d67c3cbce4d7e9355e8522e10434d76c.jpg" }
+            new Zona { Id = 1, NombreZona = "Ruta 1", ImageURL = "https://i.pinimg.com/736x/d6/7c/3c/d67c3cbce4d7e9355e8522e10434d76c.jpg" }
         );
 
         modelBuilder.Entity<Tier>().HasData(
