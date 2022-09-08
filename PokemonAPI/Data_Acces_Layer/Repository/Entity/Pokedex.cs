@@ -12,15 +12,15 @@ public class Pokedex
 
     public string? Altura { get; set; }
     public string? Peso { get; set; }
-    public virtual ICollection<Pokemon> Pokemons { get; set; }
+    public virtual ICollection<Pokemon>? Pokemons { get; set; }
 
     public int? TierId { get; set; }
     public virtual Tier? Tier { get; set; }
 
     public bool? Basico { get; set; }
 
-    public virtual List<Tipo> Tipos { get; set; }
-    public virtual List<PokedexTipo> PokedexTipos { get; set; }
+    public virtual List<Tipo>? Tipos { get; set; }
+    public virtual List<PokedexTipo>? PokedexTipos { get; set; }
 
 
     public int? RegionId { get; set; }

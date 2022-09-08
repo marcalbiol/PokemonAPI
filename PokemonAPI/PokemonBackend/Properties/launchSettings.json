@@ -1,17 +1,8 @@
 {
-  "$schema": "https://json.schemastore.org/launchsettings.json",
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:1304",
-      "sslPort": 44300
-    }
-  },
   "profiles": {
     "PokemonBackend": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchUrl": "https://localhost:7001/swagger/index.html",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "Secret_key": "ASDAWQESDFDSCVJSAIDASDAHDA"
@@ -26,6 +17,15 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
+    }
+  },
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:1304",
+      "sslPort": 44300
     }
   }
 }

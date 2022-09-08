@@ -45,17 +45,20 @@ public class MyDbContext : DbContext
         modelBuilder.Entity<Pokedex>()
             .HasOne(r => r.Region)
             .WithMany(r => r.Pokedex)
-            .HasForeignKey(r => r.RegionId);
+            .HasForeignKey(r => r.RegionId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Pokedex>()
             .HasOne(r => r.Zona)
             .WithMany(r => r.Pokedex)
-            .HasForeignKey(r => r.ZonaId);
+            .HasForeignKey(r => r.ZonaId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         // Pokemon Pokedex
         modelBuilder.Entity<Pokedex>()
             .HasMany(p => p.Pokemons)
-            .WithOne(p => p.Pokedex);
+            .WithOne(p => p.Pokedex)
+            .OnDelete(DeleteBehavior.Cascade);
 
         // OneToOne Tipo Habilidades
         modelBuilder.Entity<Tipos_Habilidades>()
@@ -108,7 +111,8 @@ public class MyDbContext : DbContext
         modelBuilder.Entity<Pokedex>()
             .HasOne(a => a.Tier)
             .WithOne(b => b.Pokedex)
-            .HasForeignKey<Pokedex>(b => b.TierId);
+            .HasForeignKey<Pokedex>(b => b.TierId)
+             .OnDelete(DeleteBehavior.Cascade);
 
         // Relacion Tipo y Bonus
 

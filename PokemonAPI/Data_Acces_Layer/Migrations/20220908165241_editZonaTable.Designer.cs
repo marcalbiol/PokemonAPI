@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Acceso_BD.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20220908073622_test")]
-    partial class test
+    [Migration("20220908165241_editZonaTable")]
+    partial class editZonaTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -1864,7 +1864,8 @@ namespace Acceso_BD.Migrations
 
                     b.HasOne("Acceso_BD.Repository.Entity.Zona", "Zona")
                         .WithMany("Pokedex")
-                        .HasForeignKey("ZonaId");
+                        .HasForeignKey("ZonaId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Region");
 
