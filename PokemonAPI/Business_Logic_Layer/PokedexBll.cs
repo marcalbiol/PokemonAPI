@@ -33,6 +33,7 @@ public class PokedexBLL
             cfg.CreateMap<Tier, TierModel>();
             cfg.CreateMap<Tipo, TipoModel>();
             cfg.CreateMap<Zona, ZonaModel>();
+
             cfg.CreateMap<PokedexZonaModel, Pokedex>()
                 .ForPath(dest => dest.Zona.Id, opt => opt.MapFrom(src => src.ZonaId)).ReverseMap();
         });
@@ -56,13 +57,11 @@ public class PokedexBLL
             .ToList();
     }
 
-    public void PutPokedexZona(int id, PokedexZonaModel model)
+    public void PutPokedexZona(int id, int zonaid)
     {
-        if (model.Id == id)
-        {
-            var pokEntity = _PokedexMapper.Map<PokedexZonaModel, Pokedex>(model);
-            repository.Update(pokEntity);
-        }
+        var EntityDB = db.Set<Pokedex>().Find(id);
+        EntityDB.ZonaId = zonaid;
+        db.SaveChanges();
     }
     public List<PokedexModel> GetByName(string name)
     {
@@ -106,8 +105,8 @@ public class PokedexBLL
     {
         if (model.ID == id)
         {
-            var entrenadorEntity = _PokedexMapper.Map<PokedexModel, Pokedex>(model);
-            repository.Update(entrenadorEntity);
+            var entity= _PokedexMapper.Map<PokedexModel, Pokedex>(model);
+            repository.Update(entity);
         }
     }
 
