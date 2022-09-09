@@ -36,13 +36,13 @@ public class ZonaController : ControllerBase
     }
 
     [HttpPost]
-    public void PostZona([FromBody] ZonaModel model)
+    public void PostZona([FromBody] PutZonaModel model)
     {
         _BLL.PostZona(model);
     }
 
     [HttpPut]
-    public void PutZona(int id, ZonaModel model)
+    public void PutZona(int id, PutZonaModel model)
     {
         _BLL.PutZona(id, model);
     }

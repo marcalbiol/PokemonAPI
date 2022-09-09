@@ -22,6 +22,7 @@ public class ZonaBll
                     .ForMember(dest => dest.Pokemon, opt
                         => opt.MapFrom(src => src.Pokedex)
                             ).ReverseMap();
+                cfg.CreateMap<Zona, PutZonaModel>().ReverseMap();
                 cfg.CreateMap<Pokedex, PokeZonaModel>().ReverseMap();
                 
 
@@ -46,17 +47,17 @@ public class ZonaBll
         return _Mapper.Map<Zona, ZonaModel>(zonaEntity);
     }
 
-    public void PostZona(ZonaModel model)
+    public void PostZona(PutZonaModel model)
     {
-        var zonaEntity = _Mapper.Map<ZonaModel, Zona>(model);
+        var zonaEntity = _Mapper.Map<PutZonaModel, Zona>(model);
         repository.Insert(zonaEntity);
     }
 
-    public void PutZona(int id, ZonaModel model)
+    public void PutZona(int id, PutZonaModel model)
     {
         if (model.Id == id)
         {
-            var zonaEntity = _Mapper.Map<ZonaModel, Zona>(model);
+            var zonaEntity = _Mapper.Map<PutZonaModel, Zona>(model);
             repository.Update(zonaEntity);
         }
     }

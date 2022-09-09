@@ -14,6 +14,13 @@ namespace Business_Logic_Layer.Models
         public List<PokeZonaModel>? Pokemon { get; set; }
     }
 
+    public class PutZonaModel
+    {
+        public int? Id { get; set; }
+        public string? NombreZona { get; set; }
+        public string? ImageURL { get; set; }
+    }
+
     public class PokeZonaModel
     {
         public int? ID { get; set; }
