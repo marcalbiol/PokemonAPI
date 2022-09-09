@@ -1,4 +1,5 @@
 ﻿using Acceso_BD.Repository.Entity;
+using Business_Logic_Layer;
 using Business_Logic_Layer.Models;
 using Data_Acces_Layer.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +13,11 @@ public class ZonaController : ControllerBase
 {
     private readonly MyDbContext db = new();
     public ZonaBll _BLL;
-    
+    public PokedexBLL _PBLL;
     public ZonaController()
     {
         _BLL = new ZonaBll();
+        _PBLL = new PokedexBLL();
     }
     
     [HttpGet]
@@ -50,4 +52,11 @@ public class ZonaController : ControllerBase
     {
         return _BLL.DeleteZonaById(id);
     }
+
+    [HttpPut("/insertPokemon")]
+    public void PutZonaIntoPokemon(int id, PokedexZonaModel model)
+    {
+        _PBLL.PutPokedexZona(id, model);
+    }
+
 }
