@@ -63,6 +63,8 @@ public class PokedexBLL
         EntityDB.ZonaId = zonaid;
         db.SaveChanges();
     }
+    
+    
     public List<PokedexModel> GetByName(string name)
     {
         var pokedexDB = repository.GetAllData();

@@ -53,10 +53,17 @@ public class ZonaController : ControllerBase
         return _BLL.DeleteZonaById(id);
     }
 
-    [HttpPut("/PutPokemonIntoZona")]
-    public void PutZonaIntoPokemon(int id,int zonaid)
+    [HttpPut("PutPokemonIntoZona")]
+    public void PutZonaIntoPokemon(int zonaid, int pokemonid)
     {
-        _PBLL.PutPokedexZona(id, zonaid);
+        _PBLL.PutPokedexZona(pokemonid, zonaid);
+    }
+
+    [HttpDelete("DeletePokemonFromZona/{id}")]
+    public void DeletePokemonFromZona(int id)
+    {
+        // TODO ELIMINAR POKEMON DE LA ZONA
+        _BLL.DeletePokemonFromZona(id);
     }
 
 }

@@ -61,6 +61,14 @@ public class ZonaBll
             repository.Update(zonaEntity);
         }
     }
+
+    public void DeletePokemonFromZona(int id)
+    {
+        var db = new MyDbContext();
+        var EntityDB = db.Set<Pokedex>().Find(id);
+        EntityDB.ZonaId = null;
+        db.SaveChanges();
+    }
     
     public Zona DeleteZonaById(int id)
     {
