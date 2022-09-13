@@ -11,10 +11,19 @@ public class PokedexModel
     public RegionModel? Region { get; set; }
     public TierModel Tier { get; set; }
     public ZonaModel? Zonas { get; set; }
-    
 }
+
+public class PokedexTierModel
+{
+    public int? TierId { get; set; }
+}
+
+public class PokedexRegionModel
+{
+    public int? RegionId { get; set; }
+}
+
 public class PokedexZonaModel
 {
-    public int? Id { get; set; }
     public int? ZonaId { get; set; }
 }

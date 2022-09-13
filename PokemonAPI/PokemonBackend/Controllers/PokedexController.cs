@@ -11,72 +11,57 @@ namespace PokemonBackend.Controllers;
 [Produces("application/json")]
 public class PokedexController : ControllerBase
 {
-    private readonly MyDbContext db = new();
-    public PokedexBLL _BLL;
+    private readonly MyDbContext _db = new();
+    public PokedexBLL Bll;
 
     public PokedexController()
     {
-        _BLL = new PokedexBLL();
+        Bll = new PokedexBLL();
     }
 
     [HttpGet]
     public List<PokedexModel> GetPokedex([FromQuery] Pagination pagination)
     {
-        return _BLL.GetPokedex(pagination);
+        return Bll.GetPokedex(pagination);
     }
 
     [HttpGet("{id}")]
     public ActionResult<PokedexModel> GetPokedexById(int id)
     {
-        var pokemon = _BLL.GetPokedexById(id);
+        var pokemon = Bll.GetPokedexById(id);
         if (pokemon == null) return StatusCode(404, "Pokemon no encontrado");
         return Ok(pokemon);
     }
 
 
     //TODO ENDPOINT PARA FILTRAR POR TIPO Y TIER
-
-    [HttpGet("Tier/")]
+    /*
+    [HttpGet("Tier/{descripcion}")]
     public List<PokedexModel> GetTierByName(string descripcion)
     {
-        return _BLL.GetTierByName(descripcion);
+        return Bll.GetTierByName(descripcion);
     }
+    */
 
 
     [HttpGet("FindByName")]
     public List<PokedexModel> GetByName([FromQuery] string name)
     {
-        return _BLL.GetByName(name);
+        return Bll.GetByName(name);
     }
-
-    [HttpGet("PokemonsAsignables")]
-    public IQueryable<PokemonModel> GetPokemonAv()
-    {
-        var Pokemon = from p in db.Pokemons
-            join pkx in db.Pokedex
-                on p.PokedexId equals pkx.ID
-            select new PokemonModel
-            {
-                Id = pkx.ID,
-                Nombre = pkx.Nombre
-            };
-        return Pokemon;
-    }
-
-
     [HttpGet("AllData")]
     public List<PokedexModel> GetPokemonTipos()
     {
-        return _BLL.GetAll();
+        return Bll.GetAll();
     }
 
     [HttpGet("Habilidades")]
     public IQueryable<HabilidadesModel> GetHabilidadesTipo()
     {
-        var Habilidades = from t in db.Tipos
-            join th in db.Tipos_Habilidades
+        var Habilidades = from t in _db.Tipos
+            join th in _db.TiposHabilidades
                 on t.Id equals th.TipoId
-            join h in db.Habilidades
+            join h in _db.Habilidades
                 on th.HabilidadId equals h.HabilidadId
             select new HabilidadesModel
             {
@@ -88,16 +73,21 @@ public class PokedexController : ControllerBase
             };
         return Habilidades;
     }
+    [HttpPatch("EditTier")]
+    public void PutZonaIntoPokemon(int tierid, int pokemonid)
+    {
+        Bll.EditPokedexTier(pokemonid, tierid);
+    }
 
     [HttpPut("{id}")]
     public void PutMethod(int id, PokedexModel model)
     {
-        _BLL.PokedexEdit(id, model);
+        Bll.PokedexEdit(id, model);
     }
 
     [HttpGet("InsertImgURL")]
     public void SeedImage()
     {
-        _BLL.SeedImageURL();
+        Bll.SeedImageUrl();
     }
 }

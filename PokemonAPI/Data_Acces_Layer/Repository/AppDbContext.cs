@@ -20,12 +20,12 @@ public class MyDbContext : DbContext
     public DbSet<Pokedex> Pokedex { get; set; }
     public DbSet<Pokemon> Pokemons { get; set; }
     public DbSet<Entrenador> Entrenadores { get; set; }
-    public DbSet<PokedexTipo> Tipo_Pokemons { get; set; }
-    public DbSet<Tipos_Habilidades> Tipos_Habilidades { get; set; }
+    public DbSet<PokedexTipo> TipoPokemons { get; set; }
+    public DbSet<Tipos_Habilidades> TiposHabilidades { get; set; }
     public DbSet<Tipo> Tipos { get; set; }
     public DbSet<TipoBonus> Bonuses { get; set; }
     public DbSet<ModificadorTipo> Modificadores { get; set; }
-    public DbSet<Entrenadores_Pokemon> Entrenadores_Pokemons { get; set; }
+    public DbSet<Entrenadores_Pokemon> EntrenadoresPokemons { get; set; }
     public DbSet<Stat> Stats { get; set; }
     public DbSet<Habilidades> Habilidades { get; set; }
     public DbSet<Region> Regiones { get; set; }
@@ -52,6 +52,12 @@ public class MyDbContext : DbContext
             .HasOne(r => r.Zona)
             .WithMany(r => r.Pokedex)
             .HasForeignKey(r => r.ZonaId)
+            .OnDelete(DeleteBehavior.Cascade);
+        
+        modelBuilder.Entity<Pokedex>()
+            .HasOne(a => a.Tier)
+            .WithOne(b => b.Pokedex)
+            .HasForeignKey<Pokedex>(b => b.TierId)
             .OnDelete(DeleteBehavior.Cascade);
 
         // Pokemon Pokedex
@@ -108,11 +114,7 @@ public class MyDbContext : DbContext
                 j => { j.HasKey(t => new { t.PokedexId, t.TipoId }); });
 
 
-        modelBuilder.Entity<Pokedex>()
-            .HasOne(a => a.Tier)
-            .WithOne(b => b.Pokedex)
-            .HasForeignKey<Pokedex>(b => b.TierId)
-             .OnDelete(DeleteBehavior.Cascade);
+      
 
         // Relacion Tipo y Bonus
 

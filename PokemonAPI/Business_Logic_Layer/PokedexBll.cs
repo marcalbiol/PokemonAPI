@@ -10,7 +10,7 @@ public class PokedexBLL
 {
     // transferir la entidad de pokemon al modelo
     private readonly Mapper _PokedexMapper;
-    private readonly MyDbContext db = new();
+    private static readonly MyDbContext db = new();
     private readonly IGenericRepository<Pokedex> repository;
 
 
@@ -25,7 +25,7 @@ public class PokedexBLL
                     => opt.MapFrom(src => src.Tipos))
                 .ForMember(dest => dest.Region, opt
                     => opt.MapFrom(src => src.Region))
-                .ForMember(dest => dest.Tier, opt 
+                .ForMember(dest => dest.Tier, opt
                     => opt.MapFrom(src => src.Tier))
                 .ForMember(dest => dest.Zonas, opt
                     => opt.MapFrom(src => src.Zona));
@@ -33,16 +33,17 @@ public class PokedexBLL
             cfg.CreateMap<Tier, TierModel>();
             cfg.CreateMap<Tipo, TipoModel>();
             cfg.CreateMap<Zona, ZonaModel>();
-
+            cfg.CreateMap<PokedexRegionModel, Pokedex>()
+                .ForPath(dest => dest.Region.Id, opt
+                    => opt.MapFrom(src => src.RegionId)).ReverseMap();
             cfg.CreateMap<PokedexZonaModel, Pokedex>()
-                .ForPath(dest => dest.Zona.Id, opt => opt.MapFrom(src => src.ZonaId)).ReverseMap();
+                .ForPath(dest => dest.Zona.Id, opt
+                    => opt.MapFrom(src => src.ZonaId)).ReverseMap();
+            cfg.CreateMap<PokedexTierModel, Pokedex>()
+                .ForPath(dest => dest.TierId, opt
+                    => opt.MapFrom(src => src.TierId)).ReverseMap();
         });
         _PokedexMapper = new Mapper(configuration);
-    }
-
-    public PokedexBLL(IGenericRepository<Pokedex> repository)
-    {
-        this.repository = repository;
     }
 
     public List<PokedexModel> GetPokedex(Pagination pagination)
@@ -57,13 +58,20 @@ public class PokedexBLL
             .ToList();
     }
 
-    public void PutPokedexZona(int id, int zonaid)
+    public void EditPokedexZona(int pokedexid, int zonaid)
     {
-        var EntityDB = db.Set<Pokedex>().Find(id);
-        EntityDB.ZonaId = zonaid;
+        var entityDb = FindPokemonInDb(pokedexid);
+        entityDb.ZonaId = zonaid;
         db.SaveChanges();
     }
-    
+
+    public void EditPokedexTier(int pokedexid, int tierid)
+    {
+        var entityDb = FindPokemonInDb(pokedexid);
+        entityDb.TierId = tierid;
+        db.SaveChanges();
+    }
+
     
     public List<PokedexModel> GetByName(string name)
     {
@@ -74,23 +82,8 @@ public class PokedexBLL
             .Where(t => t.Nombre == name)
             .ToList();
         //TODO control de error si el pokemon no existe
-        return pokFind; 
+        return pokFind;
     }
-    
-    public List<PokedexModel> GetTierByName(string tierName)
-    {
-        var pokedexDB = repository.GetAllData();
-        var pokedexModel = _PokedexMapper.Map<List<Pokedex>, List<PokedexModel>>(pokedexDB);
-        
-        var pokFind = pokedexModel
-            .OrderBy(i => i.ID)
-            .Where(t => t.Tier.Descripcion == tierName)
-            .ToList();
-        //TODO control de error si el pokemon no existe
-        return pokFind; 
-    }
-    
-    
     public PokedexModel GetPokedexById(int id)
     {
         var pokemonEntity = repository.GetById(id);
@@ -107,20 +100,27 @@ public class PokedexBLL
     {
         if (model.ID == id)
         {
-            var entity= _PokedexMapper.Map<PokedexModel, Pokedex>(model);
+            var entity = _PokedexMapper.Map<PokedexModel, Pokedex>(model);
             repository.Update(entity);
         }
     }
 
-    public void SeedImageURL()
+    public void SeedImageUrl()
     {
         //TODO coger la longitud de la pokedex 
         for (var id = 1; id <= 151; id++)
         {
             var url = $"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.png";
-            var PokedexEntityDB = db.Set<Pokedex>().Find(id);
-            PokedexEntityDB.Imagen = url;
+            var pokedexEntityDB = FindPokemonInDb(id);
+            pokedexEntityDB.Imagen = url;
         }
+
         db.SaveChanges();
     }
+    
+    public static Pokedex FindPokemonInDb(int id)
+    {
+        return db.Set<Pokedex>().Find(id);
+    }
+    
 }

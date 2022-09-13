@@ -1,19 +1,20 @@
 ﻿using Acceso_BD.Repository.Entity;
 using Acceso_BD.Repository.GenericRepository;
 using AutoMapper;
+using Business_Logic_Layer.Models;
 using Data_Acces_Layer.Repository;
 
-namespace Business_Logic_Layer.Models;
+namespace Business_Logic_Layer;
 
 public class ZonaBll
 {
-    private readonly Mapper _Mapper;
-    private readonly MyDbContext db = new();
-    private readonly IGenericRepository<Zona> repository;
+    private readonly Mapper _mapper;
+    private readonly MyDbContext _db = new();
+    private readonly IGenericRepository<Zona> _repository;
     
     public ZonaBll()
     {
-        repository = new GenericRepository<Zona>();
+        _repository = new GenericRepository<Zona>();
 
         var configuration = new MapperConfiguration(
             cfg =>
@@ -27,56 +28,49 @@ public class ZonaBll
                 
 
             });
-        _Mapper = new Mapper(configuration);
-    }
-    
-    public ZonaBll(IGenericRepository<Zona> repository)
-    {
-        this.repository = repository;
+        _mapper = new Mapper(configuration);
     }
     
     public List<ZonaModel> GetAllZonas()
     {
-        var zonaEntity = repository.GetAllData();
-        return _Mapper.Map<List<Zona>, List<ZonaModel>>(zonaEntity);
+        var zonaEntity = _repository.GetAllData();
+        return _mapper.Map<List<Zona>, List<ZonaModel>>(zonaEntity);
     }
     
     public ZonaModel GetZonaById(int id)
     {
-        var zonaEntity = repository.GetById(id);
-        return _Mapper.Map<Zona, ZonaModel>(zonaEntity);
+        var zonaEntity = _repository.GetById(id);
+        return _mapper.Map<Zona, ZonaModel>(zonaEntity);
     }
 
     public void PostZona(PutZonaModel model)
     {
-        var zonaEntity = _Mapper.Map<PutZonaModel, Zona>(model);
-        repository.Insert(zonaEntity);
+        var zonaEntity = _mapper.Map<PutZonaModel, Zona>(model);
+        _repository.Insert(zonaEntity);
     }
 
     public void PutZona(int id, PutZonaModel model)
     {
         if (model.Id == id)
         {
-            var zonaEntity = _Mapper.Map<PutZonaModel, Zona>(model);
-            repository.Update(zonaEntity);
+            var zonaEntity = _mapper.Map<PutZonaModel, Zona>(model);
+            _repository.Update(zonaEntity);
         }
     }
 
     public void DeletePokemonFromZona(int id)
     {
-        var db = new MyDbContext();
-        var EntityDB = db.Set<Pokedex>().Find(id);
-        EntityDB.ZonaId = null;
-        db.SaveChanges();
+        var entityDb = PokedexBLL.FindPokemonInDb(id);
+        entityDb.ZonaId = null;
+        _db.SaveChanges();
     }
     
     public Zona DeleteZonaById(int id)
     {
-        var db = new MyDbContext();
-        var data = repository.GetById(id);
+        var data = _repository.GetById(id);
         if (data == null) throw new Exception("Not Found");
-        db.Remove(data);
-        db.SaveChanges();
+        _db.Remove(data);
+        _db.SaveChanges();
         return data;
     }
     

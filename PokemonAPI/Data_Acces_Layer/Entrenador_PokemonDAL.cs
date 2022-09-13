@@ -10,7 +10,7 @@ public class Entrenador_PokemonDAL
     public List<Entrenadores_Pokemon> GetAll()
     {
         var db = new MyDbContext();
-        return db.Entrenadores_Pokemons.ToList();
+        return db.EntrenadoresPokemons.ToList();
     }
 
     public void PostEntrenadorPokemon(Entrenadores_Pokemon entrenador_pokemons)
@@ -32,7 +32,7 @@ public class Entrenador_PokemonDAL
     public Entrenadores_Pokemon GetEntById(int id)
     {
         var db = new MyDbContext();
-        ep = db.Entrenadores_Pokemons.FirstOrDefault(x => x.Id == id);
+        ep = db.EntrenadoresPokemons.FirstOrDefault(x => x.Id == id);
 
         return ep;
     }

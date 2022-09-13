@@ -30,7 +30,7 @@ public class EntrenadoresPokemons : ControllerBase
     public IQueryable<EntrenadorPokemonModel> GetEntrenador()
     {
         var Entrenador = from pk in db.Pokemons
-            join ep in db.Entrenadores_Pokemons
+            join ep in db.EntrenadoresPokemons
                 on pk.Id equals ep.PokemonId
             join et in db.Entrenadores
                 on ep.EntrenadorId equals et.Id
@@ -50,7 +50,7 @@ public class EntrenadoresPokemons : ControllerBase
     public IQueryable<EntrenadorPokemonModel> GetEntrenadorById(int id)
     {
         var Entrenador = from pk in db.Pokemons
-            join ep in db.Entrenadores_Pokemons
+            join ep in db.EntrenadoresPokemons
                 on pk.Id equals ep.PokemonId
             join et in db.Entrenadores
                 on ep.EntrenadorId equals et.Id
