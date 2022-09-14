@@ -34,20 +34,14 @@ public class PokedexBLL
             cfg.CreateMap<Tier, TierModel>();
             cfg.CreateMap<Tipo, TipoModel>();
             cfg.CreateMap<Zona, ZonaModel>();
-            cfg.CreateMap<PokedexRegionModel, Pokedex>()
-                .ForPath(dest => dest.Region.Id, opt
-                    => opt.MapFrom(src => src.RegionId)).ReverseMap();
             cfg.CreateMap<PokedexZonaModel, Pokedex>()
                 .ForPath(dest => dest.Zona.Id, opt
                     => opt.MapFrom(src => src.ZonaId)).ReverseMap();
-            cfg.CreateMap<PokedexTierModel, Pokedex>()
-                .ForPath(dest => dest.TierId, opt
-                    => opt.MapFrom(src => src.TierId)).ReverseMap();
+            
             cfg.CreateMap<Pokedex, EditPokedexModel>()
                 .ForMember(dest => dest.Nombre, opt => opt.MapFrom(src => src.Nombre))
                 .ForMember(dest => dest.Altura, opt => opt.MapFrom(src => src.Altura))
                 .ForMember(dest => dest.Peso, opt => opt.MapFrom(src => src.Peso));
-            cfg.CreateMap<EditPokedexModel, Pokedex>();
         });
         _PokedexMapper = new Mapper(configuration);
     }
@@ -68,13 +62,6 @@ public class PokedexBLL
     {
         var entityDb = FindPokemonInDb(pokedexid);
         entityDb.ZonaId = zonaid;
-        db.SaveChanges();
-    }
-
-    public void EditPokedexTier(int pokedexid, int tierid)
-    {
-        var entityDb = FindPokemonInDb(pokedexid);
-        entityDb.TierId = tierid;
         db.SaveChanges();
     }
 

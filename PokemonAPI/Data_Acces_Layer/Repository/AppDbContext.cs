@@ -31,6 +31,7 @@ public class MyDbContext : DbContext
     public DbSet<Region> Regiones { get; set; }
     public DbSet<Zona> Zonas { get; set; }
     public DbSet<Tier> Tiers { get; set; }
+    public DbSet<Register> Logins { get; set; }
 
 
     // configuracion de relaciones con FluentAPI

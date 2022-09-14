@@ -20,17 +20,6 @@ public class EditPokedexModel
     public string? Altura { get; set; }
     public string? Peso { get; set; }
 }
-
-public class PokedexTierModel
-{
-    public int? TierId { get; set; }
-}
-
-public class PokedexRegionModel
-{
-    public int? RegionId { get; set; }
-}
-
 public class PokedexZonaModel
 {
     public int? ZonaId { get; set; }

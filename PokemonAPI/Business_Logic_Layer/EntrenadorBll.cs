@@ -25,12 +25,6 @@ public class EntrenadorBLL
         _EntrenadorMapper = new Mapper(config);
     }
 
-    public EntrenadorBLL(IGenericRepository<Entrenador> repository)
-    {
-        this.repository = repository;
-    }
-
-
     public List<EntrenadorModel> GetEntrenador(Pagination pagination)
     {
         var entrenadorFromDB = repository.GetByPag(pagination);

@@ -63,12 +63,7 @@ public class PokedexController : ControllerBase
             };
         return Habilidades;
     }
-
-    [HttpPatch("EditTier")]
-    public void PutZonaIntoPokemon(int tierid, int pokemonid)
-    {
-        Bll.EditPokedexTier(pokemonid, tierid);
-    }
+    
 
     [HttpPatch("{id}")]
     public void EditInfoPokemon(int id, EditPokedexModel model)
