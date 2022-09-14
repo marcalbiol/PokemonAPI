@@ -8,9 +8,10 @@ namespace Business_Logic_Layer;
 
 public class PokedexBLL
 {
+    private static readonly MyDbContext db = new();
+
     // transferir la entidad de pokemon al modelo
     private readonly Mapper _PokedexMapper;
-    private static readonly MyDbContext db = new();
     private readonly IGenericRepository<Pokedex> repository;
 
 
@@ -42,6 +43,11 @@ public class PokedexBLL
             cfg.CreateMap<PokedexTierModel, Pokedex>()
                 .ForPath(dest => dest.TierId, opt
                     => opt.MapFrom(src => src.TierId)).ReverseMap();
+            cfg.CreateMap<Pokedex, EditPokedexModel>()
+                .ForMember(dest => dest.Nombre, opt => opt.MapFrom(src => src.Nombre))
+                .ForMember(dest => dest.Altura, opt => opt.MapFrom(src => src.Altura))
+                .ForMember(dest => dest.Peso, opt => opt.MapFrom(src => src.Peso));
+            cfg.CreateMap<EditPokedexModel, Pokedex>();
         });
         _PokedexMapper = new Mapper(configuration);
     }
@@ -52,7 +58,7 @@ public class PokedexBLL
         var pokedexModel = _PokedexMapper.Map<List<Pokedex>, List<PokedexModel>>(pokemonFromDB);
 
         return pokedexModel
-            .OrderBy(on => on.ID)
+            .OrderBy(on => on.Id)
             .Skip((pagination.Pagina - 1) * pagination.TamañoPagina)
             .Take(pagination.TamañoPagina)
             .ToList();
@@ -72,7 +78,7 @@ public class PokedexBLL
         db.SaveChanges();
     }
 
-    
+
     public List<PokedexModel> GetByName(string name)
     {
         var pokedexDB = repository.GetAllData();
@@ -84,6 +90,7 @@ public class PokedexBLL
         //TODO control de error si el pokemon no existe
         return pokFind;
     }
+
     public PokedexModel GetPokedexById(int id)
     {
         var pokemonEntity = repository.GetById(id);
@@ -96,11 +103,15 @@ public class PokedexBLL
         return _PokedexMapper.Map<List<Pokedex>, List<PokedexModel>>(pokemonEntity);
     }
 
-    public void PokedexEdit(int id, PokedexModel model)
+    public void PokedexEdit(int id, EditPokedexModel model)
     {
-        if (model.ID == id)
+        var entityfromDb = FindPokemonInDb(id);
+        // TODO comprobar si los otros campos se introducen
+        if (model.Id == id)
         {
-            var entity = _PokedexMapper.Map<PokedexModel, Pokedex>(model);
+            if (model.Nombre == null) model.Nombre = entityfromDb.Nombre;
+
+            var entity = _PokedexMapper.Map<EditPokedexModel, Pokedex>(model);
             repository.Update(entity);
         }
     }
@@ -117,10 +128,9 @@ public class PokedexBLL
 
         db.SaveChanges();
     }
-    
+
     public static Pokedex FindPokemonInDb(int id)
     {
         return db.Set<Pokedex>().Find(id);
     }
-    
 }

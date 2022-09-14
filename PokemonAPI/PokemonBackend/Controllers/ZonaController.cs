@@ -14,19 +14,20 @@ public class ZonaController : ControllerBase
     private readonly MyDbContext db = new();
     public ZonaBll _BLL;
     public PokedexBLL _PBLL;
+
     public ZonaController()
     {
         _BLL = new ZonaBll();
         _PBLL = new PokedexBLL();
     }
-    
+
     [HttpGet]
     public List<ZonaModel> GetZonas()
     {
         return _BLL.GetAllZonas();
     }
-    
-   
+
+
     [HttpGet("{id}")]
     public ActionResult<ZonaModel> GetZonaById(int id)
     {
@@ -46,7 +47,7 @@ public class ZonaController : ControllerBase
     {
         _BLL.PutZona(id, model);
     }
-    
+
     [HttpDelete("{id}")]
     public Zona DeleteZona(int id)
     {
@@ -65,5 +66,4 @@ public class ZonaController : ControllerBase
         // TODO ELIMINAR POKEMON DE LA ZONA
         _BLL.DeletePokemonFromZona(pokemonid);
     }
-
 }

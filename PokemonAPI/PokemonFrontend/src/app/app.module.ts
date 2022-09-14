@@ -6,11 +6,11 @@ import {PokedexService} from './app.service';
 import {EntrenadoresComponent} from './entrenadores/entrenadores.component';
 import {NavComponent} from './nav/nav.component';
 import {CommonModule} from '@angular/common';
-import { ZonasComponent } from './zonas/zonas.component';
+import {ZonasComponent} from './zonas/zonas.component';
 import {ZonaService} from "./zonas/zonas.service";
-import { MapaComponent } from './mapa/mapa.component';
+import {MapaComponent} from './mapa/mapa.component';
 import {MapaService} from "./mapa/mapa.service";
-import { ModalComponent } from './mapa/modal/modal.component';
+import {ModalComponent} from './mapa/modal/modal.component';
 
 //TODO: IMPLEMENTAR ROUTERLINK PARA NAVEGAR A OTRAS PAGINAS
 

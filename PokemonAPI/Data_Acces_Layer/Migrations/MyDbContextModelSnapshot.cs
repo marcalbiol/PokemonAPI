@@ -1162,7 +1162,7 @@ namespace Acceso_BD.Migrations
 
                     b.HasIndex("HabilidadId");
 
-                    b.ToTable("Tipos_Habilidades");
+                    b.ToTable("TiposHabilidades");
 
                     b.HasData(
                         new
@@ -1290,7 +1290,7 @@ namespace Acceso_BD.Migrations
 
                     b.HasIndex("PokemonId");
 
-                    b.ToTable("Entrenadores_Pokemons");
+                    b.ToTable("EntrenadoresPokemons");
 
                     b.HasData(
                         new

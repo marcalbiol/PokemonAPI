@@ -42,7 +42,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         return table.ToList();
     }
-    
+
 
     public void Delete(object id)
     {

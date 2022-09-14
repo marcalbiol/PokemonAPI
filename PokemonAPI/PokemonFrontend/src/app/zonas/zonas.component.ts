@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {PokedexService} from "../app.service";
 import {ZonaService} from "./zonas.service";
@@ -12,8 +12,10 @@ export class ZonasComponent implements OnInit {
 
   zona!: any;
   pokedex!: any;
+
   constructor(private http: HttpClient, private pokedexservice: PokedexService,
-              private zonaService: ZonaService) { }
+              private zonaService: ZonaService) {
+  }
 
   ngOnInit(): void {
     this.zonaService.getZona().subscribe(value => {
@@ -22,7 +24,7 @@ export class ZonasComponent implements OnInit {
     })
   }
 
-  myFunc(){
+  myFunc() {
     alert("hola")
   }
 

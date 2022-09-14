@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
 import {ZonaService} from "../zonas/zonas.service";
 import {MapaService} from "./mapa.service";
@@ -14,7 +13,7 @@ export class MapaComponent implements OnInit {
 
   constructor(private zonaService: ZonaService,
               private mapaService: MapaService
-              ) {
+  ) {
   }
 
   ngOnInit(): void {

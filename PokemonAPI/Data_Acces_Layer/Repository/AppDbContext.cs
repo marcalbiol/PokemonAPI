@@ -20,7 +20,7 @@ public class MyDbContext : DbContext
     public DbSet<Pokedex> Pokedex { get; set; }
     public DbSet<Pokemon> Pokemons { get; set; }
     public DbSet<Entrenador> Entrenadores { get; set; }
-    public DbSet<PokedexTipo> TipoPokemons { get; set; }
+    public DbSet<PokedexTipo> Tipo_Pokemons { get; set; }
     public DbSet<Tipos_Habilidades> TiposHabilidades { get; set; }
     public DbSet<Tipo> Tipos { get; set; }
     public DbSet<TipoBonus> Bonuses { get; set; }
@@ -53,7 +53,7 @@ public class MyDbContext : DbContext
             .WithMany(r => r.Pokedex)
             .HasForeignKey(r => r.ZonaId)
             .OnDelete(DeleteBehavior.Cascade);
-        
+
         modelBuilder.Entity<Pokedex>()
             .HasOne(a => a.Tier)
             .WithOne(b => b.Pokedex)
@@ -114,8 +114,6 @@ public class MyDbContext : DbContext
                 j => { j.HasKey(t => new { t.PokedexId, t.TipoId }); });
 
 
-      
-
         // Relacion Tipo y Bonus
 
         modelBuilder.Entity<TipoBonus>().HasAlternateKey(x => new { x.EficazId, x.DebilidadId, x.IdTipo });
@@ -167,7 +165,11 @@ public class MyDbContext : DbContext
         );
 
         modelBuilder.Entity<Zona>().HasData(
-            new Zona { Id = 1, NombreZona = "Ruta 1", ImageURL = "https://i.pinimg.com/736x/d6/7c/3c/d67c3cbce4d7e9355e8522e10434d76c.jpg" }
+            new Zona
+            {
+                Id = 1, NombreZona = "Ruta 1",
+                ImageURL = "https://i.pinimg.com/736x/d6/7c/3c/d67c3cbce4d7e9355e8522e10434d76c.jpg"
+            }
         );
 
         modelBuilder.Entity<Tier>().HasData(
@@ -196,19 +198,19 @@ public class MyDbContext : DbContext
 
 
         modelBuilder.Entity<Pokedex>().HasData(
-            new Pokedex { ID = 1, Nombre = "Bulbasaur", Basico = true, RegionId = 1, TierId = 1, ZonaId = 1},
-            new Pokedex { ID = 2, Nombre = "Ivysaur", Basico = false, RegionId = 1},
-            new Pokedex { ID = 3, Nombre = "Venasaur", Basico = false, RegionId = 2, TierId = 4},
+            new Pokedex { ID = 1, Nombre = "Bulbasaur", Basico = true, RegionId = 1, TierId = 1, ZonaId = 1 },
+            new Pokedex { ID = 2, Nombre = "Ivysaur", Basico = false, RegionId = 1 },
+            new Pokedex { ID = 3, Nombre = "Venasaur", Basico = false, RegionId = 2, TierId = 4 },
             new Pokedex { ID = 4, Nombre = "Charmander", Basico = true, ZonaId = 1 },
-            new Pokedex { ID = 5, Nombre = "Charmeleon", Basico = false},
-            new Pokedex { ID = 6, Nombre = "Charizard ", Basico = false},
+            new Pokedex { ID = 5, Nombre = "Charmeleon", Basico = false },
+            new Pokedex { ID = 6, Nombre = "Charizard ", Basico = false },
             new Pokedex { ID = 7, Nombre = "Squirtle", Basico = true },
             new Pokedex { ID = 8, Nombre = "Wartotle" },
             new Pokedex { ID = 9, Nombre = "Blastoise" },
             new Pokedex { ID = 10, Nombre = "Caterpie", ZonaId = 1 },
             new Pokedex { ID = 11, Nombre = "Metapod" },
             new Pokedex { ID = 12, Nombre = "Butterfree" },
-            new Pokedex { ID = 13, Nombre = "Weedle"},
+            new Pokedex { ID = 13, Nombre = "Weedle" },
             new Pokedex { ID = 14, Nombre = "Kakuna" },
             new Pokedex { ID = 15, Nombre = "Beedril" },
             new Pokedex { ID = 16, Nombre = "Pidgey" },

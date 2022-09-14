@@ -20,7 +20,7 @@ export class ZonaService {
   }
 
 
-  getZonaById(): Observable<zona[]>{
+  getZonaById(): Observable<zona[]> {
     return this.http.get<zona[]>(this.urlEndPoint + "/Zona" + "/1")
 
   }

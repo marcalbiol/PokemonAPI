@@ -33,22 +33,12 @@ public class PokedexController : ControllerBase
         return Ok(pokemon);
     }
 
-
-    //TODO ENDPOINT PARA FILTRAR POR TIPO Y TIER
-    /*
-    [HttpGet("Tier/{descripcion}")]
-    public List<PokedexModel> GetTierByName(string descripcion)
-    {
-        return Bll.GetTierByName(descripcion);
-    }
-    */
-
-
     [HttpGet("FindByName")]
     public List<PokedexModel> GetByName([FromQuery] string name)
     {
         return Bll.GetByName(name);
     }
+
     [HttpGet("AllData")]
     public List<PokedexModel> GetPokemonTipos()
     {
@@ -73,14 +63,15 @@ public class PokedexController : ControllerBase
             };
         return Habilidades;
     }
+
     [HttpPatch("EditTier")]
     public void PutZonaIntoPokemon(int tierid, int pokemonid)
     {
         Bll.EditPokedexTier(pokemonid, tierid);
     }
 
-    [HttpPut("{id}")]
-    public void PutMethod(int id, PokedexModel model)
+    [HttpPatch("{id}")]
+    public void EditInfoPokemon(int id, EditPokedexModel model)
     {
         Bll.PokedexEdit(id, model);
     }

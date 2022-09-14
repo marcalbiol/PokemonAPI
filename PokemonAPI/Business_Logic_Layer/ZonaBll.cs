@@ -8,10 +8,10 @@ namespace Business_Logic_Layer;
 
 public class ZonaBll
 {
-    private readonly Mapper _mapper;
     private readonly MyDbContext _db = new();
+    private readonly Mapper _mapper;
     private readonly IGenericRepository<Zona> _repository;
-    
+
     public ZonaBll()
     {
         _repository = new GenericRepository<Zona>();
@@ -22,21 +22,19 @@ public class ZonaBll
                 cfg.CreateMap<Zona, ZonaModel>()
                     .ForMember(dest => dest.Pokemon, opt
                         => opt.MapFrom(src => src.Pokedex)
-                            ).ReverseMap();
+                    ).ReverseMap();
                 cfg.CreateMap<Zona, PutZonaModel>().ReverseMap();
                 cfg.CreateMap<Pokedex, PokeZonaModel>().ReverseMap();
-                
-
             });
         _mapper = new Mapper(configuration);
     }
-    
+
     public List<ZonaModel> GetAllZonas()
     {
         var zonaEntity = _repository.GetAllData();
         return _mapper.Map<List<Zona>, List<ZonaModel>>(zonaEntity);
     }
-    
+
     public ZonaModel GetZonaById(int id)
     {
         var zonaEntity = _repository.GetById(id);
@@ -64,7 +62,7 @@ public class ZonaBll
         entityDb.ZonaId = null;
         _db.SaveChanges();
     }
-    
+
     public Zona DeleteZonaById(int id)
     {
         var data = _repository.GetById(id);
@@ -73,5 +71,4 @@ public class ZonaBll
         _db.SaveChanges();
         return data;
     }
-    
 }

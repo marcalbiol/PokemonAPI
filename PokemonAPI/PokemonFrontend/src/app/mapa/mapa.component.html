@@ -1,10 +1,10 @@
-<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+<div class="carousel slide" data-bs-ride="carousel" id="carouselExampleSlidesOnly">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="https://i.imgur.com/aATX2uo.png" class="d-block w-100" alt="Map pokemon" usemap="#pokemonMap">
+      <img alt="Map pokemon" class="d-block w-100" src="https://i.imgur.com/aATX2uo.png" usemap="#pokemonMap">
       <map name="pokemonMap">
-        <area target="" type="button" style="cursor: pointer" alt="" title="" coords="370,490,30" shape="circle"
-              data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="openZona()">
+        <area (click)="openZona()" alt="" coords="370,490,30" data-bs-target="#staticBackdrop" data-bs-toggle="modal" shape="circle" style="cursor: pointer"
+              target="" title="" type="button">
       </map>
     </div>
   </div>
@@ -12,22 +12,22 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div aria-hidden="true" aria-labelledby="staticBackdropLabel" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false"
+     id="staticBackdrop" tabindex="-1">
   <div class="modal-dialog modal-fullscreen">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
+        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+        <button class="btn btn-primary" type="button">Understood</button>
         <h5 class="modal-title" id="staticBackdropLabel">Titulo</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
       </div>
-      <div class="modal-body" *ngFor="let zonas of zona" style="text-align: center; margin-top: 6rem">
-        <img class="card-img" src="{{zonas.imageURL}}" alt="Card image"
+      <div *ngFor="let zonas of zona" class="modal-body" style="text-align: center; margin-top: 6rem">
+        <img alt="Card image" class="card-img" src="{{zonas.imageURL}}"
              style="width: 60rem; border-radius: 1rem; text-align: center">
         <div class="card-img-overlay">
           <div *ngFor="let pokemons of zonas.pokemon">
-            <img src="{{pokemons.imagen}}" (click)="deletePokemon(pokemons.id)" style="cursor:pointer;">
+            <img (click)="deletePokemon(pokemons.id)" src="{{pokemons.imagen}}" style="cursor:pointer;">
           </div>
         </div>
       </div>

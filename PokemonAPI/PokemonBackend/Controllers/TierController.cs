@@ -19,13 +19,12 @@ public class TierController : ControllerBase
         // inyección
         _BLR = new TierBll();
     }
-    
+
     [HttpGet]
     public List<TierModel> GetTier()
     {
         return _BLR.GetAllTiers();
     }
-    
+
     //TODO metodo put
-    
 }
