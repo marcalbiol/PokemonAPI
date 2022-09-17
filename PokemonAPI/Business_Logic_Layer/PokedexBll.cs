@@ -62,7 +62,7 @@ public class PokedexBLL
     {
         var entityDb = FindPokemonInDb(pokedexid);
         entityDb.ZonaId = zonaid;
-        db.SaveChanges();
+        db.SaveChangesAsync();
     }
 
 

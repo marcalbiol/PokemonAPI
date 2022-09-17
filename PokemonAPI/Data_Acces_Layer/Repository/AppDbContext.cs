@@ -477,7 +477,10 @@ public class MyDbContext : DbContext
     // CONEXION A LA BASE DE DATOS, YA NO SE HACE EN EL PROGRAM.CS
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var connect = @"Server=LOCALHOST;Database=db_poke_backend;Trusted_Connection=True";
+        // https://www.connectionstrings.com/sql-server/
+        // TODO GUARDAR pw en variable de entorno
+        var connect =
+            @"Server=161.97.116.226;Database=db_poke_backend;Trusted_Connection=False;User Id=sa;Password=Marc123ok.;";
         optionsBuilder
             .EnableSensitiveDataLogging()
             .UseLazyLoadingProxies();

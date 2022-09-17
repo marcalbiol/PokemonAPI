@@ -1,21 +1,22 @@
 <app-nav></app-nav>
 <app-mapa></app-mapa>
 
-<button (click)="mostrarPokedex()" class="btn btn-success"
-        type="button">{{show == true ? 'Ocultar' : 'Mostrar'}}</button>
-<div *ngIf="show == true" class="card-group">
+<div class="container">
+  <button (click)="mostrarPokedex()" class="btn btn-success"
+          type="button">{{show == true ? 'Ocultar' : 'Mostrar'}}</button>
+  <div *ngIf="show == true" class="card-group">
 
-  <div *ngFor="let pokemon of pokedex" class="card-deck">
-    <div class="card" style="width: 10rem">
-      <img alt="..." class="card-img-top img-thumbnail" src={{pokemon.imagen}}>
-      <div class="card-body">
-        <h5 class="card-title">{{pokemon.id}}</h5>
-        <h5 class="card-title">{{pokemon.nombre}}</h5>
-        <h5 *ngIf="pokemon.region" class="card-title">{{pokemon.region.nombre}}</h5>
-        <h5 *ngIf="pokemon.tier" class="card-title">{{pokemon.tier.descripcion}}</h5>
-        <h5 *ngFor="let tipos of pokemon.tipos" class="card-title">{{tipos.tipo_pokemon}}</h5>
+    <div *ngFor="let pokemon of pokedex" class="card-deck">
+      <div class="card" style="width: 10rem">
+        <img alt="..." class="card-img-top img-thumbnail" src={{pokemon.imagen}}>
+        <div class="card-body">
+          <h5 class="card-title">{{pokemon.id}}</h5>
+          <h5 class="card-title">{{pokemon.nombre}}</h5>
+          <h5 *ngIf="pokemon.region" class="card-title">{{pokemon.region.nombre}}</h5>
+          <h5 *ngIf="pokemon.tier" class="card-title">{{pokemon.tier.descripcion}}</h5>
+          <h5 *ngFor="let tipos of pokemon.tipos" class="card-title">{{tipos.tipo_pokemon}}</h5>
+        </div>
       </div>
     </div>
   </div>
 </div>
-

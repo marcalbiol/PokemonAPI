@@ -61,6 +61,7 @@ public class ZonaBll
         var entityDb = PokedexBLL.FindPokemonInDb(id);
         entityDb.ZonaId = null;
         _db.SaveChanges();
+        //TODO fix
     }
 
     public Zona DeleteZonaById(int id)

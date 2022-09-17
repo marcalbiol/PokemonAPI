@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Acceso_BD.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -35,6 +36,21 @@ namespace Acceso_BD.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Habilidades", x => x.HabilidadId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Logins",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Logins", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -194,7 +210,7 @@ namespace Acceso_BD.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tipos_Habilidades",
+                name: "TiposHabilidades",
                 columns: table => new
                 {
                     HabilidadId = table.Column<int>(type: "int", nullable: false),
@@ -203,15 +219,15 @@ namespace Acceso_BD.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tipos_Habilidades", x => new { x.TipoId, x.HabilidadId });
+                    table.PrimaryKey("PK_TiposHabilidades", x => new { x.TipoId, x.HabilidadId });
                     table.ForeignKey(
-                        name: "FK_Tipos_Habilidades_Habilidades_HabilidadId",
+                        name: "FK_TiposHabilidades_Habilidades_HabilidadId",
                         column: x => x.HabilidadId,
                         principalTable: "Habilidades",
                         principalColumn: "HabilidadId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Tipos_Habilidades_Tipos_TipoId",
+                        name: "FK_TiposHabilidades_Tipos_TipoId",
                         column: x => x.TipoId,
                         principalTable: "Tipos",
                         principalColumn: "Id",
@@ -317,7 +333,7 @@ namespace Acceso_BD.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Entrenadores_Pokemons",
+                name: "EntrenadoresPokemons",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -328,14 +344,14 @@ namespace Acceso_BD.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Entrenadores_Pokemons", x => x.Id);
+                    table.PrimaryKey("PK_EntrenadoresPokemons", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Entrenadores_Pokemons_Entrenadores_EntrenadorId",
+                        name: "FK_EntrenadoresPokemons_Entrenadores_EntrenadorId",
                         column: x => x.EntrenadorId,
                         principalTable: "Entrenadores",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Entrenadores_Pokemons_Pokemons_PokemonId",
+                        name: "FK_EntrenadoresPokemons_Pokemons_PokemonId",
                         column: x => x.PokemonId,
                         principalTable: "Pokemons",
                         principalColumn: "Id");
@@ -700,7 +716,7 @@ namespace Acceso_BD.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Tipos_Habilidades",
+                table: "TiposHabilidades",
                 columns: new[] { "HabilidadId", "TipoId", "Id" },
                 values: new object[,]
                 {
@@ -712,7 +728,7 @@ namespace Acceso_BD.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Entrenadores_Pokemons",
+                table: "EntrenadoresPokemons",
                 columns: new[] { "Id", "EntrenadorId", "PokemonId", "Shiny" },
                 values: new object[,]
                 {
@@ -757,13 +773,13 @@ namespace Acceso_BD.Migrations
                 column: "IdTipo");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Entrenadores_Pokemons_EntrenadorId",
-                table: "Entrenadores_Pokemons",
+                name: "IX_EntrenadoresPokemons_EntrenadorId",
+                table: "EntrenadoresPokemons",
                 column: "EntrenadorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Entrenadores_Pokemons_PokemonId",
-                table: "Entrenadores_Pokemons",
+                name: "IX_EntrenadoresPokemons_PokemonId",
+                table: "EntrenadoresPokemons",
                 column: "PokemonId");
 
             migrationBuilder.CreateIndex(
@@ -814,8 +830,8 @@ namespace Acceso_BD.Migrations
                 column: "TipoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tipos_Habilidades_HabilidadId",
-                table: "Tipos_Habilidades",
+                name: "IX_TiposHabilidades_HabilidadId",
+                table: "TiposHabilidades",
                 column: "HabilidadId");
         }
 
@@ -828,10 +844,13 @@ namespace Acceso_BD.Migrations
                 name: "Debilidades");
 
             migrationBuilder.DropTable(
-                name: "Entrenadores_Pokemons");
+                name: "EntrenadoresPokemons");
 
             migrationBuilder.DropTable(
                 name: "Fortalezas");
+
+            migrationBuilder.DropTable(
+                name: "Logins");
 
             migrationBuilder.DropTable(
                 name: "Modificadores");
@@ -840,7 +859,7 @@ namespace Acceso_BD.Migrations
                 name: "Tipo_Pokemons");
 
             migrationBuilder.DropTable(
-                name: "Tipos_Habilidades");
+                name: "TiposHabilidades");
 
             migrationBuilder.DropTable(
                 name: "Entrenadores");

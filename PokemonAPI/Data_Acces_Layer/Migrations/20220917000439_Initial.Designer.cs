@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Acceso_BD.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20220914104745_LoginFieldAdd")]
-    partial class LoginFieldAdd
+    [Migration("20220917000439_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -64,30 +64,6 @@ namespace Acceso_BD.Migrations
                     b.HasIndex("IdTipo");
 
                     b.ToTable("Fortalezas");
-                });
-
-            modelBuilder.Entity("Acceso_BD.Repository.Entity.Login", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("Logins");
                 });
 
             modelBuilder.Entity("Acceso_BD.Repository.Entity.ModificadorTipo", b =>
@@ -986,6 +962,30 @@ namespace Acceso_BD.Migrations
                             Id = 3,
                             Nombre = "Hoenn"
                         });
+                });
+
+            modelBuilder.Entity("Acceso_BD.Repository.Entity.Register", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Logins");
                 });
 
             modelBuilder.Entity("Acceso_BD.Repository.Entity.Tier", b =>
