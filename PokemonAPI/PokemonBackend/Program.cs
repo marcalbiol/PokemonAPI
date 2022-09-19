@@ -1,6 +1,8 @@
+using System.Configuration;
 using System.Reflection;
 using System.Text;
 using System.Text.Json.Serialization;
+using Acceso_BD.Repository.Entity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -75,7 +77,7 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 */
-
+builder.Services.Configure<DatabasePOCO>(configuration.GetSection("Database"));
 builder.Services.AddControllers().AddJsonOptions(x =>
     x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

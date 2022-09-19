@@ -1,5 +1,7 @@
 ﻿using Acceso_BD.Repository.Entity;
+using Castle.Core.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using PokemonBackend.Models;
 
 namespace Data_Acces_Layer.Repository;
@@ -8,8 +10,10 @@ namespace Data_Acces_Layer.Repository;
 // Pokemon y entrenador
 public class MyDbContext : DbContext
 {
-    public MyDbContext()
+    private IConfiguration _configuration;
+    public MyDbContext(IConfiguration iconfig)
     {
+        _configuration = iconfig;
     }
 
     public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
@@ -420,7 +424,7 @@ public class MyDbContext : DbContext
             new PokedexTipo { Id = 10, PokedexId = 6, TipoId = 7 },
             new PokedexTipo { Id = 11, PokedexId = 7, TipoId = 2 },
             new PokedexTipo { Id = 12, PokedexId = 8, TipoId = 2 },
-            new PokedexTipo { Id = 13, PokedexId = 9, TipoId = 2 },
+            new PokedexTipo { Id = 13, PokedexId = 9, TipoId = 2 }, 
             new PokedexTipo { Id = 14, PokedexId = 10, TipoId = 9 },
             new PokedexTipo { Id = 15, PokedexId = 11, TipoId = 9 },
             new PokedexTipo { Id = 16, PokedexId = 12, TipoId = 9 },
@@ -479,8 +483,12 @@ public class MyDbContext : DbContext
     {
         // https://www.connectionstrings.com/sql-server/
         // TODO GUARDAR pw en variable de entorno
+
+        DatabasePOCO dbp = new DatabasePOCO();
+        dbp.user = _configuration.GetValue<string>("Database:DB_userId");
+        
         var connect =
-            @"Server=161.97.116.226;Database=db_poke_backend;Trusted_Connection=False;User Id=sa;Password=Marc123ok.;";
+            $@"Server={Environment.GetEnvironmentVariable("DB_ip")};Database=db_poke_backend;Trusted_Connection=False;User Id={Environment.GetEnvironmentVariable("DB_userId")};Password={Environment.GetEnvironmentVariable("DB_password")};";
         optionsBuilder
             .EnableSensitiveDataLogging()
             .UseLazyLoadingProxies();
