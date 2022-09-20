@@ -9,15 +9,15 @@ namespace Business_Logic_Layer;
 public class RegisterBll
 {
     private readonly Mapper _mapper;
-    private readonly IGenericRepository<Register> repository;
+    private readonly IGenericRepository<User> repository;
 
     public RegisterBll()
     {
-        repository = new GenericRepository<Register>();
+        repository = new GenericRepository<User>();
 
         var config = new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<Register, RegisterModel>()
+            cfg.CreateMap<User, RegisterModel>()
                 .ReverseMap();
         });
         _mapper = new Mapper(config);
@@ -26,7 +26,7 @@ public class RegisterBll
 
     public void NewUser(RegisterModel model)
     {
-        var entity = _mapper.Map<RegisterModel, Register>(model);
+        var entity = _mapper.Map<RegisterModel, User>(model);
         // logica
         repository.Insert(entity);
     }

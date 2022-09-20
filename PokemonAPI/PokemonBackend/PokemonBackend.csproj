@@ -7,51 +7,52 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Remove="Controllers\Entrenadores_PokemonController.cs"/>
-        <Compile Remove="Controllers\EntrenadorPokemonModelController.cs"/>
-        <Compile Remove="Controllers\EntrenadorPokemonsController.cs"/>
-        <Compile Remove="Controllers\EntrenadorsTestController.cs"/>
-        <Compile Remove="Controllers\Entrenador_PokemonController.cs"/>
-        <Compile Remove="Controllers\PokemonController.cs"/>
-        <Compile Remove="Controllers\UsuariosController.cs"/>
+        <Compile Remove="Controllers\Entrenadores_PokemonController.cs" />
+        <Compile Remove="Controllers\EntrenadorPokemonModelController.cs" />
+        <Compile Remove="Controllers\EntrenadorPokemonsController.cs" />
+        <Compile Remove="Controllers\EntrenadorsTestController.cs" />
+        <Compile Remove="Controllers\Entrenador_PokemonController.cs" />
+        <Compile Remove="Controllers\PokemonController.cs" />
+        <Compile Remove="Controllers\UsuariosController.cs" />
     </ItemGroup>
 
     <ItemGroup>
-        <None Remove="Resources\index.html"/>
+        <None Remove="Resources\index.html" />
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Include="Resources\index.html"/>
+        <EmbeddedResource Include="Resources\index.html" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.7"/>
-        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.7"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.7"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.7"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.7"/>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.7" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.7" />
+        <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.7" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.7" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.7" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.7">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.0-rc.1.22426.10"/>
-        <PackageReference Include="Microsoft.Extensions.Logging.ApplicationInsights" Version="2.21.0"/>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.0-rc.1.22426.10" />
+        <PackageReference Include="Microsoft.Extensions.Logging.ApplicationInsights" Version="2.21.0" />
         <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.7.4">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.7"/>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.2"/>
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.7" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.2" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Business_Logic_Layer\Business_Logic_Layer.csproj"/>
+        <ProjectReference Include="..\Business_Logic_Layer\Business_Logic_Layer.csproj" />
     </ItemGroup>
 
 
     <ProjectExtensions>
         <VisualStudio>
-            <UserProperties properties_4launchsettings_1json__JsonSchema="https://github.com/fbecart/zinoma/releases/latest/download/zinoma-schema.json"/>
+            <UserProperties properties_4launchsettings_1json__JsonSchema="https://github.com/fbecart/zinoma/releases/latest/download/zinoma-schema.json" />
         </VisualStudio>
     </ProjectExtensions>
 

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Acceso_BD.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -36,21 +36,6 @@ namespace Acceso_BD.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Habilidades", x => x.HabilidadId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Logins",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Logins", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -106,6 +91,22 @@ namespace Acceso_BD.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tipos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    Salt = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -850,9 +851,6 @@ namespace Acceso_BD.Migrations
                 name: "Fortalezas");
 
             migrationBuilder.DropTable(
-                name: "Logins");
-
-            migrationBuilder.DropTable(
                 name: "Modificadores");
 
             migrationBuilder.DropTable(
@@ -860,6 +858,9 @@ namespace Acceso_BD.Migrations
 
             migrationBuilder.DropTable(
                 name: "TiposHabilidades");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Entrenadores");
