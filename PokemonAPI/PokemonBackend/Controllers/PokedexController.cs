@@ -63,7 +63,7 @@ public class PokedexController : ControllerBase
             };
         return Habilidades;
     }
-    
+
 
     [HttpPatch("{id}")]
     public void EditInfoPokemon(int id, EditPokedexModel model)

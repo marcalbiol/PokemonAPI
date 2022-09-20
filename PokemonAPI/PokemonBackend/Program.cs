@@ -77,7 +77,6 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 */
-builder.Services.Configure<DatabasePOCO>(configuration.GetSection("Database"));
 builder.Services.AddControllers().AddJsonOptions(x =>
     x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -102,6 +101,7 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -117,16 +117,12 @@ if (app.Environment.IsDevelopment())
     );
 }
 
-
 app.UseCors(x => x
     .AllowAnyOrigin()
     .AllowAnyMethod()
     .AllowAnyHeader());
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

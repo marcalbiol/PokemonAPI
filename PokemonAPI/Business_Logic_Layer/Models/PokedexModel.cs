@@ -20,6 +20,7 @@ public class EditPokedexModel
     public string? Altura { get; set; }
     public string? Peso { get; set; }
 }
+
 public class PokedexZonaModel
 {
     public int? ZonaId { get; set; }

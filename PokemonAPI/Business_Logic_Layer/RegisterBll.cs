@@ -22,13 +22,12 @@ public class RegisterBll
         });
         _mapper = new Mapper(config);
     }
-    
-    
+
+
     public void NewUser(RegisterModel model)
     {
         var entity = _mapper.Map<RegisterModel, Register>(model);
         // logica
         repository.Insert(entity);
     }
-    
 }

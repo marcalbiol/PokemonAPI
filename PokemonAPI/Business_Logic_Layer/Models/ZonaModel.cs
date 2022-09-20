@@ -13,6 +13,7 @@ namespace Business_Logic_Layer.Models
         public string? ImageURL { get; set; }
         public List<PokeZonaModel>? Pokemon { get; set; }
     }
+
     // Dto para mostrar informacion necesaria desde Zona
     public class PokeZonaModel
     {
@@ -29,7 +30,4 @@ namespace Business_Logic_Layer.Models
         public string? NombreZona { get; set; }
         public string? ImageURL { get; set; }
     }
-
-    
-  
 }
