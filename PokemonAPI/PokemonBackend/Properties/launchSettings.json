@@ -6,7 +6,11 @@
       "applicationUrl": "https://localhost:7001;http://localhost:5001",
       "dotnetRunMessages": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "database": "db_poke_backend",
+        "ip": "161.97.116.226",
+        "user": "sa",
+        "pw": "Marc123ok."
       }
     },
     "IIS Express": {

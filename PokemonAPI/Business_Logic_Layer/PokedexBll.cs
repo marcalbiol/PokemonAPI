@@ -37,7 +37,7 @@ public class PokedexBLL
             cfg.CreateMap<PokedexZonaModel, Pokedex>()
                 .ForPath(dest => dest.Zona.Id, opt
                     => opt.MapFrom(src => src.ZonaId)).ReverseMap();
-            
+
             cfg.CreateMap<Pokedex, EditPokedexModel>()
                 .ForMember(dest => dest.Nombre, opt => opt.MapFrom(src => src.Nombre))
                 .ForMember(dest => dest.Altura, opt => opt.MapFrom(src => src.Altura))

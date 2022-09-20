@@ -9,18 +9,17 @@ namespace PokemonBackend.Controllers;
 [ApiController]
 public class RegisterController : ControllerBase
 {
-        private MyDbContext db = new();
-        private RegisterBll _BLL;
+    private MyDbContext db = new();
+    private RegisterBll _BLL;
 
-        public RegisterController()
-        {
-            _BLL = new RegisterBll();
-        }
+    public RegisterController()
+    {
+        _BLL = new RegisterBll();
+    }
 
-        [HttpPost]
-        public void PostNewUser([FromBody] RegisterModel model)
-        {
-            _BLL.NewUser(model);
-        }
-
+    [HttpPost]
+    public void PostNewUser([FromBody] RegisterModel model)
+    {
+        _BLL.NewUser(model);
+    }
 }
