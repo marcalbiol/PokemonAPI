@@ -11,6 +11,7 @@ import {ZonaService} from "./zonas/zonas.service";
 import {MapaComponent} from './mapa/mapa.component';
 import {MapaService} from "./mapa/mapa.service";
 import {ModalComponent} from './mapa/modal/modal.component';
+import { LoginComponent } from './login/login.component';
 
 //TODO: IMPLEMENTAR ROUTERLINK PARA NAVEGAR A OTRAS PAGINAS
 
@@ -21,7 +22,8 @@ import {ModalComponent} from './mapa/modal/modal.component';
     NavComponent,
     ZonasComponent,
     MapaComponent,
-    ModalComponent
+    ModalComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, CommonModule
