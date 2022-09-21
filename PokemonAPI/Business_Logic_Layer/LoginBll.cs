@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XAct;
 using XSystem.Security.Cryptography;
 
 namespace Business_Logic_Layer
@@ -23,10 +24,9 @@ namespace Business_Logic_Layer
 
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<User, RegisterModel>()
-                    .ForMember(x => x.Password, opt => opt.MapFrom(src => src.Password)).ReverseMap();
-
-                //cfg.CreateMap<string, byte[]>().ConvertUsing<Base64Converter>();
+                cfg.CreateMap<string, byte[]>().ConvertUsing<Base64Converter>();
+                cfg.CreateMap<byte[], string>().ConvertUsing<Base64Converter>();
+                cfg.CreateMap<User, RegisterModel>().ReverseMap();
             });
             Mapper = new Mapper(config);
         }
@@ -44,19 +44,30 @@ namespace Business_Logic_Layer
         public void PostRegister(RegisterModel model)
         {
 
-            var entity = Mapper.Map<RegisterModel, User>(model);
-
-            entity.Salt = GenerateSalt();
-
-            var pw = EncriptarPassword(model.Password, entity.Salt);
-
-            entity.Password = pw.ToString();
-          
-
-            repository.Insert(entity);
+            var pwEncr = EncodePasswordToBase64(model.Password);
+            model.Password = pwEncr;
+            var ent = Mapper.Map<RegisterModel, User>(model);
+            ent.Salt = GenerateSalt();
+            
+            repository.Insert(ent);
         }
 
-
+        
+        public static string EncodePasswordToBase64(string password)
+        {
+            try
+            {
+                byte[] encData_byte = new byte[password.Length];
+                encData_byte = System.Text.Encoding.UTF8.GetBytes(password);
+                string encodedData = Convert.ToBase64String(encData_byte);
+                return encodedData;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error in base64Encode" + ex.Message);
+            }
+        }
+        
 
         public static string GenerateSalt()
         {
@@ -75,7 +86,7 @@ namespace Business_Logic_Layer
         {
             string contenido = password + salt;
             SHA256Managed sha = new SHA256Managed();
-            byte[] salida = Encoding.UTF8.GetBytes(contenido);
+            byte[] salida = Encoding.Unicode.GetBytes(contenido);
             for (int i = 1; i <= 107; i++)
             {
                 salida = sha.ComputeHash(salida);

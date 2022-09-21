@@ -488,8 +488,7 @@ public class MyDbContext : DbContext
     {
 
 
-        var connect1 =
-                    $@"Server=161.97.116.226;Database=db_poke_backend;Trusted_Connection=False;User Id=sa;Password=Marc123ok.;";
+         var connect1 = $@"Server=161.97.116.226;Database=db_poke_backend;Trusted_Connection=False;User Id=sa;Password=Marc123ok.;";
 
         var connect =
                     $@"Server={Environment.GetEnvironmentVariable("ip")};Database={Environment.GetEnvironmentVariable("database")};Trusted_Connection=False;User Id={Environment.GetEnvironmentVariable("user")};Password={Environment.GetEnvironmentVariable("pw")};";

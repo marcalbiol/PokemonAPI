@@ -4,6 +4,7 @@ using Business_Logic_Layer.Models;
 using Data_Acces_Layer.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using XAct;
 
 namespace PokemonBackend.Controllers
 {
@@ -20,11 +21,9 @@ namespace PokemonBackend.Controllers
         }
 
         [HttpPost]
-        public void Register([FromBody] RegisterModel model)
+        public void Register(RegisterModel model)
         {
-            _Bll.PostRegister(model);   
-
+            _Bll.PostRegister(model);
         }
-
     }
 }
