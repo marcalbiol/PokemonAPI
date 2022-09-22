@@ -6,24 +6,29 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using XAct;
 
-namespace PokemonBackend.Controllers
+namespace PokemonBackend.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class RegisterController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class RegisterController : ControllerBase
+    public LoginBll _Bll;
+
+    public RegisterController()
     {
-        public LoginBll _Bll;
-        private MyDbContext db = new();
+        _Bll = new LoginBll();
+    }
 
-        public RegisterController()
-        {
-            _Bll = new LoginBll();
-        }
 
-        [HttpPost]
-        public void Register(RegisterModel model)
-        {
-            _Bll.PostRegister(model);
-        }
+    [HttpGet]
+    public List<RegisterModel> GetAllUsers()
+    {
+        return _Bll.GetAll();
+    }
+
+    [HttpPost]
+    public void Register([FromBody] RegisterModel model)
+    {
+        _Bll.PostRegister(model);
     }
 }

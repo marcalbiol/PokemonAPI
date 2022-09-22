@@ -40,7 +40,7 @@ public class MyDbContext : DbContext
     public DbSet<Region> Regiones { get; set; }
     public DbSet<Zona> Zonas { get; set; }
     public DbSet<Tier> Tiers { get; set; }
-    public DbSet<User> Users  { get; set; }
+    public DbSet<User> Users { get; set; }
 
 
     // configuracion de relaciones con FluentAPI
@@ -486,16 +486,14 @@ public class MyDbContext : DbContext
     // CONEXION A LA BASE DE DATOS, YA NO SE HACE EN EL PROGRAM.CS
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-
-
-         var connect1 = $@"Server=161.97.116.226;Database=db_poke_backend;Trusted_Connection=False;User Id=sa;Password=Marc123ok.;";
+       
 
         var connect =
-                    $@"Server={Environment.GetEnvironmentVariable("ip")};Database={Environment.GetEnvironmentVariable("database")};Trusted_Connection=False;User Id={Environment.GetEnvironmentVariable("user")};Password={Environment.GetEnvironmentVariable("pw")};";
+            $@"Server={Environment.GetEnvironmentVariable("ip")};Database={Environment.GetEnvironmentVariable("database")};Trusted_Connection=False;User Id={Environment.GetEnvironmentVariable("user")};Password={Environment.GetEnvironmentVariable("pw")};";
         optionsBuilder
             .EnableSensitiveDataLogging()
             .UseLazyLoadingProxies();
-        if (!optionsBuilder.IsConfigured) optionsBuilder.UseSqlServer(connect1, b => b.MigrationsAssembly("Acceso_BD"));
+        if (!optionsBuilder.IsConfigured) optionsBuilder.UseSqlServer(connect, b => b.MigrationsAssembly("Acceso_BD"));
     }
 }
 /* PARA ACTUALIZAR LA TABLA. ADD-MIGRATION  (FECHA QUE SE EJECUTA). DESPUES UPDATE-DATABASE */

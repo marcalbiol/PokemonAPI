@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   pokedex!: any;
   show: boolean = true;
 
-  constructor(private http: HttpClient, private pokedexservice: PokedexService) {
+  constructor(private pokedexservice: PokedexService) {
   }
 
   // al levantar el servidor se ejecuta ->

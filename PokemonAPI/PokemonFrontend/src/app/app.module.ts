@@ -11,9 +11,17 @@ import {ZonaService} from "./zonas/zonas.service";
 import {MapaComponent} from './mapa/mapa.component';
 import {MapaService} from "./mapa/mapa.service";
 import {ModalComponent} from './mapa/modal/modal.component';
-import { LoginComponent } from './login/login.component';
+import {LoginComponent} from './login/login.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {LoginService} from "./login/login.service";
+import {RouterModule, Routes} from "@angular/router";
 
 //TODO: IMPLEMENTAR ROUTERLINK PARA NAVEGAR A OTRAS PAGINAS
+
+const router: Routes =
+  [{path: 'index', component: AppComponent},
+    {path: 'login', component: LoginComponent}
+  ]
 
 @NgModule({
   declarations: [
@@ -26,9 +34,10 @@ import { LoginComponent } from './login/login.component';
     LoginComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule, CommonModule
+    BrowserModule, HttpClientModule, CommonModule, ReactiveFormsModule,
+    RouterModule.forRoot(router),
   ],
-  providers: [PokedexService, ZonaService, MapaService],
+  providers: [PokedexService, ZonaService, MapaService, LoginService, LoginComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {
