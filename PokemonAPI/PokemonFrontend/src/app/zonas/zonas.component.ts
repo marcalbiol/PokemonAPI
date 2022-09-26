@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {PokedexService} from "../app.service";
 import {ZonaService} from "./zonas.service";
 
 @Component({
@@ -13,7 +12,7 @@ export class ZonasComponent implements OnInit {
   zona!: any;
   pokedex!: any;
 
-  constructor(private http: HttpClient, private pokedexservice: PokedexService,
+  constructor(private http: HttpClient,
               private zonaService: ZonaService) {
   }
 

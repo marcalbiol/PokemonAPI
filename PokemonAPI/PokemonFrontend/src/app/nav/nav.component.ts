@@ -1,6 +1,5 @@
 import {HttpClient} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
-import {PokedexService} from '../app.service';
 import {Tipos} from './tipos';
 import {LoginService} from "../login/login.service";
 import {LoginComponent} from "../login/login.component";
@@ -14,10 +13,9 @@ export class NavComponent implements OnInit {
 
   tipos: string[] = ['Fuego', 'Agua']
 
-  constructor(private http: HttpClient, private pokedexservice: PokedexService, public loginService: LoginService,
+  constructor(private http: HttpClient, private pokedexservice: AppService, public loginService: LoginService,
               private loginComponent: LoginComponent) {
   }
-
 
 
   ngOnInit(): void {
