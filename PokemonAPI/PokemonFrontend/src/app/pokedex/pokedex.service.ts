@@ -13,7 +13,7 @@ export class PokedexService {
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'})
 
   constructor(private http: HttpClient, private router: Router) { }
-
+  // TODO, NO CARGAR LA PAGINA HASTA QUE ESTA EL JSON CARGADO
   getPokedex(): Observable<pokedex[]> {
     return this.http.get<pokedex[]>(this.urlEndPoint + "/Pokedex/AllData")
   }

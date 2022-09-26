@@ -11,9 +11,7 @@ import {LoginComponent} from "../login/login.component";
 })
 export class NavComponent implements OnInit {
 
-  tipos: string[] = ['Fuego', 'Agua']
-
-  constructor(private http: HttpClient, private pokedexservice: AppService, public loginService: LoginService,
+  constructor(private http: HttpClient, public loginService: LoginService,
               private loginComponent: LoginComponent) {
   }
 

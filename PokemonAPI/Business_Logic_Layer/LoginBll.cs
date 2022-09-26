@@ -5,11 +5,12 @@ using Business_Logic_Layer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using XAct;
-using XSystem.Security.Cryptography;
+using SHA256Managed = XSystem.Security.Cryptography.SHA256Managed;
 
 namespace Business_Logic_Layer;
 
@@ -53,32 +54,15 @@ public class LoginBll
 
     public void PostRegister([FromBody] RegisterModel model)
     {
-        var pwEncr = EncodePasswordToBase64(model.Password);
-        model.Password = pwEncr;
         var ent = Mapper.Map<RegisterModel, User>(model);
+
         ent.Salt = GenerateSalt();
+        ent.Password = EncryptPassword(model.Password, ent.Salt);
 
         repository.Insert(ent);
     }
 
-
-    public static string EncodePasswordToBase64(string password)
-    {
-        try
-        {
-            var encData_byte = new byte[password.Length];
-            encData_byte = Encoding.UTF8.GetBytes(password);
-            var encodedData = Convert.ToBase64String(encData_byte);
-            return encodedData;
-        }
-        catch (Exception ex)
-        {
-            throw new Exception("Error in base64Encode" + ex.Message);
-        }
-    }
-
-
-    public static string GenerateSalt()
+    private string GenerateSalt()
     {
         var random = new Random();
         var salt = "";
@@ -92,14 +76,13 @@ public class LoginBll
         return salt;
     }
 
-    public static byte[] EncriptarPassword(string password, string salt)
+    private string EncryptPassword(string password, string salt)
     {
-        var contenido = password + salt;
-        var sha = new SHA256Managed();
-        var salida = Encoding.Unicode.GetBytes(contenido);
-        for (var i = 1; i <= 107; i++) salida = sha.ComputeHash(salida);
-
-        sha.Clear();
-        return salida;
+        using (var sha256 = SHA256.Create())
+        {
+            var saltedPassword = string.Format("{0}{1}", salt, password);
+            byte[] saltedPasswordAsBytes = Encoding.UTF8.GetBytes(saltedPassword);
+            return Convert.ToBase64String(sha256.ComputeHash(saltedPasswordAsBytes));
+        }
     }
 }

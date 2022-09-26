@@ -4,7 +4,6 @@
     {{show == true ? 'Ocultar' : 'Mostrar'}}
   </button>
   <div *ngIf="show == true" class="card-group">
-
     <div *ngFor="let pokemon of pokedex" class="card-deck">
       <div class="card" style="width: 10rem">
         <img alt="..." class="card-img-top img-thumbnail" src={{pokemon.imagen}}>
