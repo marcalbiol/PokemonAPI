@@ -8,6 +8,8 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Data_Acces_Layer.Repository;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Mvc;
 using XAct;
 using SHA256Managed = XSystem.Security.Cryptography.SHA256Managed;
@@ -16,6 +18,7 @@ namespace Business_Logic_Layer;
 
 public class LoginBll
 {
+    private readonly MyDbContext _db = new();
     private readonly Mapper Mapper;
     private readonly IGenericRepository<User> repository;
 
@@ -55,34 +58,55 @@ public class LoginBll
     public void PostRegister([FromBody] RegisterModel model)
     {
         var ent = Mapper.Map<RegisterModel, User>(model);
+        var hashsalt = EncryptPassword(ent.Password);
+        ent.Password = hashsalt.Hash;
+        ent.Salt = hashsalt.Salt;
 
-        ent.Salt = GenerateSalt();
-        ent.Password = EncryptPassword(model.Password, ent.Salt);
 
         repository.Insert(ent);
     }
 
-    private string GenerateSalt()
+    public bool Login(RegisterModel model)
     {
-        var random = new Random();
-        var salt = "";
-        for (var i = 1; i <= 50; i++)
+        var userFromDb = _db.Users.FirstOrDefault(u => u.Username == model.Username);
+        var isPasswordMatched = VerifyPassword(model.Password, userFromDb.Salt, userFromDb.Password);
+
+        if (isPasswordMatched)
         {
-            var numero = random.Next(0, 255);
-            var letra = Convert.ToChar(numero);
-            salt += letra;
+            return true;
         }
 
-        return salt;
+        return false;
     }
 
-    private string EncryptPassword(string password, string salt)
+
+    public HashSalt EncryptPassword(string password)
     {
-        using (var sha256 = SHA256.Create())
+        byte[] salt = new byte[128 / 8]; // Generate a 128-bit salt using a secure PRNG
+        using (var rng = RandomNumberGenerator.Create())
         {
-            var saltedPassword = string.Format("{0}{1}", salt, password);
-            byte[] saltedPasswordAsBytes = Encoding.UTF8.GetBytes(saltedPassword);
-            return Convert.ToBase64String(sha256.ComputeHash(saltedPasswordAsBytes));
+            rng.GetBytes(salt);
         }
+
+        string encryptedPassw = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+            password: password,
+            salt: salt,
+            prf: KeyDerivationPrf.HMACSHA1,
+            iterationCount: 10000,
+            numBytesRequested: 256 / 8
+        ));
+        return new HashSalt { Hash = encryptedPassw, Salt = salt };
+    }
+
+    public static bool VerifyPassword(string enteredPassword, byte[] salt, string storedPassword)
+    {
+        string encryptedPassw = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+            password: enteredPassword,
+            salt: salt,
+            prf: KeyDerivationPrf.HMACSHA1,
+            iterationCount: 10000,
+            numBytesRequested: 256 / 8
+        ));
+        return encryptedPassw == storedPassword;
     }
 }

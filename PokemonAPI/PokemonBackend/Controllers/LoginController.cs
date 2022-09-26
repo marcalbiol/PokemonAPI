@@ -4,6 +4,7 @@ using Business_Logic_Layer.Models;
 using Data_Acces_Layer.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using XAct;
 
 namespace PokemonBackend.Controllers;
@@ -31,4 +32,11 @@ public class RegisterController : ControllerBase
     {
         _Bll.PostRegister(model);
     }
+
+    [HttpPost]
+    public void Login(RegisterModel model)
+    {
+        _Bll.Login(model);
+    }
+
 }
