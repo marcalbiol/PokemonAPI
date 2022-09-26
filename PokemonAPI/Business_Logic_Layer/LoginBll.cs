@@ -18,7 +18,7 @@ namespace Business_Logic_Layer;
 
 public class LoginBll
 {
-    private readonly MyDbContext _db = new();
+    
     private readonly Mapper Mapper;
     private readonly IGenericRepository<User> repository;
 
@@ -66,23 +66,12 @@ public class LoginBll
         repository.Insert(ent);
     }
 
-    public bool Login(RegisterModel model)
-    {
-        var userFromDb = _db.Users.FirstOrDefault(u => u.Username == model.Username);
-        var isPasswordMatched = VerifyPassword(model.Password, userFromDb.Salt, userFromDb.Password);
-
-        if (isPasswordMatched)
-        {
-            return true;
-        }
-
-        return false;
-    }
+  
 
 
     public HashSalt EncryptPassword(string password)
     {
-        byte[] salt = new byte[128 / 8]; // Generate a 128-bit salt using a secure PRNG
+        byte[] salt = new byte[128 / 8];
         using (var rng = RandomNumberGenerator.Create())
         {
             rng.GetBytes(salt);

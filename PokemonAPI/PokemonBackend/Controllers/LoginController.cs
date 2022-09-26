@@ -13,6 +13,7 @@ namespace PokemonBackend.Controllers;
 [ApiController]
 public class RegisterController : ControllerBase
 {
+    private readonly MyDbContext _db = new();
     public LoginBll _Bll;
 
     public RegisterController()
@@ -33,10 +34,17 @@ public class RegisterController : ControllerBase
         _Bll.PostRegister(model);
     }
 
-    [HttpPost]
-    public void Login(RegisterModel model)
+    [HttpPost("/Login")]
+    public IActionResult Login(RegisterModel model)
     {
-        _Bll.Login(model);
-    }
+        var userFromDb = _db.Users.FirstOrDefault(u => u.Username == model.Username);
+        var isPasswordMatched = LoginBll.VerifyPassword(model.Password, userFromDb.Salt, userFromDb.Password);
 
+        if (isPasswordMatched)
+        {
+            return Ok("Login success");
+        }
+
+        return BadRequest("Password or user incorrect");
+    }
 }
