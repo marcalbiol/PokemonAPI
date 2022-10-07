@@ -7,10 +7,10 @@
       "dotnetRunMessages": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "database": "db_poke_backend",
+        "database": "",
         "ip": "161.97.116.226",
-        "user": "sa",
-        "pw": "Marc123ok."
+        "user": "",
+        "pw": ""
       }
     },
     "IIS Express": {
